@@ -7,7 +7,7 @@ from core.allied_armies import US_THIRD_ARMY, US_VIII_CORPS, US_XV_CORPS
 from core.global_game_state import GlobalGameState
 from core.german_units import PZ_21, PZ_9, PZ_LEHR
 from core.map.map_model import hitler_approval_track, strategic_reserve_box
-from core.map.map_spaces_us_3 import brest, rennes, st_malo
+from core.map.map_spaces_us_3 import brest, rennes, st_malo, le_mans
 from core.map.map_spaces_brit_2 import bayeux
 from core.map.map_spaces_can_1 import caen
 from core.map.map_utilities import add_units_to_space, do_opening_setup, get_all_map_spaces, reset_map
@@ -34,7 +34,7 @@ class TestHitlerInterventionTargets(unittest.TestCase):
         GlobalGameState.us_third_army_activated = True
         US_VIII_CORPS.location = None
         US_XV_CORPS.location = None
-        add_units_to_space(st_malo, US_THIRD_ARMY)
+        add_units_to_space(le_mans, US_THIRD_ARMY)
 
         targets = get_hitler_intervention_targets(card_046)
 
@@ -152,7 +152,7 @@ class TestCheckHitlerInterventionApplies(unittest.TestCase):
         GlobalGameState.us_third_army_activated = True
         US_VIII_CORPS.location = None
         US_XV_CORPS.location = None
-        add_units_to_space(st_malo, US_THIRD_ARMY)
+        add_units_to_space(le_mans, US_THIRD_ARMY)
 
         result = check_hitler_intervention_applies(card_046, die_roll=1)
 
@@ -203,7 +203,7 @@ class TestCheckHitlerInterventionApplies(unittest.TestCase):
         GlobalGameState.us_third_army_activated = True
         US_VIII_CORPS.location = None
         US_XV_CORPS.location = None
-        add_units_to_space(st_malo, US_THIRD_ARMY)
+        add_units_to_space(le_mans, US_THIRD_ARMY)
 
         result = check_hitler_intervention_applies(card_046, die_roll=6)
 

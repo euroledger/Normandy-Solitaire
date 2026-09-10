@@ -28,3 +28,5 @@ US_VIII_CORPS = AlliedArmy(name="US VIII CORPS",
 US_XV_CORPS = AlliedArmy(name="US XV CORPS", nation=Nation.US_XV, _strength=2)
 
 US_THIRD_ARMY = AlliedArmy(name="US 3rd ARMY", nation=Nation.US_3, _strength=4, merged=True)
+
+armies_list = [US_FIRST_ARMY, BRITISH_SECOND_ARMY, CANADIAN_FIRST_ARMY, US_THIRD_ARMY, US_VIII_CORPS, US_XV_CORPS]

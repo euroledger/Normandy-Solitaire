@@ -107,7 +107,7 @@ class TestReserveActions(unittest.TestCase):
 
 
     def test_counter_attack_normal_action_with_reserve_available(self):
-        """Verifies counter attack spends a normal action first, leaving reserve untouched."""
+        # Verifies counter attack spends a normal action first, leaving reserve untouched.
         GlobalGameState.actions_left_this_turn = 1
         GlobalGameState.reserve_actions = 1
         GlobalGameState.cards_drawn = 1

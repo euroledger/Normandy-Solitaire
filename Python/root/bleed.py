@@ -1,8 +1,8 @@
 from PIL import Image
 from pathlib import Path
 
-INPUT_FOLDER = Path(r"D:\StateOfSiege Normandy\MANUAL NEW CARD IMAGES\PRINTER-READY DECK")
-OUTPUT_FOLDER = Path(r"D:\StateOfSiege Normandy\MANUAL NEW CARD IMAGES\PRINTER-READY DECK\BLEED")
+INPUT_FOLDER = Path(r"D:\StateOfSiege Normandy\MANUAL NEW CARD IMAGES\printER-READY DECK")
+OUTPUT_FOLDER = Path(r"D:\StateOfSiege Normandy\MANUAL NEW CARD IMAGES\printER-READY DECK\BLEED")
 
 BLEED = 72
 

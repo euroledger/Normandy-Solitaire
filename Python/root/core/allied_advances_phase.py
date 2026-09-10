@@ -437,12 +437,38 @@ def do_siege_roll(space, army, card, weather, carpet_bombing, defense_strength, 
 
 
 def do_allied_attacks(armies, card, weather, carpet_bombing=0, die_roll=None, pause_after_attack=False):
+    
     print()
     print("ALLIED ATTACKS")
     print("==============")
     print()
 
     for army in armies:        
+        
+        if army.location is None:
+            print("************* CONTINUE POO *****************")
+            continue
+        
+        # --- CLEAN STRUCTURAL MERGE BYPASS ---
+        if army in [US_VIII_CORPS, US_XV_CORPS]:
+            # Identify the sister corps
+            sister_corps = US_XV_CORPS if army == US_VIII_CORPS else US_VIII_CORPS
+            target_space = get_track_for(army)[1] if army.location.terrain == TerrainType.START_BOX else next(
+                (space for space in get_track_for(army) if space.track_number == army.location.track_number - 1), None)
+
+            # If the sister corps is already at the target destination, skip combat and merge immediately
+            if sister_corps.location == target_space and target_space is not None:
+                print(f"{army.display_name} moves to join {sister_corps.display_name} at {target_space.name} for Third Army Merge.")
+
+                # Move the unit physically without triggering combat
+                army.location.units.remove(army)
+                target_space.units.append(army)
+                army.location = target_space
+
+                # Execute the merge code immediately
+                check_and_merge_us_third_army(target_space)
+                continue
+        # --------------------------------------
         if army == US_FIRST_ARMY:
             army_color = LIGHT_BROWN
         elif army == BRITISH_SECOND_ARMY:
@@ -455,19 +481,16 @@ def do_allied_attacks(armies, card, weather, carpet_bombing=0, die_roll=None, pa
             army_color = CYAN
         print(army_color) 
         # NEW RULE TO ENSURE two US 3rd ARMY CORPS NEED TO ATTACK OUT OF THEIR BOX
-        if army.location.terrain == TerrainType.START_BOX and army in [US_VIII_CORPS, US_XV_CORPS]:
+        if army in [US_VIII_CORPS, US_XV_CORPS] and army.location and army.location.terrain == TerrainType.START_BOX:
             target_space = get_track_for(army)[1]
-        elif army.location.terrain == TerrainType.START_BOX:
+        elif army.location and army.location.terrain == TerrainType.START_BOX:
+        # elif army.location.terrain == TerrainType.START_BOX:
             advance_army_one_space(army)
             print(f"{army.display_name} -> {army.location.name}")
             continue
         else:
             target_space = next((space for space in get_track_for(army) if space.track_number == army.location.track_number - 1), None)
 
-
-        # attack_result = calculate_attack_modifiers(card, army=army, num_jabos=weather.available_jabos, carpet_bombing=carpet_bombing)
-        # attack_strength = attack_result["attack_strength"]
-        # defense_strength = german_defense_strength(target_space)
         attack_result = calculate_attack_modifiers(card=card, army=army, num_jabos=weather.available_jabos, carpet_bombing=carpet_bombing)
         attack_strength = attack_result["attack_strength"]
         attacking_from = army.location.name

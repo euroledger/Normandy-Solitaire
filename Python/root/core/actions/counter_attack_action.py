@@ -53,8 +53,28 @@ def choose_attacking_units(units):
 def get_german_space_facing_front_line(army):
     track = get_track_for(army)
     front_line_space = get_front_line_space(army)
+    
+    # space = next(space for space in track if space.track_number == front_line_space.track_number - 1)
+ # --- DIAGNOSTIC DEBUG BLOCK ---
+    print(f"\n[DEBUG] Entering get_german_space_facing_front_line for: {army.name}")
+    print(f"[DEBUG] front_line_space: {front_line_space.name} (Track # {front_line_space.track_number})")
+    print(f"[DEBUG] Full Track Spaces Available: {[f'{s.name} (Track # {s.track_number})' for s in track]}")
 
-    space = next(space for space in track if space.track_number == front_line_space.track_number - 1)
+    try:
+        # Your original evaluation line statement
+        space = next(space for space in track if space.track_number == front_line_space.track_number - 1)
+        print(f"[DEBUG] Successfully located backward facing space: {space.name}")
+    except StopIteration:
+        print(f"\n" + "!" * 60)
+        print(f"[CRITICAL DETECTED] StopIteration triggered!")
+        print(f"Failed to find a space where track_number == {front_line_space.track_number - 1}")
+        print("!" * 60 + "\n")
+
+        # Re-raise the exception so your main script's logging system catches and records it safely
+        raise
+
+    return space
+   
     return space
 
 
@@ -124,7 +144,7 @@ def choose_counter_attack_option(options):
             return None
 
         if not choice.isdigit():
-            print("INVALID CHOICE")
+            print("POO INVALID CHOICE")
             continue
 
         choice_index = int(choice) - 1
@@ -132,7 +152,7 @@ def choose_counter_attack_option(options):
         if 0 <= choice_index < len(options):
             return options[choice_index]
 
-        print("INVALID CHOICE")
+        print("POO INVALID CHOICE")
 
 
 def resolve_counter_attack(attack, defense, selected_units, die_roll):

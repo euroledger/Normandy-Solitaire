@@ -8,6 +8,7 @@ from core.actions.move_action_point_to_reserve import do_move_action_point_to_st
 from core.actions.move_unit_one_space_action import do_move_unit_one_space
 from core.actions.resource_actions import do_resource_augmentation_roll
 from core.actions.strategic_reserve_actions import do_move_other_unit_from_strategic_reserve, do_move_panzer_from_strategic_reserve, do_move_panzer_to_strategic_reserve, do_refit_panzer_division, get_panzer_divisions_in_strategic_reserve
+from core.ai.headless_env_manager import get_automated_choice
 from core.enums import ReinforcementType
 from core.game_summary import print_game_summary
 from core.german_units import SS_12, TIGER_101
@@ -16,6 +17,7 @@ from core.map.map_model import (
     in_transit_box,
     strategic_reserve_box,
 )
+from game_phases.action_phase import common_post_action_phase
 
 YELLOW = "\033[33m"
 GREEN = "\033[32m"
@@ -56,7 +58,7 @@ def list_user_actions():
 
 
 def choose_user_action():
-    choice = input("Choose Action: ")
+    choice = get_automated_choice("Choose Action: ", ai_slot=0, default_fallback="0")
 
     if choice == "1":
         do_counter_attack()
@@ -95,38 +97,45 @@ def set_available_actions(card):
         if effect.condition is not None and effect.condition.is_met(GlobalGameState):
             GlobalGameState.actions_left_this_turn += effect.value
 
-def do_action_phase(card, weather):
-    print()
-    print("========================================")
-    print("ACTION PHASE")
-    print("========================================")
-    print()
 
-    # 1. Check for Hitler Intervention
-    if card.hitler_intervention:
-        target_army = check_hitler_intervention_applies(card)
-        if target_army is not None:
-            target_army, attacking_space = do_hitler_intervention_redeploy(card, target_army)
-            
-            do_hitler_intervention_attack(card, weather, target_army, attacking_space)
-            return
-
-    # 2. Print number actions - dependent on Hitler Intervention
-    set_available_actions(card)
-
-    print(f"ACTIONS AVAILABLE: {GlobalGameState.actions_left_this_turn}")
-    print()
-
-    # 3. Do In Transit Pz Div Resource Roll (roll against Transport Level)
-
+def common_pre_action_phase(card, weather):
+    # Executes mandatory card overrides and structural troop arrivals.
+       
+    # Execute In Transit Resource Rolls for arrived Panzers
     panzer_divisions = [unit for unit in in_transit_box.units[:] if unit.type == ReinforcementType.PZ_DIV]
-
     for unit in panzer_divisions:
         die_roll = randint(1, 6)
         print("IN TRANSIT CHECK")
         print("================")
         do_panzer_transport_check(unit, die_roll)
 
+    if card.hitler_intervention:
+        # If running headlessly, DO NOT let the game engine execute the choice.
+        # Return False to halt normal actions, but let action_phase_ai handle it.
+        if GlobalGameState.headless:
+            return False
+        target_army = check_hitler_intervention_applies(card)
+        if target_army is not None:
+            target_army, attacking_space = do_hitler_intervention_redeploy(card, target_army)
+            do_hitler_intervention_attack(card, weather, target_army, attacking_space)
+            return False  # Returns False indicating the phase was overridden/ended by Hitler
+        
+    # Load Action Points from Card modifiers
+    set_available_actions(card)
+    print(f"ACTIONS AVAILABLE: {GlobalGameState.actions_left_this_turn}")
+    return True  # Returns True indicating the turn proceeds to tactical choices
+
+def do_action_phase(card, weather):
+    proceed = common_pre_action_phase(GlobalGameState.current_card, GlobalGameState.current_weather)
+
+    if proceed == False:
+        # ◄── FIX: Intercepts the forced historical events
+        # execute_flat_hitler_intervention_ai(GlobalGameState.current_card, GlobalGameState.current_weather)
+        
+        # TODO add calls to execute_flat_hitler_intervention_ai for each phase
+        # ◄── FIX: Triggers card/turn counters and cleanup scripts
+        common_post_action_phase()
+        return  # ◄── Safely exits the function, advancing to the next card draw.
     cont = True
     while cont and GlobalGameState.actions_left_this_turn + GlobalGameState.reserve_actions > 0:
         # 4. List Menu of Actions

@@ -179,15 +179,17 @@ class TestAlliedAttacks(unittest.TestCase):
         self.assertEqual(hitler_approval_track.value, 6)
 
     def test_us_first_army_captures_cherbourg_lowers_hitler_approval_once(self):
-        hitler_approval_track.value = 6
         GlobalGameState.cherbourg_captured = False
 
         # Move US First Army to Valognes
         advance_army_one_space(US_FIRST_ARMY)
         advance_army_one_space(US_FIRST_ARMY)
 
+
         self.assertEqual(US_FIRST_ARMY.location, valognes)
         self.assertEqual(cherbourg.controlling_player, SideType.GERMAN)
+
+        hitler_approval_track.value = 6
 
         # First capture of Cherbourg
         do_allied_attacks([US_FIRST_ARMY], card_003, self.weather, die_roll=3)
@@ -199,6 +201,8 @@ class TestAlliedAttacks(unittest.TestCase):
 
         # Reset the game state
         do_opening_setup()
+        GlobalGameState.cherbourg_captured = True
+        hitler_approval_track.value = 5
         cherbourg.controlling_player=SideType.GERMAN
 
         # GlobalGameState.cherbourg_captured = True

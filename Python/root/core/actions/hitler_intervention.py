@@ -36,8 +36,9 @@ def get_hitler_intervention_targets(card):
                     if is_valid_target(corps):
                         targets.append(corps)
             else:
-                if US_THIRD_ARMY.location is not None:
-                    targets.append(US_THIRD_ARMY)
+                if US_THIRD_ARMY.location is not None:  # noqa: SIM102
+                    if is_valid_target(army):
+                        targets.append(army)
             continue
 
         if is_valid_target(army):
@@ -125,6 +126,38 @@ def check_hitler_intervention_applies(card, die_roll=None, target_choice=None, c
     return selected_target
 
 
+def choose_hitler_intervention_units(available_units, count_needed=2):
+    # Sort units so that higher strength divisions (e.g. 21st Panzer over Kampfgruppen) are prioritized
+    sorted_units = sorted(available_units, key=lambda x: getattr(x, 'strength', 1), reverse=True)
+    return sorted_units[:count_needed]
+
+
+def create_available_panzers_list(attacking_space):
+    available_panzers = []
+
+    # Change your track loop logic to track string names instead of object instances
+    seen_spaces = set()
+    for track in [us_1_track, brit_2_track, can_1_track, us_viii_track, us_xv_track]:
+        for space in track:
+            # BUG FIX: Check against the string space name identifier instead of the raw object
+            if space.name in seen_spaces or space == attacking_space or space.under_siege:
+                continue
+
+            # BUG FIX: Add the string representation to the set
+            seen_spaces.add(space.name)
+
+            for unit in space.units:
+                if isinstance(unit, GermanUnit) and unit.is_panzer():
+                    available_panzers.append((unit, space))
+
+
+    for unit in strategic_reserve_box.units:
+        if isinstance(unit, GermanUnit) and unit.is_panzer():
+            available_panzers.append((unit, strategic_reserve_box))
+    
+    return available_panzers
+    
+
 def do_hitler_intervention_redeploy(card, target_army, deployment_choices=None):
     print()
     print("HITLER INTERVENTION")
@@ -135,63 +168,68 @@ def do_hitler_intervention_redeploy(card, target_army, deployment_choices=None):
     attacking_space = get_german_space_facing_front_line(target_army)
 
     print(f"TARGET LOCATION: {target_army.location.name}")
-    print(f"ATTACKING SPACE: {attacking_space.name}")
-    print()
+    print(f"ATTACKING SPACE: {attacking_space.name}\n")
 
-    available_panzers = []
+    available_panzers = create_available_panzers_list(attacking_space)
+    panzer_count = sum(
+        1 for unit in attacking_space.units
+        if isinstance(unit, GermanUnit) and unit.is_panzer()
+    )
+    max_redeployments = min(
+        card.hitler_intervention_panzer_count,
+        PANZER_STACKING_LIMIT - panzer_count
+    )
 
+    provided_choices = deployment_choices is not None
+    selected_space_units = []
+    redeployed = 0
 
-    seen_spaces = set()
-    for track in [us_1_track, brit_2_track, can_1_track, us_viii_track, us_xv_track]:
-        for space in track:
-            space_id = id(space)
-            if space_id in seen_spaces or space == attacking_space or space.under_siege:
-                continue
-            seen_spaces.add(space_id)
-            for unit in space.units:
-                if isinstance(unit, GermanUnit) and unit.is_panzer():
-                    available_panzers.append((unit, space))
-    for unit in strategic_reserve_box.units:
-        if isinstance(unit, GermanUnit) and unit.is_panzer():
-            available_panzers.append((unit, strategic_reserve_box))
-
-    panzer_count = sum(1 for unit in attacking_space.units if isinstance(unit, GermanUnit) and unit.is_panzer())
-    max_redeployments = min(card.hitler_intervention_panzer_count, PANZER_STACKING_LIMIT - panzer_count)
-
-    redeployed = []
-    for deployment_number in range(max_redeployments):
+    for deployment_num in range(max_redeployments):
         if not available_panzers:
             break
+
         print("AVAILABLE PANZER FORCES")
         print("=======================")
         for index, (unit, space) in enumerate(available_panzers, start=1):
             print(f"{index}. {unit.name} ({unit.combat_value}) - {space.name}")
         print()
-        if deployment_choices is not None:
-            choice = deployment_choices[deployment_number] if deployment_number < len(deployment_choices) else None
-            if choice is None:
+
+        if provided_choices:
+            if deployment_num >= len(deployment_choices):
                 break
-            choice = str(choice)
-            print(f"Choose Panzer force to redeploy: {choice}")
+            choice = str(deployment_choices[deployment_num])
+        elif GlobalGameState.headless:
+            best_selections = choose_hitler_intervention_units(
+                available_panzers,
+                count_needed=1
+            )
+            if not best_selections:
+                break
+            choice = str(available_panzers.index(best_selections[0]) + 1)
         else:
-            choice = input("Choose Panzer force to redeploy: ").strip()
+            print(f"Choose Panzer force to redeploy (Choice {deployment_num + 1}): ")
+            choice = input("Choice: ").strip()
+
         if not choice.isdigit():
-            print("INVALID CHOICE")
             continue
+
         selected_index = int(choice) - 1
         if selected_index < 0 or selected_index >= len(available_panzers):
             print("INVALID CHOICE")
             continue
+
         selected_unit, selected_space = available_panzers.pop(selected_index)
         selected_space.units.remove(selected_unit)
         attacking_space.units.append(selected_unit)
-        redeployed.append(selected_unit)
-        print(f"{selected_unit.name} moved from {selected_space.name} to {attacking_space.name}")
-        print()
+        selected_space_units.append(selected_unit)
+        redeployed += 1
 
-    print(f"REDEPLOYED: {len(redeployed)} PANZER FORCES")
-    print()
+        print(
+            f"Moved {selected_unit.name} from {selected_space.name} "
+            f"to {attacking_space.name}"
+        )
 
+    print(f"REDEPLOYED: {redeployed} PANZER FORCES\n")
     return target_army, attacking_space
 
 def do_hitler_intervention_attack(card, weather, target_army, attacking_space):

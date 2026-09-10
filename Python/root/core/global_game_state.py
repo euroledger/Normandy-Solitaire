@@ -1,9 +1,10 @@
-from core.models import AlliedArmy, Strategy
+from core.models import Strategy
 
 
 class GlobalGameState:
     # MODE if monte_carlo certain things disabled (eg auto save)
-    monte_carlo = False
+    # monte_carlo = False
+    headless = False
 
     us_1_front_line = 11
     brit_2_front_line = 7
@@ -67,4 +68,5 @@ class GlobalGameState:
     reserve_actions = 0
     
     armies_upgraded = False
+
 

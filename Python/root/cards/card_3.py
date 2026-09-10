@@ -1,7 +1,7 @@
 from core.models import *
 from core.enums import *
 from core.allied_armies import US_FIRST_ARMY
-from core.german_units import SS_21_PZGRD
+from core.german_units import SS_17_PZGRD
 
 
 # =========================================================
@@ -34,7 +34,7 @@ card.resources.effects.extend([
     # 17 SS Pz Grd reinforcement
     Effect(modifier_type=ModifierType.REINFORCEMENT,
            value=1,
-           target=SS_21_PZGRD),
+           target=SS_17_PZGRD),
 
     # Truck icon = Transport loss
     Effect(modifier_type=ModifierType.RESOURCE_LOSS,

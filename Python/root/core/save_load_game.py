@@ -27,7 +27,7 @@ from core.german_units import (
     TIGER_101,
     PZ_21,
     PZ_116,
-    SS_21_PZGRD,
+    SS_17_PZGRD,
     PZ_2,
     PZ_9,
     create_nebelwerfer,
@@ -80,7 +80,7 @@ GERMAN_UNITS_BY_SAVE_NAME = {
         TIGER_101,
         PZ_21,
         PZ_116,
-        SS_21_PZGRD,
+        SS_17_PZGRD,
         PZ_2,
         PZ_9,
     ]

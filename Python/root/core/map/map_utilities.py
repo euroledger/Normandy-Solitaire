@@ -13,7 +13,7 @@ from core.map.map_spaces_can_1 import can_1_start_box, lebisey_wood, can_1_track
 from core.map.map_spaces_us_3 import us_viii_track, us_xv_track
 from core.enums import ReinforcementType, SideType
 
-from core.map.map_model import in_transit_box, strategic_reserve_box, eliminated_units_box, supply_track
+from core.map.map_model import in_transit_box, strategic_reserve_box, eliminated_units_box, supply_track, transport_track, hitler_approval_track
 from core.global_game_state import GlobalGameState
 from core.map.map_model import TerrainType
 from core.models import AlliedArmy, GermanUnit
@@ -28,7 +28,7 @@ from core.german_units import (
     SS_2,
     PZ_21,
     PZ_116,
-    SS_21_PZGRD,
+    SS_17_PZGRD,
     PZ_2,
     PZ_9,
 )
@@ -42,7 +42,6 @@ def add_units_to_space(space, units):
         if isinstance(unit, AlliedArmy):
             unit.location = space
             update_front_line_for_army(unit, space.track_number)
-
 
 
 def remove_units_from_space(space, units):
@@ -69,7 +68,7 @@ def german_defense_strength(space):
     print(f"GERMAN DEFENSE: {space.name}")
     print(f"TERRAIN: {terrain_value}")
     if fortified_value != 0:
-        print(f"FORTIFIED VILLAGES: {fortified_value}")    
+        print(f"FORTIFIED VILLAGES: {fortified_value}")
     if model_value != 0:
         print(f"MODEL +{model_value}")
 
@@ -99,17 +98,17 @@ def calculate_german_attack_strength(space, selected_units):
     model_value = space.model_modifier
     unit_strength = sum(unit.combat_value for unit in selected_units)
 
-    print()
-    print(f"LAUNCH GERMAN ATTACK FROM: {space.name}")
-    
-    if model_value != 0:
-        print(f"MODEL +{model_value}")
+    # print()
+    # print(f"LAUNCH GERMAN ATTACK FROM: {space.name}")
 
-    for unit in selected_units:
-        print(f"{unit}: {unit.combat_value}")
+    # if model_value != 0:
+    #     print(f"MODEL +{model_value}")
 
-    print(f"TOTAL ATTACK: {model_value + unit_strength}")
-    print()
+    # for unit in selected_units:
+    #     print(f"{unit}: {unit.combat_value}")
+
+    # print(f"TOTAL ATTACK: {model_value + unit_strength}")
+    # print()
 
     return model_value + unit_strength
 
@@ -140,7 +139,7 @@ def german_attack_strength(space):
 
 # Some tests reduce combat values - reset them here
 def reset_german_panzer_divisions():
-    for unit in [PZ_LEHR, SS_12, SS_1, SS_9, SS_10, SS_2, PZ_21, PZ_116, SS_21_PZGRD, PZ_2, PZ_9]:
+    for unit in [PZ_LEHR, SS_12, SS_1, SS_9, SS_10, SS_2, PZ_21, PZ_116, SS_17_PZGRD, PZ_2, PZ_9]:
         unit.combat_value = 2
 
 
@@ -184,6 +183,8 @@ def reset_allied_armies():
         army.location = None
         army.flipped = False
         army.merged = False
+        
+
 
 
 def get_eligible_german_units(space):
@@ -237,6 +238,38 @@ def do_opening_setup():
     GlobalGameState.us_viii_front_line = 7
     GlobalGameState.us_xv_front_line = 4
 
+    GlobalGameState.transport_roll_drm = 0
+    GlobalGameState.supply_roll_drm = 0
+    GlobalGameState.transport_check_drm = 0
+    GlobalGameState.supply_check_drm = 0
+    GlobalGameState.hitler_approval_check_drm = 0
+    GlobalGameState.transport_base_level = 3
+    GlobalGameState.supply_base_level = 3
+    GlobalGameState.hitler_approval_base_level = 3
+    GlobalGameState.actions_left_this_turn = 0
+    GlobalGameState.cards_drawn = 0
+    GlobalGameState.drawn_cards = []
+    GlobalGameState.mid_deck_added = False
+    GlobalGameState.late_deck_added = False
+    GlobalGameState.current_card = None
+    GlobalGameState.current_weather = None
+    GlobalGameState.current_carpet_bombing = 0
+    GlobalGameState.current_step = 1
+    GlobalGameState.counter_attacked_armies = set()
+    GlobalGameState.cherbourg_captured = False
+    GlobalGameState.us_third_army_activated = False
+    GlobalGameState.us_third_army_merged = False
+    GlobalGameState.us_first_army_furthest_advance = 11
+    GlobalGameState.meyer_available = False
+    GlobalGameState.bocage_defense_modifier = 0
+    GlobalGameState.model_in_command = False
+    GlobalGameState.hitler_assassination = False
+    GlobalGameState.hitler_intervention_no_effect = False
+    GlobalGameState.reserve_actions = 0
+    GlobalGameState.armies_upgraded = False
+    transport_track.value = 5
+    supply_track.value = 4
+    hitler_approval_track.value = 6
     # =========================================================
     # OPENING SETUP - ALLIES
     # =========================================================
