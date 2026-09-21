@@ -124,7 +124,7 @@ def get_unit_by_save_name(unit_name):
 # ---------------------------------------------------------
 
 
-def get_all_map_spaces():
+def get_all_map_spaces_excluding_boxes():
     spaces = []
 
     for track in [
@@ -140,7 +140,7 @@ def get_all_map_spaces():
 
 
 def clear_all_units_from_map():
-    for space in get_all_map_spaces():
+    for space in get_all_map_spaces_excluding_boxes():
         space.units.clear()
 
 
@@ -267,7 +267,7 @@ def save_game(save_name=None):
                 "under_siege": space.under_siege,
                 "units": [unit.name for unit in space.units],
             }
-            for space in get_all_map_spaces()
+            for space in get_all_map_spaces_excluding_boxes()
         },
     }
 
@@ -334,7 +334,7 @@ def load_game():
     in_transit_box.units[:] = [get_unit_by_save_name(unit) for unit in boxes["in_transit"]]
     strategic_reserve_box.units[:] = [get_unit_by_save_name(unit) for unit in boxes["strategic_reserve"]]
     eliminated_units_box.units[:] = [get_unit_by_save_name(unit) for unit in boxes["eliminated_units"]]
-    spaces = {space.name: space for space in get_all_map_spaces()}
+    spaces = {space.name: space for space in get_all_map_spaces_excluding_boxes()}
 
     for name, saved_space in save_data["map_spaces"].items():
         space = spaces[name]

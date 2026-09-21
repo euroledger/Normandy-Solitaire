@@ -72,23 +72,52 @@ def get_front_line_space(army):
 def advance_army_one_space(army):
     track = get_track_for(army)
     current_space = army.location
+
+    # US VIII Corps and US XV Corps use their track list order because
+    # their track numbers are not always sequential.
     if army in [US_VIII_CORPS, US_XV_CORPS]:
         current_index = track.index(current_space)
         next_space = track[current_index + 1] if current_index + 1 < len(track) else None
+
+    # A merged US 3rd Army retreating into its Start Box must attack
+    # and advance directly from the Start Box to Rennes.
+    elif army == US_THIRD_ARMY and current_space == us_3_start_box:
+        next_space = rennes
+
     else:
-        next_space = next((space for space in track if space.track_number == current_space.track_number - 1), None)
+        next_space = next(
+            (
+                space
+                for space in track
+                if space.track_number == current_space.track_number - 1
+            ),
+            None
+        )
+
     if next_space is None:
         return
+
     current_space.units.remove(army)
     next_space.units.append(army)
     army.location = next_space
+
     if hasattr(next_space, "controlling_player"):
         next_space.controlling_player = SideType.ALLIED
-    new_furthest_advance = update_front_line_for_army(army, next_space.track_number)
-    print(f">>>>>>> AFTER ALLIED ADVANCE -> ALLIED ARMY LOCATION:{army.display_name} IS AT {army.location.name}")
+
+    new_furthest_advance = update_front_line_for_army(
+        army,
+        next_space.track_number
+    )
+
+    print(
+        f">>>>>>> AFTER ALLIED ADVANCE -> "
+        f"ALLIED ARMY LOCATION:{army.display_name} "
+        f"IS AT {army.location.name}"
+    )
+
     if army in [US_VIII_CORPS, US_XV_CORPS]:
         check_and_merge_us_third_army(next_space)
-        
+
     return new_furthest_advance
 
 def dday_landings_first_wave():
@@ -214,7 +243,7 @@ def choose_german_excess_unit(units, choice=None):
     return units[selection - 1]
 
 
-def enforce_german_stacking_limit(space, choice=None):
+def enforce_german_stacking_limit(space, casualty_choice=None):
     stacking_groups = [
         ("PANZER / KAMPFGRUPPE", lambda unit: unit.is_panzer(), PANZER_STACKING_LIMIT),
         ("FLAK 88", lambda unit: unit.type == ReinforcementType.FLAK_88, FLAK_88_STACKING_LIMIT),
@@ -248,7 +277,11 @@ def enforce_german_stacking_limit(space, choice=None):
 
         for _ in range(excess):
             available_units = [unit for unit in units if unit in space.units]
-            casualty = choose_german_excess_unit(available_units, choice)
+            if GlobalGameState.headless:
+                casualty = choice(available_units)
+            else:
+                casualty = choose_german_excess_unit(available_units, casualty_choice)
+
             space.units.remove(casualty)
             eliminated_units_box.units.append(casualty)
             print(f"ELIMINATED: {casualty}")
@@ -267,6 +300,9 @@ def retreat_german_units(space, track):
     
 # if two US Corps occupy same space -> merge
 def check_and_merge_us_third_army(space):
+    if space.terrain == TerrainType.START_BOX:
+        return False
+    
     if US_VIII_CORPS not in space.units or US_XV_CORPS not in space.units:
         return False
 
@@ -446,7 +482,6 @@ def do_allied_attacks(armies, card, weather, carpet_bombing=0, die_roll=None, pa
     for army in armies:        
         
         if army.location is None:
-            print("************* CONTINUE POO *****************")
             continue
         
         # --- CLEAN STRUCTURAL MERGE BYPASS ---
@@ -483,14 +518,21 @@ def do_allied_attacks(armies, card, weather, carpet_bombing=0, die_roll=None, pa
         # NEW RULE TO ENSURE two US 3rd ARMY CORPS NEED TO ATTACK OUT OF THEIR BOX
         if army in [US_VIII_CORPS, US_XV_CORPS] and army.location and army.location.terrain == TerrainType.START_BOX:
             target_space = get_track_for(army)[1]
-        elif army.location and army.location.terrain == TerrainType.START_BOX:
-        # elif army.location.terrain == TerrainType.START_BOX:
+            
+        elif army.location and army.location.terrain == TerrainType.START_BOX:  # noqa: SIM114
             advance_army_one_space(army)
             print(f"{army.display_name} -> {army.location.name}")
             continue
         else:
             target_space = next((space for space in get_track_for(army) if space.track_number == army.location.track_number - 1), None)
-
+        
+        # Edge Case -> US corps is advancing into Allied Controlled Space
+        if target_space.controlling_player == SideType.ALLIED:
+            print(f"{army.display_name} ADVANCES INTO ALLIED-CONTROLLED {target_space.name}")
+            advance_army_one_space(army)
+            print(f"{army.display_name} -> {army.location.name}")
+            continue
+        
         attack_result = calculate_attack_modifiers(card=card, army=army, num_jabos=weather.available_jabos, carpet_bombing=carpet_bombing)
         attack_strength = attack_result["attack_strength"]
         attacking_from = army.location.name

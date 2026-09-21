@@ -53,9 +53,8 @@ class TestMovePanzerToStrategicReserve(unittest.TestCase):
 
         do_move_panzer_to_strategic_reserve(
             die_roll=6,
-            div_choice=1,
+            div_choice=SS_12,
         )
-
         self.assertNotIn(SS_12, carentan.units)
         self.assertIn(SS_12, strategic_reserve_box.units)
         self.assertIn(PZ_LEHR, caen.units)

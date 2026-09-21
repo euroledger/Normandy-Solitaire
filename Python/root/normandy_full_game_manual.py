@@ -1,25 +1,47 @@
 import traceback
-import importlib
-from core.ai.headless_env_manager import _REAL_print, save_log_to_disk
+
+from core.ai.headless_env_manager import _REAL_PRINT_, save_log_to_disk
 import builtins
 import copy
-import sys
 from random import shuffle, randint
+from collections import Counter
+
 from cards.decks import draw_deck, mid_deck, late_deck
-from core.actions.strategic_reserve_actions import do_move_other_unit_from_strategic_reserve, get_other_units_in_strategic_reserve
+from core.actions.strategic_reserve_actions import (
+    do_move_other_unit_from_strategic_reserve,
+    get_other_units_in_strategic_reserve,
+)
 from core.allied_advances_phase import do_allied_advances_phase
-from core.allied_armies import BRITISH_SECOND_ARMY, CANADIAN_FIRST_ARMY, US_FIRST_ARMY, US_THIRD_ARMY, US_VIII_CORPS, US_XV_CORPS
+from core.allied_armies import (
+    BRITISH_SECOND_ARMY,
+    CANADIAN_FIRST_ARMY,
+    US_FIRST_ARMY,
+    US_THIRD_ARMY,
+    US_VIII_CORPS,
+    US_XV_CORPS,
+)
 from core.game_constants import CYAN, GREEN, RED, RESET
 from core.save_load_game import load_game, save_game
 from core.tables.weather import get_weather_result
-from core.resources import do_event, do_resource_phase_adjustments, do_resource_phase_drms, do_resource_phase_reinforcements
+from core.resources import (
+    do_event,
+    do_resource_phase_adjustments,
+    do_resource_phase_drms,
+    do_resource_phase_reinforcements,
+)
 from core.tables.carpet_bombing import get_carpet_bombing_result, ATTACK_CANCELLED
 from core.map.map_utilities import do_opening_setup
 from core.game_summary import print_game_summary
 from core.global_game_state import GlobalGameState
-from core.ai.headless_env_manager import configure_headless_printing, configure_automated_inputs
+
+from core.ai.headless_env_manager import (
+    configure_headless_printing,
+    configure_automated_inputs,
+)
 from game_phases.action_phase import action_phase_fork
+
 import time
+import sys
 
 # Enforce human visible terminal strings
 # Set both to False to play the manual (human) game
@@ -31,20 +53,31 @@ _PRISTINE_DRAW = copy.deepcopy(draw_deck)
 _PRISTINE_MID = copy.deepcopy(mid_deck)
 _PRISTINE_LATE = copy.deepcopy(late_deck)
 
-def execute_single_game_run(i):
-    GlobalGameState.headless = True
-    configure_headless_printing(i)
 
-    configure_automated_inputs(True)
+def execute_single_game_run(i):
+    headless = False
+    GlobalGameState.headless = headless
+    
+    if headless:
+        configure_headless_printing(i)
+
+    configure_automated_inputs(headless)
 
     from core.card_utilities import (
         calculate_attack_modifiers,
         get_all_defending_armies,
         get_armies_as_objects,
-        calculate_defense_modifiers
+        calculate_defense_modifiers,
     )
+
+    # Analysis values for this game
+    card_28_draw_position = None
+    us_3_activation_position = None
+    us_3_activation_location = None
+
     # --- DECK REFRESHMENT FIX ---
- # --- DECK REFRESHMENT (FIXED FOR REFERENCES) ---
+    # --- DECK REFRESHMENT (FIXED FOR REFERENCES) ---
+
     # 1. Clear out tracking parameters on your master control layout
     GlobalGameState.cards_drawn = 0
     GlobalGameState.drawn_cards = []
@@ -53,8 +86,7 @@ def execute_single_game_run(i):
     GlobalGameState.current_step = 1
     GlobalGameState.mid_deck_added = False
     GlobalGameState.late_deck_added = False
-    
-    
+
     # 2. Slice-assign the pristine card contents back to the active tracking lists
     # This keeps the exact memory reference pointers untouched while resetting the items
     import cards.decks
@@ -62,7 +94,7 @@ def execute_single_game_run(i):
     draw_deck = list(cards.decks.draw_deck)
     mid_deck = list(cards.decks.mid_deck)
     late_deck = list(cards.decks.late_deck)
-    
+
     GAME_WON = "won"
     GAME_LOST = "lost"
     GAME_CONTINUES = None
@@ -79,6 +111,7 @@ def execute_single_game_run(i):
         print("========================================")
         print("ATTACK STRENGTHS (ALLIED ARMIES)")
         print("========================================")
+
         armies = get_armies_as_objects(card)
 
         if not armies:
@@ -110,8 +143,20 @@ def execute_single_game_run(i):
             print("========================================")
             return GAME_LOST
 
-        allied_formations = [US_FIRST_ARMY, BRITISH_SECOND_ARMY, CANADIAN_FIRST_ARMY, US_THIRD_ARMY, US_VIII_CORPS, US_XV_CORPS]
-        if any(formation.location and formation.location.name == "FALAISE GAP" for formation in allied_formations):
+        allied_formations = [
+            US_FIRST_ARMY,
+            BRITISH_SECOND_ARMY,
+            CANADIAN_FIRST_ARMY,
+            US_THIRD_ARMY,
+            US_VIII_CORPS,
+            US_XV_CORPS,
+        ]
+
+        if any(
+            formation.location
+            and formation.location.name == "FALAISE GAP"
+            for formation in allied_formations
+        ):
             print()
             print("========================================")
             print("ALLIED FORMATION HAS REACHED FALAISE GAP")
@@ -119,8 +164,10 @@ def execute_single_game_run(i):
             print("YOU LOSE!")
             print("========================================")
             return GAME_LOST
+
         if GlobalGameState.cards_drawn == 48:
             return GAME_WON
+
         return GAME_CONTINUES
 
     def print_defense_strengths(card, weather):
@@ -152,11 +199,15 @@ def execute_single_game_run(i):
         print()
 
         game_result = check_for_game_end()
+
         if game_result == GAME_LOST:
             break
 
         if GlobalGameState.drawn_cards:
-            drawn_ids = [str(card.card_id) for card in GlobalGameState.drawn_cards]
+            drawn_ids = [
+                str(card.card_id)
+                for card in GlobalGameState.drawn_cards
+            ]
 
             print(f"List of Drawn Cards: ({', '.join(drawn_ids)})")
         else:
@@ -175,7 +226,10 @@ def execute_single_game_run(i):
             print(f"Current Card: {GlobalGameState.current_card.card_id}")
 
         if GlobalGameState.current_weather:
-            print(f"Current Weather: {GlobalGameState.current_weather.weather_type.value}")
+            print(
+                f"Current Weather: "
+                f"{GlobalGameState.current_weather.weather_type.value}"
+            )
 
         print()
 
@@ -198,7 +252,10 @@ def execute_single_game_run(i):
         print("Press ENTER to perform next action")
         print("Press G to see game summary")
 
-        can_save_game = GlobalGameState.current_step == 1 and GlobalGameState.current_card is not None
+        can_save_game = (
+            GlobalGameState.current_step == 1
+            and GlobalGameState.current_card is not None
+        )
 
         can_load_game = GlobalGameState.current_step == 1
 
@@ -207,7 +264,6 @@ def execute_single_game_run(i):
 
         if can_load_game:
             print("Press L to load saved game")
-
             print("Press Q to quit")
             print()
 
@@ -250,11 +306,30 @@ def execute_single_game_run(i):
             draw_deck.remove(drawn_card)
             GlobalGameState.drawn_cards.append(drawn_card)
 
-            if drawn_card.card_id == 20 and not GlobalGameState.mid_deck_added:
+            # Record where Card 28 appeared
+            if drawn_card.card_id == 28:
+                card_28_draw_position = len(GlobalGameState.drawn_cards)
+
+
+            # if (
+            #     drawn_card.card_id == 20
+            #     and not GlobalGameState.mid_deck_added
+            # ):
+            #     draw_deck.extend(mid_deck)
+            #     shuffle(draw_deck)
+            #     GlobalGameState.mid_deck_added = True
+            if (
+                drawn_card.card_id == 20
+                and not GlobalGameState.mid_deck_added
+            ):
                 draw_deck.extend(mid_deck)
                 shuffle(draw_deck)
-                GlobalGameState.mid_deck_added = True
 
+                card_28 = next(card for card in draw_deck if card.card_id == 28)
+                draw_deck.remove(card_28)
+                draw_deck.insert(0, card_28)
+
+                GlobalGameState.mid_deck_added = True
                 print(CYAN)
                 print()
                 print("========================================")
@@ -263,7 +338,10 @@ def execute_single_game_run(i):
                 print("========================================")
                 print(RESET)
 
-            if drawn_card.card_id == 37 and not GlobalGameState.late_deck_added:
+            if (
+                drawn_card.card_id == 37
+                and not GlobalGameState.late_deck_added
+            ):
                 draw_deck.extend(late_deck)
                 shuffle(draw_deck)
                 GlobalGameState.late_deck_added = True
@@ -283,13 +361,15 @@ def execute_single_game_run(i):
             print("========================================")
 
             drawn_card.summary()
+
             print(RESET)
             input("Press ENTER to continue...")
+
             GlobalGameState.current_step = 2
             continue
 
         if GlobalGameState.current_step == 2 and user_input == "":
-            if GlobalGameState.current_card.card_id == 13:  # Great Storm
+            if GlobalGameState.current_card.card_id == 13:
                 weather = get_weather_result(1)
                 weather_roll = "N/A"
             else:
@@ -337,59 +417,111 @@ def execute_single_game_run(i):
                     print("RESULT: ATTACK CANCELLED")
                     GlobalGameState.current_carpet_bombing = 0
                 else:
-                    GlobalGameState.current_carpet_bombing = carpet_result.attack_modifier
-                    print(f"RESULT: {GlobalGameState.current_carpet_bombing:+} ATTACK STRENGTH")
+                    GlobalGameState.current_carpet_bombing = (
+                        carpet_result.attack_modifier
+                    )
+
+                    print(
+                        f"RESULT: "
+                        f"{GlobalGameState.current_carpet_bombing:+} "
+                        f"ATTACK STRENGTH"
+                    )
 
             print(RESET)
             input("Press ENTER to continue...")
+
             GlobalGameState.current_step = 3
             continue
 
         if GlobalGameState.current_step == 3 and user_input == "":
             do_event(GlobalGameState.current_card)
-            do_resource_phase_adjustments(GlobalGameState.current_card)
+
+            do_resource_phase_adjustments(
+                GlobalGameState.current_card
+            )
+
             do_resource_phase_drms(
                 GlobalGameState.current_weather.weather_type,
                 GlobalGameState.current_card,
             )
-            print(f"RESOURCE PHASE - weather is {GlobalGameState.current_weather.weather_type.value}\n")
+
+            print(
+                f"RESOURCE PHASE - weather is "
+                f"{GlobalGameState.current_weather.weather_type.value}\n"
+            )
+
             print_attack_strengths(
                 GlobalGameState.current_card,
                 GlobalGameState.current_weather,
                 GlobalGameState.current_carpet_bombing,
             )
+
             print_defense_strengths(
                 GlobalGameState.current_card,
                 GlobalGameState.current_weather,
             )
+
             print(CYAN)
-            do_resource_phase_reinforcements(GlobalGameState.current_card)
+
+            do_resource_phase_reinforcements(
+                GlobalGameState.current_card
+            )
+
             print(RESET)
             input("Press ENTER to continue...")
+
             GlobalGameState.current_step = 4
             continue
 
         if GlobalGameState.current_step == 4 and user_input == "":
             while get_other_units_in_strategic_reserve():
-                choice = input("Deploy a non-Panzer unit from Strategic Reserve? (Y/N): ").strip().lower()
+                choice = input(
+                    "Deploy a non-Panzer unit from Strategic Reserve? (Y/N): "
+                ).strip().lower()
+
                 if choice != "y":
                     break
+
                 deployed = do_move_other_unit_from_strategic_reserve()
+
                 if not deployed:
                     break
+
             GlobalGameState.current_step = 5
             continue
+
         if GlobalGameState.current_step == 5 and user_input == "":
+            # Record whether Third Army was inactive before this Allied phase
+            us_3_was_active = GlobalGameState.us_third_army_activated
+
             print(CYAN)
+
             do_allied_advances_phase(
                 GlobalGameState.current_card,
                 GlobalGameState.current_weather,
             )
+
             print(RESET)
-            # input("Press ENTER to continue...")
+
+            # Detect the exact turn on which Third Army became active
+            if (
+                not us_3_was_active
+                and GlobalGameState.us_third_army_activated
+            ):
+                us_3_activation_position = len(
+                    GlobalGameState.drawn_cards
+                )
+
+                if US_FIRST_ARMY.location is not None:
+                    us_3_activation_location = (
+                        US_FIRST_ARMY.location.name
+                    )
+
             game_result = check_for_game_end()
+
             if game_result == GAME_LOST:
                 break
+
             GlobalGameState.current_step = 6
             continue
 
@@ -408,89 +540,270 @@ def execute_single_game_run(i):
         print("You lost!")
 
     print("========================================")
-    return game_result
+
+    return {
+        "result": game_result,
+        "card_28_draw_position": card_28_draw_position,
+        "us_3_activation_position": us_3_activation_position,
+        "us_3_activation_location": us_3_activation_location,
+    }
 
 
 batch_start = time.perf_counter()
 
-NUM_EPISODES = 100  # Scale this up or down as needed for benchmarking
+NUM_EPISODES = 1000
+
 win_count = 0
 loss_count = 0
+
 cards_drawn_per_game = []
 game_durations = []
 
+# Analysis of winning games
+winning_card_28_positions = []
+winning_us3_activations = []
+
 # Main metrics collection loop
 for i in range(NUM_EPISODES):
-    # Silence output for internal performance testing
-    builtins.print = lambda *args, **kwargs: None
+    if i % 100 == 0 and i != 0:
+        save_log_to_disk(i) # SAVE EVERY 100th GAME
+        _REAL_PRINT_("GAME", i)
 
     game_start = time.perf_counter()
-
     try:
-        # Execute the single game loop iteration
-        result = execute_single_game_run(i)
-    except Exception as e:
-        # 1. Instantly restore your system print capability
-        builtins.print = _REAL_print
-
+        game_data = execute_single_game_run(i)
+        result = game_data["result"]
+    except Exception as e:  # noqa: BLE001
+        builtins.print = _REAL_PRINT_
+        _REAL_PRINT_("ERROR!!!")
         import traceback
         print("\n" + "!" * 60)
-        print(f"CRITICAL APP TERMINATION: Exception occurred in Game {i}")
+        print(
+            f"CRITICAL APP TERMINATION: "
+            f"Exception occurred in Game {i}"
+        )
         print("-" * 60)
-
-        # This directly inspects Python's execution stack and prints the exact lines that broke
         traceback.print_exc()
-
         print("!" * 60)
-
-        # 2. Treat the current incomplete game as a failure metric safely
         result = "lost"
         game_end = time.perf_counter()
-        game_durations.append(game_end - game_start)
-        cards_drawn_per_game.append(GlobalGameState.cards_drawn)
+        game_durations.append(
+            game_end - game_start
+        )
+        cards_drawn_per_game.append(
+            GlobalGameState.cards_drawn
+        )
         loss_count += 1
-        
         save_log_to_disk(i)
-
-        # 3. Halt the simulation batch entirely to print the analytics table
         sys.exit()
 
     game_end = time.perf_counter()
-
-    # Store standard round performance data
     duration = game_end - game_start
     game_durations.append(duration)
-    cards_drawn_per_game.append(GlobalGameState.cards_drawn)
+    cards_drawn_per_game.append(
+        GlobalGameState.cards_drawn
+    )
 
     if result == "won":
         win_count += 1
-        # Save the fully loaded RAM buffer to hard drive
-        save_log_to_disk(game_number=i)
 
-        # Immediately kill the process to lock up your variable workspace for debugging
-        sys.exit(0)
+        card_28_position = game_data[
+            "card_28_draw_position"
+        ]
+
+        us_3_position = game_data[
+            "us_3_activation_position"
+        ]
+
+        us_3_location = game_data[
+            "us_3_activation_location"
+        ]
+        winning_card_28_positions.append(
+            card_28_position
+        )
+        winning_us3_activations.append(
+            (
+                us_3_position,
+                us_3_location,
+            )
+        )
+
+        save_log_to_disk(
+            game_number=i
+        )
+
+        _REAL_PRINT_(f"AI WIN: game {i}")
+
+        _REAL_PRINT_(
+            f"  Card 28 drawn: "
+            f"{card_28_position}"
+        )
+
+        if us_3_position is None:
+            _REAL_PRINT_(
+                "  US 3rd Army activated: NEVER"
+            )
+        else:
+            _REAL_PRINT_(
+                f"  US 3rd Army activated: "
+                f"turn {us_3_position} "
+                f"at {us_3_location}"
+            )
+
     elif result == "lost":
         loss_count += 1
 
-# THE END BIT: Forcefully restore standard terminal printing
-builtins.print = _REAL_print
+# Forcefully restore standard terminal printing
+builtins.print = _REAL_PRINT_
 
-# Calculate final analytical metrics across the arrays safely
-total_batch_time = sum(game_durations)
-actual_attempts = len(game_durations)
+# Calculate final analytical metrics
+total_batch_time = sum(
+    game_durations
+)
 
-average_game_time = total_batch_time / actual_attempts if actual_attempts > 0 else 0
-avg_cards_processed = sum(cards_drawn_per_game) / len(cards_drawn_per_game) if cards_drawn_per_game else 0
-win_rate = (win_count / actual_attempts) * 100 if actual_attempts > 0 else 0
+actual_attempts = len(
+    game_durations
+)
 
-print("\n=========================================")
+average_game_time = (
+    total_batch_time / actual_attempts
+    if actual_attempts > 0
+    else 0
+)
+
+avg_cards_processed = (
+    sum(cards_drawn_per_game)
+    / len(cards_drawn_per_game)
+    if cards_drawn_per_game
+    else 0
+)
+
+win_rate = (
+    (win_count / actual_attempts) * 100
+    if actual_attempts > 0
+    else 0
+)
+
+print()
+print("=========================================")
 print("         BATCH RUN PERFORMANCE SUMMARY    ")
 print("=========================================")
-print(f"Total Games Attempted : {actual_attempts}")
-print(f"Total Recorded Wins   : {win_count} ({win_rate:.2f}%)")
-print(f"Total Recorded Losses : {loss_count}")
-print(f"Avg Cards Processed   : {avg_cards_processed:.2f} / 48")
+
+print(
+    f"Total Games Attempted : "
+    f"{actual_attempts}"
+)
+
+print(
+    f"Total Recorded Wins   : "
+    f"{win_count} ({win_rate:.2f}%)"
+)
+
+print(
+    f"Total Recorded Losses : "
+    f"{loss_count}"
+)
+
+print(
+    f"Avg Cards Processed   : "
+    f"{avg_cards_processed:.2f} / 48"
+)
+
 print("-----------------------------------------")
-print(f"Total Execution Time  : {total_batch_time:.4f} seconds")
-print(f"Avg Time Per Game     : {average_game_time:.6f} seconds")
-print("=========================================\n")
+
+print(
+    f"Total Execution Time  : "
+    f"{total_batch_time:.4f} seconds"
+)
+
+print(
+    f"Avg Time Per Game     : "
+    f"{average_game_time:.6f} seconds"
+)
+
+print("=========================================")
+
+if win_count > 0:
+    print()
+    print("=========================================")
+    print("          WINNING GAME ANALYSIS")
+    print("=========================================")
+
+    valid_card_28_positions = [
+        position
+        for position in winning_card_28_positions
+        if position is not None
+    ]
+
+    if valid_card_28_positions:
+        print(
+            f"Card 28 Avg Draw       : "
+            f"{sum(valid_card_28_positions) / len(valid_card_28_positions):.2f}"
+        )
+
+        print(
+            f"Card 28 Earliest       : "
+            f"{min(valid_card_28_positions)}"
+        )
+
+        print(
+            f"Card 28 Latest         : "
+            f"{max(valid_card_28_positions)}"
+        )
+
+    activated_positions = [
+        position
+        for position, location in winning_us3_activations
+        if position is not None
+    ]
+
+    never_activated = sum(
+        1
+        for position, location in winning_us3_activations
+        if position is None
+    )
+
+    if activated_positions:
+        print(
+            f"US 3rd Army Avg Active : "
+            f"{sum(activated_positions) / len(activated_positions):.2f}"
+        )
+
+        print(
+            f"US 3rd Army Earliest   : "
+            f"{min(activated_positions)}"
+        )
+
+        print(
+            f"US 3rd Army Latest     : "
+            f"{max(activated_positions)}"
+        )
+
+    print(
+        f"US 3rd Never Activated : "
+        f"{never_activated}"
+    )
+
+    activation_locations = Counter(
+        location
+        for position, location in winning_us3_activations
+        if location is not None
+    )
+
+    print()
+
+    print(
+        "US 3rd Army Activation Locations:"
+    )
+
+    if activation_locations:
+        for location, count in activation_locations.items():
+            print(
+                f"  {location}: {count}"
+            )
+    else:
+        print("  NONE")
+
+    print("=========================================")
+
+print()

@@ -35,10 +35,9 @@ class TestMovePanzerFromStrategicReserve(unittest.TestCase):
 
         do_move_panzer_from_strategic_reserve(
             die_roll=6,
-            div_choice=1,
-            space_choice=1,
+            div_choice=SS_12,
+            space_choice=destination,
         )
-
         self.assertNotIn(SS_12, strategic_reserve_box.units)
         self.assertIn(SS_12, destination.units)
         self.assertEqual(GlobalGameState.actions_left_this_turn, 0)

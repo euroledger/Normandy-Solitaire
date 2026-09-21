@@ -11,6 +11,7 @@ from core.map.map_model import (
     supply_track,
     TerrainType,
 )
+from core.map.map_spaces_us_3 import us_xv_track
 from core.map.map_utilities import (
     can_counter_attack,
     calculate_german_attack_strength,
@@ -87,6 +88,14 @@ def get_counter_attack_options():
 
         target_space = get_front_line_space(army)
 
+        # EDGE CASE check viii corps on xv corps track
+        if army == US_VIII_CORPS:
+            viii_front_line = target_space
+            xv_front_line = get_front_line_space(US_XV_CORPS)
+
+            if viii_front_line in us_xv_track and xv_front_line.track_number < viii_front_line.track_number:
+                continue
+            
         if not can_counter_attack(target_space):
             continue
 

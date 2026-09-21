@@ -17,6 +17,7 @@ def action_phase_fork():
     else:
         action_phase_ai()
 
+
 def action_phase_ai():
     proceed = common_pre_action_phase(
         GlobalGameState.current_card,
@@ -30,6 +31,7 @@ def action_phase_ai():
             )
             legal_actions = np.where(action_mask == 1.0)[0]
             ai_chosen_flat_id = np.random.choice(legal_actions)
+
             inject_ai_turn_arguments([""])
 
             action_success = execute_flat_hitler_intervention_ai(
@@ -49,21 +51,25 @@ def action_phase_ai():
 
     while True:
         action_mask = get_mini_action_mask()
+
         legal_actions = np.where(action_mask == 1.0)[0]
-        tactical_actions = [aid for aid in legal_actions if aid != 0]
+
+        tactical_actions = [
+            action_id
+            for action_id in legal_actions
+            if action_id != 0
+        ]
 
         if not tactical_actions:
             break
 
         ai_chosen_flat_id = np.random.choice(tactical_actions)
-        target_option = get_counter_attack_options()[ai_chosen_flat_id - 1]
-        execute_flat_action_ai(
-            ai_chosen_flat_id,
-            target_option=target_option
-        )
+
+        execute_flat_action_ai(ai_chosen_flat_id)
 
     common_post_action_phase()
-        
+
+
 def action_phase_manual():
     print(CYAN)
     do_action_phase(

@@ -4,6 +4,7 @@ from core.german_units import MEYER, SS_12
 from core.models import GermanUnit, ReinforcementType
 from core.global_game_state import GlobalGameState
 from core.map.map_model import (
+    MapSpace,
     eliminated_units_box,
     hitler_approval_track,
     transport_track,
@@ -48,7 +49,10 @@ def get_other_units_in_strategic_reserve():
     ]
 
 
-def do_move_other_unit_from_strategic_reserve(unit_choice=None, space_choice=None):
+def do_move_other_unit_from_strategic_reserve(
+    unit_choice=None,
+    space_choice=None
+):
     print("MOVE OTHER UNIT FROM STRATEGIC RESERVE")
     print()
 
@@ -63,29 +67,52 @@ def do_move_other_unit_from_strategic_reserve(unit_choice=None, space_choice=Non
 
     for index, unit in enumerate(units, start=1):
         print(f"{index}. {unit.name} ({unit.combat_value})")
+
     print()
     print("0. Return to main menu")
     print()
-    if unit_choice is None:
-        unit_choice = input("Choice: ").strip()
+
+    # ---------------------------------------------------------
+    # SELECT UNIT
+    # ---------------------------------------------------------
+
+    if isinstance(unit_choice, GermanUnit):
+        if unit_choice not in units:
+            print("INVALID CHOICE")
+            return False
+
+        selected_unit = unit_choice
+
     else:
-        unit_choice = str(unit_choice).strip()
-    if unit_choice == "0":
-        return False
-    if not unit_choice.isdigit():
-        print("INVALID CHOICE")
-        return False
+        if unit_choice is None:
+            unit_choice = input("Choice: ").strip()
+        else:
+            unit_choice = str(unit_choice).strip()
 
-    selected_index = int(unit_choice) - 1
-    if selected_index < 0 or selected_index >= len(units):
-        print("INVALID CHOICE")
-        return False
+        if unit_choice == "0":
+            return False
 
-    selected_unit = units[selected_index]
+        if not unit_choice.isdigit():
+            print("INVALID CHOICE")
+            return False
+
+        selected_index = int(unit_choice) - 1
+
+        if selected_index < 0 or selected_index >= len(units):
+            print("INVALID CHOICE")
+            return False
+
+        selected_unit = units[selected_index]
+
     print()
     print(f"SELECTED: {selected_unit.name}")
 
+    # ---------------------------------------------------------
+    # SELECT DESTINATION
+    # ---------------------------------------------------------
+
     german_spaces = get_german_controlled_spaces()
+
     if not german_spaces:
         print("No German-controlled spaces available")
         return False
@@ -94,31 +121,55 @@ def do_move_other_unit_from_strategic_reserve(unit_choice=None, space_choice=Non
 
     if display_spaces is None:
         return False
-    if space_choice is None:
-        space_choice = input("Choice: ").strip()
+
+    if isinstance(space_choice, MapSpace):
+        if space_choice not in display_spaces:
+            print("INVALID CHOICE")
+            return False
+
+        selected_space = space_choice
+
     else:
-        space_choice = str(space_choice).strip()
-    if space_choice == "0":
-        return False
-    if not space_choice.isdigit():
-        print("INVALID CHOICE")
-        return False
+        if space_choice is None:
+            space_choice = input("Choice: ").strip()
+        else:
+            space_choice = str(space_choice).strip()
 
-    selected_index = int(space_choice) - 1
-    if selected_index < 0 or selected_index >= len(display_spaces):
-        print("INVALID CHOICE")
-        return False
+        if space_choice == "0":
+            return False
 
-    selected_space = display_spaces[selected_index]
+        if not space_choice.isdigit():
+            print("INVALID CHOICE")
+            return False
+
+        selected_index = int(space_choice) - 1
+
+        if selected_index < 0 or selected_index >= len(display_spaces):
+            print("INVALID CHOICE")
+            return False
+
+        selected_space = display_spaces[selected_index]
+
+    # ---------------------------------------------------------
+    # STACKING
+    # ---------------------------------------------------------
+
     if not can_add_unit_to_space(selected_space, selected_unit):
         print("STACKING LIMIT REACHED, INVALID MOVE")
         return True
 
+    # ---------------------------------------------------------
+    # MOVE UNIT
+    # ---------------------------------------------------------
+
     print()
     print(f"{selected_unit.name} moved to {selected_space.name}")
+
     strategic_reserve_box.units.remove(selected_unit)
     selected_space.units.append(selected_unit)
+
     return True
+
 
 def do_move_panzer_to_strategic_reserve(die_roll, div_choice=None):
     print("MOVE PANZER DIVISION TO STRATEGIC RESERVE")
@@ -140,38 +191,56 @@ def do_move_panzer_to_strategic_reserve(die_roll, div_choice=None):
     print("0. Return to main menu")
     print()
 
-    if div_choice is None:
-        div_choice = input("Choice: ").strip()
+    if isinstance(div_choice, GermanUnit):
+        selected_pair = next(
+            (
+                (space, unit)
+                for space, unit in panzer_divisions
+                if unit is div_choice
+            ),
+            None
+        )
+
+        if selected_pair is None:
+            print("INVALID CHOICE")
+            return
+
+        selected_space, selected_panzer = selected_pair
+
     else:
-        div_choice = str(div_choice).strip()
+        if div_choice is None:
+            div_choice = input("Choice: ").strip()
+        else:
+            div_choice = str(div_choice).strip()
 
-    if div_choice == "0":
-        return
+        if div_choice == "0":
+            return
 
-    if not div_choice.isdigit():
-        print("INVALID CHOICE")
-        return
+        if not div_choice.isdigit():
+            print("INVALID CHOICE")
+            return
 
-    selected_index = int(div_choice) - 1
+        selected_index = int(div_choice) - 1
 
-    if selected_index < 0 or selected_index >= len(panzer_divisions):
-        print("INVALID CHOICE")
-        return
+        if selected_index < 0 or selected_index >= len(panzer_divisions):
+            print("INVALID CHOICE")
+            return
+
+        selected_space, selected_panzer = panzer_divisions[selected_index]
+
     if not use_action():
         print("NOT ENOUGH ACTIONS")
         return
-    selected_space, selected_panzer = panzer_divisions[selected_index]
 
     print()
     print(f"SELECTED: {selected_panzer.name}")
-
     print()
     print("TRANSPORT CHECK")
     print(f"ROLL: {die_roll}")
     print(f"TRANSPORT LEVEL: {transport_track.value}")
 
     if die_roll > transport_track.value:
-        print(f"{RED}RESULT: FAILED{RESET}") 
+        print(f"{RED}RESULT: FAILED{RESET}")
         return
 
     print("RESULT: PASSED")
@@ -180,12 +249,14 @@ def do_move_panzer_to_strategic_reserve(die_roll, div_choice=None):
 
     selected_space.units.remove(selected_panzer)
     strategic_reserve_box.units.append(selected_panzer)
-    
+
     if selected_panzer == SS_12 and MEYER in selected_space.units:
         selected_space.units.remove(MEYER)
         GlobalGameState.meyer_available = True
-        print("MEYER REMOVED - 12th SS PANZER MOVED TO STRATEGIC RESERVE")
-
+        print(
+            "MEYER REMOVED - "
+            "12th SS PANZER MOVED TO STRATEGIC RESERVE"
+        )
 
 # TODO move this into separate helper file to be used in move one unit action
 # Need to add types of units to check (eg Panzer, FlaK, Fallschirmjager etc)
@@ -203,87 +274,82 @@ def check_stacking(space):
 
     return True
 
-def do_move_panzer_from_strategic_reserve(die_roll, div_choice=None, space_choice=None):    
+
+def do_move_panzer_from_strategic_reserve(die_roll, div_choice=None, space_choice=None):
     print("MOVE PANZER DIVISION FROM STRATEGIC RESERVE")
     print()
-
     panzer_divisions = get_panzer_divisions_in_strategic_reserve()
-
     if not panzer_divisions:
         print("No Panzer Divisions in Strategic Reserve")
         return
-
     print("SELECT PANZER DIVISION")
     print()
-
     for index, unit in enumerate(panzer_divisions, start=1):
         print(f"{index}. {unit.name} ({unit.combat_value})")
-
     print()
     print("0. Return to main menu")
     print()
-
-    if div_choice is None:
-        div_choice = input("Choice: ").strip()
+    if isinstance(div_choice, GermanUnit):
+        if div_choice not in panzer_divisions:
+            print("INVALID CHOICE")
+            return
+        selected_panzer = div_choice
     else:
-        div_choice = str(div_choice).strip()
-
-    if div_choice == "0":
-        return
-
-    if not div_choice.isdigit():
-        print("INVALID CHOICE")
-        return
-
-
-    selected_index = int(div_choice) - 1
-
-    if selected_index < 0 or selected_index >= len(panzer_divisions):
-        print("INVALID CHOICE")
-        return
-
-
-    selected_panzer = panzer_divisions[selected_index]
-
+        if div_choice is None:
+            div_choice = input("Choice: ").strip()
+        else:
+            div_choice = str(div_choice).strip()
+        if div_choice == "0":
+            return
+        if not div_choice.isdigit():
+            print("INVALID CHOICE")
+            return
+        selected_index = int(div_choice) - 1
+        if selected_index < 0 or selected_index >= len(panzer_divisions):
+            print("INVALID CHOICE")
+            return
+        selected_panzer = panzer_divisions[selected_index]
+    
     print()
     print(f"SELECTED: {selected_panzer.name}")
-
     german_spaces = get_german_controlled_spaces()
-
     if not german_spaces:
         print("No German-controlled spaces available")
         return
 
     display_spaces = get_display_spaces(space_choice is None)
-
     if display_spaces is None:
         return
 
-    if space_choice is None:
-        space_choice = input("Choice: ").strip()
+    if isinstance(space_choice, MapSpace):
+        if space_choice not in display_spaces:
+            print("INVALID CHOICE")
+            return
+        selected_space = space_choice
     else:
-        space_choice = str(space_choice).strip()
+        if space_choice is None:
+            space_choice = input("Choice: ").strip()
+        else:
+            space_choice = str(space_choice).strip()
 
-    if space_choice == "0":
-        return
+        if space_choice == "0":
+            return
 
-    if not space_choice.isdigit():
-        print("INVALID CHOICE")
-        return
+        if not space_choice.isdigit():
+            print("INVALID CHOICE")
+            return
 
-    selected_index = int(space_choice) - 1
+        selected_index = int(space_choice) - 1
+        if selected_index < 0 or selected_index >= len(display_spaces):
+            print("INVALID CHOICE")
+            return
 
-    if selected_index < 0 or selected_index >= len(display_spaces):
-        print("INVALID CHOICE")
-        return
-    
-    selected_space = display_spaces[selected_index]
+        selected_space = display_spaces[selected_index]
 
-    # Check Stacking -> Maximum 4 Panzer Units (Div or Kampfgruppe) per space
     if not can_add_unit_to_space(selected_space, selected_panzer):
         print("STACKING LIMIT REACHED, INVALID MOVE")
         return
-    
+
     if not use_action():
         print("NOT ENOUGH ACTIONS")
         return

@@ -52,47 +52,69 @@ def do_hitler_approval_augmentation_roll(die_roll):
         print("NO INCREASE")
 
 
-def do_resource_augmentation_roll():
-    print()
-    print("RESOURCE AUGMENTATION ROLL")
-    print("==========================")
-    print()
-    print(f"1. {transport_track.name}: {transport_track.value}")
-    print(f"2. {supply_track.name}: {supply_track.value}")
-    print(f"3. {hitler_approval_track.name}: {hitler_approval_track.value}")
-    print()
-    print("0. Return to main menu")
-    print()
+def do_resource_augmentation_roll(choice=None, die_roll=None):
 
-    choice = input("Choose Resource: ").strip()
+    # Human player chooses the resource.
+    if choice is None:
+        print()
+        print("RESOURCE AUGMENTATION ROLL")
+        print("==========================")
+        print()
+        print(f"1. {transport_track.name}: {transport_track.value}")
+        print(f"2. {supply_track.name}: {supply_track.value}")
+        print(
+            f"3. {hitler_approval_track.name}: "
+            f"{hitler_approval_track.value}"
+        )
+        print()
+        print("0. Return to main menu")
+        print()
+
+        choice = input("Choose Resource: ").strip()
+
+    choice = str(choice)
 
     if choice == "0":
-        return
+        return False
 
+    # Generate the die roll only if one was not supplied.
+    if die_roll is None:
+        die_roll = randint(1, 6)
+
+    # TRANSPORT
     if choice == "1":
         if transport_track.value >= transport_track.maximum:
             print("TRANSPORT IS ALREADY AT MAXIMUM")
-            return
-        if not use_action():
-            return
-        do_transport_augmentation_roll(randint(1, 6))
+            return False
 
-    elif choice == "2":
+        if not use_action():
+            return False
+
+        do_transport_augmentation_roll(die_roll)
+        return True
+
+    # SUPPLY
+    if choice == "2":
         if supply_track.value >= supply_track.maximum:
             print("SUPPLY IS ALREADY AT MAXIMUM")
-            return
-        if not use_action():
-            return
-        do_supply_augmentation_roll(randint(1, 6))
+            return False
 
-    elif choice == "3":
+        if not use_action():
+            return False
+
+        do_supply_augmentation_roll(die_roll)
+        return True
+
+    # HITLER APPROVAL
+    if choice == "3":
         if hitler_approval_track.value >= hitler_approval_track.maximum:
             print("HITLER APPROVAL IS ALREADY AT MAXIMUM")
-            return
-        if not use_action():
-            return
-        do_hitler_approval_augmentation_roll(randint(1, 6))
+            return False
 
-    else:
-        print("INVALID CHOICE")
-        return
+        if not use_action():
+            return False
+
+        do_hitler_approval_augmentation_roll(die_roll)
+        return True
+
+    return False

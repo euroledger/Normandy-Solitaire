@@ -11,8 +11,8 @@ def get_fortified_village_options():
         for space in get_german_controlled_spaces()
         if space.controlling_player == SideType.GERMAN
         and space.terrain != TerrainType.FORTRESS
+        and space.fortified_village_modifier < 2
     ]
-
 
 def print_fortified_village_options(spaces):
     print()

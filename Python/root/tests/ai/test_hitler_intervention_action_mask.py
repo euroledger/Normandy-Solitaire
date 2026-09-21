@@ -55,7 +55,7 @@ from core.map.map_utilities import (
     add_units_to_space,
     remove_units_from_space,
 )
-from core.save_load_game import get_all_map_spaces
+from core.save_load_game import get_all_map_spaces_excluding_boxes
 
 
 
@@ -94,7 +94,7 @@ class TestHitlerInterventionActionMask(unittest.TestCase):
     def remove_all_panzer_forces(self):
         from core.models import GermanUnit
 
-        for space in get_all_map_spaces():
+        for space in get_all_map_spaces_excluding_boxes():
             space.units[:] = [
                 unit for unit in space.units
                 if not (

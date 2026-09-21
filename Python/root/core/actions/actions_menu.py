@@ -17,7 +17,7 @@ from core.map.map_model import (
     in_transit_box,
     strategic_reserve_box,
 )
-from game_phases.action_phase import common_post_action_phase
+# from game_phases.action_phase import common_post_action_phase
 
 YELLOW = "\033[33m"
 GREEN = "\033[32m"
@@ -134,7 +134,7 @@ def do_action_phase(card, weather):
         
         # TODO add calls to execute_flat_hitler_intervention_ai for each phase
         # ◄── FIX: Triggers card/turn counters and cleanup scripts
-        common_post_action_phase()
+        # common_post_action_phase()
         return  # ◄── Safely exits the function, advancing to the next card draw.
     cont = True
     while cont and GlobalGameState.actions_left_this_turn + GlobalGameState.reserve_actions > 0:

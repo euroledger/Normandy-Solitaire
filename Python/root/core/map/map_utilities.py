@@ -91,7 +91,7 @@ def can_counter_attack(space):
         return False
 
     # Cannot attack beach after turn 3
-    return not (space.terrain == TerrainType.BEACH and GlobalGameState.cards_drawn >= 3)
+    return not (space.terrain == TerrainType.BEACH and GlobalGameState.cards_drawn >= 2)
 
 
 def calculate_german_attack_strength(space, selected_units):

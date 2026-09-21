@@ -8,14 +8,14 @@ from core.allied_armies import (
 )
 from core.enums import ModifierType, ResourceType
 from core.global_game_state import GlobalGameState
-from core.save_load_game import get_all_map_spaces
+from core.save_load_game import get_all_map_spaces_excluding_boxes
 from core.tables.weather import ALL_JABOS_AVAILABLE
 from core.map.map_model import TerrainType, transport_track, supply_track, hitler_approval_track, strategic_reserve_box
 from core.german_units import MEYER, MODEL, ROMMEL, TIGER_101
 
 
 def remove_meyer():
-    for space in get_all_map_spaces():
+    for space in get_all_map_spaces_excluding_boxes():
         if MEYER in space.units:
             space.units.remove(MEYER)
 
@@ -26,7 +26,7 @@ def remove_meyer():
 
 
 def remove_rommel():
-    for space in get_all_map_spaces():
+    for space in get_all_map_spaces_excluding_boxes():
         if ROMMEL in space.units:
             space.units.remove(ROMMEL)
 
@@ -35,7 +35,7 @@ def remove_rommel():
 
 
 def remove_model():
-    for space in get_all_map_spaces():
+    for space in get_all_map_spaces_excluding_boxes():
         if MODEL in space.units:
             space.units.remove(MODEL)
 
@@ -43,7 +43,7 @@ def remove_model():
         strategic_reserve_box.units.remove(MODEL)
         
 def remove_wittmann():
-    for space in get_all_map_spaces():
+    for space in get_all_map_spaces_excluding_boxes():
         if TIGER_101 in space.units:
             space.units.remove(TIGER_101)
             return
