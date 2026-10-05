@@ -551,7 +551,7 @@ def execute_single_game_run(i):
 
 batch_start = time.perf_counter()
 
-NUM_EPISODES = 1000
+NUM_EPISODES = 200
 
 win_count = 0
 loss_count = 0

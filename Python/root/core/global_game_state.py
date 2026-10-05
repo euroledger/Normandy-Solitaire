@@ -28,7 +28,7 @@ class GlobalGameState:
     hitler_approval_base_level = 3
 
     # HUMAN/AI TOGGLES
-    german_casualty_strategy = Strategy.RANDOM
+    german_casualty_strategy = Strategy.AI
 
     actions_left_this_turn = 0
 

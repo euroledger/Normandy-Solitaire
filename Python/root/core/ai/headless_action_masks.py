@@ -1,10 +1,14 @@
 
+from core.actions.fortified_villages_action import do_build_fortified_villages, get_fortified_village_options
+from core.actions.move_action_point_to_reserve import do_move_action_point_to_strategic_reserve
+from core.actions.move_unit_one_space_action import do_move_unit_one_space
+from core.actions.refit_panzer_division_action import do_refit_panzer_division
 from core.actions.resource_actions import do_resource_augmentation_roll
-from core.german_units import MEYER, MODEL, ROMMEL, TIGER_101, FS_3, FS_5
-from random import randint
+from core.german_units import MEYER, MODEL, PZ_116, PZ_2, PZ_21, PZ_9, PZ_LEHR, ROMMEL, SS_1, SS_10, SS_12, SS_17_PZGRD, SS_2, SS_9, TIGER_101, FS_3, FS_5
+from random import choice, randint
 
 import numpy as np
-from core.actions.actions_helper import can_add_unit_to_space, get_german_controlled_spaces
+from core.actions.actions_helper import can_add_unit_to_space, get_adjacent_german_controlled_spaces, get_german_controlled_spaces
 from core.actions.strategic_reserve_actions import do_move_other_unit_from_strategic_reserve, do_move_panzer_from_strategic_reserve, do_move_panzer_to_strategic_reserve, get_other_units_in_strategic_reserve, get_panzer_divisions_in_strategic_reserve, get_panzer_divisions_on_map
 from core.allied_armies import armies_list
 from core.actions.hitler_intervention import (
@@ -40,6 +44,71 @@ OTHER_RESERVE_UNIT_TYPES = [
     ("101st TIGER BATTALION", None, TIGER_101),
 ]
 
+MOVE_UNIT_TYPES = [
+    ("FLAK 88", ReinforcementType.FLAK_88, None),
+    ("KAMPFGRUPPE", ReinforcementType.KAMPFGRUPPE, None),
+    ("NEBELWERFER", ReinforcementType.NEBELWERFER, None),
+    ("3rd FALLSCHIRMJAGER", None, FS_3),
+    ("5th FALLSCHIRMJAGER", None, FS_5),
+    ("PANZER LEHR", None, PZ_LEHR),
+    ("12th SS PANZER", None, SS_12),
+    ("1st SS PANZER", None, SS_1),
+    ("9th SS PANZER", None, SS_9),
+    ("10th SS PANZER", None, SS_10),
+    ("2nd SS PANZER", None, SS_2),
+    ("21st PANZER", None, PZ_21),
+    ("116th PANZER", None, PZ_116),
+    ("17th SS PANZERGRENADIER", None, SS_17_PZGRD),
+    ("2nd PANZER", None, PZ_2),
+    ("9th PANZER", None, PZ_9),
+]
+
+GERMAN_LOSS_TYPES = [
+    # Generic units
+    ("FLAK 88 FULL", ReinforcementType.FLAK_88, None, 2),
+    ("FLAK 88 REDUCED", ReinforcementType.FLAK_88, None, 1),
+    ("KAMPFGRUPPE", ReinforcementType.KAMPFGRUPPE, None, 1),
+    ("NEBELWERFER", ReinforcementType.NEBELWERFER, None, 1),
+
+    # Fallschirmjager
+    ("3rd FALLSCHIRMJAGER FULL", None, FS_3, 2),
+    ("3rd FALLSCHIRMJAGER REDUCED", None, FS_3, 1),
+    ("5th FALLSCHIRMJAGER", None, FS_5, 1),
+
+    # Panzer divisions
+    ("PANZER LEHR FULL", None, PZ_LEHR, 2),
+    ("PANZER LEHR REDUCED", None, PZ_LEHR, 1),
+
+    ("12th SS PANZER FULL", None, SS_12, 2),
+    ("12th SS PANZER REDUCED", None, SS_12, 1),
+
+    ("1st SS PANZER FULL", None, SS_1, 2),
+    ("1st SS PANZER REDUCED", None, SS_1, 1),
+
+    ("9th SS PANZER FULL", None, SS_9, 2),
+    ("9th SS PANZER REDUCED", None, SS_9, 1),
+
+    ("10th SS PANZER FULL", None, SS_10, 2),
+    ("10th SS PANZER REDUCED", None, SS_10, 1),
+
+    ("2nd SS PANZER FULL", None, SS_2, 2),
+    ("2nd SS PANZER REDUCED", None, SS_2, 1),
+
+    ("21st PANZER FULL", None, PZ_21, 2),
+    ("21st PANZER REDUCED", None, PZ_21, 1),
+
+    ("116th PANZER FULL", None, PZ_116, 2),
+    ("116th PANZER REDUCED", None, PZ_116, 1),
+
+    ("17th SS PANZERGRENADIER FULL", None, SS_17_PZGRD, 2),
+    ("17th SS PANZERGRENADIER REDUCED", None, SS_17_PZGRD, 1),
+
+    ("2nd PANZER FULL", None, PZ_2, 2),
+    ("2nd PANZER REDUCED", None, PZ_2, 1),
+
+    ("9th PANZER FULL", None, PZ_9, 2),
+    ("9th PANZER REDUCED", None, PZ_9, 1),
+]
 # ============================================================
 # HEADLESS AGENT DECISION STATE
 # ============================================================
@@ -75,6 +144,7 @@ def get_total_actions():
     for space in get_all_map_spaces_excluding_boxes():
         if id(space) in seen_spaces:
             continue
+
         seen_spaces.add(id(space))
         all_map_spaces.append(space)
 
@@ -92,7 +162,13 @@ def get_total_actions():
         + len(panzer_divisions_list) * len(german_eligible_spaces)
         + len(panzer_divisions_list)
         + len(OTHER_RESERVE_UNIT_TYPES) * len(german_eligible_spaces)
-        + 3 # augmentation rolls
+        + 1  # move Action Point to Strategic Reserve
+        + 3  # augmentation rolls
+        + len(german_eligible_spaces)  # Fortified Villages
+        + len(MOVE_UNIT_TYPES) * len(german_eligible_spaces)
+        + len(panzer_divisions_list) # refit panzer divisions
+
+
     )
 
     return actions, german_eligible_spaces
@@ -101,7 +177,7 @@ def get_total_actions():
 TOTAL_ACTIONS, german_eligible_spaces = get_total_actions()
 
 
-def print_mini_action_mask(mask, legal_only=False):
+def print_action_phase_action_mask(mask, legal_only=False):
     action_names = []
 
     # ---------------------------------------------------------
@@ -150,16 +226,50 @@ def print_mini_action_mask(mask, legal_only=False):
                 f"{unit_name} -> {space.name}"
             )
 
+    # ---------------------------------------------------------
+    # MOVE UNIT ONE SPACE
+    # ---------------------------------------------------------
+
+    for unit_name, _, _ in MOVE_UNIT_TYPES:
+        for space in german_eligible_spaces:
+            action_names.append(
+                f"MOVE UNIT ONE SPACE: "
+                f"{unit_name} -> {space.name}"
+            )
+    # ---------------------------------------------------------
+    # REFIT PANZER DIVISION
+    # ---------------------------------------------------------
+
+    for panzer in panzer_divisions_list:
+        action_names.append(
+            f"REFIT PANZER DIVISION: {panzer.name}"
+        )
+        
+    # ---------------------------------------------------------
+    # MOVE ACTION POINT TO STRATEGIC RESERVE
+    # ---------------------------------------------------------
+
+    action_names.append(
+        "MOVE ACTION POINT TO STRATEGIC RESERVE"
+    )
+
+    # ---------------------------------------------------------
     # AUGMENTATION ROLLS
+    # ---------------------------------------------------------
 
     action_names.append("AUGMENTATION ROLL: TRANSPORT")
     action_names.append("AUGMENTATION ROLL: SUPPLY")
     action_names.append("AUGMENTATION ROLL: HITLER APPROVAL")
 
-    assert len(action_names) == len(mask), (
-        f"Action-name count ({len(action_names)}) "
-        f"does not match mask size ({len(mask)})"
-    )
+    # ---------------------------------------------------------
+    # FORTIFIED VILLAGES
+    # ---------------------------------------------------------
+
+    for space in german_eligible_spaces:
+        action_names.append(
+            f"BUILD / UPGRADE FORTIFIED VILLAGES: {space.name}"
+        )
+
     # ---------------------------------------------------------
     # SAFETY CHECK
     # ---------------------------------------------------------
@@ -174,11 +284,10 @@ def print_mini_action_mask(mask, legal_only=False):
     # ---------------------------------------------------------
 
     print()
-    print("AI ACTION MASK")
-    print("--------------")
+    print("AI ACTION PHASE MASK")
+    print("--------------------")
 
     for action_id, is_legal in enumerate(mask):
-
         if legal_only and is_legal != 1.0:
             continue
 
@@ -189,7 +298,6 @@ def print_mini_action_mask(mask, legal_only=False):
         )
 
     print()
-
 
 def get_pass_action_mask(is_legal):
     # PASS has one local action slot.
@@ -353,59 +461,163 @@ def get_move_other_unit_from_strategic_reserve_mask():
     return mask
 
 
-def get_mini_action_mask():
+def get_move_action_point_to_strategic_reserve_mask():
+    mask = np.zeros(
+        1,
+        dtype=np.float32
+    )
+    if (
+        GlobalGameState.actions_left_this_turn >= 1
+        and GlobalGameState.reserve_actions < 2
+    ):
+        mask[0] = 1.0
+    return mask
 
-    total_ap = (
-        GlobalGameState.actions_left_this_turn
-        + GlobalGameState.reserve_actions
+
+def get_fortified_villages_mask():
+    mask = np.zeros(len(german_eligible_spaces), dtype=np.float32)
+
+    valid_spaces = get_fortified_village_options()
+
+    for space_index, space in enumerate(german_eligible_spaces):
+        if space in valid_spaces:
+            mask[space_index] = 1.0
+
+    return mask
+
+
+def get_refit_panzer_division_mask():
+    # One fixed slot per Panzer division.
+    # A Panzer may be refitted only when it is reduced
+    # and currently in Strategic Reserve.
+
+    mask = np.zeros(
+        len(panzer_divisions_list),
+        dtype=np.float32
     )
 
-    has_ap = total_ap > 0
+    for panzer_index, panzer in enumerate(panzer_divisions_list):
+        if (
+            panzer in strategic_reserve_box.units
+            and panzer.combat_value == 1
+        ):
+            mask[panzer_index] = 1.0
 
-    # ---------------------------------------------------------
+    return mask
+
+def get_move_unit_one_space_mask():
+    # Local mask layout:
+    # unit_type_index * number_of_spaces + destination_space_index
+
+    mask_size = len(MOVE_UNIT_TYPES) * len(german_eligible_spaces)
+    mask = np.zeros(mask_size, dtype=np.float32)
+
+    german_controlled_spaces = get_german_controlled_spaces()
+
+    for unit_type_index, (_, unit_type, named_unit) in enumerate(MOVE_UNIT_TYPES):
+        for current_space in german_controlled_spaces:
+            # Named unit: exact physical counter.
+            if named_unit is not None:
+                matching_units = [
+                    unit
+                    for unit in current_space.units
+                    if unit is named_unit
+                ]
+
+            # Generic unit type: any physical counter of this type.
+            else:
+                matching_units = [
+                    unit
+                    for unit in current_space.units
+                    if isinstance(unit, GermanUnit)
+                    and unit.type == unit_type
+                ]
+
+            if not matching_units:
+                continue
+
+            destination_spaces = get_adjacent_german_controlled_spaces(current_space)
+
+            for space_index, destination_space in enumerate(german_eligible_spaces):
+                if destination_space not in destination_spaces:
+                    continue
+
+                if not any(
+                    can_add_unit_to_space(destination_space, unit)
+                    for unit in matching_units
+                ):
+                    continue
+
+                local_action_id = (
+                    unit_type_index * len(german_eligible_spaces)
+                    + space_index
+                )
+
+                mask[local_action_id] = 1.0
+
+    return mask
+
+
+def get_action_phase_action_mask():
+    normal_ap = GlobalGameState.actions_left_this_turn
+    reserve_ap = GlobalGameState.reserve_actions
+    total_ap = normal_ap + reserve_ap
+
+    has_normal_ap = normal_ap > 0
+    has_available_ap = total_ap > 0
+
     # PASS
-    # ---------------------------------------------------------
+    # PASS is legal when normal AP is exhausted.
+    # Reserve AP does not have to be spent.
 
-    pass_mask = get_pass_action_mask(
-        is_legal=not has_ap
-    )
+    pass_mask = get_pass_action_mask(is_legal=not has_normal_ap)
 
-    # ---------------------------------------------------------
-    # ACTIONS THAT REQUIRE AP
-    # ---------------------------------------------------------
+    # 1-AP ACTIONS
+    # These use normal AP when available.
+    # If normal AP is 0, they may use Reserve AP.
 
-    if has_ap:
+    if has_available_ap:
+        counter_attack_mask = get_counter_attack_mask()
+        panzer_from_reserve_mask = get_move_panzer_from_strategic_reserve_mask()
+        panzer_to_reserve_mask = get_move_panzer_to_strategic_reserve_mask()
+        move_unit_one_space_mask = get_move_unit_one_space_mask()
+        refit_panzer_division_mask = get_refit_panzer_division_mask()
 
-        counter_attack_mask = (
-            get_counter_attack_mask()
-        )
+        # QUACK DEBUG
+        if np.any(refit_panzer_division_mask):
+            eligible_panzers = [
+                panzer.name
+                for panzer_index, panzer in enumerate(panzer_divisions_list)
+                if refit_panzer_division_mask[panzer_index] == 1.0
+            ]
 
-        panzer_from_reserve_mask = (
-            get_move_panzer_from_strategic_reserve_mask()
-        )
-
-        panzer_to_reserve_mask = (
-            get_move_panzer_to_strategic_reserve_mask()
-        )
-
-        augmentation_mask = (
-            augmentation_roll_mask()
-        )
-
+            print(
+                f"REFIT AVAILABLE: {', '.join(eligible_panzers)}"
+            )
+            
+        augmentation_mask = augmentation_roll_mask()
     else:
-
         counter_attack_mask = np.zeros(
             len(armies_list),
             dtype=np.float32
         )
 
         panzer_from_reserve_mask = np.zeros(
-            len(panzer_divisions_list)
-            * len(german_eligible_spaces),
+            len(panzer_divisions_list) * len(german_eligible_spaces),
             dtype=np.float32
         )
 
         panzer_to_reserve_mask = np.zeros(
+            len(panzer_divisions_list),
+            dtype=np.float32
+        )
+
+        move_unit_one_space_mask = np.zeros(
+            len(MOVE_UNIT_TYPES) * len(german_eligible_spaces),
+            dtype=np.float32
+        )
+
+        refit_panzer_division_mask = np.zeros(
             len(panzer_divisions_list),
             dtype=np.float32
         )
@@ -415,17 +627,29 @@ def get_mini_action_mask():
             dtype=np.float32
         )
 
-    # ---------------------------------------------------------
     # ACTIONS THAT DO NOT REQUIRE AP
-    # ---------------------------------------------------------
 
-    other_unit_from_reserve_mask = (
-        get_move_other_unit_from_strategic_reserve_mask()
-    )
+    other_unit_from_reserve_mask = get_move_other_unit_from_strategic_reserve_mask()
 
-    # ---------------------------------------------------------
+    # MOVE ACTION POINT TO STRATEGIC RESERVE
+    # This specifically requires a normal AP.
+
+    
+    move_action_point_to_reserve_mask = get_move_action_point_to_strategic_reserve_mask()
+
+    # FORTIFIED VILLAGES
+    # Cost = 3 AP.
+    # Normal and Reserve AP may be combined.
+
+    if total_ap >= 3:
+        fortified_villages_mask = get_fortified_villages_mask()
+    else:
+        fortified_villages_mask = np.zeros(
+            len(german_eligible_spaces),
+            dtype=np.float32
+        )
+
     # BUILD COMPLETE ACTION PHASE MASK
-    # ---------------------------------------------------------
 
     mask = np.concatenate(
         (
@@ -434,12 +658,14 @@ def get_mini_action_mask():
             panzer_from_reserve_mask,
             panzer_to_reserve_mask,
             other_unit_from_reserve_mask,
+            move_unit_one_space_mask,
+            refit_panzer_division_mask,
+            move_action_point_to_reserve_mask,
             augmentation_mask,
+            fortified_villages_mask,
         )
     )
-
     return mask
-
 
 def augmentation_roll_mask():
     mask = np.zeros(3, dtype=np.float32)
@@ -459,6 +685,7 @@ def augmentation_roll_mask():
 
     return mask
 
+
 def get_action_mask():
     mask = np.zeros(TOTAL_ACTIONS, dtype=np.float32)
     # Action 0 = end/pass action phase.
@@ -468,17 +695,13 @@ def get_action_mask():
 
 def execute_flat_action_ai(action_id, target_option=None):
 
-    # ---------------------------------------------------------
     # PASS
-    # ---------------------------------------------------------
 
     if action_id == 0:
         GlobalGameState.actions_left_this_turn = 0
         return True
 
-    # ---------------------------------------------------------
     # COUNTER-ATTACK
-    # ---------------------------------------------------------
 
     if 1 <= action_id <= 6:
         if target_option is None:
@@ -499,12 +722,9 @@ def execute_flat_action_ai(action_id, target_option=None):
         do_counter_attack(selected_option=target_option)
         return True
 
-    # ---------------------------------------------------------
     # MOVE PANZER FROM STRATEGIC RESERVE
-    # ---------------------------------------------------------
 
     panzer_action_start = 7
-
     panzer_action_end = (
         panzer_action_start
         + len(panzer_divisions_list) * len(german_eligible_spaces)
@@ -513,13 +733,8 @@ def execute_flat_action_ai(action_id, target_option=None):
     if panzer_action_start <= action_id < panzer_action_end:
         relative_id = action_id - panzer_action_start
 
-        panzer_index = (
-            relative_id // len(german_eligible_spaces)
-        )
-
-        space_index = (
-            relative_id % len(german_eligible_spaces)
-        )
+        panzer_index = relative_id // len(german_eligible_spaces)
+        space_index = relative_id % len(german_eligible_spaces)
 
         selected_panzer = panzer_divisions_list[panzer_index]
         selected_space = german_eligible_spaces[space_index]
@@ -532,12 +747,9 @@ def execute_flat_action_ai(action_id, target_option=None):
 
         return True
 
-    # ---------------------------------------------------------
     # MOVE PANZER TO STRATEGIC RESERVE
-    # ---------------------------------------------------------
 
     panzer_to_reserve_start = panzer_action_end
-
     panzer_to_reserve_end = (
         panzer_to_reserve_start
         + len(panzer_divisions_list)
@@ -545,7 +757,6 @@ def execute_flat_action_ai(action_id, target_option=None):
 
     if panzer_to_reserve_start <= action_id < panzer_to_reserve_end:
         panzer_index = action_id - panzer_to_reserve_start
-
         selected_panzer = panzer_divisions_list[panzer_index]
 
         do_move_panzer_to_strategic_reserve(
@@ -555,36 +766,25 @@ def execute_flat_action_ai(action_id, target_option=None):
 
         return True
 
-    # ---------------------------------------------------------
     # MOVE OTHER UNIT FROM STRATEGIC RESERVE
-    # ---------------------------------------------------------
 
     other_reserve_start = panzer_to_reserve_end
-
     other_reserve_end = (
         other_reserve_start
-        + len(OTHER_RESERVE_UNIT_TYPES)
-        * len(german_eligible_spaces)
+        + len(OTHER_RESERVE_UNIT_TYPES) * len(german_eligible_spaces)
     )
 
     if other_reserve_start <= action_id < other_reserve_end:
         relative_id = action_id - other_reserve_start
 
-        unit_type_index = (
-            relative_id // len(german_eligible_spaces)
-        )
+        unit_type_index = relative_id // len(german_eligible_spaces)
+        space_index = relative_id % len(german_eligible_spaces)
 
-        space_index = (
-            relative_id % len(german_eligible_spaces)
-        )
-
-        _, unit_type, named_unit = (
-            OTHER_RESERVE_UNIT_TYPES[unit_type_index]
-        )
-
+        _, unit_type, named_unit = OTHER_RESERVE_UNIT_TYPES[unit_type_index]
         selected_space = german_eligible_spaces[space_index]
 
         # Named units use their exact object.
+
         if named_unit is not None:
             selected_unit = named_unit
 
@@ -593,6 +793,7 @@ def execute_flat_action_ai(action_id, target_option=None):
 
         # Generic units use any matching physical counter
         # currently in Strategic Reserve.
+
         else:
             selected_unit = next(
                 (
@@ -611,38 +812,235 @@ def execute_flat_action_ai(action_id, target_option=None):
             unit_choice=selected_unit,
             space_choice=selected_space,
         )
-    # ---------------------------------------------------------
-    # AUGMENTATION ROLLS
-    # ---------------------------------------------------------
 
-    augmentation_start = other_reserve_end
+    # MOVE UNIT ONE SPACE
+
+    move_unit_one_space_start = other_reserve_end
+    move_unit_one_space_end = (
+        move_unit_one_space_start
+        + len(MOVE_UNIT_TYPES) * len(german_eligible_spaces)
+    )
+
+    if move_unit_one_space_start <= action_id < move_unit_one_space_end:
+        relative_id = action_id - move_unit_one_space_start
+
+        unit_type_index = relative_id // len(german_eligible_spaces)
+        space_index = relative_id % len(german_eligible_spaces)
+
+        _, unit_type, named_unit = MOVE_UNIT_TYPES[unit_type_index]
+        selected_space = german_eligible_spaces[space_index]
+
+        # Named units use their exact object.
+
+        if named_unit is not None:
+            selected_unit = named_unit
+
+        # Generic units use a matching physical counter that can
+        # legally move to the selected destination.
+
+        else:
+            selected_unit = None
+
+            for current_space in get_german_controlled_spaces():
+                destination_spaces = get_adjacent_german_controlled_spaces(
+                    current_space
+                )
+
+                if selected_space not in destination_spaces:
+                    continue
+
+                selected_unit = next(
+                    (
+                        unit
+                        for unit in current_space.units
+                        if isinstance(unit, GermanUnit)
+                        and unit.type == unit_type
+                        and can_add_unit_to_space(selected_space, unit)
+                    ),
+                    None
+                )
+
+                if selected_unit is not None:
+                    break
+
+            if selected_unit is None:
+                return False
+
+        do_move_unit_one_space(
+            unit_choice=selected_unit,
+            space_choice=selected_space
+        )
+
+        return True
+
+    # REFIT PANZER DIVISION
+
+    refit_panzer_start = move_unit_one_space_end
+    refit_panzer_end = (
+        refit_panzer_start
+        + len(panzer_divisions_list)
+    )
+
+    if refit_panzer_start <= action_id < refit_panzer_end:
+        panzer_index = action_id - refit_panzer_start
+        selected_panzer = panzer_divisions_list[panzer_index]
+
+        # do_refit_panzer_division expects the position of the
+        # reduced Panzer within the current eligible refit list.
+
+        reduced_panzers = [
+            panzer
+            for panzer in get_panzer_divisions_in_strategic_reserve()
+            if panzer.combat_value == 1
+        ]
+
+        if selected_panzer not in reduced_panzers:
+            return False
+
+        unit_choice = reduced_panzers.index(selected_panzer) + 1
+
+        do_refit_panzer_division(
+            unit_choice=unit_choice
+        )
+
+        return True
+
+    # MOVE ACTION POINT TO STRATEGIC RESERVE
+
+    move_ap_to_reserve_start = refit_panzer_end
+    move_ap_to_reserve_end = move_ap_to_reserve_start + 1
+
+    if move_ap_to_reserve_start <= action_id < move_ap_to_reserve_end:
+        do_move_action_point_to_strategic_reserve()
+        return True
+
+    # AUGMENTATION ROLLS
+
+    augmentation_start = move_ap_to_reserve_end
     augmentation_end = augmentation_start + 3
 
     if augmentation_start <= action_id < augmentation_end:
-
         augmentation_index = action_id - augmentation_start
 
-        # Local augmentation mask:
         # 0 = Transport
         # 1 = Supply
         # 2 = Hitler Approval
-        #
-        # do_resource_augmentation_roll choices:
-        # 1 = Transport
-        # 2 = Supply
-        # 3 = Hitler Approval
 
         augmentation_choice = augmentation_index + 1
 
         return do_resource_augmentation_roll(
             choice=augmentation_choice
         )
-        
-    # ---------------------------------------------------------
-    # UNKNOWN / INVALID ACTION ID
-    # ---------------------------------------------------------
 
+    # FORTIFIED VILLAGES
+
+    fortified_villages_start = augmentation_end
+    fortified_villages_end = (
+        fortified_villages_start
+        + len(german_eligible_spaces)
+    )
+
+    if fortified_villages_start <= action_id < fortified_villages_end:
+        space_index = action_id - fortified_villages_start
+        selected_space = german_eligible_spaces[space_index]
+
+        do_build_fortified_villages(
+            space=selected_space
+        )
+
+        return True
+
+    # UNKNOWN / INVALID ACTION ID
     return False
+
+
+def get_casualty_from_action(action_id, german_units):
+    _, unit_type, named_unit, combat_value = GERMAN_LOSS_TYPES[action_id]
+
+    # Named unit: return the exact GermanUnit object
+    # at the strength represented by this action.
+
+    if named_unit is not None:
+        casualty = next(
+            (
+                unit
+                for unit in german_units
+                if (
+                    unit is named_unit
+                    and unit.combat_value == combat_value
+                )
+            ),
+            None
+        )
+
+    # Generic unit: return a physical GermanUnit matching
+    # both the unit type and the strength represented by this action.
+
+    else:
+        casualty = next(
+            (
+                unit
+                for unit in german_units
+                if (
+                    isinstance(unit, GermanUnit)
+                    and unit.type == unit_type
+                    and unit.combat_value == combat_value
+                )
+            ),
+            None
+        )
+
+    return casualty
+
+def select_random_casualty_ai(german_units):
+    casualty_mask = get_casualty_mask(german_units)
+    legal_actions = np.where(casualty_mask == 1.0)[0]
+
+    # No eligible casualty.
+    # This can occur when 101st Tiger Battalion is the only attacking unit.
+    if len(legal_actions) == 0:
+        return None
+    
+    action_id = choice(legal_actions)
+
+    return get_casualty_from_action(
+        action_id,
+        german_units
+    )
+
+def get_casualty_mask(german_units):
+    # One fixed slot for each valid unit / strength combination
+    # in GERMAN_LOSS_TYPES.
+
+    mask = np.zeros(
+        len(GERMAN_LOSS_TYPES),
+        dtype=np.float32
+    )
+
+    for loss_index, (_, unit_type, named_unit, combat_value) in enumerate(
+        GERMAN_LOSS_TYPES
+    ):
+        for unit in german_units:
+
+            # Named unit: exact physical counter.
+            if named_unit is not None:
+                unit_matches = unit is named_unit
+
+            # Generic unit type: any physical counter of this type.
+            else:
+                unit_matches = (
+                    isinstance(unit, GermanUnit)
+                    and unit.type == unit_type
+                )
+
+            if (
+                unit_matches
+                and unit.combat_value == combat_value
+            ):
+                mask[loss_index] = 1.0
+                break
+
+    return mask
 
 # ============================================================
 # HITLER INTERVENTION ACTION MASK
@@ -809,6 +1207,49 @@ def get_hitler_intervention_mask(card):
     return mask
 
 
+def execute_flat_move_other_units_from_strategic_reserve_ai():
+    while True:
+        mask = get_move_other_unit_from_strategic_reserve_mask()
+        legal_actions = np.where(mask == 1.0)[0]
+
+        if len(legal_actions) == 0:
+            break
+
+        # +1 represents the option to stop deploying.
+        choice = randint(0, len(legal_actions))
+
+        if choice == 0:
+            break
+
+        local_action_id = legal_actions[choice - 1]
+
+        unit_type_index = local_action_id // len(german_eligible_spaces)
+        space_index = local_action_id % len(german_eligible_spaces)
+
+        _, unit_type, named_unit = OTHER_RESERVE_UNIT_TYPES[unit_type_index]
+        selected_space = german_eligible_spaces[space_index]
+
+        if named_unit is not None:
+            selected_unit = named_unit
+        else:
+            selected_unit = next(
+                (
+                    unit
+                    for unit in strategic_reserve_box.units
+                    if isinstance(unit, GermanUnit)
+                    and unit.type == unit_type
+                ),
+                None
+            )
+
+        if selected_unit is None:
+            continue
+        
+        do_move_other_unit_from_strategic_reserve(
+            unit_choice=selected_unit,
+            space_choice=selected_space,
+        )
+        
 def execute_flat_hitler_intervention_ai(action_id, card, weather):
     targets = get_hitler_intervention_targets(card)
     stage = HeadlessDecisionState.hitler_intervention_stage

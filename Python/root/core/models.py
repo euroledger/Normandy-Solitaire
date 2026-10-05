@@ -325,3 +325,4 @@ class Strategy(Enum):
     UNIT_TEST = "TEST"
     HUMAN = "HUMAN"
     RANDOM = "RANDOM"
+    AI = "AI"

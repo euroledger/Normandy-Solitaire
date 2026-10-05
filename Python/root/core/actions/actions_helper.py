@@ -49,6 +49,7 @@ def can_add_unit_to_space(space, unit):
         return counts[ReinforcementType.FLAK_88] < FLAK_88_STACKING_LIMIT
     return True
 
+
 def use_action():
     if GlobalGameState.actions_left_this_turn > 0:
         GlobalGameState.actions_left_this_turn -= 1
@@ -57,6 +58,16 @@ def use_action():
     if GlobalGameState.reserve_actions == 0:
         return False
 
+
+    # if GlobalGameState.headless:
+    #     GlobalGameState.reserve_actions -= 1
+    #     return True
+    if GlobalGameState.headless:
+        GlobalGameState.reserve_actions -= 1
+        print("AI USED 1 RESERVE ACTION")
+        print(f"RESERVE ACTIONS REMAINING: {GlobalGameState.reserve_actions}")
+        return True
+    
     print()
     print("NO ACTIONS REMAINING")
     choice = input("USE 1 RESERVE ACTION? (Y/N): ").strip().upper()

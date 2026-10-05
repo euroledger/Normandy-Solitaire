@@ -1,8 +1,7 @@
 import unittest
 
-from core.actions.strategic_reserve_actions import (
-    do_refit_panzer_division,
-)
+
+from core.actions.refit_panzer_division_action import do_refit_panzer_division
 from core.enums import ReinforcementType
 from core.german_units import PZ_21, SS_12, TIGER_101
 from core.global_game_state import GlobalGameState

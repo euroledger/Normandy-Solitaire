@@ -1,6 +1,5 @@
 import numpy as np
-from core.actions.counter_attack_action import get_counter_attack_options
-from core.ai.headless_action_masks import execute_flat_hitler_intervention_ai, get_hitler_intervention_mask, get_mini_action_mask, execute_flat_action_ai
+from core.ai.headless_action_masks import execute_flat_hitler_intervention_ai, get_hitler_intervention_mask, get_action_phase_action_mask, execute_flat_action_ai
 from datetime import datetime
 
 from core.actions.actions_menu import do_action_phase, common_pre_action_phase, set_available_actions
@@ -50,20 +49,16 @@ def action_phase_ai():
         set_available_actions(GlobalGameState.current_card)
 
     while True:
-        action_mask = get_mini_action_mask()
-
+        action_mask = get_action_phase_action_mask()
         legal_actions = np.where(action_mask == 1.0)[0]
 
-        tactical_actions = [
-            action_id
-            for action_id in legal_actions
-            if action_id != 0
-        ]
-
-        if not tactical_actions:
+        if len(legal_actions) == 0:
             break
 
-        ai_chosen_flat_id = np.random.choice(tactical_actions)
+        ai_chosen_flat_id = np.random.choice(legal_actions)
+
+        if ai_chosen_flat_id == 0:
+            break
 
         execute_flat_action_ai(ai_chosen_flat_id)
 

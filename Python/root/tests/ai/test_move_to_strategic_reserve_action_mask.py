@@ -3,7 +3,7 @@ from unittest.mock import patch
 
 from core.ai.headless_action_masks import (
     execute_flat_action_ai,
-    get_mini_action_mask,
+    get_action_phase_action_mask,
     get_total_actions,
 )
 from core.german_units import (
@@ -55,7 +55,7 @@ class TestMoveToStrategicReserveActionMask(unittest.TestCase):
         )
 
     def test_mask_contains_panzer_on_map(self):
-        mask = get_mini_action_mask()
+        mask = get_action_phase_action_mask()
 
         self.assertEqual(
             mask[self.get_action_id(SS_12)],
@@ -70,7 +70,7 @@ class TestMoveToStrategicReserveActionMask(unittest.TestCase):
     def test_mask_excludes_panzer_not_on_map(self):
         strategic_reserve_box.units.append(SS_1)
 
-        mask = get_mini_action_mask()
+        mask = get_action_phase_action_mask()
 
         self.assertEqual(
             mask[self.get_action_id(SS_1)],

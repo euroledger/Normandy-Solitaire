@@ -1,3 +1,4 @@
+import matplotlib.pyplot as plt
 import traceback
 
 from core.ai.ai_diagnostics_helper import save_exception_game, save_winning_game
@@ -6,6 +7,8 @@ import builtins
 import copy
 from random import shuffle, randint
 from collections import Counter
+
+from core.ai.headless_action_masks import execute_flat_move_other_units_from_strategic_reserve_ai
 
 from cards.decks import draw_deck, mid_deck, late_deck
 from core.actions.strategic_reserve_actions import (
@@ -21,6 +24,7 @@ from core.allied_armies import (
     US_VIII_CORPS,
     US_XV_CORPS,
 )
+import csv
 from core.game_constants import CYAN, GREEN, RED, RESET
 from core.save_load_game import load_game, save_game
 from core.tables.weather import get_weather_result
@@ -60,7 +64,6 @@ _PRISTINE_LATE = copy.deepcopy(late_deck)
 def execute_single_game_run(i):
     headless = True
     GlobalGameState.headless = headless
-    
 
     if headless:
         configure_headless_printing(i)
@@ -314,7 +317,6 @@ def execute_single_game_run(i):
             if drawn_card.card_id == 28:
                 card_28_draw_position = len(GlobalGameState.drawn_cards)
 
-
             # if (
             #     drawn_card.card_id == 20
             #     and not GlobalGameState.mid_deck_added
@@ -478,18 +480,7 @@ def execute_single_game_run(i):
             continue
 
         if GlobalGameState.current_step == 4 and user_input == "":
-            while get_other_units_in_strategic_reserve():
-                choice = input(
-                    "Deploy a non-Panzer unit from Strategic Reserve? (Y/N): "
-                ).strip().lower()
-
-                if choice != "y":
-                    break
-
-                deployed = do_move_other_unit_from_strategic_reserve()
-
-                if not deployed:
-                    break
+            execute_flat_move_other_units_from_strategic_reserve_ai()
 
             GlobalGameState.current_step = 5
             continue
@@ -556,6 +547,7 @@ def execute_single_game_run(i):
 # MULTIPROCESS BATCH RUNNER
 # ============================================================
 
+
 NUM_EPISODES = 1000
 
 
@@ -581,8 +573,7 @@ def run_game_worker(game_number):
 
         # Save an occasional game for inspection.
 
-
-        if game_number > 0 and game_number % 500 == 0:
+        if game_number > 0 and game_number % 100 == 0:
             save_log_to_disk(
                 game_number=game_number
             )
@@ -639,14 +630,15 @@ def run_game_worker(game_number):
             "us_3_activation_location": None,
             "error": traceback.format_exc(),
         }
+
+
 def run_parallel_games(
     num_episodes,
     max_workers=MAX_WORKERS,
 ):
-    
+
     # Submit all games to a pool of independent Python processes.
     # Results are returned to the parent process as games finish.
-
 
     results = []
 
@@ -707,7 +699,7 @@ def run_parallel_games(
 
             completed += 1
 
-            # Progress report every 100 completed games.
+            # Progress report every 100 compl% 1eted games.
             if (
                 completed % 100 == 0
                 or completed == num_episodes
@@ -737,14 +729,36 @@ def run_parallel_games(
     return results, wall_clock_time
 
 
+def save_batch_results(results):
+    timestamp = time.strftime("%Y%m%d_%H%M%S")
+    filename = f"normandy_batch_results_{timestamp}.csv"
+
+    with open(filename, "w", newline="") as csv_file:
+        writer = csv.writer(csv_file)
+
+        writer.writerow([
+            "game_number",
+            "result",
+            "cards_drawn",
+            "duration",
+        ])
+
+        for result in results:
+            writer.writerow([
+                result["game_number"],
+                result["result"],
+                result["cards_drawn"],
+                result["duration"],
+            ])
+
+    return filename
 def print_batch_summary(
     results,
     wall_clock_time,
 ):
-    
+
     # Aggregate results in the parent process.
     # Worker processes never modify these aggregate statistics.
-    
 
     # Make output deterministic even though games finish
     # in an arbitrary order.
@@ -836,9 +850,33 @@ def print_batch_summary(
         f"{avg_cards_processed:.2f} / 48"
     )
 
+    best_game = (
+            max(cards_drawn_per_game)
+            if cards_drawn_per_game
+            else 0
+    )
+    _REAL_PRINT_(
+            f"Best Game             : "
+            f"{best_game} / 48"
+            )
+    worst_game_result = min(
+            results,
+            key=lambda result: result["cards_drawn"],
+        )
+
+    worst_game = worst_game_result["cards_drawn"]
+    worst_game_number = worst_game_result["game_number"]
+    _REAL_PRINT_(
+            f"Worst Game             : "
+            f"{worst_game} / 48"
+            )
     _REAL_PRINT_(
         f"Worker Errors         : "
         f"{len(errors)}"
+    )
+    _REAL_PRINT_(
+        f"Worst Game Number     : "
+        f"{worst_game_number}"
     )
 
     _REAL_PRINT_("-----------------------------------------")
@@ -865,6 +903,27 @@ def print_batch_summary(
 
     _REAL_PRINT_("=========================================")
 
+    plt.figure(figsize=(10, 6))
+
+    plt.hist(
+        cards_drawn_per_game,
+        bins=range(0, 50),
+        edgecolor="black",
+        align="left",
+    )
+
+    plt.xlabel("Cards Survived")
+    plt.ylabel("Number of Games")
+    plt.title(
+        f"Normandy Solitaire Survival Distribution "
+        f"({actual_attempts} Games)"
+    )
+
+    plt.xticks(range(0, 49, 2))
+    plt.xlim(0, 48)
+
+    plt.tight_layout()
+    plt.show()
     # ========================================================
     # ERROR REPORT
     # ========================================================

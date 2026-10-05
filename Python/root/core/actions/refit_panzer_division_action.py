@@ -1,4 +1,3 @@
-from core.actions.actions_helper import use_action
 from core.actions.strategic_reserve_actions import get_panzer_divisions_in_strategic_reserve
 from core.global_game_state import GlobalGameState
 
@@ -11,10 +10,6 @@ def do_refit_panzer_division(unit_choice=None):
         print("NO PANZER DIVISIONS AVAILABLE TO REFIT")
         return
 
-    if not use_action():
-        print("NOT ENOUGH ACTIONS")
-        return
-    
     print("REFIT PANZER DIVISION")
     print()
 

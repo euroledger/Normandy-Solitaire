@@ -1,5 +1,11 @@
 # tests/test_action_mask.py
 
+from core.map.map_spaces_us_3 import le_mans, alencon, argentan
+from core.map.map_spaces_can_1 import cagny, falaise, bourguebus_ridge
+from core.map.map_spaces_brit_2 import villers_bocage, mont_pincon, thury_harcourt
+from core.map.map_spaces_us_1 import st_lo, coutances, flers
+from core.map.map_model import falaise_gap
+
 import unittest
 import numpy as np
 
@@ -8,23 +14,29 @@ from core.map.map_model import transport_track, supply_track, hitler_approval_tr
 from core.global_game_state import GlobalGameState
 from core.ai.headless_action_masks import (
     augmentation_roll_mask,
-    get_mini_action_mask,
+    execute_flat_action_ai,
+    get_fortified_villages_mask,
+    get_action_phase_action_mask,
+    get_move_action_point_to_strategic_reserve_mask,
     get_total_actions,
-    print_mini_action_mask,
+    print_action_phase_action_mask,
+    get_refit_panzer_division_mask,
     OTHER_RESERVE_UNIT_TYPES,
 )
 from core.allied_armies import US_FIRST_ARMY
 
 import core.map.map_model
 
+from core.ai.headless_action_masks import (
+    get_move_unit_one_space_mask,
+    MOVE_UNIT_TYPES,
+)
 from core.german_units import (
     PZ_LEHR,
     SS_12,
     FS_3,
     FS_5,
     ROMMEL,
-    MEYER,
-    MODEL,
     TIGER_101,
     create_flak88,
     create_kampfgruppe,
@@ -32,11 +44,33 @@ from core.german_units import (
     panzer_divisions_list,
 )
 
-from core.map.map_model import strategic_reserve_box
-
 
 class TestActionMask(unittest.TestCase):
+    def get_move_unit_action_id(self, unit, destination_space):
+        _, german_eligible_spaces = get_total_actions()
 
+        unit_index = next(
+            index
+            for index, (_, _, named_unit) in enumerate(MOVE_UNIT_TYPES)
+            if named_unit is unit
+        )
+
+        space_index = german_eligible_spaces.index(destination_space)
+
+        return (
+            unit_index * len(german_eligible_spaces)
+            + space_index
+        )
+
+    def get_generic_move_unit_action_id(self, unit_type_index, destination_space):
+        _, german_eligible_spaces = get_total_actions()
+
+        space_index = german_eligible_spaces.index(destination_space)
+
+        return (
+            unit_type_index * len(german_eligible_spaces)
+            + space_index
+        )
     def setUp(self):
         GlobalGameState.actions_left_this_turn = 1
         GlobalGameState.reserve_actions = 0
@@ -89,7 +123,7 @@ class TestActionMask(unittest.TestCase):
         GlobalGameState.reserve_actions = 0
         strategic_reserve_box.units.clear()
 
-        mask = get_mini_action_mask()
+        mask = get_action_phase_action_mask()
 
         print(f"\n[DEBUG] Test Baseline Mask Output: {mask}")
 
@@ -103,7 +137,7 @@ class TestActionMask(unittest.TestCase):
             US_FIRST_ARMY.name
         )
 
-        mask = get_mini_action_mask()
+        mask = get_action_phase_action_mask()
 
         print(
             f"\n[DEBUG] Test Attacked Army Mask Output: {mask}"
@@ -117,7 +151,7 @@ class TestActionMask(unittest.TestCase):
         self.assertEqual(mask[0], 0.0)
 
     def test_action_mask_output_structure(self):
-        mask = get_mini_action_mask()
+        mask = get_action_phase_action_mask()
 
         self.assertIsInstance(mask, np.ndarray)
 
@@ -148,7 +182,7 @@ class TestActionMask(unittest.TestCase):
         # 11 * 27 Panzer FROM reserve
         # 11 Panzer TO reserve
         # 9 * 27 other units FROM reserve
-        self.assertEqual(total_actions, 561)
+        self.assertEqual(total_actions, 1032)
 
         for space in german_eligible_spaces:
             self.assertNotIn(
@@ -169,9 +203,9 @@ class TestActionMask(unittest.TestCase):
         )
 
         _, german_eligible_spaces = get_total_actions()
-        mask = get_mini_action_mask()
+        mask = get_action_phase_action_mask()
 
-        print_mini_action_mask(
+        print_action_phase_action_mask(
             mask=mask,
             legal_only=True
         )
@@ -207,7 +241,7 @@ class TestActionMask(unittest.TestCase):
         flak = create_flak88()
         strategic_reserve_box.units.append(flak)
 
-        mask = get_mini_action_mask()
+        mask = get_action_phase_action_mask()
 
         flak_index = 0
 
@@ -226,7 +260,7 @@ class TestActionMask(unittest.TestCase):
             create_nebelwerfer()
         )
 
-        mask = get_mini_action_mask()
+        mask = get_action_phase_action_mask()
 
         flak_index = 0
 
@@ -249,7 +283,7 @@ class TestActionMask(unittest.TestCase):
             ]
         )
 
-        mask = get_mini_action_mask()
+        mask = get_action_phase_action_mask()
 
         flak_index = 0
 
@@ -277,7 +311,7 @@ class TestActionMask(unittest.TestCase):
             create_kampfgruppe()
         )
 
-        mask = get_mini_action_mask()
+        mask = get_action_phase_action_mask()
 
         flak_start, flak_end = (
             self.get_other_unit_action_slice(0)
@@ -311,7 +345,7 @@ class TestActionMask(unittest.TestCase):
             create_nebelwerfer()
         )
 
-        mask = get_mini_action_mask()
+        mask = get_action_phase_action_mask()
 
         nebelwerfer_index = 2
 
@@ -331,7 +365,7 @@ class TestActionMask(unittest.TestCase):
     def test_fs3_in_reserve_enables_fs3_but_not_fs5(self):
         strategic_reserve_box.units.append(FS_3)
 
-        mask = get_mini_action_mask()
+        mask = get_action_phase_action_mask()
 
         fs3_start, fs3_end = (
             self.get_other_unit_action_slice(3)
@@ -356,7 +390,7 @@ class TestActionMask(unittest.TestCase):
     def test_fs5_in_reserve_enables_fs5_but_not_fs3(self):
         strategic_reserve_box.units.append(FS_5)
 
-        mask = get_mini_action_mask()
+        mask = get_action_phase_action_mask()
 
         fs3_start, fs3_end = (
             self.get_other_unit_action_slice(3)
@@ -379,7 +413,7 @@ class TestActionMask(unittest.TestCase):
     def test_named_commanders_have_separate_action_blocks(self):
         strategic_reserve_box.units.append(ROMMEL)
 
-        mask = get_mini_action_mask()
+        mask = get_action_phase_action_mask()
 
         rommel_start, rommel_end = (
             self.get_other_unit_action_slice(5)
@@ -411,7 +445,7 @@ class TestActionMask(unittest.TestCase):
     def test_tiger_101_has_own_action_block(self):
         strategic_reserve_box.units.append(TIGER_101)
 
-        mask = get_mini_action_mask()
+        mask = get_action_phase_action_mask()
 
         tiger_start, tiger_end = (
             self.get_other_unit_action_slice(8)
@@ -439,7 +473,7 @@ class TestActionMask(unittest.TestCase):
             create_flak88()
         )
 
-        mask = get_mini_action_mask()
+        mask = get_action_phase_action_mask()
 
         start, end = self.get_other_unit_action_slice(0)
 
@@ -472,34 +506,27 @@ class TestActionMask(unittest.TestCase):
             243
         )
 
-    def test_other_reserve_block_ends_at_total_actions(self):
-        total_actions, german_eligible_spaces = (
-            get_total_actions()
-        )
 
-        other_start = self.get_other_reserve_start()
+    def test_other_reserve_block_ends_at_move_unit_block(self):
+        _, german_eligible_spaces = get_total_actions()
+
+        other_start = (
+            7
+            + len(panzer_divisions_list) * len(german_eligible_spaces)
+            + len(panzer_divisions_list)
+        )
 
         other_end = (
             other_start
-            + len(OTHER_RESERVE_UNIT_TYPES)
-            * len(german_eligible_spaces)
+            + len(OTHER_RESERVE_UNIT_TYPES) * len(german_eligible_spaces)
         )
 
-        self.assertEqual(
-            other_start,
-            315
-        )
+        move_unit_start = other_end
 
         self.assertEqual(
             other_end,
-            total_actions - 3
+            move_unit_start
         )
-
-        self.assertEqual(
-            other_end,
-            558
-        )
-
     # ---------------------------------------------------------
     # AUGMENTATION ROLL
     # ---------------------------------------------------------
@@ -554,6 +581,479 @@ class TestActionMask(unittest.TestCase):
                 dtype=np.float32
             )
         )
+        
+    # ---------------------------------------------------------
+    # MOVE ACTION POINT TO STRATEGIC RESERVE
+    # ---------------------------------------------------------
 
+    def test_move_action_point_to_reserve_mask_available(self):
+
+        GlobalGameState.actions_left_this_turn = 1
+        GlobalGameState.reserve_actions = 0
+
+        mask = get_move_action_point_to_strategic_reserve_mask()
+
+        self.assertEqual(mask.shape, (1,))
+        self.assertEqual(mask.dtype, np.float32)
+        self.assertEqual(mask[0], 1.0)
+
+    def test_move_action_point_to_reserve_mask_no_action_points(self):
+
+        GlobalGameState.actions_left_this_turn = 0
+        GlobalGameState.reserve_actions = 0
+
+        mask = get_move_action_point_to_strategic_reserve_mask()
+
+        self.assertEqual(mask[0], 0.0)
+
+    def test_move_action_point_to_reserve_mask_one_reserve_action(self):
+
+        GlobalGameState.actions_left_this_turn = 1
+        GlobalGameState.reserve_actions = 1
+
+        mask = get_move_action_point_to_strategic_reserve_mask()
+
+        self.assertEqual(mask[0], 1.0)
+
+    def test_move_action_point_to_reserve_mask_reserve_full(self):
+
+        GlobalGameState.actions_left_this_turn = 1
+        GlobalGameState.reserve_actions = 2
+
+        mask = get_move_action_point_to_strategic_reserve_mask()
+
+        self.assertEqual(mask[0], 0.0)
+        
+    # ---------------------------------------------------------
+    # FORTIFIED VILLAGES
+    # ---------------------------------------------------------
+
+    def test_fortified_villages_mask_structure(self):
+        mask = get_fortified_villages_mask()
+
+        self.assertEqual(mask.shape, (27,))
+        self.assertEqual(mask.dtype, np.float32)
+
+    def test_fortified_villages_available_with_three_normal_ap(self):
+        GlobalGameState.actions_left_this_turn = 3
+        GlobalGameState.reserve_actions = 0
+
+        mask = get_action_phase_action_mask()
+
+
+        fortified_mask = mask[994:1021]
+        self.assertGreater(
+            np.sum(fortified_mask),
+            0.0
+        )
+
+    def test_fortified_villages_available_with_two_normal_one_reserve(self):
+        GlobalGameState.actions_left_this_turn = 2
+        GlobalGameState.reserve_actions = 1
+
+        mask = get_action_phase_action_mask()
+
+        fortified_mask = mask[994:1021]
+
+        self.assertGreater(
+            np.sum(fortified_mask),
+            0.0
+        )
+
+    def test_fortified_villages_available_with_one_normal_two_reserve(self):
+        GlobalGameState.actions_left_this_turn = 1
+        GlobalGameState.reserve_actions = 2
+
+        mask = get_action_phase_action_mask()
+
+        fortified_mask = mask[994:1021]
+
+        self.assertGreater(
+            np.sum(fortified_mask),
+            0.0
+        )
+
+    def test_fortified_villages_blocked_with_only_two_ap(self):
+        GlobalGameState.actions_left_this_turn = 2
+        GlobalGameState.reserve_actions = 0
+
+        mask = get_action_phase_action_mask()
+
+        fortified_mask = mask[562:589]
+
+        self.assertEqual(
+            np.sum(fortified_mask),
+            0.0
+        )
+
+    def test_fortified_villages_blocked_with_zero_normal_two_reserve(self):
+        GlobalGameState.actions_left_this_turn = 0
+        GlobalGameState.reserve_actions = 2
+
+        mask = get_action_phase_action_mask()
+
+        fortified_mask = mask[562:589]
+
+        self.assertEqual(
+            np.sum(fortified_mask),
+            0.0
+        )
+        
+    # ---------------------------------------------------------
+    # MOVE UNIT ONE SPACE
+    # ---------------------------------------------------------
+
+    def test_move_unit_one_space_mask_structure(self):
+        mask = get_move_unit_one_space_mask()
+
+        _, german_eligible_spaces = get_total_actions()
+
+        self.assertEqual(
+            mask.shape,
+            (
+                len(MOVE_UNIT_TYPES)
+                * len(german_eligible_spaces),
+            )
+        )
+
+        self.assertEqual(mask.dtype, np.float32)
+
+        self.assertEqual(len(mask), 432)
+
+    def test_move_unit_one_space_units_on_all_four_tracks(self):
+        flak = create_flak88()
+        nebelwerfer = create_nebelwerfer()
+
+        st_lo.units.append(PZ_LEHR)
+        villers_bocage.units.append(flak)
+        cagny.units.append(FS_3)
+        le_mans.units.append(nebelwerfer)
+
+        mask = get_move_unit_one_space_mask()
+
+        pz_lehr_action = self.get_move_unit_action_id(
+            PZ_LEHR,
+            coutances
+        )
+
+        flak_action = self.get_generic_move_unit_action_id(
+            0,
+            mont_pincon
+        )
+
+        fs3_action = self.get_move_unit_action_id(
+            FS_3,
+            bourguebus_ridge
+        )
+
+        nebelwerfer_action = self.get_generic_move_unit_action_id(
+            2,
+            alencon
+        )
+
+        self.assertEqual(mask[pz_lehr_action], 1.0)
+        self.assertEqual(mask[flak_action], 1.0)
+        self.assertEqual(mask[fs3_action], 1.0)
+        self.assertEqual(mask[nebelwerfer_action], 1.0)
+
+        st_lo.units.remove(PZ_LEHR)
+        villers_bocage.units.remove(flak)
+        cagny.units.remove(FS_3)
+        le_mans.units.remove(nebelwerfer)
+        
+    def test_move_unit_one_space_kampfgruppe(self):
+        kampfgruppe = create_kampfgruppe()
+
+        st_lo.units.append(kampfgruppe)
+
+        mask = get_move_unit_one_space_mask()
+
+        action_id = self.get_generic_move_unit_action_id(
+            1,
+            coutances
+        )
+
+        self.assertEqual(mask[action_id], 1.0)
+
+        st_lo.units.remove(kampfgruppe)
+        
+    def test_move_unit_one_space_unit_under_siege_has_no_actions(self):
+        st_lo.units.append(PZ_LEHR)
+        st_lo.under_siege = True
+
+        mask = get_move_unit_one_space_mask()
+
+        pz_lehr_index = next(
+            index
+            for index, (_, _, named_unit) in enumerate(MOVE_UNIT_TYPES)
+            if named_unit is PZ_LEHR
+        )
+
+        _, german_eligible_spaces = get_total_actions()
+        space_count = len(german_eligible_spaces)
+
+        start = pz_lehr_index * space_count
+        end = start + space_count
+
+        self.assertEqual(
+            np.sum(mask[start:end]),
+            0.0
+        )
+
+        st_lo.under_siege = False
+        st_lo.units.remove(PZ_LEHR)
+        
+    def test_move_unit_one_space_cannot_move_into_space_under_siege(self):
+        st_lo.units.append(PZ_LEHR)
+        coutances.under_siege = True
+
+        mask = get_move_unit_one_space_mask()
+
+        action_id = self.get_move_unit_action_id(
+            PZ_LEHR,
+            coutances
+        )
+
+        self.assertEqual(mask[action_id], 0.0)
+
+        coutances.under_siege = False
+        st_lo.units.remove(PZ_LEHR)
+        
+    def test_move_unit_one_space_from_falaise_gap_all_four_tracks(self):
+        falaise_gap.units.append(SS_12)
+
+        mask = get_move_unit_one_space_mask()
+
+        destinations = [
+            flers,
+            thury_harcourt,
+            falaise,
+            argentan,
+        ]
+
+        for destination in destinations:
+            action_id = self.get_move_unit_action_id(
+                SS_12,
+                destination
+            )
+
+            self.assertEqual(
+                mask[action_id],
+                1.0,
+                f"SS_12 should be able to move from Falaise Gap "
+                f"to {destination.name}"
+            )
+
+        falaise_gap.units.remove(SS_12)
+        
+    def test_move_unit_one_space_all_four_tracks_can_enter_falaise_gap(self):
+        test_cases = [
+            (PZ_LEHR, flers),
+            (SS_12, thury_harcourt),
+            (FS_3, falaise),
+            (FS_5, argentan),
+        ]
+
+        for unit, source_space in test_cases:
+            source_space.units.append(unit)
+
+        mask = get_move_unit_one_space_mask()
+
+        for unit, source_space in test_cases:
+            action_id = self.get_move_unit_action_id(
+                unit,
+                falaise_gap
+            )
+
+            self.assertEqual(
+                mask[action_id],
+                1.0,
+                f"{unit.name} should be able to move from "
+                f"{source_space.name} to Falaise Gap"
+            )
+
+        for unit, source_space in test_cases:
+            source_space.units.remove(unit)
+            
+    # ---------------------------------------------------------
+    # REFIT PANZER DIVISION
+    # ---------------------------------------------------------
+
+    def test_refit_panzer_division_mask_structure(self):
+        mask = get_refit_panzer_division_mask()
+
+        self.assertEqual(
+            mask.shape,
+            (len(panzer_divisions_list),)
+        )
+
+        self.assertEqual(mask.dtype, np.float32)
+        self.assertEqual(len(mask), 11)
+
+    def test_refit_reduced_panzer_in_reserve_is_legal(self):
+        strategic_reserve_box.units.append(PZ_LEHR)
+        PZ_LEHR.combat_value = 1
+
+        mask = get_refit_panzer_division_mask()
+
+        panzer_index = panzer_divisions_list.index(PZ_LEHR)
+
+        self.assertEqual(
+            mask[panzer_index],
+            1.0
+        )
+
+        PZ_LEHR.combat_value = 2
+
+    def test_refit_full_strength_panzer_in_reserve_is_illegal(self):
+        strategic_reserve_box.units.append(PZ_LEHR)
+        PZ_LEHR.combat_value = 2
+
+        mask = get_refit_panzer_division_mask()
+
+        panzer_index = panzer_divisions_list.index(PZ_LEHR)
+
+        self.assertEqual(
+            mask[panzer_index],
+            0.0
+        )
+
+    def test_refit_reduced_panzer_not_in_reserve_is_illegal(self):
+        PZ_LEHR.combat_value = 1
+
+        mask = get_refit_panzer_division_mask()
+
+        panzer_index = panzer_divisions_list.index(PZ_LEHR)
+
+        self.assertEqual(
+            mask[panzer_index],
+            0.0
+        )
+
+        PZ_LEHR.combat_value = 2
+
+    def test_refit_two_reduced_panzers_have_separate_slots(self):
+        strategic_reserve_box.units.extend(
+            [PZ_LEHR, SS_12]
+        )
+
+        PZ_LEHR.combat_value = 1
+        SS_12.combat_value = 1
+
+        mask = get_refit_panzer_division_mask()
+
+        pz_lehr_index = panzer_divisions_list.index(PZ_LEHR)
+        ss12_index = panzer_divisions_list.index(SS_12)
+
+        self.assertEqual(mask[pz_lehr_index], 1.0)
+        self.assertEqual(mask[ss12_index], 1.0)
+
+        self.assertEqual(
+            np.sum(mask),
+            2.0
+        )
+
+        PZ_LEHR.combat_value = 2
+        SS_12.combat_value = 2
+
+    def test_refit_only_reduced_panzer_is_legal(self):
+        strategic_reserve_box.units.extend(
+            [PZ_LEHR, SS_12]
+        )
+
+        PZ_LEHR.combat_value = 1
+        SS_12.combat_value = 2
+
+        mask = get_refit_panzer_division_mask()
+
+        pz_lehr_index = panzer_divisions_list.index(PZ_LEHR)
+        ss12_index = panzer_divisions_list.index(SS_12)
+
+        self.assertEqual(mask[pz_lehr_index], 1.0)
+        self.assertEqual(mask[ss12_index], 0.0)
+
+        self.assertEqual(
+            np.sum(mask),
+            1.0
+        )
+
+        PZ_LEHR.combat_value = 2
+
+    def test_refit_panzer_division_action_phase_block(self):
+        strategic_reserve_box.units.append(PZ_LEHR)
+        PZ_LEHR.combat_value = 1
+
+        mask = get_action_phase_action_mask()
+
+        refit_start = 990
+        refit_end = 1001
+
+        refit_mask = mask[refit_start:refit_end]
+
+        pz_lehr_index = panzer_divisions_list.index(PZ_LEHR)
+
+        self.assertEqual(len(refit_mask), 11)
+        self.assertEqual(refit_mask[pz_lehr_index], 1.0)
+        self.assertEqual(np.sum(refit_mask), 1.0)
+
+        PZ_LEHR.combat_value = 2
+        
+    def test_refit_panzer_division_blocked_with_no_available_ap(self):
+        strategic_reserve_box.units.append(PZ_LEHR)
+        PZ_LEHR.combat_value = 1
+
+        GlobalGameState.actions_left_this_turn = 0
+        GlobalGameState.reserve_actions = 0
+
+        mask = get_action_phase_action_mask()
+
+        refit_mask = mask[990:1001]
+
+        self.assertEqual(
+            np.sum(refit_mask),
+            0.0
+        )
+
+        PZ_LEHR.combat_value = 2
+        
+    def test_refit_panzer_division_available_with_reserve_ap(self):
+        strategic_reserve_box.units.append(PZ_LEHR)
+        PZ_LEHR.combat_value = 1
+
+        GlobalGameState.actions_left_this_turn = 0
+        GlobalGameState.reserve_actions = 1
+
+        mask = get_action_phase_action_mask()
+
+        refit_mask = mask[990:1001]
+
+        pz_lehr_index = panzer_divisions_list.index(PZ_LEHR)
+
+        self.assertEqual(
+            refit_mask[pz_lehr_index],
+            1.0
+        )
+
+        PZ_LEHR.combat_value = 2
+        
+
+    def test_execute_refit_panzer_division_ai(self):
+        strategic_reserve_box.units.append(PZ_LEHR)
+        PZ_LEHR.combat_value = 1
+
+        GlobalGameState.actions_left_this_turn = 1
+        GlobalGameState.reserve_actions = 0
+
+        panzer_index = panzer_divisions_list.index(PZ_LEHR)
+
+        # Refit block starts at global action ID 990.
+        action_id = 990 + panzer_index
+
+        result = execute_flat_action_ai(action_id)
+
+        self.assertTrue(result)
+        self.assertEqual(PZ_LEHR.combat_value, 2)
+
+        PZ_LEHR.combat_value = 2
 if __name__ == "__main__":
     unittest.main()

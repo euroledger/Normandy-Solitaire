@@ -215,6 +215,12 @@ def do_german_losses(space, selected_units=None):
     elif GlobalGameState.german_casualty_strategy == Strategy.RANDOM:
         casualty = choice(german_units)
 
+    elif GlobalGameState.german_casualty_strategy == Strategy.AI:
+        from core.ai.headless_action_masks import select_random_casualty_ai
+        casualty = select_random_casualty_ai(german_units)
+        if casualty is None:
+            print("NO ELIGIBLE UNIT TO TAKE LOSS")
+            return
     else:
         raise ValueError(
             f"Strategy.HUMAN={Strategy.HUMAN} Unknown strategy: {GlobalGameState.german_casualty_strategy}"

@@ -1,5 +1,6 @@
 import io
 import builtins
+import os
 import re
 from core.global_game_state import GlobalGameState
 
@@ -31,9 +32,6 @@ def headless_file_logger(*args, **kwargs):
     _LOG_BUFFER.write(message + "\n")
 
 
-# def save_log_to_disk(game_number):
-#     with open(f"game_{game_number}_log.txt", "w", encoding="utf-8") as f:
-#         f.write(_LOG_BUFFER.getvalue())
 def save_log_to_disk(game_number):
     if not CAPTURE_FULL_LOG:
         return
@@ -41,10 +39,12 @@ def save_log_to_disk(game_number):
     log_text = _LOG_BUFFER.getvalue()
     log_text = re.sub(r"\x1b\[[0-9;]*m", "", log_text)
 
+    os.makedirs("logs", exist_ok=True)
+
     with open(
-        f"game_{game_number}_log.txt",
+        os.path.join("logs", f"game_{game_number}_log.txt"),
         "w",
-        encoding="utf-8"
+        encoding="utf-8",
     ) as f:
         f.write(log_text)
 

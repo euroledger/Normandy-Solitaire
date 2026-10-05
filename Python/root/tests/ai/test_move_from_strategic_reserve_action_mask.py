@@ -2,9 +2,9 @@ import unittest
 
 from core.ai.headless_action_masks import (
     execute_flat_action_ai,
-    get_mini_action_mask,
+    get_action_phase_action_mask,
     get_total_actions,
-    print_mini_action_mask,
+    print_action_phase_action_mask,
 )
 from core.german_units import (
     PZ_LEHR,
@@ -48,21 +48,21 @@ class TestMoveFromStrategicReserveActionMask(unittest.TestCase):
         )
 
     def test_mask_contains_panzer_lehr_deployment(self):
-        mask = get_mini_action_mask()
+        mask = get_action_phase_action_mask()
         action_id = self.get_action_id(PZ_LEHR, carentan)
 
-        print_mini_action_mask(mask, legal_only=True)
+        print_action_phase_action_mask(mask, legal_only=True)
 
         self.assertEqual(mask[action_id], 1.0)
 
     def test_mask_contains_12th_ss_deployment(self):
-        mask = get_mini_action_mask()
+        mask = get_action_phase_action_mask()
         action_id = self.get_action_id(SS_12, caen)
 
         self.assertEqual(mask[action_id], 1.0)
 
     def test_mask_excludes_panzer_not_in_strategic_reserve(self):
-        mask = get_mini_action_mask()
+        mask = get_action_phase_action_mask()
         action_id = self.get_action_id(SS_1, caen)
 
         self.assertEqual(mask[action_id], 0.0)
@@ -111,7 +111,7 @@ class TestMoveFromStrategicReserveActionMask(unittest.TestCase):
         self.assertEqual(GlobalGameState.actions_left_this_turn, 0)
 
     def test_only_panzers_in_strategic_reserve_have_deployment_actions(self):
-        mask = get_mini_action_mask()
+        mask = get_action_phase_action_mask()
 
         for panzer in panzer_divisions_list:
             start = (

@@ -1,0 +1,4048 @@
+=== START OF GAME 200 LOG ===
+
+
+=========================================
+NORMANDY SOLITAIRE! D-Day to Falaise 1944
+=========================================
+
+List of Drawn Cards: []
+Cards Drawn: 0
+Cards Remaining: 48
+Cards Remaining in Deck: 24
+
+
+> Draw Card
+  Roll For Weather
+  Resources Phase
+  Deploy Non Panzer Div Reinforcements
+  Allied Advances Phase
+  Action Phase
+
+Press ENTER to perform next action
+Press G to see game summary
+Press L to load saved game
+Press Q to quit
+
+
+
+========================================
+DREW CARD 1
+========================================
+
+============================================================
+CARD #1 - D-Day Landings: First Wave
+============================================================
+
+RESOURCES
+  +1 Reinforcement Panzer Lehr
+  +1 Reinforcement 12th SS Panzer
+  -1 DRM Transport
+
+AIR POWER
+  N/A
+
+ALLIED ADVANCES
+  US 1st ARMY (3)
+  BRITISH XXX CORPS (2)
+  BRITISH I CORPS (2)
+
+ACTIONS
+  Actions Available: 1
+  No Modifiers
+
+
+=========================================
+NORMANDY SOLITAIRE! D-Day to Falaise 1944
+=========================================
+
+List of Drawn Cards: (1)
+Cards Drawn: 1
+Cards Remaining: 47
+Cards Remaining in Deck: 23
+
+Current Card: 1
+
+  Draw Card
+> Roll For Weather
+  Resources Phase
+  Deploy Non Panzer Div Reinforcements
+  Allied Advances Phase
+  Action Phase
+
+Press ENTER to perform next action
+Press G to see game summary
+
+
+========================================
+WEATHER ROLL
+========================================
+
+ROLL: 1
+RESULT: Overcast
+
+
+=========================================
+NORMANDY SOLITAIRE! D-Day to Falaise 1944
+=========================================
+
+List of Drawn Cards: (1)
+Cards Drawn: 1
+Cards Remaining: 47
+Cards Remaining in Deck: 23
+
+Current Card: 1
+Current Weather: Overcast
+
+  Draw Card
+  Roll For Weather
+> Resources Phase
+  Deploy Non Panzer Div Reinforcements
+  Allied Advances Phase
+  Action Phase
+
+Press ENTER to perform next action
+Press G to see game summary
+
+EVENT
+
+RESOURCE ADJUSTMENTS
+RESOURCE PHASE - weather is Overcast
+
+
+========================================
+ATTACK STRENGTHS (ALLIED ARMIES)
+========================================
+US 1st ARMY -> ATTACK STRENGTH: 0 () ; AIR SUPPORT=False
+BRITISH XXX CORPS -> ATTACK STRENGTH: 0 () ; AIR SUPPORT=False
+BRITISH I CORPS -> ATTACK STRENGTH: 0 () ; AIR SUPPORT=False
+
+
+========================================
+DEFENSE STRENGTHS (ALLIED ARMIES)
+========================================
+
+N/A
+
+
+
+========================================
+REINFORCEMENTS
+========================================
+
+Panzer Lehr -> IN TRANSIT
+12th SS Panzer -> IN TRANSIT
+
+
+
+=========================================
+NORMANDY SOLITAIRE! D-Day to Falaise 1944
+=========================================
+
+List of Drawn Cards: (1)
+Cards Drawn: 1
+Cards Remaining: 47
+Cards Remaining in Deck: 23
+
+Current Card: 1
+Current Weather: Overcast
+
+  Draw Card
+  Roll For Weather
+  Resources Phase
+> Deploy Non Panzer Div Reinforcements
+  Allied Advances Phase
+  Action Phase
+
+Press ENTER to perform next action
+Press G to see game summary
+
+=========================================
+NORMANDY SOLITAIRE! D-Day to Falaise 1944
+=========================================
+
+List of Drawn Cards: (1)
+Cards Drawn: 1
+Cards Remaining: 47
+Cards Remaining in Deck: 23
+
+Current Card: 1
+Current Weather: Overcast
+
+  Draw Card
+  Roll For Weather
+  Resources Phase
+  Deploy Non Panzer Div Reinforcements
+> Allied Advances Phase
+  Action Phase
+
+Press ENTER to perform next action
+Press G to see game summary
+
+
+========================================
+ALLIED ADVANCES PHASE
+========================================
+
+
+D-DAY LANDINGS FIRST WAVE
+=========================
+
+US 1st ARMY
+ROLL: 3
+>>>>>>> AFTER ALLIED ADVANCE -> ALLIED ARMY LOCATION:US 1st ARMY IS AT UTAH-OMAHA BEACH
+SUCCESS -> UTAH-OMAHA BEACH
+
+BRITISH XXX CORPS
+ROLL: 4
+>>>>>>> AFTER ALLIED ADVANCE -> ALLIED ARMY LOCATION:BRITISH XXX CORPS IS AT GOLD-JUNO-SWORD BEACH (BRITISH TRACK)
+SUCCESS -> GOLD-JUNO-SWORD BEACH (BRITISH TRACK)
+
+BRITISH I CORPS
+ROLL: 2
+>>>>>>> AFTER ALLIED ADVANCE -> ALLIED ARMY LOCATION:BRITISH I CORPS IS AT GOLD-JUNO-SWORD BEACH (CANADIAN TRACK)
+SUCCESS -> GOLD-JUNO-SWORD BEACH (CANADIAN TRACK)
+
+
+
+=========================================
+NORMANDY SOLITAIRE! D-Day to Falaise 1944
+=========================================
+
+List of Drawn Cards: (1)
+Cards Drawn: 1
+Cards Remaining: 47
+Cards Remaining in Deck: 23
+
+Current Card: 1
+Current Weather: Overcast
+
+  Draw Card
+  Roll For Weather
+  Resources Phase
+  Deploy Non Panzer Div Reinforcements
+  Allied Advances Phase
+> Action Phase
+
+Press ENTER to perform next action
+Press G to see game summary
+IN TRANSIT CHECK
+================
+Panzer Lehr
+ROLL: 4
+DRM: -1
+MODIFIED ROLL: 3
+CHECK: 3 <= Transport 5
+	=>Panzer Lehr MOVED TO STRATEGIC RESERVE
+IN TRANSIT CHECK
+================
+12th SS Panzer
+ROLL: 1
+DRM: -1
+MODIFIED ROLL: 0
+CHECK: 0 <= Transport 5
+	=>12th SS Panzer MOVED TO STRATEGIC RESERVE
+ACTIONS AVAILABLE: 1
+
+SUPPLY AUGMENTATION ROLL
+ROLL: 4
+DRM: +1
+MODIFIED ROLL: 5
+BASE LEVEL: 3
+SUPPLY INCREASED TO 5
+
+=========================================
+NORMANDY SOLITAIRE! D-Day to Falaise 1944
+=========================================
+
+List of Drawn Cards: (1)
+Cards Drawn: 1
+Cards Remaining: 47
+Cards Remaining in Deck: 23
+
+Current Card: 1
+Current Weather: Overcast
+
+> Draw Card
+  Roll For Weather
+  Resources Phase
+  Deploy Non Panzer Div Reinforcements
+  Allied Advances Phase
+  Action Phase
+
+Press ENTER to perform next action
+Press G to see game summary
+Press S to save game
+Press L to load saved game
+Press Q to quit
+
+
+
+========================================
+DREW CARD 2
+========================================
+
+============================================================
+CARD #2 - D-Day Landings: Second Wave
+============================================================
+
+RESOURCES
+  -1 Resource Loss Hitler Approval
+  -1 Resource Loss Supply
+  -1 DRM Hitler Approval
+
+AIR POWER
+  N/A
+
+ALLIED ADVANCES
+  US 1st ARMY (3)
+  BRITISH XXX CORPS (2)
+  BRITISH I CORPS (2)
+
+ACTIONS
+  Actions Available: 3
+  +1 Attack Strength US 1st ARMY
+
+
+=========================================
+NORMANDY SOLITAIRE! D-Day to Falaise 1944
+=========================================
+
+List of Drawn Cards: (1, 2)
+Cards Drawn: 2
+Cards Remaining: 46
+Cards Remaining in Deck: 22
+
+Current Card: 2
+
+  Draw Card
+> Roll For Weather
+  Resources Phase
+  Deploy Non Panzer Div Reinforcements
+  Allied Advances Phase
+  Action Phase
+
+Press ENTER to perform next action
+Press G to see game summary
+
+
+========================================
+WEATHER ROLL
+========================================
+
+ROLL: 2
+RESULT: Partly Clear
+
+
+=========================================
+NORMANDY SOLITAIRE! D-Day to Falaise 1944
+=========================================
+
+List of Drawn Cards: (1, 2)
+Cards Drawn: 2
+Cards Remaining: 46
+Cards Remaining in Deck: 22
+
+Current Card: 2
+Current Weather: Partly Clear
+
+  Draw Card
+  Roll For Weather
+> Resources Phase
+  Deploy Non Panzer Div Reinforcements
+  Allied Advances Phase
+  Action Phase
+
+Press ENTER to perform next action
+Press G to see game summary
+
+EVENT
+
+RESOURCE ADJUSTMENTS
+Hitler Approval: LOSE 1 (6 -> 5)
+Supply: LOSE 1 (5 -> 4)
+RESOURCE PHASE - weather is Partly Clear
+
+
+========================================
+ATTACK STRENGTHS (ALLIED ARMIES)
+========================================
+US 1st ARMY -> ATTACK STRENGTH: 1 (+1 Card modifier) ; AIR SUPPORT=False
+BRITISH XXX CORPS -> ATTACK STRENGTH: 0 () ; AIR SUPPORT=False
+BRITISH I CORPS -> ATTACK STRENGTH: 0 () ; AIR SUPPORT=False
+
+
+========================================
+DEFENSE STRENGTHS (ALLIED ARMIES)
+========================================
+
+DEFENSE VALUES
+US 1st ARMY -> DEFENSE STRENGTH: 5 (+2 Terrain, +3 Army) ; AIR SUPPORT=False
+
+DEFENSE VALUES
+BRITISH XXX CORPS -> DEFENSE STRENGTH: 4 (+2 Terrain, +2 Army) ; AIR SUPPORT=False
+
+DEFENSE VALUES
+BRITISH I CORPS -> DEFENSE STRENGTH: 4 (+2 Terrain, +2 Army) ; AIR SUPPORT=False
+
+
+========================================
+REINFORCEMENTS
+========================================
+
+NONE
+
+
+=========================================
+NORMANDY SOLITAIRE! D-Day to Falaise 1944
+=========================================
+
+List of Drawn Cards: (1, 2)
+Cards Drawn: 2
+Cards Remaining: 46
+Cards Remaining in Deck: 22
+
+Current Card: 2
+Current Weather: Partly Clear
+
+  Draw Card
+  Roll For Weather
+  Resources Phase
+> Deploy Non Panzer Div Reinforcements
+  Allied Advances Phase
+  Action Phase
+
+Press ENTER to perform next action
+Press G to see game summary
+
+=========================================
+NORMANDY SOLITAIRE! D-Day to Falaise 1944
+=========================================
+
+List of Drawn Cards: (1, 2)
+Cards Drawn: 2
+Cards Remaining: 46
+Cards Remaining in Deck: 22
+
+Current Card: 2
+Current Weather: Partly Clear
+
+  Draw Card
+  Roll For Weather
+  Resources Phase
+  Deploy Non Panzer Div Reinforcements
+> Allied Advances Phase
+  Action Phase
+
+Press ENTER to perform next action
+Press G to see game summary
+
+
+========================================
+ALLIED ADVANCES PHASE
+========================================
+
+
+D-DAY LANDINGS SECOND WAVE
+==========================
+
+
+ALLIED ATTACKS
+==============
+
+
+
+US 1st ARMY ADVANCING FROM UTAH-OMAHA BEACH
+===========================================
+
+GERMAN DEFENSE: CARENTAN
+TERRAIN: 2
+Nebelwerfer: 1
+TOTAL DEFENSE: 3
+
+US 1st ARMY
+TARGET: CARENTAN
+ATTACK STRENGTH: 1
+DEFENSE STRENGTH: 3
+
+DIE ROLL: 6
+ATTACK TOTAL: 7
+
+
+GERMAN LOSSES
+=============
+>>>> GlobalGameState.german_casualty_strategy= Strategy.AI
+ELIMINATED: Nebelwerfer
+ALLIED VICTORY
+<<SPACE CLEARED>>
+>>>>>>> AFTER ALLIED ADVANCE -> ALLIED ARMY LOCATION:US 1st ARMY IS AT CARENTAN
+US 1st ARMY -> CARENTAN
+
+
+
+BRITISH XXX CORPS ADVANCING FROM GOLD-JUNO-SWORD BEACH (BRITISH TRACK)
+======================================================================
+
+GERMAN DEFENSE: BAYEUX
+TERRAIN: 1
+21st Panzer: 2
+Nebelwerfer: 1
+Nebelwerfer: 1
+Flak 88: 2
+TOTAL DEFENSE: 7
+
+BRITISH XXX CORPS
+TARGET: BAYEUX
+ATTACK STRENGTH: 0
+DEFENSE STRENGTH: 7
+
+DIE ROLL: 6
+ATTACK TOTAL: 6
+
+HITLER APPROVAL -1 → 4
+
+GERMAN LOSSES
+=============
+>>>> GlobalGameState.german_casualty_strategy= Strategy.AI
+ELIMINATED: Nebelwerfer
+ALLIED VICTORY
+GERMANS RETREAT FROM BAYEUX TO TILLY
+>>>>>>> AFTER ALLIED ADVANCE -> ALLIED ARMY LOCATION:BRITISH XXX CORPS IS AT BAYEUX
+BRITISH XXX CORPS -> BAYEUX
+
+
+
+BRITISH I CORPS ADVANCING FROM GOLD-JUNO-SWORD BEACH (CANADIAN TRACK)
+=====================================================================
+
+GERMAN DEFENSE: LEBISEY WOOD
+TERRAIN: 2
+Nebelwerfer: 1
+Nebelwerfer: 1
+Flak 88: 2
+TOTAL DEFENSE: 6
+
+BRITISH I CORPS
+TARGET: LEBISEY WOOD
+ATTACK STRENGTH: 0
+DEFENSE STRENGTH: 6
+
+DIE ROLL: 5
+ATTACK TOTAL: 5
+
+
+GERMAN LOSSES
+=============
+>>>> GlobalGameState.german_casualty_strategy= Strategy.AI
+REDUCED: Flak 88 now 1
+ALLIED DEFEAT
+
+
+
+=========================================
+NORMANDY SOLITAIRE! D-Day to Falaise 1944
+=========================================
+
+List of Drawn Cards: (1, 2)
+Cards Drawn: 2
+Cards Remaining: 46
+Cards Remaining in Deck: 22
+
+Current Card: 2
+Current Weather: Partly Clear
+
+  Draw Card
+  Roll For Weather
+  Resources Phase
+  Deploy Non Panzer Div Reinforcements
+  Allied Advances Phase
+> Action Phase
+
+Press ENTER to perform next action
+Press G to see game summary
+ACTIONS AVAILABLE: 3
+MOVE PANZER DIVISION FROM STRATEGIC RESERVE
+
+SELECT PANZER DIVISION
+
+1. Panzer Lehr (2)
+2. 12th SS Panzer (2)
+
+0. Return to main menu
+
+
+SELECTED: Panzer Lehr
+
+HITLER APPROVAL CHECK
+ROLL: 6
+HITLER APPROVAL: 4
+RESULT: FAILED
+MOVE PANZER DIVISION FROM STRATEGIC RESERVE
+
+SELECT PANZER DIVISION
+
+1. Panzer Lehr (2)
+2. 12th SS Panzer (2)
+
+0. Return to main menu
+
+
+SELECTED: 12th SS Panzer
+
+HITLER APPROVAL CHECK
+ROLL: 2
+HITLER APPROVAL: 4
+RESULT: PASSED
+
+12th SS Panzer moved to ST. MALO
+MOVE PANZER DIVISION FROM STRATEGIC RESERVE
+
+SELECT PANZER DIVISION
+
+1. Panzer Lehr (2)
+
+0. Return to main menu
+
+
+SELECTED: Panzer Lehr
+
+HITLER APPROVAL CHECK
+ROLL: 5
+HITLER APPROVAL: 4
+RESULT: FAILED
+
+=========================================
+NORMANDY SOLITAIRE! D-Day to Falaise 1944
+=========================================
+
+List of Drawn Cards: (1, 2)
+Cards Drawn: 2
+Cards Remaining: 46
+Cards Remaining in Deck: 22
+
+Current Card: 2
+Current Weather: Partly Clear
+
+> Draw Card
+  Roll For Weather
+  Resources Phase
+  Deploy Non Panzer Div Reinforcements
+  Allied Advances Phase
+  Action Phase
+
+Press ENTER to perform next action
+Press G to see game summary
+Press S to save game
+Press L to load saved game
+Press Q to quit
+
+
+
+========================================
+DREW CARD 9
+========================================
+
+============================================================
+CARD #9 - Michael Wittmann
+============================================================
+
+RESOURCES
+  +1 Reinforcement 101st Tiger Battalion
+  +2 Resource Gain Hitler Approval
+  +1 Resource Gain Supply
+
+AIR POWER
+  N/A
+
+ALLIED ADVANCES
+  None
+
+ACTIONS
+  Actions Available: 3
+  No Modifiers
+
+
+=========================================
+NORMANDY SOLITAIRE! D-Day to Falaise 1944
+=========================================
+
+List of Drawn Cards: (1, 2, 9)
+Cards Drawn: 3
+Cards Remaining: 45
+Cards Remaining in Deck: 21
+
+Current Card: 9
+
+  Draw Card
+> Roll For Weather
+  Resources Phase
+  Deploy Non Panzer Div Reinforcements
+  Allied Advances Phase
+  Action Phase
+
+Press ENTER to perform next action
+Press G to see game summary
+
+
+========================================
+WEATHER ROLL
+========================================
+
+ROLL: 5
+RESULT: Clear
+
+
+=========================================
+NORMANDY SOLITAIRE! D-Day to Falaise 1944
+=========================================
+
+List of Drawn Cards: (1, 2, 9)
+Cards Drawn: 3
+Cards Remaining: 45
+Cards Remaining in Deck: 21
+
+Current Card: 9
+Current Weather: Clear
+
+  Draw Card
+  Roll For Weather
+> Resources Phase
+  Deploy Non Panzer Div Reinforcements
+  Allied Advances Phase
+  Action Phase
+
+Press ENTER to perform next action
+Press G to see game summary
+
+EVENT
+
+RESOURCE ADJUSTMENTS
+Hitler Approval: GAIN 2 (4 -> 6)
+Supply: GAIN 1 (4 -> 5)
+RESOURCE PHASE - weather is Clear
+
+
+========================================
+ATTACK STRENGTHS (ALLIED ARMIES)
+========================================
+	=>NO ARMIES ATTACKING
+
+
+========================================
+DEFENSE STRENGTHS (ALLIED ARMIES)
+========================================
+
+DEFENSE VALUES
+US 1st ARMY -> DEFENSE STRENGTH: 5 (+2 Terrain, +3 Army) ; AIR SUPPORT=False
+
+DEFENSE VALUES
+BRITISH XXX CORPS -> DEFENSE STRENGTH: 3 (+1 Terrain, +2 Army) ; AIR SUPPORT=False
+
+DEFENSE VALUES
+BRITISH I CORPS -> DEFENSE STRENGTH: 4 (+2 Terrain, +2 Army) ; AIR SUPPORT=False
+
+
+========================================
+REINFORCEMENTS
+========================================
+
+101st Tiger Battalion -> STRATEGIC RESERVE
+
+
+
+=========================================
+NORMANDY SOLITAIRE! D-Day to Falaise 1944
+=========================================
+
+List of Drawn Cards: (1, 2, 9)
+Cards Drawn: 3
+Cards Remaining: 45
+Cards Remaining in Deck: 21
+
+Current Card: 9
+Current Weather: Clear
+
+  Draw Card
+  Roll For Weather
+  Resources Phase
+> Deploy Non Panzer Div Reinforcements
+  Allied Advances Phase
+  Action Phase
+
+Press ENTER to perform next action
+Press G to see game summary
+MOVE OTHER UNIT FROM STRATEGIC RESERVE
+
+SELECT UNIT
+
+1. 101st Tiger Battalion (3)
+
+0. Return to main menu
+
+
+SELECTED: 101st Tiger Battalion
+
+101st Tiger Battalion moved to VIRE
+
+=========================================
+NORMANDY SOLITAIRE! D-Day to Falaise 1944
+=========================================
+
+List of Drawn Cards: (1, 2, 9)
+Cards Drawn: 3
+Cards Remaining: 45
+Cards Remaining in Deck: 21
+
+Current Card: 9
+Current Weather: Clear
+
+  Draw Card
+  Roll For Weather
+  Resources Phase
+  Deploy Non Panzer Div Reinforcements
+> Allied Advances Phase
+  Action Phase
+
+Press ENTER to perform next action
+Press G to see game summary
+
+
+========================================
+ALLIED ADVANCES PHASE
+========================================
+
+NO ATTACKING ARMIES
+
+
+=========================================
+NORMANDY SOLITAIRE! D-Day to Falaise 1944
+=========================================
+
+List of Drawn Cards: (1, 2, 9)
+Cards Drawn: 3
+Cards Remaining: 45
+Cards Remaining in Deck: 21
+
+Current Card: 9
+Current Weather: Clear
+
+  Draw Card
+  Roll For Weather
+  Resources Phase
+  Deploy Non Panzer Div Reinforcements
+  Allied Advances Phase
+> Action Phase
+
+Press ENTER to perform next action
+Press G to see game summary
+ACTIONS AVAILABLE: 3
+MOVE PANZER DIVISION FROM STRATEGIC RESERVE
+
+SELECT PANZER DIVISION
+
+1. Panzer Lehr (2)
+
+0. Return to main menu
+
+
+SELECTED: Panzer Lehr
+
+HITLER APPROVAL CHECK
+ROLL: 4
+HITLER APPROVAL: 6
+RESULT: PASSED
+
+Panzer Lehr moved to LORIENT
+MOVE UNIT ONE SPACE
+
+
+SELECT DESTINATION FOR Nebelwerfer
+
+
+Nebelwerfer MOVED FROM TILLY TO VILLERS-BOCAGE
+ACTIONS REMAINING: 1
+
+SELECT ATTACKING UNITS (number of unit to toggle, X=Participating)
+Press ENTER to confirm
+
+COUNTER-ATTACK: US 1st ARMY at CARENTAN
+Final attack strength: 0 vs defense: 5
+
+RESOLVING COUNTER-ATTACK
+Attack Strength: 0
+Defense Strength: 5
+
+Die Roll: 5
+Modified Total: 0 + 5 = 5
+Result: GERMAN LOSS
+
+
+POST-COMBAT
+===========
+GERMAN DEFEAT
+NO GERMAN UNITS ENGAGED - NO LOSSES APPLIED
+
+=========================================
+NORMANDY SOLITAIRE! D-Day to Falaise 1944
+=========================================
+
+List of Drawn Cards: (1, 2, 9)
+Cards Drawn: 3
+Cards Remaining: 45
+Cards Remaining in Deck: 21
+
+Current Card: 9
+Current Weather: Clear
+
+> Draw Card
+  Roll For Weather
+  Resources Phase
+  Deploy Non Panzer Div Reinforcements
+  Allied Advances Phase
+  Action Phase
+
+Press ENTER to perform next action
+Press G to see game summary
+Press S to save game
+Press L to load saved game
+Press Q to quit
+
+
+
+========================================
+DREW CARD 5
+========================================
+
+============================================================
+CARD #5 - Panzer Meyer
+============================================================
+
+RESOURCES
+  +1 Reinforcement 2nd Panzer
+
+AIR POWER
+  +1 Jabos BRITISH I CORPS
+
+ALLIED ADVANCES
+  BRITISH I CORPS (2)
+  Meyer marker available for any combat involving 12th SS Panzer Division
+
+ACTIONS
+  Actions Available: 2
+  +1 Meyer
+  -1 Defense Strength BRITISH XXX CORPS
+
+
+=========================================
+NORMANDY SOLITAIRE! D-Day to Falaise 1944
+=========================================
+
+List of Drawn Cards: (1, 2, 9, 5)
+Cards Drawn: 4
+Cards Remaining: 44
+Cards Remaining in Deck: 20
+
+Current Card: 5
+
+  Draw Card
+> Roll For Weather
+  Resources Phase
+  Deploy Non Panzer Div Reinforcements
+  Allied Advances Phase
+  Action Phase
+
+Press ENTER to perform next action
+Press G to see game summary
+
+
+========================================
+WEATHER ROLL
+========================================
+
+ROLL: 1
+RESULT: Overcast
+
+
+=========================================
+NORMANDY SOLITAIRE! D-Day to Falaise 1944
+=========================================
+
+List of Drawn Cards: (1, 2, 9, 5)
+Cards Drawn: 4
+Cards Remaining: 44
+Cards Remaining in Deck: 20
+
+Current Card: 5
+Current Weather: Overcast
+
+  Draw Card
+  Roll For Weather
+> Resources Phase
+  Deploy Non Panzer Div Reinforcements
+  Allied Advances Phase
+  Action Phase
+
+Press ENTER to perform next action
+Press G to see game summary
+
+EVENT
+MEYER PLACED IN ST. MALO WITH 12th SS PANZER
+
+RESOURCE ADJUSTMENTS
+RESOURCE PHASE - weather is Overcast
+
+
+========================================
+ATTACK STRENGTHS (ALLIED ARMIES)
+========================================
+BRITISH I CORPS -> ATTACK STRENGTH: 0 () ; AIR SUPPORT=False
+
+
+========================================
+DEFENSE STRENGTHS (ALLIED ARMIES)
+========================================
+
+DEFENSE VALUES
+US 1st ARMY -> DEFENSE STRENGTH: 5 (+2 Terrain, +3 Army) ; AIR SUPPORT=False
+
+DEFENSE VALUES
+APPLY -1: Defense modifier
+BRITISH XXX CORPS -> DEFENSE STRENGTH: 2 (+1 Terrain, +2 Army, -1 Defense modifier) ; AIR SUPPORT=False
+
+DEFENSE VALUES
+BRITISH I CORPS -> DEFENSE STRENGTH: 4 (+2 Terrain, +2 Army) ; AIR SUPPORT=False
+
+
+========================================
+REINFORCEMENTS
+========================================
+
+2nd Panzer -> IN TRANSIT
+Meyer -> STRATEGIC RESERVE
+
+
+
+=========================================
+NORMANDY SOLITAIRE! D-Day to Falaise 1944
+=========================================
+
+List of Drawn Cards: (1, 2, 9, 5)
+Cards Drawn: 4
+Cards Remaining: 44
+Cards Remaining in Deck: 20
+
+Current Card: 5
+Current Weather: Overcast
+
+  Draw Card
+  Roll For Weather
+  Resources Phase
+> Deploy Non Panzer Div Reinforcements
+  Allied Advances Phase
+  Action Phase
+
+Press ENTER to perform next action
+Press G to see game summary
+
+=========================================
+NORMANDY SOLITAIRE! D-Day to Falaise 1944
+=========================================
+
+List of Drawn Cards: (1, 2, 9, 5)
+Cards Drawn: 4
+Cards Remaining: 44
+Cards Remaining in Deck: 20
+
+Current Card: 5
+Current Weather: Overcast
+
+  Draw Card
+  Roll For Weather
+  Resources Phase
+  Deploy Non Panzer Div Reinforcements
+> Allied Advances Phase
+  Action Phase
+
+Press ENTER to perform next action
+Press G to see game summary
+
+
+========================================
+ALLIED ADVANCES PHASE
+========================================
+
+ADVANCING ARMIES
+ - BRITISH I CORPS
+
+ALLIED ATTACKS
+==============
+
+
+
+BRITISH I CORPS ADVANCING FROM GOLD-JUNO-SWORD BEACH (CANADIAN TRACK)
+=====================================================================
+
+GERMAN DEFENSE: LEBISEY WOOD
+TERRAIN: 2
+Nebelwerfer: 1
+Nebelwerfer: 1
+Flak 88: 1
+TOTAL DEFENSE: 5
+
+BRITISH I CORPS
+TARGET: LEBISEY WOOD
+ATTACK STRENGTH: 0
+DEFENSE STRENGTH: 5
+
+DIE ROLL: 6
+ATTACK TOTAL: 6
+
+
+GERMAN LOSSES
+=============
+>>>> GlobalGameState.german_casualty_strategy= Strategy.AI
+ELIMINATED: Nebelwerfer
+ALLIED VICTORY
+GERMANS RETREAT FROM LEBISEY WOOD TO CAEN
+>>>>>>> AFTER ALLIED ADVANCE -> ALLIED ARMY LOCATION:BRITISH I CORPS IS AT LEBISEY WOOD
+BRITISH I CORPS -> LEBISEY WOOD
+
+
+
+=========================================
+NORMANDY SOLITAIRE! D-Day to Falaise 1944
+=========================================
+
+List of Drawn Cards: (1, 2, 9, 5)
+Cards Drawn: 4
+Cards Remaining: 44
+Cards Remaining in Deck: 20
+
+Current Card: 5
+Current Weather: Overcast
+
+  Draw Card
+  Roll For Weather
+  Resources Phase
+  Deploy Non Panzer Div Reinforcements
+  Allied Advances Phase
+> Action Phase
+
+Press ENTER to perform next action
+Press G to see game summary
+IN TRANSIT CHECK
+================
+2nd Panzer
+ROLL: 3
+DRM: +0
+MODIFIED ROLL: 3
+CHECK: 3 <= Transport 5
+	=>2nd Panzer MOVED TO STRATEGIC RESERVE
+ACTIONS AVAILABLE: 2
+
+SELECT ATTACKING UNITS (number of unit to toggle, X=Participating)
+Press ENTER to confirm
+
+1. [X] Nebelwerfer (1)
+COUNTER-ATTACK: BRITISH I CORPS at LEBISEY WOOD
+Final attack strength: 1 vs defense: 4
+
+RESOLVING COUNTER-ATTACK
+Attack Strength: 1
+Defense Strength: 4
+
+Die Roll: 4
+Modified Total: 1 + 4 = 5
+Result: GERMAN WIN
+
+
+POST-COMBAT
+===========
+GERMAN VICTORY
+BRITISH I CORPS RETREATS TO GOLD-JUNO-SWORD BEACH (CANADIAN TRACK)
+GERMANS ADVANCE INTO LEBISEY WOOD
+HITLER APPROVAL ALREADY AT MAX (6)
+MOVE PANZER DIVISION FROM STRATEGIC RESERVE
+
+SELECT PANZER DIVISION
+
+1. 2nd Panzer (2)
+
+0. Return to main menu
+
+
+SELECTED: 2nd Panzer
+
+HITLER APPROVAL CHECK
+ROLL: 3
+HITLER APPROVAL: 6
+RESULT: PASSED
+
+2nd Panzer moved to FLERS
+
+=========================================
+NORMANDY SOLITAIRE! D-Day to Falaise 1944
+=========================================
+
+List of Drawn Cards: (1, 2, 9, 5)
+Cards Drawn: 4
+Cards Remaining: 44
+Cards Remaining in Deck: 20
+
+Current Card: 5
+Current Weather: Overcast
+
+> Draw Card
+  Roll For Weather
+  Resources Phase
+  Deploy Non Panzer Div Reinforcements
+  Allied Advances Phase
+  Action Phase
+
+Press ENTER to perform next action
+Press G to see game summary
+Press S to save game
+Press L to load saved game
+Press Q to quit
+
+
+
+========================================
+DREW CARD 8
+========================================
+
+============================================================
+CARD #8 - Rommel
+============================================================
+
+RESOURCES
+  +1 Reinforcement 1st SS Panzer
+
+AIR POWER
+  +2 Jabos BRITISH XXX CORPS
+
+ALLIED ADVANCES
+  BRITISH XXX CORPS (2)
+
+ACTIONS
+  Actions Available: 3
+  +2 Rommel
+
+
+=========================================
+NORMANDY SOLITAIRE! D-Day to Falaise 1944
+=========================================
+
+List of Drawn Cards: (1, 2, 9, 5, 8)
+Cards Drawn: 5
+Cards Remaining: 43
+Cards Remaining in Deck: 19
+
+Current Card: 8
+
+  Draw Card
+> Roll For Weather
+  Resources Phase
+  Deploy Non Panzer Div Reinforcements
+  Allied Advances Phase
+  Action Phase
+
+Press ENTER to perform next action
+Press G to see game summary
+
+
+========================================
+WEATHER ROLL
+========================================
+
+ROLL: 3
+RESULT: Partly Clear
+
+
+=========================================
+NORMANDY SOLITAIRE! D-Day to Falaise 1944
+=========================================
+
+List of Drawn Cards: (1, 2, 9, 5, 8)
+Cards Drawn: 5
+Cards Remaining: 43
+Cards Remaining in Deck: 19
+
+Current Card: 8
+Current Weather: Partly Clear
+
+  Draw Card
+  Roll For Weather
+> Resources Phase
+  Deploy Non Panzer Div Reinforcements
+  Allied Advances Phase
+  Action Phase
+
+Press ENTER to perform next action
+Press G to see game summary
+
+EVENT
+
+RESOURCE ADJUSTMENTS
+RESOURCE PHASE - weather is Partly Clear
+
+
+========================================
+ATTACK STRENGTHS (ALLIED ARMIES)
+========================================
+BRITISH XXX CORPS -> ATTACK STRENGTH: 1 (+1 Jabo) ; AIR SUPPORT=True
+
+
+========================================
+DEFENSE STRENGTHS (ALLIED ARMIES)
+========================================
+
+DEFENSE VALUES
+US 1st ARMY -> DEFENSE STRENGTH: 5 (+2 Terrain, +3 Army) ; AIR SUPPORT=False
+
+DEFENSE VALUES
+BRITISH XXX CORPS -> DEFENSE STRENGTH: 4 (+1 Terrain, +2 Army, +1 Jabo) ; AIR SUPPORT=True
+
+DEFENSE VALUES
+BRITISH I CORPS -> DEFENSE STRENGTH: 4 (+2 Terrain, +2 Army) ; AIR SUPPORT=False
+
+
+========================================
+REINFORCEMENTS
+========================================
+
+1st SS Panzer -> IN TRANSIT
+Rommel -> STRATEGIC RESERVE
+
+
+
+=========================================
+NORMANDY SOLITAIRE! D-Day to Falaise 1944
+=========================================
+
+List of Drawn Cards: (1, 2, 9, 5, 8)
+Cards Drawn: 5
+Cards Remaining: 43
+Cards Remaining in Deck: 19
+
+Current Card: 8
+Current Weather: Partly Clear
+
+  Draw Card
+  Roll For Weather
+  Resources Phase
+> Deploy Non Panzer Div Reinforcements
+  Allied Advances Phase
+  Action Phase
+
+Press ENTER to perform next action
+Press G to see game summary
+MOVE OTHER UNIT FROM STRATEGIC RESERVE
+
+SELECT UNIT
+
+1. ROMMEL (2)
+
+0. Return to main menu
+
+
+SELECTED: ROMMEL
+
+ROMMEL moved to BREST
+
+=========================================
+NORMANDY SOLITAIRE! D-Day to Falaise 1944
+=========================================
+
+List of Drawn Cards: (1, 2, 9, 5, 8)
+Cards Drawn: 5
+Cards Remaining: 43
+Cards Remaining in Deck: 19
+
+Current Card: 8
+Current Weather: Partly Clear
+
+  Draw Card
+  Roll For Weather
+  Resources Phase
+  Deploy Non Panzer Div Reinforcements
+> Allied Advances Phase
+  Action Phase
+
+Press ENTER to perform next action
+Press G to see game summary
+
+
+========================================
+ALLIED ADVANCES PHASE
+========================================
+
+ADVANCING ARMIES
+ - BRITISH XXX CORPS
+
+ALLIED ATTACKS
+==============
+
+
+
+BRITISH XXX CORPS ADVANCING FROM BAYEUX
+=======================================
+
+GERMAN DEFENSE: TILLY
+TERRAIN: 2
+21st Panzer: 2
+Flak 88: 2
+TOTAL DEFENSE: 6
+
+BRITISH XXX CORPS
+TARGET: TILLY
+ATTACK STRENGTH: 1
+DEFENSE STRENGTH: 6
+
+DIE ROLL: 2
+ATTACK TOTAL: 3
+
+
+GERMAN LOSSES
+=============
+>>>> GlobalGameState.german_casualty_strategy= Strategy.AI
+REDUCED: 21st Panzer now 1
+ALLIED DEFEAT
+
+
+
+=========================================
+NORMANDY SOLITAIRE! D-Day to Falaise 1944
+=========================================
+
+List of Drawn Cards: (1, 2, 9, 5, 8)
+Cards Drawn: 5
+Cards Remaining: 43
+Cards Remaining in Deck: 19
+
+Current Card: 8
+Current Weather: Partly Clear
+
+  Draw Card
+  Roll For Weather
+  Resources Phase
+  Deploy Non Panzer Div Reinforcements
+  Allied Advances Phase
+> Action Phase
+
+Press ENTER to perform next action
+Press G to see game summary
+IN TRANSIT CHECK
+================
+1st SS Panzer
+ROLL: 5
+DRM: +0
+MODIFIED ROLL: 5
+CHECK: 5 <= Transport 5
+	=>1st SS Panzer MOVED TO STRATEGIC RESERVE
+ACTIONS AVAILABLE: 3
+MOVE PANZER DIVISION FROM STRATEGIC RESERVE
+
+SELECT PANZER DIVISION
+
+1. 1st SS Panzer (2)
+
+0. Return to main menu
+
+
+SELECTED: 1st SS Panzer
+
+HITLER APPROVAL CHECK
+ROLL: 1
+HITLER APPROVAL: 6
+RESULT: PASSED
+
+1st SS Panzer moved to CAEN
+MOVE PANZER DIVISION TO STRATEGIC RESERVE
+
+SELECT PANZER DIVISION
+
+1. 2nd Panzer (2) - FLERS
+2. 21st Panzer (1) - TILLY
+3. 1st SS Panzer (2) - CAEN
+4. 12th SS Panzer (2) - ST. MALO
+5. Panzer Lehr (2) - LORIENT
+
+0. Return to main menu
+
+
+SELECTED: 2nd Panzer
+
+TRANSPORT CHECK
+ROLL: 2
+TRANSPORT LEVEL: 5
+RESULT: PASSED
+
+2nd Panzer moved to Strategic Reserve
+MOVE PANZER DIVISION FROM STRATEGIC RESERVE
+
+SELECT PANZER DIVISION
+
+1. 2nd Panzer (2)
+
+0. Return to main menu
+
+
+SELECTED: 2nd Panzer
+
+HITLER APPROVAL CHECK
+ROLL: 3
+HITLER APPROVAL: 6
+RESULT: PASSED
+
+2nd Panzer moved to LORIENT
+
+=========================================
+NORMANDY SOLITAIRE! D-Day to Falaise 1944
+=========================================
+
+List of Drawn Cards: (1, 2, 9, 5, 8)
+Cards Drawn: 5
+Cards Remaining: 43
+Cards Remaining in Deck: 19
+
+Current Card: 8
+Current Weather: Partly Clear
+
+> Draw Card
+  Roll For Weather
+  Resources Phase
+  Deploy Non Panzer Div Reinforcements
+  Allied Advances Phase
+  Action Phase
+
+Press ENTER to perform next action
+Press G to see game summary
+Press S to save game
+Press L to load saved game
+Press Q to quit
+
+
+
+========================================
+DREW CARD 12
+========================================
+
+============================================================
+CARD #12 - Operation Bagration
+============================================================
+
+RESOURCES
+  -2 Resource Loss Hitler Approval
+  -1 Resource Loss Supply
+  -1 DRM Transport
+
+AIR POWER
+  +1 Jabos US 1st ARMY
+
+ALLIED ADVANCES
+  US 1st ARMY (3)
+
+ACTIONS
+  Actions Available: 1
+  No Modifiers
+
+
+=========================================
+NORMANDY SOLITAIRE! D-Day to Falaise 1944
+=========================================
+
+List of Drawn Cards: (1, 2, 9, 5, 8, 12)
+Cards Drawn: 6
+Cards Remaining: 42
+Cards Remaining in Deck: 18
+
+Current Card: 12
+
+  Draw Card
+> Roll For Weather
+  Resources Phase
+  Deploy Non Panzer Div Reinforcements
+  Allied Advances Phase
+  Action Phase
+
+Press ENTER to perform next action
+Press G to see game summary
+
+
+========================================
+WEATHER ROLL
+========================================
+
+ROLL: 1
+RESULT: Overcast
+
+
+=========================================
+NORMANDY SOLITAIRE! D-Day to Falaise 1944
+=========================================
+
+List of Drawn Cards: (1, 2, 9, 5, 8, 12)
+Cards Drawn: 6
+Cards Remaining: 42
+Cards Remaining in Deck: 18
+
+Current Card: 12
+Current Weather: Overcast
+
+  Draw Card
+  Roll For Weather
+> Resources Phase
+  Deploy Non Panzer Div Reinforcements
+  Allied Advances Phase
+  Action Phase
+
+Press ENTER to perform next action
+Press G to see game summary
+
+EVENT
+
+RESOURCE ADJUSTMENTS
+Hitler Approval: LOSE 2 (6 -> 4)
+Supply: LOSE 1 (5 -> 4)
+RESOURCE PHASE - weather is Overcast
+
+
+========================================
+ATTACK STRENGTHS (ALLIED ARMIES)
+========================================
+US 1st ARMY -> ATTACK STRENGTH: 0 () ; AIR SUPPORT=False
+
+
+========================================
+DEFENSE STRENGTHS (ALLIED ARMIES)
+========================================
+
+DEFENSE VALUES
+US 1st ARMY -> DEFENSE STRENGTH: 5 (+2 Terrain, +3 Army) ; AIR SUPPORT=False
+
+DEFENSE VALUES
+BRITISH XXX CORPS -> DEFENSE STRENGTH: 3 (+1 Terrain, +2 Army) ; AIR SUPPORT=False
+
+DEFENSE VALUES
+BRITISH I CORPS -> DEFENSE STRENGTH: 4 (+2 Terrain, +2 Army) ; AIR SUPPORT=False
+
+
+========================================
+REINFORCEMENTS
+========================================
+
+NONE
+
+
+=========================================
+NORMANDY SOLITAIRE! D-Day to Falaise 1944
+=========================================
+
+List of Drawn Cards: (1, 2, 9, 5, 8, 12)
+Cards Drawn: 6
+Cards Remaining: 42
+Cards Remaining in Deck: 18
+
+Current Card: 12
+Current Weather: Overcast
+
+  Draw Card
+  Roll For Weather
+  Resources Phase
+> Deploy Non Panzer Div Reinforcements
+  Allied Advances Phase
+  Action Phase
+
+Press ENTER to perform next action
+Press G to see game summary
+
+=========================================
+NORMANDY SOLITAIRE! D-Day to Falaise 1944
+=========================================
+
+List of Drawn Cards: (1, 2, 9, 5, 8, 12)
+Cards Drawn: 6
+Cards Remaining: 42
+Cards Remaining in Deck: 18
+
+Current Card: 12
+Current Weather: Overcast
+
+  Draw Card
+  Roll For Weather
+  Resources Phase
+  Deploy Non Panzer Div Reinforcements
+> Allied Advances Phase
+  Action Phase
+
+Press ENTER to perform next action
+Press G to see game summary
+
+
+========================================
+ALLIED ADVANCES PHASE
+========================================
+
+ADVANCING ARMIES
+ - US 1st ARMY
+
+ALLIED ATTACKS
+==============
+
+
+
+US 1st ARMY ADVANCING FROM CARENTAN
+===================================
+
+GERMAN DEFENSE: VALOGNES
+TERRAIN: 2
+TOTAL DEFENSE: 2
+
+US 1st ARMY
+TARGET: VALOGNES
+ATTACK STRENGTH: 0
+DEFENSE STRENGTH: 2
+
+DIE ROLL: 4
+ATTACK TOTAL: 4
+
+NO UNITS IN SPACE - NO LOSSES
+ALLIED VICTORY
+<<SPACE CLEARED>>
+>>>>>>> AFTER ALLIED ADVANCE -> ALLIED ARMY LOCATION:US 1st ARMY IS AT VALOGNES
+US 1st ARMY -> VALOGNES
+
+
+
+=========================================
+NORMANDY SOLITAIRE! D-Day to Falaise 1944
+=========================================
+
+List of Drawn Cards: (1, 2, 9, 5, 8, 12)
+Cards Drawn: 6
+Cards Remaining: 42
+Cards Remaining in Deck: 18
+
+Current Card: 12
+Current Weather: Overcast
+
+  Draw Card
+  Roll For Weather
+  Resources Phase
+  Deploy Non Panzer Div Reinforcements
+  Allied Advances Phase
+> Action Phase
+
+Press ENTER to perform next action
+Press G to see game summary
+ACTIONS AVAILABLE: 1
+MOVE UNIT ONE SPACE
+
+
+SELECT DESTINATION FOR Nebelwerfer
+
+
+Nebelwerfer MOVED FROM VILLERS-BOCAGE TO TILLY
+ACTIONS REMAINING: 0
+
+=========================================
+NORMANDY SOLITAIRE! D-Day to Falaise 1944
+=========================================
+
+List of Drawn Cards: (1, 2, 9, 5, 8, 12)
+Cards Drawn: 6
+Cards Remaining: 42
+Cards Remaining in Deck: 18
+
+Current Card: 12
+Current Weather: Overcast
+
+> Draw Card
+  Roll For Weather
+  Resources Phase
+  Deploy Non Panzer Div Reinforcements
+  Allied Advances Phase
+  Action Phase
+
+Press ENTER to perform next action
+Press G to see game summary
+Press S to save game
+Press L to load saved game
+Press Q to quit
+
+
+
+========================================
+DREW CARD 14
+========================================
+
+============================================================
+CARD #14 - Operation Epsom
+============================================================
+
+RESOURCES
+  +1 Reinforcement 9th SS Panzer
+  +1 DRM Transport
+
+AIR POWER
+  +1 Jabos BRITISH XXX CORPS
+  +1 Jabos BRITISH I CORPS
+  Carpet Bombing
+
+ALLIED ADVANCES
+  BRITISH XXX CORPS (2)
+  BRITISH I CORPS (2)
+
+ACTIONS
+  Actions Available: 4
+  +1 Attack Strength BRITISH XXX CORPS
+  +1 Attack Strength BRITISH I CORPS
+  +2 Montgomery BRITISH XXX CORPS
+
+
+=========================================
+NORMANDY SOLITAIRE! D-Day to Falaise 1944
+=========================================
+
+List of Drawn Cards: (1, 2, 9, 5, 8, 12, 14)
+Cards Drawn: 7
+Cards Remaining: 41
+Cards Remaining in Deck: 17
+
+Current Card: 14
+
+  Draw Card
+> Roll For Weather
+  Resources Phase
+  Deploy Non Panzer Div Reinforcements
+  Allied Advances Phase
+  Action Phase
+
+Press ENTER to perform next action
+Press G to see game summary
+
+
+========================================
+WEATHER ROLL
+========================================
+
+ROLL: 1
+RESULT: Overcast
+
+
+=========================================
+NORMANDY SOLITAIRE! D-Day to Falaise 1944
+=========================================
+
+List of Drawn Cards: (1, 2, 9, 5, 8, 12, 14)
+Cards Drawn: 7
+Cards Remaining: 41
+Cards Remaining in Deck: 17
+
+Current Card: 14
+Current Weather: Overcast
+
+  Draw Card
+  Roll For Weather
+> Resources Phase
+  Deploy Non Panzer Div Reinforcements
+  Allied Advances Phase
+  Action Phase
+
+Press ENTER to perform next action
+Press G to see game summary
+
+EVENT
+
+RESOURCE ADJUSTMENTS
+RESOURCE PHASE - weather is Overcast
+
+
+========================================
+ATTACK STRENGTHS (ALLIED ARMIES)
+========================================
+BRITISH XXX CORPS -> ATTACK STRENGTH: 3 (+1 Card modifier, +2 Montgomery) ; AIR SUPPORT=False
+BRITISH I CORPS -> ATTACK STRENGTH: 1 (+1 Card modifier) ; AIR SUPPORT=False
+
+
+========================================
+DEFENSE STRENGTHS (ALLIED ARMIES)
+========================================
+
+DEFENSE VALUES
+US 1st ARMY -> DEFENSE STRENGTH: 5 (+2 Terrain, +3 Army) ; AIR SUPPORT=False
+
+DEFENSE VALUES
+APPLY +2: Montgomery
+BRITISH XXX CORPS -> DEFENSE STRENGTH: 5 (+1 Terrain, +2 Army, +2 Montgomery) ; AIR SUPPORT=False
+
+DEFENSE VALUES
+BRITISH I CORPS -> DEFENSE STRENGTH: 4 (+2 Terrain, +2 Army) ; AIR SUPPORT=False
+
+
+========================================
+REINFORCEMENTS
+========================================
+
+9th SS Panzer -> IN TRANSIT
+
+
+
+=========================================
+NORMANDY SOLITAIRE! D-Day to Falaise 1944
+=========================================
+
+List of Drawn Cards: (1, 2, 9, 5, 8, 12, 14)
+Cards Drawn: 7
+Cards Remaining: 41
+Cards Remaining in Deck: 17
+
+Current Card: 14
+Current Weather: Overcast
+
+  Draw Card
+  Roll For Weather
+  Resources Phase
+> Deploy Non Panzer Div Reinforcements
+  Allied Advances Phase
+  Action Phase
+
+Press ENTER to perform next action
+Press G to see game summary
+
+=========================================
+NORMANDY SOLITAIRE! D-Day to Falaise 1944
+=========================================
+
+List of Drawn Cards: (1, 2, 9, 5, 8, 12, 14)
+Cards Drawn: 7
+Cards Remaining: 41
+Cards Remaining in Deck: 17
+
+Current Card: 14
+Current Weather: Overcast
+
+  Draw Card
+  Roll For Weather
+  Resources Phase
+  Deploy Non Panzer Div Reinforcements
+> Allied Advances Phase
+  Action Phase
+
+Press ENTER to perform next action
+Press G to see game summary
+
+
+========================================
+ALLIED ADVANCES PHASE
+========================================
+
+ADVANCING ARMIES
+ - BRITISH XXX CORPS
+ - BRITISH I CORPS
+
+ALLIED ATTACKS
+==============
+
+
+
+BRITISH XXX CORPS ADVANCING FROM BAYEUX
+=======================================
+
+GERMAN DEFENSE: TILLY
+TERRAIN: 2
+21st Panzer: 1
+Flak 88: 2
+Nebelwerfer: 1
+TOTAL DEFENSE: 6
+
+BRITISH XXX CORPS
+TARGET: TILLY
+ATTACK STRENGTH: 3
+DEFENSE STRENGTH: 6
+
+DIE ROLL: 5
+ATTACK TOTAL: 8
+
+HITLER APPROVAL -1 → 3
+
+GERMAN LOSSES
+=============
+>>>> GlobalGameState.german_casualty_strategy= Strategy.AI
+ELIMINATED: Nebelwerfer
+ALLIED VICTORY
+GERMANS RETREAT FROM TILLY TO VILLERS-BOCAGE
+>>>>>>> AFTER ALLIED ADVANCE -> ALLIED ARMY LOCATION:BRITISH XXX CORPS IS AT TILLY
+BRITISH XXX CORPS -> TILLY
+
+
+
+BRITISH I CORPS ADVANCING FROM GOLD-JUNO-SWORD BEACH (CANADIAN TRACK)
+=====================================================================
+
+GERMAN DEFENSE: LEBISEY WOOD
+TERRAIN: 2
+Nebelwerfer: 1
+TOTAL DEFENSE: 3
+
+BRITISH I CORPS
+TARGET: LEBISEY WOOD
+ATTACK STRENGTH: 1
+DEFENSE STRENGTH: 3
+
+DIE ROLL: 1
+ATTACK TOTAL: 2
+
+
+GERMAN LOSSES
+=============
+>>>> GlobalGameState.german_casualty_strategy= Strategy.AI
+ELIMINATED: Nebelwerfer
+ALLIED DEFEAT (UNMODIFIED 1)
+
+
+
+=========================================
+NORMANDY SOLITAIRE! D-Day to Falaise 1944
+=========================================
+
+List of Drawn Cards: (1, 2, 9, 5, 8, 12, 14)
+Cards Drawn: 7
+Cards Remaining: 41
+Cards Remaining in Deck: 17
+
+Current Card: 14
+Current Weather: Overcast
+
+  Draw Card
+  Roll For Weather
+  Resources Phase
+  Deploy Non Panzer Div Reinforcements
+  Allied Advances Phase
+> Action Phase
+
+Press ENTER to perform next action
+Press G to see game summary
+IN TRANSIT CHECK
+================
+9th SS Panzer
+ROLL: 5
+DRM: +1
+MODIFIED ROLL: 6
+CHECK: 6 <= Transport 5
+	=>9th SS Panzer REMAINS IN TRANSIT
+ACTIONS AVAILABLE: 4
+PLACE / UPGRADE FORTIFIED VILLAGES
+
+ST. MALO FORTIFIED VILLAGES +1
+
+ACTIONS USED: 3
+ACTIONS REMAINING: 1
+RESERVE ACTIONS USED: 0
+RESERVE ACTIONS REMAINING: 0
+
+SELECT ATTACKING UNITS (number of unit to toggle, X=Participating)
+Press ENTER to confirm
+
+COUNTER-ATTACK: US 1st ARMY at VALOGNES
+Final attack strength: 0 vs defense: 5
+
+RESOLVING COUNTER-ATTACK
+Attack Strength: 0
+Defense Strength: 5
+
+Die Roll: 5
+Modified Total: 0 + 5 = 5
+Result: GERMAN LOSS
+
+
+POST-COMBAT
+===========
+GERMAN DEFEAT
+NO GERMAN UNITS ENGAGED - NO LOSSES APPLIED
+
+=========================================
+NORMANDY SOLITAIRE! D-Day to Falaise 1944
+=========================================
+
+List of Drawn Cards: (1, 2, 9, 5, 8, 12, 14)
+Cards Drawn: 7
+Cards Remaining: 41
+Cards Remaining in Deck: 17
+
+Current Card: 14
+Current Weather: Overcast
+
+> Draw Card
+  Roll For Weather
+  Resources Phase
+  Deploy Non Panzer Div Reinforcements
+  Allied Advances Phase
+  Action Phase
+
+Press ENTER to perform next action
+Press G to see game summary
+Press S to save game
+Press L to load saved game
+Press Q to quit
+
+
+
+========================================
+DREW CARD 16
+========================================
+
+============================================================
+CARD #16 - Battle of the Bocage
+============================================================
+
+RESOURCES
+  +1 Reinforcement 116th Panzer
+  -1 Resource Loss Transport
+  -1 DRM Transport
+
+AIR POWER
+  +1 Jabos US 1st ARMY
+
+ALLIED ADVANCES
+  US 1st ARMY (3)
+
+ACTIONS
+  Actions Available: 2
+  +1 Attack Strength US 1st ARMY
+
+
+=========================================
+NORMANDY SOLITAIRE! D-Day to Falaise 1944
+=========================================
+
+List of Drawn Cards: (1, 2, 9, 5, 8, 12, 14, 16)
+Cards Drawn: 8
+Cards Remaining: 40
+Cards Remaining in Deck: 16
+
+Current Card: 16
+
+  Draw Card
+> Roll For Weather
+  Resources Phase
+  Deploy Non Panzer Div Reinforcements
+  Allied Advances Phase
+  Action Phase
+
+Press ENTER to perform next action
+Press G to see game summary
+
+
+========================================
+WEATHER ROLL
+========================================
+
+ROLL: 6
+RESULT: Clear
+
+
+=========================================
+NORMANDY SOLITAIRE! D-Day to Falaise 1944
+=========================================
+
+List of Drawn Cards: (1, 2, 9, 5, 8, 12, 14, 16)
+Cards Drawn: 8
+Cards Remaining: 40
+Cards Remaining in Deck: 16
+
+Current Card: 16
+Current Weather: Clear
+
+  Draw Card
+  Roll For Weather
+> Resources Phase
+  Deploy Non Panzer Div Reinforcements
+  Allied Advances Phase
+  Action Phase
+
+Press ENTER to perform next action
+Press G to see game summary
+
+EVENT
+
+RESOURCE ADJUSTMENTS
+Transport: LOSE 1 (5 -> 4)
+RESOURCE PHASE - weather is Clear
+
+
+========================================
+ATTACK STRENGTHS (ALLIED ARMIES)
+========================================
+US 1st ARMY -> ATTACK STRENGTH: 2 (+1 Jabo, +1 Card modifier) ; AIR SUPPORT=True
+
+
+========================================
+DEFENSE STRENGTHS (ALLIED ARMIES)
+========================================
+
+DEFENSE VALUES
+US 1st ARMY -> DEFENSE STRENGTH: 6 (+2 Terrain, +3 Army, +1 Jabo) ; AIR SUPPORT=True
+
+DEFENSE VALUES
+BRITISH XXX CORPS -> DEFENSE STRENGTH: 4 (+2 Terrain, +2 Army) ; AIR SUPPORT=False
+
+DEFENSE VALUES
+BRITISH I CORPS -> DEFENSE STRENGTH: 4 (+2 Terrain, +2 Army) ; AIR SUPPORT=False
+
+
+========================================
+REINFORCEMENTS
+========================================
+
+116th Panzer -> IN TRANSIT
+
+
+
+=========================================
+NORMANDY SOLITAIRE! D-Day to Falaise 1944
+=========================================
+
+List of Drawn Cards: (1, 2, 9, 5, 8, 12, 14, 16)
+Cards Drawn: 8
+Cards Remaining: 40
+Cards Remaining in Deck: 16
+
+Current Card: 16
+Current Weather: Clear
+
+  Draw Card
+  Roll For Weather
+  Resources Phase
+> Deploy Non Panzer Div Reinforcements
+  Allied Advances Phase
+  Action Phase
+
+Press ENTER to perform next action
+Press G to see game summary
+
+=========================================
+NORMANDY SOLITAIRE! D-Day to Falaise 1944
+=========================================
+
+List of Drawn Cards: (1, 2, 9, 5, 8, 12, 14, 16)
+Cards Drawn: 8
+Cards Remaining: 40
+Cards Remaining in Deck: 16
+
+Current Card: 16
+Current Weather: Clear
+
+  Draw Card
+  Roll For Weather
+  Resources Phase
+  Deploy Non Panzer Div Reinforcements
+> Allied Advances Phase
+  Action Phase
+
+Press ENTER to perform next action
+Press G to see game summary
+
+
+========================================
+ALLIED ADVANCES PHASE
+========================================
+
+ADVANCING ARMIES
+ - US 1st ARMY
+
+ALLIED ATTACKS
+==============
+
+
+
+US 1st ARMY ADVANCING FROM VALOGNES
+===================================
+
+GERMAN DEFENSE: CHERBOURG
+TERRAIN: 1
+TOTAL DEFENSE: 1
+
+US 1st ARMY
+TARGET: CHERBOURG
+ATTACK STRENGTH: 2
+DEFENSE STRENGTH: 1
+
+DIE ROLL: 5
+ATTACK TOTAL: 7
+
+NO UNITS IN SPACE - NO LOSSES
+ALLIED VICTORY
+<<SPACE CLEARED>>
+>>>>>>> AFTER ALLIED ADVANCE -> ALLIED ARMY LOCATION:US 1st ARMY IS AT CHERBOURG
+US 1st ARMY -> CHERBOURG
+Hitler Approval: LOSE 1 (3 -> 2)
+
+
+
+=========================================
+NORMANDY SOLITAIRE! D-Day to Falaise 1944
+=========================================
+
+List of Drawn Cards: (1, 2, 9, 5, 8, 12, 14, 16)
+Cards Drawn: 8
+Cards Remaining: 40
+Cards Remaining in Deck: 16
+
+Current Card: 16
+Current Weather: Clear
+
+  Draw Card
+  Roll For Weather
+  Resources Phase
+  Deploy Non Panzer Div Reinforcements
+  Allied Advances Phase
+> Action Phase
+
+Press ENTER to perform next action
+Press G to see game summary
+IN TRANSIT CHECK
+================
+9th SS Panzer
+ROLL: 5
+DRM: -1
+MODIFIED ROLL: 4
+CHECK: 4 <= Transport 4
+	=>9th SS Panzer MOVED TO STRATEGIC RESERVE
+IN TRANSIT CHECK
+================
+116th Panzer
+ROLL: 3
+DRM: -1
+MODIFIED ROLL: 2
+CHECK: 2 <= Transport 4
+	=>116th Panzer MOVED TO STRATEGIC RESERVE
+ACTIONS AVAILABLE: 2
+
+SELECT ATTACKING UNITS (number of unit to toggle, X=Participating)
+Press ENTER to confirm
+
+1. [X] 21st Panzer (1)
+COUNTER-ATTACK: BRITISH XXX CORPS at TILLY
+Final attack strength: 1 vs defense: 4
+
+RESOLVING COUNTER-ATTACK
+Attack Strength: 1
+Defense Strength: 4
+
+Die Roll: 1
+SUPPLY -1 (Attacking Panzer Unit)
+Natural 1 → AUTOMATIC GERMAN LOSS
+
+
+POST-COMBAT
+===========
+GERMAN DEFEAT
+
+GERMAN LOSSES
+=============
+>>>> GlobalGameState.german_casualty_strategy= Strategy.AI
+ELIMINATED: 21st Panzer
+
+TRANSPORT AUGMENTATION ROLL
+ROLL: 2
+BASE LEVEL: 3
+NO INCREASE
+
+=========================================
+NORMANDY SOLITAIRE! D-Day to Falaise 1944
+=========================================
+
+List of Drawn Cards: (1, 2, 9, 5, 8, 12, 14, 16)
+Cards Drawn: 8
+Cards Remaining: 40
+Cards Remaining in Deck: 16
+
+Current Card: 16
+Current Weather: Clear
+
+> Draw Card
+  Roll For Weather
+  Resources Phase
+  Deploy Non Panzer Div Reinforcements
+  Allied Advances Phase
+  Action Phase
+
+Press ENTER to perform next action
+Press G to see game summary
+Press S to save game
+Press L to load saved game
+Press Q to quit
+
+
+
+========================================
+DREW CARD 15
+========================================
+
+============================================================
+CARD #15 - Operation Windsor
+============================================================
+
+RESOURCES
+  +1 Reinforcement 10th SS Panzer
+  -1 Resource Loss Hitler Approval
+  -2 Resource Loss Supply
+
+AIR POWER
+  +1 Jabos BRITISH XXX CORPS
+  +1 Jabos BRITISH I CORPS
+
+ALLIED ADVANCES
+  BRITISH XXX CORPS (2)
+  BRITISH I CORPS (2)
+
+ACTIONS
+  Actions Available: 4
+  +1 Attack Strength BRITISH XXX CORPS
+  +1 Attack Strength BRITISH I CORPS
+
+
+=========================================
+NORMANDY SOLITAIRE! D-Day to Falaise 1944
+=========================================
+
+List of Drawn Cards: (1, 2, 9, 5, 8, 12, 14, 16, 15)
+Cards Drawn: 9
+Cards Remaining: 39
+Cards Remaining in Deck: 15
+
+Current Card: 15
+
+  Draw Card
+> Roll For Weather
+  Resources Phase
+  Deploy Non Panzer Div Reinforcements
+  Allied Advances Phase
+  Action Phase
+
+Press ENTER to perform next action
+Press G to see game summary
+
+
+========================================
+WEATHER ROLL
+========================================
+
+ROLL: 6
+RESULT: Clear
+
+
+=========================================
+NORMANDY SOLITAIRE! D-Day to Falaise 1944
+=========================================
+
+List of Drawn Cards: (1, 2, 9, 5, 8, 12, 14, 16, 15)
+Cards Drawn: 9
+Cards Remaining: 39
+Cards Remaining in Deck: 15
+
+Current Card: 15
+Current Weather: Clear
+
+  Draw Card
+  Roll For Weather
+> Resources Phase
+  Deploy Non Panzer Div Reinforcements
+  Allied Advances Phase
+  Action Phase
+
+Press ENTER to perform next action
+Press G to see game summary
+
+EVENT
+
+RESOURCE ADJUSTMENTS
+Hitler Approval: LOSE 1 (2 -> 1)
+Supply: LOSE 2 (3 -> 1)
+RESOURCE PHASE - weather is Clear
+
+
+========================================
+ATTACK STRENGTHS (ALLIED ARMIES)
+========================================
+BRITISH XXX CORPS -> ATTACK STRENGTH: 2 (+1 Jabo, +1 Card modifier) ; AIR SUPPORT=True
+BRITISH I CORPS -> ATTACK STRENGTH: 2 (+1 Jabo, +1 Card modifier) ; AIR SUPPORT=True
+
+
+========================================
+DEFENSE STRENGTHS (ALLIED ARMIES)
+========================================
+
+DEFENSE VALUES
+US 1st ARMY -> DEFENSE STRENGTH: 4 (+1 Terrain, +3 Army) ; AIR SUPPORT=False
+
+DEFENSE VALUES
+BRITISH XXX CORPS -> DEFENSE STRENGTH: 5 (+2 Terrain, +2 Army, +1 Jabo) ; AIR SUPPORT=True
+
+DEFENSE VALUES
+BRITISH I CORPS -> DEFENSE STRENGTH: 5 (+2 Terrain, +2 Army, +1 Jabo) ; AIR SUPPORT=True
+
+
+========================================
+REINFORCEMENTS
+========================================
+
+10th SS Panzer -> IN TRANSIT
+
+
+
+=========================================
+NORMANDY SOLITAIRE! D-Day to Falaise 1944
+=========================================
+
+List of Drawn Cards: (1, 2, 9, 5, 8, 12, 14, 16, 15)
+Cards Drawn: 9
+Cards Remaining: 39
+Cards Remaining in Deck: 15
+
+Current Card: 15
+Current Weather: Clear
+
+  Draw Card
+  Roll For Weather
+  Resources Phase
+> Deploy Non Panzer Div Reinforcements
+  Allied Advances Phase
+  Action Phase
+
+Press ENTER to perform next action
+Press G to see game summary
+
+=========================================
+NORMANDY SOLITAIRE! D-Day to Falaise 1944
+=========================================
+
+List of Drawn Cards: (1, 2, 9, 5, 8, 12, 14, 16, 15)
+Cards Drawn: 9
+Cards Remaining: 39
+Cards Remaining in Deck: 15
+
+Current Card: 15
+Current Weather: Clear
+
+  Draw Card
+  Roll For Weather
+  Resources Phase
+  Deploy Non Panzer Div Reinforcements
+> Allied Advances Phase
+  Action Phase
+
+Press ENTER to perform next action
+Press G to see game summary
+
+
+========================================
+ALLIED ADVANCES PHASE
+========================================
+
+ADVANCING ARMIES
+ - BRITISH XXX CORPS
+ - BRITISH I CORPS
+
+ALLIED ATTACKS
+==============
+
+
+
+BRITISH XXX CORPS ADVANCING FROM TILLY
+======================================
+
+GERMAN DEFENSE: VILLERS-BOCAGE
+TERRAIN: 2
+Flak 88: 2
+TOTAL DEFENSE: 4
+
+BRITISH XXX CORPS
+TARGET: VILLERS-BOCAGE
+ATTACK STRENGTH: 2
+DEFENSE STRENGTH: 4
+
+DIE ROLL: 3
+ATTACK TOTAL: 5
+
+
+GERMAN LOSSES
+=============
+>>>> GlobalGameState.german_casualty_strategy= Strategy.AI
+REDUCED: Flak 88 now 1
+ALLIED VICTORY
+GERMANS RETREAT FROM VILLERS-BOCAGE TO MONT PINCON
+>>>>>>> AFTER ALLIED ADVANCE -> ALLIED ARMY LOCATION:BRITISH XXX CORPS IS AT VILLERS-BOCAGE
+BRITISH XXX CORPS -> VILLERS-BOCAGE
+
+
+
+BRITISH I CORPS ADVANCING FROM GOLD-JUNO-SWORD BEACH (CANADIAN TRACK)
+=====================================================================
+
+GERMAN DEFENSE: LEBISEY WOOD
+TERRAIN: 2
+TOTAL DEFENSE: 2
+
+BRITISH I CORPS
+TARGET: LEBISEY WOOD
+ATTACK STRENGTH: 2
+DEFENSE STRENGTH: 2
+
+DIE ROLL: 4
+ATTACK TOTAL: 6
+
+NO UNITS IN SPACE - NO LOSSES
+ALLIED VICTORY
+<<SPACE CLEARED>>
+>>>>>>> AFTER ALLIED ADVANCE -> ALLIED ARMY LOCATION:BRITISH I CORPS IS AT LEBISEY WOOD
+BRITISH I CORPS -> LEBISEY WOOD
+
+
+
+=========================================
+NORMANDY SOLITAIRE! D-Day to Falaise 1944
+=========================================
+
+List of Drawn Cards: (1, 2, 9, 5, 8, 12, 14, 16, 15)
+Cards Drawn: 9
+Cards Remaining: 39
+Cards Remaining in Deck: 15
+
+Current Card: 15
+Current Weather: Clear
+
+  Draw Card
+  Roll For Weather
+  Resources Phase
+  Deploy Non Panzer Div Reinforcements
+  Allied Advances Phase
+> Action Phase
+
+Press ENTER to perform next action
+Press G to see game summary
+IN TRANSIT CHECK
+================
+10th SS Panzer
+ROLL: 1
+DRM: +0
+MODIFIED ROLL: 1
+CHECK: 1 <= Transport 4
+	=>10th SS Panzer MOVED TO STRATEGIC RESERVE
+ACTIONS AVAILABLE: 4
+MOVE PANZER DIVISION FROM STRATEGIC RESERVE
+
+SELECT PANZER DIVISION
+
+1. 9th SS Panzer (2)
+2. 116th Panzer (2)
+3. 10th SS Panzer (2)
+
+0. Return to main menu
+
+
+SELECTED: 116th Panzer
+
+HITLER APPROVAL CHECK
+ROLL: 1
+HITLER APPROVAL: 1
+RESULT: PASSED
+
+116th Panzer moved to MONT PINCON
+MOVE PANZER DIVISION FROM STRATEGIC RESERVE
+
+SELECT PANZER DIVISION
+
+1. 9th SS Panzer (2)
+2. 10th SS Panzer (2)
+
+0. Return to main menu
+
+
+SELECTED: 9th SS Panzer
+
+HITLER APPROVAL CHECK
+ROLL: 1
+HITLER APPROVAL: 1
+RESULT: PASSED
+
+9th SS Panzer moved to LORIENT
+MOVE PANZER DIVISION FROM STRATEGIC RESERVE
+
+SELECT PANZER DIVISION
+
+1. 10th SS Panzer (2)
+
+0. Return to main menu
+
+
+SELECTED: 10th SS Panzer
+
+HITLER APPROVAL CHECK
+ROLL: 1
+HITLER APPROVAL: 1
+RESULT: PASSED
+
+10th SS Panzer moved to BREST
+MOVE ACTION POINT TO STRATEGIC RESERVE
+
+1 ACTION MOVED TO STRATEGIC RESERVE
+ACTIONS REMAINING: 0
+RESERVE ACTIONS: 1
+MOVE UNIT ONE SPACE
+
+
+SELECT DESTINATION FOR 10th SS Panzer
+
+AI USED 1 RESERVE ACTION
+RESERVE ACTIONS REMAINING: 0
+
+10th SS Panzer MOVED FROM BREST TO ST. MALO
+ACTIONS REMAINING: 0
+
+=========================================
+NORMANDY SOLITAIRE! D-Day to Falaise 1944
+=========================================
+
+List of Drawn Cards: (1, 2, 9, 5, 8, 12, 14, 16, 15)
+Cards Drawn: 9
+Cards Remaining: 39
+Cards Remaining in Deck: 15
+
+Current Card: 15
+Current Weather: Clear
+
+> Draw Card
+  Roll For Weather
+  Resources Phase
+  Deploy Non Panzer Div Reinforcements
+  Allied Advances Phase
+  Action Phase
+
+Press ENTER to perform next action
+Press G to see game summary
+Press S to save game
+Press L to load saved game
+Press Q to quit
+
+
+
+========================================
+DREW CARD 3
+========================================
+
+============================================================
+CARD #3 - Carentan
+============================================================
+
+RESOURCES
+  +1 Reinforcement 17th SS Panzergrenadier
+  -1 Resource Loss Transport
+  -1 Resource Loss Supply
+  -1 DRM Transport
+
+AIR POWER
+  +1 Jabos US 1st ARMY
+
+ALLIED ADVANCES
+  US 1st ARMY (3)
+
+ACTIONS
+  Actions Available: 2
+  +1 Attack Strength US 1st ARMY
+
+
+=========================================
+NORMANDY SOLITAIRE! D-Day to Falaise 1944
+=========================================
+
+List of Drawn Cards: (1, 2, 9, 5, 8, 12, 14, 16, 15, 3)
+Cards Drawn: 10
+Cards Remaining: 38
+Cards Remaining in Deck: 14
+
+Current Card: 3
+
+  Draw Card
+> Roll For Weather
+  Resources Phase
+  Deploy Non Panzer Div Reinforcements
+  Allied Advances Phase
+  Action Phase
+
+Press ENTER to perform next action
+Press G to see game summary
+
+
+========================================
+WEATHER ROLL
+========================================
+
+ROLL: 3
+RESULT: Partly Clear
+
+
+=========================================
+NORMANDY SOLITAIRE! D-Day to Falaise 1944
+=========================================
+
+List of Drawn Cards: (1, 2, 9, 5, 8, 12, 14, 16, 15, 3)
+Cards Drawn: 10
+Cards Remaining: 38
+Cards Remaining in Deck: 14
+
+Current Card: 3
+Current Weather: Partly Clear
+
+  Draw Card
+  Roll For Weather
+> Resources Phase
+  Deploy Non Panzer Div Reinforcements
+  Allied Advances Phase
+  Action Phase
+
+Press ENTER to perform next action
+Press G to see game summary
+
+EVENT
+
+RESOURCE ADJUSTMENTS
+Transport: LOSE 1 (4 -> 3)
+Supply: LOSE 1 (1 -> 0)
+RESOURCE PHASE - weather is Partly Clear
+
+
+========================================
+ATTACK STRENGTHS (ALLIED ARMIES)
+========================================
+US 1st ARMY -> ATTACK STRENGTH: 2 (+1 Jabo, +1 Card modifier) ; AIR SUPPORT=True
+
+
+========================================
+DEFENSE STRENGTHS (ALLIED ARMIES)
+========================================
+
+DEFENSE VALUES
+US 1st ARMY -> DEFENSE STRENGTH: 5 (+1 Terrain, +3 Army, +1 Jabo) ; AIR SUPPORT=True
+
+DEFENSE VALUES
+BRITISH XXX CORPS -> DEFENSE STRENGTH: 4 (+2 Terrain, +2 Army) ; AIR SUPPORT=False
+
+DEFENSE VALUES
+BRITISH I CORPS -> DEFENSE STRENGTH: 4 (+2 Terrain, +2 Army) ; AIR SUPPORT=False
+
+
+========================================
+REINFORCEMENTS
+========================================
+
+17th SS Panzergrenadier -> IN TRANSIT
+
+
+
+=========================================
+NORMANDY SOLITAIRE! D-Day to Falaise 1944
+=========================================
+
+List of Drawn Cards: (1, 2, 9, 5, 8, 12, 14, 16, 15, 3)
+Cards Drawn: 10
+Cards Remaining: 38
+Cards Remaining in Deck: 14
+
+Current Card: 3
+Current Weather: Partly Clear
+
+  Draw Card
+  Roll For Weather
+  Resources Phase
+> Deploy Non Panzer Div Reinforcements
+  Allied Advances Phase
+  Action Phase
+
+Press ENTER to perform next action
+Press G to see game summary
+
+=========================================
+NORMANDY SOLITAIRE! D-Day to Falaise 1944
+=========================================
+
+List of Drawn Cards: (1, 2, 9, 5, 8, 12, 14, 16, 15, 3)
+Cards Drawn: 10
+Cards Remaining: 38
+Cards Remaining in Deck: 14
+
+Current Card: 3
+Current Weather: Partly Clear
+
+  Draw Card
+  Roll For Weather
+  Resources Phase
+  Deploy Non Panzer Div Reinforcements
+> Allied Advances Phase
+  Action Phase
+
+Press ENTER to perform next action
+Press G to see game summary
+
+
+========================================
+ALLIED ADVANCES PHASE
+========================================
+
+ADVANCING ARMIES
+ - US 1st ARMY
+
+ALLIED ATTACKS
+==============
+
+
+
+US 1st ARMY ADVANCING FROM CHERBOURG
+====================================
+
+GERMAN DEFENSE: ST. LO
+TERRAIN: 2
+TOTAL DEFENSE: 2
+
+US 1st ARMY
+TARGET: ST. LO
+ATTACK STRENGTH: 2
+DEFENSE STRENGTH: 2
+
+DIE ROLL: 4
+ATTACK TOTAL: 6
+
+NO UNITS IN SPACE - NO LOSSES
+ALLIED VICTORY
+<<SPACE CLEARED>>
+>>>>>>> AFTER ALLIED ADVANCE -> ALLIED ARMY LOCATION:US 1st ARMY IS AT ST. LO
+US 1st ARMY -> ST. LO
+
+US 3RD ARMY ACTIVATION
+Roll: 7 +2 SAINT-LÔ = 9
+US 3rd Army NOT ACTIVATED
+
+
+
+=========================================
+NORMANDY SOLITAIRE! D-Day to Falaise 1944
+=========================================
+
+List of Drawn Cards: (1, 2, 9, 5, 8, 12, 14, 16, 15, 3)
+Cards Drawn: 10
+Cards Remaining: 38
+Cards Remaining in Deck: 14
+
+Current Card: 3
+Current Weather: Partly Clear
+
+  Draw Card
+  Roll For Weather
+  Resources Phase
+  Deploy Non Panzer Div Reinforcements
+  Allied Advances Phase
+> Action Phase
+
+Press ENTER to perform next action
+Press G to see game summary
+IN TRANSIT CHECK
+================
+17th SS Panzergrenadier
+ROLL: 3
+DRM: -1
+MODIFIED ROLL: 2
+CHECK: 2 <= Transport 3
+	=>17th SS Panzergrenadier MOVED TO STRATEGIC RESERVE
+ACTIONS AVAILABLE: 2
+Supply is 0 - 116th Panzer Cannot Attack
+Supply is 0 - 1st SS Panzer Cannot Attack
+MOVE PANZER DIVISION FROM STRATEGIC RESERVE
+
+SELECT PANZER DIVISION
+
+1. 17th SS Panzergrenadier (2)
+
+0. Return to main menu
+
+
+SELECTED: 17th SS Panzergrenadier
+
+HITLER APPROVAL CHECK
+ROLL: 2
+HITLER APPROVAL: 1
+RESULT: FAILED
+Supply is 0 - 116th Panzer Cannot Attack
+Supply is 0 - 1st SS Panzer Cannot Attack
+MOVE PANZER DIVISION FROM STRATEGIC RESERVE
+
+SELECT PANZER DIVISION
+
+1. 17th SS Panzergrenadier (2)
+
+0. Return to main menu
+
+
+SELECTED: 17th SS Panzergrenadier
+
+HITLER APPROVAL CHECK
+ROLL: 4
+HITLER APPROVAL: 1
+RESULT: FAILED
+
+=========================================
+NORMANDY SOLITAIRE! D-Day to Falaise 1944
+=========================================
+
+List of Drawn Cards: (1, 2, 9, 5, 8, 12, 14, 16, 15, 3)
+Cards Drawn: 10
+Cards Remaining: 38
+Cards Remaining in Deck: 14
+
+Current Card: 3
+Current Weather: Partly Clear
+
+> Draw Card
+  Roll For Weather
+  Resources Phase
+  Deploy Non Panzer Div Reinforcements
+  Allied Advances Phase
+  Action Phase
+
+Press ENTER to perform next action
+Press G to see game summary
+Press S to save game
+Press L to load saved game
+Press Q to quit
+
+
+
+========================================
+DREW CARD 17
+========================================
+
+============================================================
+CARD #17 - Nebelwerfers
+============================================================
+
+RESOURCES
+  +1 Reinforcement Nebelwerfer
+  +1 Reinforcement Nebelwerfer
+  +1 Reinforcement Nebelwerfer
+  -1 DRM Transport
+
+AIR POWER
+  N/A
+
+ALLIED ADVANCES
+  US 1st ARMY (3)
+  BRITISH XXX CORPS (2)
+
+ACTIONS
+  Actions Available: 3
+  No Modifiers
+
+
+=========================================
+NORMANDY SOLITAIRE! D-Day to Falaise 1944
+=========================================
+
+List of Drawn Cards: (1, 2, 9, 5, 8, 12, 14, 16, 15, 3, 17)
+Cards Drawn: 11
+Cards Remaining: 37
+Cards Remaining in Deck: 13
+
+Current Card: 17
+
+  Draw Card
+> Roll For Weather
+  Resources Phase
+  Deploy Non Panzer Div Reinforcements
+  Allied Advances Phase
+  Action Phase
+
+Press ENTER to perform next action
+Press G to see game summary
+
+
+========================================
+WEATHER ROLL
+========================================
+
+ROLL: 5
+RESULT: Clear
+
+
+=========================================
+NORMANDY SOLITAIRE! D-Day to Falaise 1944
+=========================================
+
+List of Drawn Cards: (1, 2, 9, 5, 8, 12, 14, 16, 15, 3, 17)
+Cards Drawn: 11
+Cards Remaining: 37
+Cards Remaining in Deck: 13
+
+Current Card: 17
+Current Weather: Clear
+
+  Draw Card
+  Roll For Weather
+> Resources Phase
+  Deploy Non Panzer Div Reinforcements
+  Allied Advances Phase
+  Action Phase
+
+Press ENTER to perform next action
+Press G to see game summary
+
+EVENT
+
+RESOURCE ADJUSTMENTS
+RESOURCE PHASE - weather is Clear
+
+
+========================================
+ATTACK STRENGTHS (ALLIED ARMIES)
+========================================
+US 1st ARMY -> ATTACK STRENGTH: 0 () ; AIR SUPPORT=False
+BRITISH XXX CORPS -> ATTACK STRENGTH: 0 () ; AIR SUPPORT=False
+
+
+========================================
+DEFENSE STRENGTHS (ALLIED ARMIES)
+========================================
+
+DEFENSE VALUES
+US 1st ARMY -> DEFENSE STRENGTH: 5 (+2 Terrain, +3 Army) ; AIR SUPPORT=False
+
+DEFENSE VALUES
+BRITISH XXX CORPS -> DEFENSE STRENGTH: 4 (+2 Terrain, +2 Army) ; AIR SUPPORT=False
+
+DEFENSE VALUES
+BRITISH I CORPS -> DEFENSE STRENGTH: 4 (+2 Terrain, +2 Army) ; AIR SUPPORT=False
+
+
+========================================
+REINFORCEMENTS
+========================================
+
+Nebelwerfer -> STRATEGIC RESERVE
+Nebelwerfer -> STRATEGIC RESERVE
+Nebelwerfer -> STRATEGIC RESERVE
+
+
+
+=========================================
+NORMANDY SOLITAIRE! D-Day to Falaise 1944
+=========================================
+
+List of Drawn Cards: (1, 2, 9, 5, 8, 12, 14, 16, 15, 3, 17)
+Cards Drawn: 11
+Cards Remaining: 37
+Cards Remaining in Deck: 13
+
+Current Card: 17
+Current Weather: Clear
+
+  Draw Card
+  Roll For Weather
+  Resources Phase
+> Deploy Non Panzer Div Reinforcements
+  Allied Advances Phase
+  Action Phase
+
+Press ENTER to perform next action
+Press G to see game summary
+MOVE OTHER UNIT FROM STRATEGIC RESERVE
+
+SELECT UNIT
+
+1. Nebelwerfer (1)
+2. Nebelwerfer (1)
+3. Nebelwerfer (1)
+
+0. Return to main menu
+
+
+SELECTED: Nebelwerfer
+
+Nebelwerfer moved to FALAISE GAP
+MOVE OTHER UNIT FROM STRATEGIC RESERVE
+
+SELECT UNIT
+
+1. Nebelwerfer (1)
+2. Nebelwerfer (1)
+
+0. Return to main menu
+
+
+SELECTED: Nebelwerfer
+
+Nebelwerfer moved to LE MANS
+MOVE OTHER UNIT FROM STRATEGIC RESERVE
+
+SELECT UNIT
+
+1. Nebelwerfer (1)
+
+0. Return to main menu
+
+
+SELECTED: Nebelwerfer
+
+Nebelwerfer moved to AVRANCHES
+
+=========================================
+NORMANDY SOLITAIRE! D-Day to Falaise 1944
+=========================================
+
+List of Drawn Cards: (1, 2, 9, 5, 8, 12, 14, 16, 15, 3, 17)
+Cards Drawn: 11
+Cards Remaining: 37
+Cards Remaining in Deck: 13
+
+Current Card: 17
+Current Weather: Clear
+
+  Draw Card
+  Roll For Weather
+  Resources Phase
+  Deploy Non Panzer Div Reinforcements
+> Allied Advances Phase
+  Action Phase
+
+Press ENTER to perform next action
+Press G to see game summary
+
+
+========================================
+ALLIED ADVANCES PHASE
+========================================
+
+ADVANCING ARMIES
+ - US 1st ARMY
+ - BRITISH XXX CORPS
+
+ALLIED ATTACKS
+==============
+
+
+
+US 1st ARMY ADVANCING FROM ST. LO
+=================================
+
+GERMAN DEFENSE: COUTANCES
+TERRAIN: 2
+TOTAL DEFENSE: 2
+
+US 1st ARMY
+TARGET: COUTANCES
+ATTACK STRENGTH: 0
+DEFENSE STRENGTH: 2
+
+DIE ROLL: 2
+ATTACK TOTAL: 2
+
+NO UNITS IN SPACE - NO LOSSES
+ALLIED DEFEAT
+
+
+
+BRITISH XXX CORPS ADVANCING FROM VILLERS-BOCAGE
+===============================================
+
+GERMAN DEFENSE: MONT PINCON
+TERRAIN: 2
+Flak 88: 1
+116th Panzer: 2
+TOTAL DEFENSE: 5
+
+BRITISH XXX CORPS
+TARGET: MONT PINCON
+ATTACK STRENGTH: 0
+DEFENSE STRENGTH: 5
+
+DIE ROLL: 4
+ATTACK TOTAL: 4
+
+
+GERMAN LOSSES
+=============
+>>>> GlobalGameState.german_casualty_strategy= Strategy.AI
+ELIMINATED: Flak 88
+ALLIED DEFEAT
+
+
+
+=========================================
+NORMANDY SOLITAIRE! D-Day to Falaise 1944
+=========================================
+
+List of Drawn Cards: (1, 2, 9, 5, 8, 12, 14, 16, 15, 3, 17)
+Cards Drawn: 11
+Cards Remaining: 37
+Cards Remaining in Deck: 13
+
+Current Card: 17
+Current Weather: Clear
+
+  Draw Card
+  Roll For Weather
+  Resources Phase
+  Deploy Non Panzer Div Reinforcements
+  Allied Advances Phase
+> Action Phase
+
+Press ENTER to perform next action
+Press G to see game summary
+ACTIONS AVAILABLE: 3
+Supply is 0 - 116th Panzer Cannot Attack
+Supply is 0 - 1st SS Panzer Cannot Attack
+PLACE / UPGRADE FORTIFIED VILLAGES
+
+FALAISE GAP FORTIFIED VILLAGES +1
+
+ACTIONS USED: 3
+ACTIONS REMAINING: 0
+RESERVE ACTIONS USED: 0
+RESERVE ACTIONS REMAINING: 0
+
+=========================================
+NORMANDY SOLITAIRE! D-Day to Falaise 1944
+=========================================
+
+List of Drawn Cards: (1, 2, 9, 5, 8, 12, 14, 16, 15, 3, 17)
+Cards Drawn: 11
+Cards Remaining: 37
+Cards Remaining in Deck: 13
+
+Current Card: 17
+Current Weather: Clear
+
+> Draw Card
+  Roll For Weather
+  Resources Phase
+  Deploy Non Panzer Div Reinforcements
+  Allied Advances Phase
+  Action Phase
+
+Press ENTER to perform next action
+Press G to see game summary
+Press S to save game
+Press L to load saved game
+Press Q to quit
+
+
+
+========================================
+DREW CARD 18
+========================================
+
+============================================================
+CARD #18 - Operation Charnwood
+============================================================
+
+RESOURCES
+  -1 Resource Loss Hitler Approval
+  -1 DRM Transport
+
+AIR POWER
+  +1 Jabos BRITISH I CORPS
+  +1 Jabos BRITISH XXX CORPS
+  Carpet Bombing
+
+ALLIED ADVANCES
+  BRITISH XXX CORPS (2)
+  BRITISH I CORPS (2)
+
+ACTIONS
+  Actions Available: 3
+  No Modifiers
+
+
+=========================================
+NORMANDY SOLITAIRE! D-Day to Falaise 1944
+=========================================
+
+List of Drawn Cards: (1, 2, 9, 5, 8, 12, 14, 16, 15, 3, 17, 18)
+Cards Drawn: 12
+Cards Remaining: 36
+Cards Remaining in Deck: 12
+
+Current Card: 18
+
+  Draw Card
+> Roll For Weather
+  Resources Phase
+  Deploy Non Panzer Div Reinforcements
+  Allied Advances Phase
+  Action Phase
+
+Press ENTER to perform next action
+Press G to see game summary
+
+
+========================================
+WEATHER ROLL
+========================================
+
+ROLL: 2
+RESULT: Partly Clear
+
+========================================
+CARPET BOMBING
+========================================
+
+ROLL: 5
+DRM: +1
+RESULT: ATTACK CANCELLED
+
+
+=========================================
+NORMANDY SOLITAIRE! D-Day to Falaise 1944
+=========================================
+
+List of Drawn Cards: (1, 2, 9, 5, 8, 12, 14, 16, 15, 3, 17, 18)
+Cards Drawn: 12
+Cards Remaining: 36
+Cards Remaining in Deck: 12
+
+Current Card: 18
+Current Weather: Partly Clear
+
+  Draw Card
+  Roll For Weather
+> Resources Phase
+  Deploy Non Panzer Div Reinforcements
+  Allied Advances Phase
+  Action Phase
+
+Press ENTER to perform next action
+Press G to see game summary
+
+EVENT
+
+RESOURCE ADJUSTMENTS
+Hitler Approval: LOSE 1 (1 -> 0)
+RESOURCE PHASE - weather is Partly Clear
+
+
+========================================
+ATTACK STRENGTHS (ALLIED ARMIES)
+========================================
+BRITISH XXX CORPS -> ATTACK STRENGTH: 0 () ; AIR SUPPORT=False
+BRITISH I CORPS -> ATTACK STRENGTH: 1 (+1 Jabo) ; AIR SUPPORT=True
+
+
+========================================
+DEFENSE STRENGTHS (ALLIED ARMIES)
+========================================
+
+DEFENSE VALUES
+US 1st ARMY -> DEFENSE STRENGTH: 5 (+2 Terrain, +3 Army) ; AIR SUPPORT=False
+
+DEFENSE VALUES
+BRITISH XXX CORPS -> DEFENSE STRENGTH: 4 (+2 Terrain, +2 Army) ; AIR SUPPORT=False
+
+DEFENSE VALUES
+BRITISH I CORPS -> DEFENSE STRENGTH: 5 (+2 Terrain, +2 Army, +1 Jabo) ; AIR SUPPORT=True
+
+
+========================================
+REINFORCEMENTS
+========================================
+
+NONE
+
+
+=========================================
+NORMANDY SOLITAIRE! D-Day to Falaise 1944
+=========================================
+
+List of Drawn Cards: (1, 2, 9, 5, 8, 12, 14, 16, 15, 3, 17, 18)
+Cards Drawn: 12
+Cards Remaining: 36
+Cards Remaining in Deck: 12
+
+Current Card: 18
+Current Weather: Partly Clear
+
+  Draw Card
+  Roll For Weather
+  Resources Phase
+> Deploy Non Panzer Div Reinforcements
+  Allied Advances Phase
+  Action Phase
+
+Press ENTER to perform next action
+Press G to see game summary
+
+=========================================
+NORMANDY SOLITAIRE! D-Day to Falaise 1944
+=========================================
+
+List of Drawn Cards: (1, 2, 9, 5, 8, 12, 14, 16, 15, 3, 17, 18)
+Cards Drawn: 12
+Cards Remaining: 36
+Cards Remaining in Deck: 12
+
+Current Card: 18
+Current Weather: Partly Clear
+
+  Draw Card
+  Roll For Weather
+  Resources Phase
+  Deploy Non Panzer Div Reinforcements
+> Allied Advances Phase
+  Action Phase
+
+Press ENTER to perform next action
+Press G to see game summary
+
+
+========================================
+ALLIED ADVANCES PHASE
+========================================
+
+ADVANCING ARMIES
+ - BRITISH XXX CORPS
+ - BRITISH I CORPS
+
+ALLIED ATTACKS
+==============
+
+
+
+BRITISH XXX CORPS ADVANCING FROM VILLERS-BOCAGE
+===============================================
+
+GERMAN DEFENSE: MONT PINCON
+TERRAIN: 2
+116th Panzer: 2
+TOTAL DEFENSE: 4
+
+BRITISH XXX CORPS
+TARGET: MONT PINCON
+ATTACK STRENGTH: 1
+DEFENSE STRENGTH: 4
+
+DIE ROLL: 1
+ATTACK TOTAL: 2
+
+
+GERMAN LOSSES
+=============
+>>>> GlobalGameState.german_casualty_strategy= Strategy.AI
+REDUCED: 116th Panzer now 1
+ALLIED DEFEAT (UNMODIFIED 1)
+
+
+
+BRITISH I CORPS ADVANCING FROM LEBISEY WOOD
+===========================================
+
+GERMAN DEFENSE: CAEN
+TERRAIN: 4
+Flak 88: 1
+1st SS Panzer: 2
+TOTAL DEFENSE: 7
+
+BRITISH I CORPS
+TARGET: CAEN
+ATTACK STRENGTH: 2
+DEFENSE STRENGTH: 7
+
+DIE ROLL: 2
+ATTACK TOTAL: 4
+
+
+GERMAN LOSSES
+=============
+>>>> GlobalGameState.german_casualty_strategy= Strategy.AI
+REDUCED: 1st SS Panzer now 1
+ALLIED DEFEAT
+
+
+
+=========================================
+NORMANDY SOLITAIRE! D-Day to Falaise 1944
+=========================================
+
+List of Drawn Cards: (1, 2, 9, 5, 8, 12, 14, 16, 15, 3, 17, 18)
+Cards Drawn: 12
+Cards Remaining: 36
+Cards Remaining in Deck: 12
+
+Current Card: 18
+Current Weather: Partly Clear
+
+  Draw Card
+  Roll For Weather
+  Resources Phase
+  Deploy Non Panzer Div Reinforcements
+  Allied Advances Phase
+> Action Phase
+
+Press ENTER to perform next action
+Press G to see game summary
+ACTIONS AVAILABLE: 3
+Supply is 0 - 116th Panzer Cannot Attack
+Supply is 0 - 1st SS Panzer Cannot Attack
+PLACE / UPGRADE FORTIFIED VILLAGES
+
+THURY HARCOURT FORTIFIED VILLAGES +1
+
+ACTIONS USED: 3
+ACTIONS REMAINING: 0
+RESERVE ACTIONS USED: 0
+RESERVE ACTIONS REMAINING: 0
+
+=========================================
+NORMANDY SOLITAIRE! D-Day to Falaise 1944
+=========================================
+
+List of Drawn Cards: (1, 2, 9, 5, 8, 12, 14, 16, 15, 3, 17, 18)
+Cards Drawn: 12
+Cards Remaining: 36
+Cards Remaining in Deck: 12
+
+Current Card: 18
+Current Weather: Partly Clear
+
+> Draw Card
+  Roll For Weather
+  Resources Phase
+  Deploy Non Panzer Div Reinforcements
+  Allied Advances Phase
+  Action Phase
+
+Press ENTER to perform next action
+Press G to see game summary
+Press S to save game
+Press L to load saved game
+Press Q to quit
+
+
+
+========================================
+DREW CARD 21
+========================================
+
+============================================================
+CARD #21 - Operation Jupiter
+============================================================
+
+RESOURCES
+  -1 Resource Loss Hitler Approval
+
+AIR POWER
+  +2 Jabos BRITISH I CORPS
+  Carpet Bombing
+
+ALLIED ADVANCES
+  BRITISH I CORPS (2)
+
+ACTIONS
+  Actions Available: 2
+  +1 Attack Strength BRITISH I CORPS
+
+
+=========================================
+NORMANDY SOLITAIRE! D-Day to Falaise 1944
+=========================================
+
+List of Drawn Cards: (1, 2, 9, 5, 8, 12, 14, 16, 15, 3, 17, 18, 21)
+Cards Drawn: 13
+Cards Remaining: 35
+Cards Remaining in Deck: 11
+
+Current Card: 21
+
+  Draw Card
+> Roll For Weather
+  Resources Phase
+  Deploy Non Panzer Div Reinforcements
+  Allied Advances Phase
+  Action Phase
+
+Press ENTER to perform next action
+Press G to see game summary
+
+
+========================================
+WEATHER ROLL
+========================================
+
+ROLL: 3
+RESULT: Partly Clear
+
+========================================
+CARPET BOMBING
+========================================
+
+ROLL: 4
+DRM: +1
+RESULT: +1 ATTACK STRENGTH
+
+
+=========================================
+NORMANDY SOLITAIRE! D-Day to Falaise 1944
+=========================================
+
+List of Drawn Cards: (1, 2, 9, 5, 8, 12, 14, 16, 15, 3, 17, 18, 21)
+Cards Drawn: 13
+Cards Remaining: 35
+Cards Remaining in Deck: 11
+
+Current Card: 21
+Current Weather: Partly Clear
+
+  Draw Card
+  Roll For Weather
+> Resources Phase
+  Deploy Non Panzer Div Reinforcements
+  Allied Advances Phase
+  Action Phase
+
+Press ENTER to perform next action
+Press G to see game summary
+
+EVENT
+
+RESOURCE ADJUSTMENTS
+Hitler Approval: LOSE 1 (0 -> -1)
+RESOURCE PHASE - weather is Partly Clear
+
+
+========================================
+ATTACK STRENGTHS (ALLIED ARMIES)
+========================================
+BRITISH I CORPS -> ATTACK STRENGTH: 3 (+1 Jabo, +1 Carpet Bombing, +1 Card modifier) ; AIR SUPPORT=True
+
+
+========================================
+DEFENSE STRENGTHS (ALLIED ARMIES)
+========================================
+
+DEFENSE VALUES
+US 1st ARMY -> DEFENSE STRENGTH: 5 (+2 Terrain, +3 Army) ; AIR SUPPORT=False
+
+DEFENSE VALUES
+BRITISH XXX CORPS -> DEFENSE STRENGTH: 4 (+2 Terrain, +2 Army) ; AIR SUPPORT=False
+
+DEFENSE VALUES
+BRITISH I CORPS -> DEFENSE STRENGTH: 5 (+2 Terrain, +2 Army, +1 Jabo) ; AIR SUPPORT=True
+
+
+========================================
+REINFORCEMENTS
+========================================
+
+NONE
+
+
+=========================================
+NORMANDY SOLITAIRE! D-Day to Falaise 1944
+=========================================
+
+List of Drawn Cards: (1, 2, 9, 5, 8, 12, 14, 16, 15, 3, 17, 18, 21)
+Cards Drawn: 13
+Cards Remaining: 35
+Cards Remaining in Deck: 11
+
+Current Card: 21
+Current Weather: Partly Clear
+
+  Draw Card
+  Roll For Weather
+  Resources Phase
+> Deploy Non Panzer Div Reinforcements
+  Allied Advances Phase
+  Action Phase
+
+Press ENTER to perform next action
+Press G to see game summary
+
+=========================================
+NORMANDY SOLITAIRE! D-Day to Falaise 1944
+=========================================
+
+List of Drawn Cards: (1, 2, 9, 5, 8, 12, 14, 16, 15, 3, 17, 18, 21)
+Cards Drawn: 13
+Cards Remaining: 35
+Cards Remaining in Deck: 11
+
+Current Card: 21
+Current Weather: Partly Clear
+
+  Draw Card
+  Roll For Weather
+  Resources Phase
+  Deploy Non Panzer Div Reinforcements
+> Allied Advances Phase
+  Action Phase
+
+Press ENTER to perform next action
+Press G to see game summary
+
+
+========================================
+ALLIED ADVANCES PHASE
+========================================
+
+ADVANCING ARMIES
+ - BRITISH I CORPS
+
+ALLIED ATTACKS
+==============
+
+
+
+BRITISH I CORPS ADVANCING FROM LEBISEY WOOD
+===========================================
+
+GERMAN DEFENSE: CAEN
+TERRAIN: 4
+Flak 88: 1
+1st SS Panzer: 1
+TOTAL DEFENSE: 6
+
+BRITISH I CORPS
+TARGET: CAEN
+ATTACK STRENGTH: 4
+DEFENSE STRENGTH: 6
+
+DIE ROLL: 5
+ATTACK TOTAL: 9
+
+HITLER APPROVAL -1 → 0
+
+GERMAN LOSSES
+=============
+>>>> GlobalGameState.german_casualty_strategy= Strategy.AI
+ELIMINATED: Flak 88
+ALLIED VICTORY
+GERMANS RETREAT FROM CAEN TO CAGNY
+>>>>>>> AFTER ALLIED ADVANCE -> ALLIED ARMY LOCATION:BRITISH I CORPS IS AT CAEN
+BRITISH I CORPS -> CAEN
+Hitler Approval: LOSE 1 (0 -> -1)
+
+
+
+=========================================
+NORMANDY SOLITAIRE! D-Day to Falaise 1944
+=========================================
+
+List of Drawn Cards: (1, 2, 9, 5, 8, 12, 14, 16, 15, 3, 17, 18, 21)
+Cards Drawn: 13
+Cards Remaining: 35
+Cards Remaining in Deck: 11
+
+Current Card: 21
+Current Weather: Partly Clear
+
+  Draw Card
+  Roll For Weather
+  Resources Phase
+  Deploy Non Panzer Div Reinforcements
+  Allied Advances Phase
+> Action Phase
+
+Press ENTER to perform next action
+Press G to see game summary
+ACTIONS AVAILABLE: 2
+Supply is 0 - 116th Panzer Cannot Attack
+MOVE UNIT ONE SPACE
+
+
+SELECT DESTINATION FOR Nebelwerfer
+
+
+Nebelwerfer MOVED FROM AVRANCHES TO MORTAIN
+ACTIONS REMAINING: 1
+Supply is 0 - 116th Panzer Cannot Attack
+MOVE PANZER DIVISION FROM STRATEGIC RESERVE
+
+SELECT PANZER DIVISION
+
+1. 17th SS Panzergrenadier (2)
+
+0. Return to main menu
+
+
+SELECTED: 17th SS Panzergrenadier
+
+HITLER APPROVAL CHECK
+ROLL: 5
+HITLER APPROVAL: -1
+RESULT: FAILED
+
+=========================================
+NORMANDY SOLITAIRE! D-Day to Falaise 1944
+=========================================
+
+List of Drawn Cards: (1, 2, 9, 5, 8, 12, 14, 16, 15, 3, 17, 18, 21)
+Cards Drawn: 13
+Cards Remaining: 35
+Cards Remaining in Deck: 11
+
+Current Card: 21
+Current Weather: Partly Clear
+
+> Draw Card
+  Roll For Weather
+  Resources Phase
+  Deploy Non Panzer Div Reinforcements
+  Allied Advances Phase
+  Action Phase
+
+Press ENTER to perform next action
+Press G to see game summary
+Press S to save game
+Press L to load saved game
+Press Q to quit
+
+
+
+========================================
+MID DECK ADDED
+DRAW DECK SHUFFLED
+========================================
+
+
+
+========================================
+DREW CARD 20
+========================================
+
+============================================================
+CARD #20 - Operation Goodwood
+============================================================
+
+RESOURCES
+  -2 Resource Loss Hitler Approval
+
+AIR POWER
+  +2 Jabos BRITISH XXX CORPS
+  Carpet Bombing
+
+ALLIED ADVANCES
+  BRITISH XXX CORPS (2)
+  BRITISH I CORPS (2)
+
+ACTIONS
+  Actions Available: 2
+  +1 Attack Strength BRITISH XXX CORPS
+  +2 Montgomery BRITISH I CORPS
+
+
+=========================================
+NORMANDY SOLITAIRE! D-Day to Falaise 1944
+=========================================
+
+List of Drawn Cards: (1, 2, 9, 5, 8, 12, 14, 16, 15, 3, 17, 18, 21, 20)
+Cards Drawn: 14
+Cards Remaining: 34
+Cards Remaining in Deck: 22
+
+Current Card: 20
+
+  Draw Card
+> Roll For Weather
+  Resources Phase
+  Deploy Non Panzer Div Reinforcements
+  Allied Advances Phase
+  Action Phase
+
+Press ENTER to perform next action
+Press G to see game summary
+
+
+========================================
+WEATHER ROLL
+========================================
+
+ROLL: 5
+RESULT: Clear
+
+========================================
+CARPET BOMBING
+========================================
+
+ROLL: 1
+DRM: 0
+RESULT: +2 ATTACK STRENGTH
+
+
+=========================================
+NORMANDY SOLITAIRE! D-Day to Falaise 1944
+=========================================
+
+List of Drawn Cards: (1, 2, 9, 5, 8, 12, 14, 16, 15, 3, 17, 18, 21, 20)
+Cards Drawn: 14
+Cards Remaining: 34
+Cards Remaining in Deck: 22
+
+Current Card: 20
+Current Weather: Clear
+
+  Draw Card
+  Roll For Weather
+> Resources Phase
+  Deploy Non Panzer Div Reinforcements
+  Allied Advances Phase
+  Action Phase
+
+Press ENTER to perform next action
+Press G to see game summary
+
+EVENT
+
+RESOURCE ADJUSTMENTS
+Hitler Approval: LOSE 2 (-1 -> -2)
+RESOURCE PHASE - weather is Clear
+
+
+========================================
+ATTACK STRENGTHS (ALLIED ARMIES)
+========================================
+BRITISH XXX CORPS -> ATTACK STRENGTH: 5 (+2 Jabo, +2 Carpet Bombing, +1 Card modifier) ; AIR SUPPORT=True
+BRITISH I CORPS -> ATTACK STRENGTH: 4 (+2 Carpet Bombing, +2 Montgomery) ; AIR SUPPORT=True
+
+
+========================================
+DEFENSE STRENGTHS (ALLIED ARMIES)
+========================================
+
+DEFENSE VALUES
+US 1st ARMY -> DEFENSE STRENGTH: 5 (+2 Terrain, +3 Army) ; AIR SUPPORT=False
+
+DEFENSE VALUES
+BRITISH XXX CORPS -> DEFENSE STRENGTH: 6 (+2 Terrain, +2 Army, +2 Jabo) ; AIR SUPPORT=True
+
+
+========================================
+REINFORCEMENTS
+========================================
+
+NONE
+
+
+=========================================
+NORMANDY SOLITAIRE! D-Day to Falaise 1944
+=========================================
+
+
+========================================
+HITLER APPROVAL HAS FALLEN TO -2
+YOU ARE RELIEVED OF COMMAND
+
+YOU LOSE!
+========================================
+
+========================================
+GAME OVER
+
+You lost!
+========================================
