@@ -1,0 +1,21 @@
+normandy_v1:
+  # Replay memory and training
+  replay_memory_size: 100000
+  mini_batch_size: 64
+  learning_rate: 0.0001
+  discount_factor: 0.99
+
+  # Exploration
+  epsilon_init: 1.0
+  epsilon_decay: 0.99995
+  epsilon_min: 0.05
+
+  # Target network
+  network_sync_rate: 1000
+
+  # Network architecture
+  hidden_layers: [512, 512, 512]
+
+  # DQN variants
+  enable_double_dqn: true
+  enable_dueling_dqn: false

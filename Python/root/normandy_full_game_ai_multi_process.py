@@ -4,17 +4,11 @@ import traceback
 from core.ai.ai_diagnostics_helper import save_exception_game, save_winning_game
 from core.ai.headless_env_manager import _REAL_PRINT_, save_log_to_disk
 import builtins
-import copy
 from random import shuffle, randint
 from collections import Counter
 
 from core.ai.headless_action_masks import execute_flat_move_other_units_from_strategic_reserve_ai
 
-from cards.decks import draw_deck, mid_deck, late_deck
-from core.actions.strategic_reserve_actions import (
-    do_move_other_unit_from_strategic_reserve,
-    get_other_units_in_strategic_reserve,
-)
 from core.allied_advances_phase import do_allied_advances_phase
 from core.allied_armies import (
     BRITISH_SECOND_ARMY,
@@ -34,8 +28,8 @@ from core.resources import (
     do_resource_phase_drms,
     do_resource_phase_reinforcements,
 )
+from core.map.map_model import hitler_approval_track
 from core.tables.carpet_bombing import get_carpet_bombing_result, ATTACK_CANCELLED
-from core.map.map_utilities import do_opening_setup
 from core.game_summary import print_game_summary
 from core.global_game_state import GlobalGameState
 
@@ -46,72 +40,34 @@ from core.ai.headless_env_manager import (
 from game_phases.action_phase import action_phase_fork
 
 import time
-import sys
 from concurrent.futures import ProcessPoolExecutor, as_completed
 import multiprocessing
 import os
+from core.card_utilities import (
+        calculate_attack_modifiers,
+        get_all_defending_armies,
+        get_armies_as_objects,
+        calculate_defense_modifiers,
+)
+from reset import reset_game
 # Enforce human visible terminal strings
 # Set both to False to play the manual (human) game
 
 start_time = time.perf_counter()
 
-# Save an untouched copy of the exact card lists at application startup
-_PRISTINE_DRAW = copy.deepcopy(draw_deck)
-_PRISTINE_MID = copy.deepcopy(mid_deck)
-_PRISTINE_LATE = copy.deepcopy(late_deck)
-
 
 def execute_single_game_run(i):
-    headless = True
-    GlobalGameState.headless = headless
-
-    if headless:
+    draw_deck, mid_deck, late_deck = reset_game() 
+    if GlobalGameState.headless:
         configure_headless_printing(i)
 
-    configure_automated_inputs(headless)
-
-    from core.card_utilities import (
-        calculate_attack_modifiers,
-        get_all_defending_armies,
-        get_armies_as_objects,
-        calculate_defense_modifiers,
-    )
-
-    # Analysis values for this game
-    card_28_draw_position = None
-    us_3_activation_position = None
-    us_3_activation_location = None
-
-    # --- DECK REFRESHMENT FIX ---
-    # --- DECK REFRESHMENT (FIXED FOR REFERENCES) ---
-
-    # 1. Clear out tracking parameters on your master control layout
-    GlobalGameState.cards_drawn = 0
-    GlobalGameState.drawn_cards = []
-    GlobalGameState.current_card = None
-    GlobalGameState.current_weather = None
-    GlobalGameState.current_step = 1
-    GlobalGameState.mid_deck_added = False
-    GlobalGameState.late_deck_added = False
-
-    # 2. Slice-assign the pristine card contents back to the active tracking lists
-    # This keeps the exact memory reference pointers untouched while resetting the items
-    import cards.decks
-
-    draw_deck = list(cards.decks.draw_deck)
-    mid_deck = list(cards.decks.mid_deck)
-    late_deck = list(cards.decks.late_deck)
-
+    configure_automated_inputs(GlobalGameState.headless)
     GAME_WON = "won"
     GAME_LOST = "lost"
     GAME_CONTINUES = None
-
-    do_opening_setup()
-
-    opening_cards = draw_deck[:2]
-    random_cards = draw_deck[2:]
-    shuffle(random_cards)
-    draw_deck[:] = opening_cards + random_cards
+    card_28_draw_position = None
+    us_3_activation_position = None
+    us_3_activation_location = None
 
     def print_attack_strengths(card, weather, carpet_bombing):
         print(CYAN)
@@ -137,7 +93,6 @@ def execute_single_game_run(i):
 
         print(RESET)
 
-    from core.map.map_model import hitler_approval_track
 
     def check_for_game_end():
         if hitler_approval_track.value == -2:

@@ -15,9 +15,9 @@ def strip_all_comments_and_docstrings(text):
 
 def flatten_codebase(root_dir, output_file):
     # Folders to skip
-    # exclude_dirs = {'.git', '__pycache__', 'venv', 'node_modules', '.vscode', 'dist', 'build', 'data'}
+    exclude_dirs = {'.git', '__pycache__', 'venv', 'node_modules', '.vscode', 'dist', 'build', 'data'}
 
-    exclude_dirs = {'.git', '__pycache__', 'venv', 'node_modules', '.vscode', 'dist', 'build', 'data','tests'}
+    # exclude_dirs = {'.git', '__pycache__', 'venv', 'node_modules', '.vscode', 'dist', 'build', 'data','tests'}
 
     # File extensions to skip
     exclude_exts = {'.pyc', '.exe', '.bin', '.pdf', '.jpg', '.png', '.zip', '.lock'}

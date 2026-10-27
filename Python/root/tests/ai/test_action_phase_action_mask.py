@@ -47,7 +47,9 @@ from core.german_units import (
 
 class TestActionMask(unittest.TestCase):
     def get_move_unit_action_id(self, unit, destination_space):
-        _, german_eligible_spaces = get_total_actions()
+        actions, german_eligible_spaces = get_total_actions()
+        
+        print("****** QUACK GET TOTAL ACTIONS = ",actions )
 
         unit_index = next(
             index
@@ -679,12 +681,13 @@ class TestActionMask(unittest.TestCase):
 
         mask = get_action_phase_action_mask()
 
-        fortified_mask = mask[562:589]
+        fortified_mask = mask[-27:]
 
         self.assertEqual(
             np.sum(fortified_mask),
             0.0
         )
+
 
     def test_fortified_villages_blocked_with_zero_normal_two_reserve(self):
         GlobalGameState.actions_left_this_turn = 0
@@ -692,7 +695,7 @@ class TestActionMask(unittest.TestCase):
 
         mask = get_action_phase_action_mask()
 
-        fortified_mask = mask[562:589]
+        fortified_mask = mask[-27:]
 
         self.assertEqual(
             np.sum(fortified_mask),

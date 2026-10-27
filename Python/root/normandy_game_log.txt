@@ -1,0 +1,5207 @@
+DQN DECISION | Turn: 1 | Decision: 1 | Type: action_phase | Action ID: 0 | Actions remaining: 0
+
+=========================================
+NORMANDY SOLITAIRE! D-Day to Falaise 1944
+=========================================
+
+List of Drawn Cards: []
+Cards Drawn: 0
+Cards Remaining: 48
+Cards Remaining in Deck: 24
+
+
+> Draw Card
+  Roll For Weather
+  Resources Phase
+  Deploy Non Panzer Div Reinforcements
+  Allied Advances Phase
+  Action Phase
+
+Press ENTER to perform next action
+Press G to see game summary
+Press L to load saved game
+Press Q to quit
+
+
+
+========================================
+DREW CARD 1
+========================================
+
+============================================================
+CARD #1 - D-Day Landings: First Wave
+============================================================
+
+RESOURCES
+  +1 Reinforcement Panzer Lehr
+  +1 Reinforcement 12th SS Panzer
+  -1 DRM Transport
+
+AIR POWER
+  N/A
+
+ALLIED ADVANCES
+  US 1st ARMY (3)
+  BRITISH XXX CORPS (2)
+  BRITISH I CORPS (2)
+
+ACTIONS
+  Actions Available: 1
+  No Modifiers
+
+
+=========================================
+NORMANDY SOLITAIRE! D-Day to Falaise 1944
+=========================================
+
+List of Drawn Cards: (1)
+Cards Drawn: 1
+Cards Remaining: 47
+Cards Remaining in Deck: 23
+
+Current Card: 1
+
+  Draw Card
+> Roll For Weather
+  Resources Phase
+  Deploy Non Panzer Div Reinforcements
+  Allied Advances Phase
+  Action Phase
+
+Press ENTER to perform next action
+Press G to see game summary
+
+
+========================================
+WEATHER ROLL
+========================================
+
+ROLL: 2
+RESULT: Partly Clear
+
+
+=========================================
+NORMANDY SOLITAIRE! D-Day to Falaise 1944
+=========================================
+
+List of Drawn Cards: (1)
+Cards Drawn: 1
+Cards Remaining: 47
+Cards Remaining in Deck: 23
+
+Current Card: 1
+Current Weather: Partly Clear
+
+  Draw Card
+  Roll For Weather
+> Resources Phase
+  Deploy Non Panzer Div Reinforcements
+  Allied Advances Phase
+  Action Phase
+
+Press ENTER to perform next action
+Press G to see game summary
+
+EVENT
+
+RESOURCE ADJUSTMENTS
+RESOURCE PHASE - weather is Partly Clear
+
+
+========================================
+ATTACK STRENGTHS (ALLIED ARMIES)
+========================================
+US 1st ARMY -> ATTACK STRENGTH: 0 () ; AIR SUPPORT=False
+BRITISH XXX CORPS -> ATTACK STRENGTH: 0 () ; AIR SUPPORT=False
+BRITISH I CORPS -> ATTACK STRENGTH: 0 () ; AIR SUPPORT=False
+
+
+========================================
+DEFENSE STRENGTHS (ALLIED ARMIES)
+========================================
+
+N/A
+
+
+
+========================================
+REINFORCEMENTS
+========================================
+
+Panzer Lehr -> IN TRANSIT
+12th SS Panzer -> IN TRANSIT
+
+
+
+=========================================
+NORMANDY SOLITAIRE! D-Day to Falaise 1944
+=========================================
+
+List of Drawn Cards: (1)
+Cards Drawn: 1
+Cards Remaining: 47
+Cards Remaining in Deck: 23
+
+Current Card: 1
+Current Weather: Partly Clear
+
+  Draw Card
+  Roll For Weather
+  Resources Phase
+> Deploy Non Panzer Div Reinforcements
+  Allied Advances Phase
+  Action Phase
+
+Press ENTER to perform next action
+Press G to see game summary
+
+=========================================
+NORMANDY SOLITAIRE! D-Day to Falaise 1944
+=========================================
+
+List of Drawn Cards: (1)
+Cards Drawn: 1
+Cards Remaining: 47
+Cards Remaining in Deck: 23
+
+Current Card: 1
+Current Weather: Partly Clear
+
+  Draw Card
+  Roll For Weather
+  Resources Phase
+  Deploy Non Panzer Div Reinforcements
+> Allied Advances Phase
+  Action Phase
+
+Press ENTER to perform next action
+Press G to see game summary
+
+
+========================================
+ALLIED ADVANCES PHASE
+========================================
+
+
+D-DAY LANDINGS FIRST WAVE
+=========================
+
+US 1st ARMY
+ROLL: 4
+>>>>>>> AFTER ALLIED ADVANCE -> ALLIED ARMY LOCATION:US 1st ARMY IS AT UTAH-OMAHA BEACH
+SUCCESS -> UTAH-OMAHA BEACH
+
+BRITISH XXX CORPS
+ROLL: 5
+>>>>>>> AFTER ALLIED ADVANCE -> ALLIED ARMY LOCATION:BRITISH XXX CORPS IS AT GOLD-JUNO-SWORD BEACH (BRITISH TRACK)
+SUCCESS -> GOLD-JUNO-SWORD BEACH (BRITISH TRACK)
+
+BRITISH I CORPS
+ROLL: 3
+>>>>>>> AFTER ALLIED ADVANCE -> ALLIED ARMY LOCATION:BRITISH I CORPS IS AT GOLD-JUNO-SWORD BEACH (CANADIAN TRACK)
+SUCCESS -> GOLD-JUNO-SWORD BEACH (CANADIAN TRACK)
+
+
+IN TRANSIT CHECK
+================
+Panzer Lehr
+ROLL: 5
+DRM: -1
+MODIFIED ROLL: 4
+CHECK: 4 <= Transport 5
+	=>Panzer Lehr MOVED TO STRATEGIC RESERVE
+IN TRANSIT CHECK
+================
+12th SS Panzer
+ROLL: 2
+DRM: -1
+MODIFIED ROLL: 1
+CHECK: 1 <= Transport 5
+	=>12th SS Panzer MOVED TO STRATEGIC RESERVE
+ACTIONS AVAILABLE: 1
+
+=========================================
+NORMANDY SOLITAIRE! D-Day to Falaise 1944
+=========================================
+
+List of Drawn Cards: (1)
+Cards Drawn: 1
+Cards Remaining: 47
+Cards Remaining in Deck: 23
+
+Current Card: 1
+Current Weather: Partly Clear
+
+  Draw Card
+  Roll For Weather
+  Resources Phase
+  Deploy Non Panzer Div Reinforcements
+  Allied Advances Phase
+> Action Phase
+
+Press ENTER to perform next action
+Press G to see game summary
+DQN DECISION | Turn: 2 | Decision: 2 | Type: action_phase | Action ID: 9 | Actions remaining: 1
+MOVE PANZER DIVISION FROM STRATEGIC RESERVE
+
+SELECT PANZER DIVISION
+
+1. Panzer Lehr (2)
+2. 12th SS Panzer (2)
+
+0. Return to main menu
+
+
+SELECTED: Panzer Lehr
+
+HITLER APPROVAL CHECK
+ROLL: 1
+HITLER APPROVAL: 6
+RESULT: PASSED
+
+Panzer Lehr moved to CHERBOURG
+
+=========================================
+NORMANDY SOLITAIRE! D-Day to Falaise 1944
+=========================================
+
+List of Drawn Cards: (1)
+Cards Drawn: 1
+Cards Remaining: 47
+Cards Remaining in Deck: 23
+
+Current Card: 1
+Current Weather: Partly Clear
+
+  Draw Card
+  Roll For Weather
+  Resources Phase
+  Deploy Non Panzer Div Reinforcements
+  Allied Advances Phase
+> Action Phase
+
+Press ENTER to perform next action
+Press G to see game summary
+
+=========================================
+NORMANDY SOLITAIRE! D-Day to Falaise 1944
+=========================================
+
+List of Drawn Cards: (1)
+Cards Drawn: 1
+Cards Remaining: 47
+Cards Remaining in Deck: 23
+
+Current Card: 1
+Current Weather: Partly Clear
+
+> Draw Card
+  Roll For Weather
+  Resources Phase
+  Deploy Non Panzer Div Reinforcements
+  Allied Advances Phase
+  Action Phase
+
+Press ENTER to perform next action
+Press G to see game summary
+Press S to save game
+Press L to load saved game
+Press Q to quit
+
+
+
+========================================
+DREW CARD 2
+========================================
+
+============================================================
+CARD #2 - D-Day Landings: Second Wave
+============================================================
+
+RESOURCES
+  -1 Resource Loss Hitler Approval
+  -1 Resource Loss Supply
+  -1 DRM Hitler Approval
+
+AIR POWER
+  N/A
+
+ALLIED ADVANCES
+  US 1st ARMY (3)
+  BRITISH XXX CORPS (2)
+  BRITISH I CORPS (2)
+
+ACTIONS
+  Actions Available: 3
+  +1 Attack Strength US 1st ARMY
+
+
+=========================================
+NORMANDY SOLITAIRE! D-Day to Falaise 1944
+=========================================
+
+List of Drawn Cards: (1, 2)
+Cards Drawn: 2
+Cards Remaining: 46
+Cards Remaining in Deck: 22
+
+Current Card: 2
+
+  Draw Card
+> Roll For Weather
+  Resources Phase
+  Deploy Non Panzer Div Reinforcements
+  Allied Advances Phase
+  Action Phase
+
+Press ENTER to perform next action
+Press G to see game summary
+
+
+========================================
+WEATHER ROLL
+========================================
+
+ROLL: 3
+RESULT: Partly Clear
+
+
+=========================================
+NORMANDY SOLITAIRE! D-Day to Falaise 1944
+=========================================
+
+List of Drawn Cards: (1, 2)
+Cards Drawn: 2
+Cards Remaining: 46
+Cards Remaining in Deck: 22
+
+Current Card: 2
+Current Weather: Partly Clear
+
+  Draw Card
+  Roll For Weather
+> Resources Phase
+  Deploy Non Panzer Div Reinforcements
+  Allied Advances Phase
+  Action Phase
+
+Press ENTER to perform next action
+Press G to see game summary
+
+EVENT
+
+RESOURCE ADJUSTMENTS
+Hitler Approval: LOSE 1 (6 -> 5)
+Supply: LOSE 1 (4 -> 3)
+RESOURCE PHASE - weather is Partly Clear
+
+
+========================================
+ATTACK STRENGTHS (ALLIED ARMIES)
+========================================
+US 1st ARMY -> ATTACK STRENGTH: 1 (+1 Card modifier) ; AIR SUPPORT=False
+BRITISH XXX CORPS -> ATTACK STRENGTH: 0 () ; AIR SUPPORT=False
+BRITISH I CORPS -> ATTACK STRENGTH: 0 () ; AIR SUPPORT=False
+
+
+========================================
+DEFENSE STRENGTHS (ALLIED ARMIES)
+========================================
+
+N/A
+
+
+DEFENSE VALUES
+US 1st ARMY -> DEFENSE STRENGTH: 5 (+2 Terrain, +3 Army) ; AIR SUPPORT=False
+
+DEFENSE VALUES
+BRITISH XXX CORPS -> DEFENSE STRENGTH: 4 (+2 Terrain, +2 Army) ; AIR SUPPORT=False
+
+DEFENSE VALUES
+BRITISH I CORPS -> DEFENSE STRENGTH: 4 (+2 Terrain, +2 Army) ; AIR SUPPORT=False
+
+
+========================================
+REINFORCEMENTS
+========================================
+
+NONE
+
+
+=========================================
+NORMANDY SOLITAIRE! D-Day to Falaise 1944
+=========================================
+
+List of Drawn Cards: (1, 2)
+Cards Drawn: 2
+Cards Remaining: 46
+Cards Remaining in Deck: 22
+
+Current Card: 2
+Current Weather: Partly Clear
+
+  Draw Card
+  Roll For Weather
+  Resources Phase
+> Deploy Non Panzer Div Reinforcements
+  Allied Advances Phase
+  Action Phase
+
+Press ENTER to perform next action
+Press G to see game summary
+
+=========================================
+NORMANDY SOLITAIRE! D-Day to Falaise 1944
+=========================================
+
+List of Drawn Cards: (1, 2)
+Cards Drawn: 2
+Cards Remaining: 46
+Cards Remaining in Deck: 22
+
+Current Card: 2
+Current Weather: Partly Clear
+
+  Draw Card
+  Roll For Weather
+  Resources Phase
+  Deploy Non Panzer Div Reinforcements
+> Allied Advances Phase
+  Action Phase
+
+Press ENTER to perform next action
+Press G to see game summary
+
+
+========================================
+ALLIED ADVANCES PHASE
+========================================
+
+
+D-DAY LANDINGS SECOND WAVE
+==========================
+
+
+ALLIED ATTACKS
+==============
+
+
+
+US 1st ARMY ADVANCING FROM UTAH-OMAHA BEACH
+===========================================
+
+GERMAN DEFENSE: CARENTAN
+TERRAIN: 2
+Nebelwerfer: 1
+TOTAL DEFENSE: 3
+
+US 1st ARMY
+TARGET: CARENTAN
+ATTACK STRENGTH: 1
+DEFENSE STRENGTH: 3
+
+DIE ROLL: 2
+ATTACK TOTAL: 3
+
+
+GERMAN LOSSES
+=============
+>>>> GlobalGameState.german_casualty_strategy= Strategy.AI
+ELIMINATED: Nebelwerfer
+ALLIED DEFEAT
+
+
+
+BRITISH XXX CORPS ADVANCING FROM GOLD-JUNO-SWORD BEACH (BRITISH TRACK)
+======================================================================
+
+GERMAN DEFENSE: BAYEUX
+TERRAIN: 1
+21st Panzer: 2
+Nebelwerfer: 1
+Nebelwerfer: 1
+Flak 88: 2
+TOTAL DEFENSE: 7
+
+BRITISH XXX CORPS
+TARGET: BAYEUX
+ATTACK STRENGTH: 0
+DEFENSE STRENGTH: 7
+
+DIE ROLL: 2
+ATTACK TOTAL: 2
+
+
+GERMAN LOSSES
+=============
+>>>> GlobalGameState.german_casualty_strategy= Strategy.AI
+REDUCED: Flak 88 now 1
+ALLIED DEFEAT
+
+
+
+BRITISH I CORPS ADVANCING FROM GOLD-JUNO-SWORD BEACH (CANADIAN TRACK)
+=====================================================================
+
+GERMAN DEFENSE: LEBISEY WOOD
+TERRAIN: 2
+Nebelwerfer: 1
+Nebelwerfer: 1
+Flak 88: 2
+TOTAL DEFENSE: 6
+
+BRITISH I CORPS
+TARGET: LEBISEY WOOD
+ATTACK STRENGTH: 0
+DEFENSE STRENGTH: 6
+
+DIE ROLL: 1
+ATTACK TOTAL: 1
+
+
+GERMAN LOSSES
+=============
+>>>> GlobalGameState.german_casualty_strategy= Strategy.AI
+ELIMINATED: Nebelwerfer
+ALLIED DEFEAT (UNMODIFIED 1)
+
+
+ACTIONS AVAILABLE: 3
+
+=========================================
+NORMANDY SOLITAIRE! D-Day to Falaise 1944
+=========================================
+
+List of Drawn Cards: (1, 2)
+Cards Drawn: 2
+Cards Remaining: 46
+Cards Remaining in Deck: 22
+
+Current Card: 2
+Current Weather: Partly Clear
+
+  Draw Card
+  Roll For Weather
+  Resources Phase
+  Deploy Non Panzer Div Reinforcements
+  Allied Advances Phase
+> Action Phase
+
+Press ENTER to perform next action
+Press G to see game summary
+DQN DECISION | Turn: 3 | Decision: 3 | Type: action_phase | Action ID: 1013 | Actions remaining: 3
+PLACE / UPGRADE FORTIFIED VILLAGES
+
+FLERS FORTIFIED VILLAGES +1
+
+ACTIONS USED: 3
+ACTIONS REMAINING: 0
+RESERVE ACTIONS USED: 0
+RESERVE ACTIONS REMAINING: 0
+
+=========================================
+NORMANDY SOLITAIRE! D-Day to Falaise 1944
+=========================================
+
+List of Drawn Cards: (1, 2)
+Cards Drawn: 2
+Cards Remaining: 46
+Cards Remaining in Deck: 22
+
+Current Card: 2
+Current Weather: Partly Clear
+
+  Draw Card
+  Roll For Weather
+  Resources Phase
+  Deploy Non Panzer Div Reinforcements
+  Allied Advances Phase
+> Action Phase
+
+Press ENTER to perform next action
+Press G to see game summary
+
+=========================================
+NORMANDY SOLITAIRE! D-Day to Falaise 1944
+=========================================
+
+List of Drawn Cards: (1, 2)
+Cards Drawn: 2
+Cards Remaining: 46
+Cards Remaining in Deck: 22
+
+Current Card: 2
+Current Weather: Partly Clear
+
+> Draw Card
+  Roll For Weather
+  Resources Phase
+  Deploy Non Panzer Div Reinforcements
+  Allied Advances Phase
+  Action Phase
+
+Press ENTER to perform next action
+Press G to see game summary
+Press S to save game
+Press L to load saved game
+Press Q to quit
+
+
+
+========================================
+DREW CARD 15
+========================================
+
+============================================================
+CARD #15 - Operation Windsor
+============================================================
+
+RESOURCES
+  +1 Reinforcement 10th SS Panzer
+  -1 Resource Loss Hitler Approval
+  -2 Resource Loss Supply
+
+AIR POWER
+  +1 Jabos BRITISH XXX CORPS
+  +1 Jabos BRITISH I CORPS
+
+ALLIED ADVANCES
+  BRITISH XXX CORPS (2)
+  BRITISH I CORPS (2)
+
+ACTIONS
+  Actions Available: 4
+  +1 Attack Strength BRITISH XXX CORPS
+  +1 Attack Strength BRITISH I CORPS
+
+
+=========================================
+NORMANDY SOLITAIRE! D-Day to Falaise 1944
+=========================================
+
+List of Drawn Cards: (1, 2, 15)
+Cards Drawn: 3
+Cards Remaining: 45
+Cards Remaining in Deck: 21
+
+Current Card: 15
+
+  Draw Card
+> Roll For Weather
+  Resources Phase
+  Deploy Non Panzer Div Reinforcements
+  Allied Advances Phase
+  Action Phase
+
+Press ENTER to perform next action
+Press G to see game summary
+
+
+========================================
+WEATHER ROLL
+========================================
+
+ROLL: 4
+RESULT: Clear
+
+
+=========================================
+NORMANDY SOLITAIRE! D-Day to Falaise 1944
+=========================================
+
+List of Drawn Cards: (1, 2, 15)
+Cards Drawn: 3
+Cards Remaining: 45
+Cards Remaining in Deck: 21
+
+Current Card: 15
+Current Weather: Clear
+
+  Draw Card
+  Roll For Weather
+> Resources Phase
+  Deploy Non Panzer Div Reinforcements
+  Allied Advances Phase
+  Action Phase
+
+Press ENTER to perform next action
+Press G to see game summary
+
+EVENT
+
+RESOURCE ADJUSTMENTS
+Hitler Approval: LOSE 1 (5 -> 4)
+Supply: LOSE 2 (3 -> 1)
+RESOURCE PHASE - weather is Clear
+
+
+========================================
+ATTACK STRENGTHS (ALLIED ARMIES)
+========================================
+BRITISH XXX CORPS -> ATTACK STRENGTH: 2 (+1 Jabo, +1 Card modifier) ; AIR SUPPORT=True
+BRITISH I CORPS -> ATTACK STRENGTH: 2 (+1 Jabo, +1 Card modifier) ; AIR SUPPORT=True
+
+
+========================================
+DEFENSE STRENGTHS (ALLIED ARMIES)
+========================================
+
+N/A
+
+
+DEFENSE VALUES
+US 1st ARMY -> DEFENSE STRENGTH: 5 (+2 Terrain, +3 Army) ; AIR SUPPORT=False
+
+DEFENSE VALUES
+BRITISH XXX CORPS -> DEFENSE STRENGTH: 5 (+2 Terrain, +2 Army, +1 Jabo) ; AIR SUPPORT=True
+
+DEFENSE VALUES
+BRITISH I CORPS -> DEFENSE STRENGTH: 5 (+2 Terrain, +2 Army, +1 Jabo) ; AIR SUPPORT=True
+
+
+========================================
+REINFORCEMENTS
+========================================
+
+10th SS Panzer -> IN TRANSIT
+
+
+
+=========================================
+NORMANDY SOLITAIRE! D-Day to Falaise 1944
+=========================================
+
+List of Drawn Cards: (1, 2, 15)
+Cards Drawn: 3
+Cards Remaining: 45
+Cards Remaining in Deck: 21
+
+Current Card: 15
+Current Weather: Clear
+
+  Draw Card
+  Roll For Weather
+  Resources Phase
+> Deploy Non Panzer Div Reinforcements
+  Allied Advances Phase
+  Action Phase
+
+Press ENTER to perform next action
+Press G to see game summary
+
+=========================================
+NORMANDY SOLITAIRE! D-Day to Falaise 1944
+=========================================
+
+List of Drawn Cards: (1, 2, 15)
+Cards Drawn: 3
+Cards Remaining: 45
+Cards Remaining in Deck: 21
+
+Current Card: 15
+Current Weather: Clear
+
+  Draw Card
+  Roll For Weather
+  Resources Phase
+  Deploy Non Panzer Div Reinforcements
+> Allied Advances Phase
+  Action Phase
+
+Press ENTER to perform next action
+Press G to see game summary
+
+
+========================================
+ALLIED ADVANCES PHASE
+========================================
+
+ADVANCING ARMIES
+ - BRITISH XXX CORPS
+ - BRITISH I CORPS
+
+ALLIED ATTACKS
+==============
+
+
+
+BRITISH XXX CORPS ADVANCING FROM GOLD-JUNO-SWORD BEACH (BRITISH TRACK)
+======================================================================
+
+GERMAN DEFENSE: BAYEUX
+TERRAIN: 1
+21st Panzer: 2
+Nebelwerfer: 1
+Nebelwerfer: 1
+Flak 88: 1
+TOTAL DEFENSE: 6
+
+BRITISH XXX CORPS
+TARGET: BAYEUX
+ATTACK STRENGTH: 2
+DEFENSE STRENGTH: 6
+
+DIE ROLL: 4
+ATTACK TOTAL: 6
+
+
+GERMAN LOSSES
+=============
+>>>> GlobalGameState.german_casualty_strategy= Strategy.AI
+ELIMINATED: Nebelwerfer
+ALLIED DEFEAT
+
+
+
+BRITISH I CORPS ADVANCING FROM GOLD-JUNO-SWORD BEACH (CANADIAN TRACK)
+=====================================================================
+
+GERMAN DEFENSE: LEBISEY WOOD
+TERRAIN: 2
+Nebelwerfer: 1
+Flak 88: 2
+TOTAL DEFENSE: 5
+
+BRITISH I CORPS
+TARGET: LEBISEY WOOD
+ATTACK STRENGTH: 2
+DEFENSE STRENGTH: 5
+
+DIE ROLL: 5
+ATTACK TOTAL: 7
+
+
+GERMAN LOSSES
+=============
+>>>> GlobalGameState.german_casualty_strategy= Strategy.AI
+REDUCED: Flak 88 now 1
+ALLIED VICTORY
+GERMANS RETREAT FROM LEBISEY WOOD TO CAEN
+>>>>>>> AFTER ALLIED ADVANCE -> ALLIED ARMY LOCATION:BRITISH I CORPS IS AT LEBISEY WOOD
+BRITISH I CORPS -> LEBISEY WOOD
+
+
+IN TRANSIT CHECK
+================
+10th SS Panzer
+ROLL: 6
+DRM: +0
+MODIFIED ROLL: 6
+CHECK: 6 <= Transport 5
+	=>10th SS Panzer REMAINS IN TRANSIT
+ACTIONS AVAILABLE: 4
+
+=========================================
+NORMANDY SOLITAIRE! D-Day to Falaise 1944
+=========================================
+
+List of Drawn Cards: (1, 2, 15)
+Cards Drawn: 3
+Cards Remaining: 45
+Cards Remaining in Deck: 21
+
+Current Card: 15
+Current Weather: Clear
+
+  Draw Card
+  Roll For Weather
+  Resources Phase
+  Deploy Non Panzer Div Reinforcements
+  Allied Advances Phase
+> Action Phase
+
+Press ENTER to perform next action
+Press G to see game summary
+DQN DECISION | Turn: 4 | Decision: 4 | Type: action_phase | Action ID: 1005 | Actions remaining: 4
+PLACE / UPGRADE FORTIFIED VILLAGES
+
+CARENTAN FORTIFIED VILLAGES +1
+
+ACTIONS USED: 3
+ACTIONS REMAINING: 1
+RESERVE ACTIONS USED: 0
+RESERVE ACTIONS REMAINING: 0
+DQN DECISION | Turn: 4 | Decision: 5 | Type: action_phase | Action ID: 50 | Actions remaining: 1
+MOVE PANZER DIVISION FROM STRATEGIC RESERVE
+
+SELECT PANZER DIVISION
+
+1. 12th SS Panzer (2)
+
+0. Return to main menu
+
+
+SELECTED: 12th SS Panzer
+
+HITLER APPROVAL CHECK
+ROLL: 5
+HITLER APPROVAL: 4
+RESULT: FAILED
+
+=========================================
+NORMANDY SOLITAIRE! D-Day to Falaise 1944
+=========================================
+
+List of Drawn Cards: (1, 2, 15)
+Cards Drawn: 3
+Cards Remaining: 45
+Cards Remaining in Deck: 21
+
+Current Card: 15
+Current Weather: Clear
+
+  Draw Card
+  Roll For Weather
+  Resources Phase
+  Deploy Non Panzer Div Reinforcements
+  Allied Advances Phase
+> Action Phase
+
+Press ENTER to perform next action
+Press G to see game summary
+
+=========================================
+NORMANDY SOLITAIRE! D-Day to Falaise 1944
+=========================================
+
+List of Drawn Cards: (1, 2, 15)
+Cards Drawn: 3
+Cards Remaining: 45
+Cards Remaining in Deck: 21
+
+Current Card: 15
+Current Weather: Clear
+
+> Draw Card
+  Roll For Weather
+  Resources Phase
+  Deploy Non Panzer Div Reinforcements
+  Allied Advances Phase
+  Action Phase
+
+Press ENTER to perform next action
+Press G to see game summary
+Press S to save game
+Press L to load saved game
+Press Q to quit
+
+
+
+========================================
+DREW CARD 24
+========================================
+
+============================================================
+CARD #24 - Operation Spring
+============================================================
+
+RESOURCES
+  -2 Resource Loss Supply
+
+AIR POWER
+  +1 Jabos BRITISH XXX CORPS
+  +1 Jabos BRITISH I CORPS
+
+ALLIED ADVANCES
+  BRITISH XXX CORPS (2)
+  BRITISH I CORPS (2)
+
+ACTIONS
+  Actions Available: 2
+  +1 Attack Strength BRITISH XXX CORPS
+  +1 Attack Strength BRITISH I CORPS
+
+
+=========================================
+NORMANDY SOLITAIRE! D-Day to Falaise 1944
+=========================================
+
+List of Drawn Cards: (1, 2, 15, 24)
+Cards Drawn: 4
+Cards Remaining: 44
+Cards Remaining in Deck: 20
+
+Current Card: 24
+
+  Draw Card
+> Roll For Weather
+  Resources Phase
+  Deploy Non Panzer Div Reinforcements
+  Allied Advances Phase
+  Action Phase
+
+Press ENTER to perform next action
+Press G to see game summary
+
+
+========================================
+WEATHER ROLL
+========================================
+
+ROLL: 3
+RESULT: Partly Clear
+
+
+=========================================
+NORMANDY SOLITAIRE! D-Day to Falaise 1944
+=========================================
+
+List of Drawn Cards: (1, 2, 15, 24)
+Cards Drawn: 4
+Cards Remaining: 44
+Cards Remaining in Deck: 20
+
+Current Card: 24
+Current Weather: Partly Clear
+
+  Draw Card
+  Roll For Weather
+> Resources Phase
+  Deploy Non Panzer Div Reinforcements
+  Allied Advances Phase
+  Action Phase
+
+Press ENTER to perform next action
+Press G to see game summary
+
+EVENT
+
+RESOURCE ADJUSTMENTS
+Supply: LOSE 2 (1 -> 0)
+RESOURCE PHASE - weather is Partly Clear
+
+
+========================================
+ATTACK STRENGTHS (ALLIED ARMIES)
+========================================
+BRITISH XXX CORPS -> ATTACK STRENGTH: 2 (+1 Jabo, +1 Card modifier) ; AIR SUPPORT=True
+BRITISH I CORPS -> ATTACK STRENGTH: 1 (+1 Card modifier) ; AIR SUPPORT=False
+
+
+========================================
+DEFENSE STRENGTHS (ALLIED ARMIES)
+========================================
+
+N/A
+
+
+DEFENSE VALUES
+US 1st ARMY -> DEFENSE STRENGTH: 5 (+2 Terrain, +3 Army) ; AIR SUPPORT=False
+
+DEFENSE VALUES
+BRITISH XXX CORPS -> DEFENSE STRENGTH: 5 (+2 Terrain, +2 Army, +1 Jabo) ; AIR SUPPORT=True
+
+DEFENSE VALUES
+BRITISH I CORPS -> DEFENSE STRENGTH: 4 (+2 Terrain, +2 Army) ; AIR SUPPORT=False
+
+
+========================================
+REINFORCEMENTS
+========================================
+
+NONE
+
+
+=========================================
+NORMANDY SOLITAIRE! D-Day to Falaise 1944
+=========================================
+
+List of Drawn Cards: (1, 2, 15, 24)
+Cards Drawn: 4
+Cards Remaining: 44
+Cards Remaining in Deck: 20
+
+Current Card: 24
+Current Weather: Partly Clear
+
+  Draw Card
+  Roll For Weather
+  Resources Phase
+> Deploy Non Panzer Div Reinforcements
+  Allied Advances Phase
+  Action Phase
+
+Press ENTER to perform next action
+Press G to see game summary
+
+=========================================
+NORMANDY SOLITAIRE! D-Day to Falaise 1944
+=========================================
+
+List of Drawn Cards: (1, 2, 15, 24)
+Cards Drawn: 4
+Cards Remaining: 44
+Cards Remaining in Deck: 20
+
+Current Card: 24
+Current Weather: Partly Clear
+
+  Draw Card
+  Roll For Weather
+  Resources Phase
+  Deploy Non Panzer Div Reinforcements
+> Allied Advances Phase
+  Action Phase
+
+Press ENTER to perform next action
+Press G to see game summary
+
+
+========================================
+ALLIED ADVANCES PHASE
+========================================
+
+ADVANCING ARMIES
+ - BRITISH XXX CORPS
+ - BRITISH I CORPS
+
+ALLIED ATTACKS
+==============
+
+
+
+BRITISH XXX CORPS ADVANCING FROM GOLD-JUNO-SWORD BEACH (BRITISH TRACK)
+======================================================================
+
+GERMAN DEFENSE: BAYEUX
+TERRAIN: 1
+21st Panzer: 2
+Nebelwerfer: 1
+Flak 88: 1
+TOTAL DEFENSE: 5
+
+BRITISH XXX CORPS
+TARGET: BAYEUX
+ATTACK STRENGTH: 2
+DEFENSE STRENGTH: 5
+
+DIE ROLL: 1
+ATTACK TOTAL: 3
+
+
+GERMAN LOSSES
+=============
+>>>> GlobalGameState.german_casualty_strategy= Strategy.AI
+ELIMINATED: Flak 88
+ALLIED DEFEAT (UNMODIFIED 1)
+
+
+
+BRITISH I CORPS ADVANCING FROM LEBISEY WOOD
+===========================================
+
+GERMAN DEFENSE: CAEN
+TERRAIN: 4
+Nebelwerfer: 1
+Flak 88: 1
+TOTAL DEFENSE: 6
+
+BRITISH I CORPS
+TARGET: CAEN
+ATTACK STRENGTH: 1
+DEFENSE STRENGTH: 6
+
+DIE ROLL: 5
+ATTACK TOTAL: 6
+
+
+GERMAN LOSSES
+=============
+>>>> GlobalGameState.german_casualty_strategy= Strategy.AI
+ELIMINATED: Nebelwerfer
+ALLIED DEFEAT
+
+
+IN TRANSIT CHECK
+================
+10th SS Panzer
+ROLL: 2
+DRM: +0
+MODIFIED ROLL: 2
+CHECK: 2 <= Transport 5
+	=>10th SS Panzer MOVED TO STRATEGIC RESERVE
+ACTIONS AVAILABLE: 2
+
+=========================================
+NORMANDY SOLITAIRE! D-Day to Falaise 1944
+=========================================
+
+List of Drawn Cards: (1, 2, 15, 24)
+Cards Drawn: 4
+Cards Remaining: 44
+Cards Remaining in Deck: 20
+
+Current Card: 24
+Current Weather: Partly Clear
+
+  Draw Card
+  Roll For Weather
+  Resources Phase
+  Deploy Non Panzer Div Reinforcements
+  Allied Advances Phase
+> Action Phase
+
+Press ENTER to perform next action
+Press G to see game summary
+Supply is 0 - 21st Panzer Cannot Attack
+DQN DECISION | Turn: 5 | Decision: 6 | Type: action_phase | Action ID: 60 | Actions remaining: 2
+Supply is 0 - 21st Panzer Cannot Attack
+Supply is 0 - 21st Panzer Cannot Attack
+MOVE PANZER DIVISION FROM STRATEGIC RESERVE
+
+SELECT PANZER DIVISION
+
+1. 12th SS Panzer (2)
+2. 10th SS Panzer (2)
+
+0. Return to main menu
+
+
+SELECTED: 12th SS Panzer
+
+HITLER APPROVAL CHECK
+ROLL: 2
+HITLER APPROVAL: 4
+RESULT: PASSED
+
+12th SS Panzer moved to ARGENTAN
+Supply is 0 - 21st Panzer Cannot Attack
+DQN DECISION | Turn: 5 | Decision: 7 | Type: action_phase | Action ID: 729 | Actions remaining: 1
+Supply is 0 - 21st Panzer Cannot Attack
+Supply is 0 - 21st Panzer Cannot Attack
+MOVE UNIT ONE SPACE
+
+
+SELECT DESTINATION FOR 12th SS Panzer
+
+
+12th SS Panzer MOVED FROM ARGENTAN TO FALAISE GAP
+ACTIONS REMAINING: 0
+
+=========================================
+NORMANDY SOLITAIRE! D-Day to Falaise 1944
+=========================================
+
+List of Drawn Cards: (1, 2, 15, 24)
+Cards Drawn: 4
+Cards Remaining: 44
+Cards Remaining in Deck: 20
+
+Current Card: 24
+Current Weather: Partly Clear
+
+  Draw Card
+  Roll For Weather
+  Resources Phase
+  Deploy Non Panzer Div Reinforcements
+  Allied Advances Phase
+> Action Phase
+
+Press ENTER to perform next action
+Press G to see game summary
+
+=========================================
+NORMANDY SOLITAIRE! D-Day to Falaise 1944
+=========================================
+
+List of Drawn Cards: (1, 2, 15, 24)
+Cards Drawn: 4
+Cards Remaining: 44
+Cards Remaining in Deck: 20
+
+Current Card: 24
+Current Weather: Partly Clear
+
+> Draw Card
+  Roll For Weather
+  Resources Phase
+  Deploy Non Panzer Div Reinforcements
+  Allied Advances Phase
+  Action Phase
+
+Press ENTER to perform next action
+Press G to see game summary
+Press S to save game
+Press L to load saved game
+Press Q to quit
+
+
+
+========================================
+DREW CARD 14
+========================================
+
+============================================================
+CARD #14 - Operation Epsom
+============================================================
+
+RESOURCES
+  +1 Reinforcement 9th SS Panzer
+  +1 DRM Transport
+
+AIR POWER
+  +1 Jabos BRITISH XXX CORPS
+  +1 Jabos BRITISH I CORPS
+  Carpet Bombing
+
+ALLIED ADVANCES
+  BRITISH XXX CORPS (2)
+  BRITISH I CORPS (2)
+
+ACTIONS
+  Actions Available: 4
+  +1 Attack Strength BRITISH XXX CORPS
+  +1 Attack Strength BRITISH I CORPS
+  +2 Montgomery BRITISH XXX CORPS
+
+
+=========================================
+NORMANDY SOLITAIRE! D-Day to Falaise 1944
+=========================================
+
+List of Drawn Cards: (1, 2, 15, 24, 14)
+Cards Drawn: 5
+Cards Remaining: 43
+Cards Remaining in Deck: 19
+
+Current Card: 14
+
+  Draw Card
+> Roll For Weather
+  Resources Phase
+  Deploy Non Panzer Div Reinforcements
+  Allied Advances Phase
+  Action Phase
+
+Press ENTER to perform next action
+Press G to see game summary
+
+
+========================================
+WEATHER ROLL
+========================================
+
+ROLL: 1
+RESULT: Overcast
+
+
+=========================================
+NORMANDY SOLITAIRE! D-Day to Falaise 1944
+=========================================
+
+List of Drawn Cards: (1, 2, 15, 24, 14)
+Cards Drawn: 5
+Cards Remaining: 43
+Cards Remaining in Deck: 19
+
+Current Card: 14
+Current Weather: Overcast
+
+  Draw Card
+  Roll For Weather
+> Resources Phase
+  Deploy Non Panzer Div Reinforcements
+  Allied Advances Phase
+  Action Phase
+
+Press ENTER to perform next action
+Press G to see game summary
+
+EVENT
+
+RESOURCE ADJUSTMENTS
+RESOURCE PHASE - weather is Overcast
+
+
+========================================
+ATTACK STRENGTHS (ALLIED ARMIES)
+========================================
+BRITISH XXX CORPS -> ATTACK STRENGTH: 3 (+1 Card modifier, +2 Montgomery) ; AIR SUPPORT=False
+BRITISH I CORPS -> ATTACK STRENGTH: 1 (+1 Card modifier) ; AIR SUPPORT=False
+
+
+========================================
+DEFENSE STRENGTHS (ALLIED ARMIES)
+========================================
+
+N/A
+
+
+DEFENSE VALUES
+US 1st ARMY -> DEFENSE STRENGTH: 5 (+2 Terrain, +3 Army) ; AIR SUPPORT=False
+
+DEFENSE VALUES
+APPLY +2: Montgomery
+BRITISH XXX CORPS -> DEFENSE STRENGTH: 6 (+2 Terrain, +2 Army, +2 Montgomery) ; AIR SUPPORT=False
+
+DEFENSE VALUES
+BRITISH I CORPS -> DEFENSE STRENGTH: 4 (+2 Terrain, +2 Army) ; AIR SUPPORT=False
+
+
+========================================
+REINFORCEMENTS
+========================================
+
+9th SS Panzer -> IN TRANSIT
+
+
+
+=========================================
+NORMANDY SOLITAIRE! D-Day to Falaise 1944
+=========================================
+
+List of Drawn Cards: (1, 2, 15, 24, 14)
+Cards Drawn: 5
+Cards Remaining: 43
+Cards Remaining in Deck: 19
+
+Current Card: 14
+Current Weather: Overcast
+
+  Draw Card
+  Roll For Weather
+  Resources Phase
+> Deploy Non Panzer Div Reinforcements
+  Allied Advances Phase
+  Action Phase
+
+Press ENTER to perform next action
+Press G to see game summary
+
+=========================================
+NORMANDY SOLITAIRE! D-Day to Falaise 1944
+=========================================
+
+List of Drawn Cards: (1, 2, 15, 24, 14)
+Cards Drawn: 5
+Cards Remaining: 43
+Cards Remaining in Deck: 19
+
+Current Card: 14
+Current Weather: Overcast
+
+  Draw Card
+  Roll For Weather
+  Resources Phase
+  Deploy Non Panzer Div Reinforcements
+> Allied Advances Phase
+  Action Phase
+
+Press ENTER to perform next action
+Press G to see game summary
+
+
+========================================
+ALLIED ADVANCES PHASE
+========================================
+
+ADVANCING ARMIES
+ - BRITISH XXX CORPS
+ - BRITISH I CORPS
+
+ALLIED ATTACKS
+==============
+
+
+
+BRITISH XXX CORPS ADVANCING FROM GOLD-JUNO-SWORD BEACH (BRITISH TRACK)
+======================================================================
+
+GERMAN DEFENSE: BAYEUX
+TERRAIN: 1
+21st Panzer: 2
+Nebelwerfer: 1
+TOTAL DEFENSE: 4
+
+BRITISH XXX CORPS
+TARGET: BAYEUX
+ATTACK STRENGTH: 3
+DEFENSE STRENGTH: 4
+
+DIE ROLL: 1
+ATTACK TOTAL: 4
+
+
+GERMAN LOSSES
+=============
+>>>> GlobalGameState.german_casualty_strategy= Strategy.AI
+ELIMINATED: Nebelwerfer
+ALLIED DEFEAT (UNMODIFIED 1)
+
+
+
+BRITISH I CORPS ADVANCING FROM LEBISEY WOOD
+===========================================
+
+GERMAN DEFENSE: CAEN
+TERRAIN: 4
+Flak 88: 1
+TOTAL DEFENSE: 5
+
+BRITISH I CORPS
+TARGET: CAEN
+ATTACK STRENGTH: 1
+DEFENSE STRENGTH: 5
+
+DIE ROLL: 2
+ATTACK TOTAL: 3
+
+
+GERMAN LOSSES
+=============
+>>>> GlobalGameState.german_casualty_strategy= Strategy.AI
+ELIMINATED: Flak 88
+ALLIED DEFEAT
+
+
+IN TRANSIT CHECK
+================
+9th SS Panzer
+ROLL: 3
+DRM: +1
+MODIFIED ROLL: 4
+CHECK: 4 <= Transport 5
+	=>9th SS Panzer MOVED TO STRATEGIC RESERVE
+ACTIONS AVAILABLE: 4
+
+=========================================
+NORMANDY SOLITAIRE! D-Day to Falaise 1944
+=========================================
+
+List of Drawn Cards: (1, 2, 15, 24, 14)
+Cards Drawn: 5
+Cards Remaining: 43
+Cards Remaining in Deck: 19
+
+Current Card: 14
+Current Weather: Overcast
+
+  Draw Card
+  Roll For Weather
+  Resources Phase
+  Deploy Non Panzer Div Reinforcements
+  Allied Advances Phase
+> Action Phase
+
+Press ENTER to perform next action
+Press G to see game summary
+Supply is 0 - 21st Panzer Cannot Attack
+DQN DECISION | Turn: 6 | Decision: 8 | Type: action_phase | Action ID: 92 | Actions remaining: 4
+Supply is 0 - 21st Panzer Cannot Attack
+Supply is 0 - 21st Panzer Cannot Attack
+MOVE PANZER DIVISION FROM STRATEGIC RESERVE
+
+SELECT PANZER DIVISION
+
+1. 10th SS Panzer (2)
+2. 9th SS Panzer (2)
+
+0. Return to main menu
+
+
+SELECTED: 9th SS Panzer
+
+HITLER APPROVAL CHECK
+ROLL: 6
+HITLER APPROVAL: 4
+RESULT: FAILED
+Supply is 0 - 21st Panzer Cannot Attack
+DQN DECISION | Turn: 6 | Decision: 9 | Type: action_phase | Action ID: 866 | Actions remaining: 3
+Supply is 0 - 21st Panzer Cannot Attack
+Supply is 0 - 21st Panzer Cannot Attack
+MOVE UNIT ONE SPACE
+
+
+SELECT DESTINATION FOR 21st Panzer
+
+
+21st Panzer MOVED FROM BAYEUX TO TILLY
+ACTIONS REMAINING: 2
+DQN DECISION | Turn: 6 | Decision: 10 | Type: action_phase | Action ID: 99 | Actions remaining: 2
+MOVE PANZER DIVISION FROM STRATEGIC RESERVE
+
+SELECT PANZER DIVISION
+
+1. 10th SS Panzer (2)
+2. 9th SS Panzer (2)
+
+0. Return to main menu
+
+
+SELECTED: 9th SS Panzer
+
+HITLER APPROVAL CHECK
+ROLL: 4
+HITLER APPROVAL: 4
+RESULT: PASSED
+
+9th SS Panzer moved to TILLY
+DQN DECISION | Turn: 6 | Decision: 11 | Type: action_phase | Action ID: 116 | Actions remaining: 1
+MOVE PANZER DIVISION FROM STRATEGIC RESERVE
+
+SELECT PANZER DIVISION
+
+1. 10th SS Panzer (2)
+
+0. Return to main menu
+
+
+SELECTED: 10th SS Panzer
+
+HITLER APPROVAL CHECK
+ROLL: 6
+HITLER APPROVAL: 4
+RESULT: FAILED
+
+=========================================
+NORMANDY SOLITAIRE! D-Day to Falaise 1944
+=========================================
+
+List of Drawn Cards: (1, 2, 15, 24, 14)
+Cards Drawn: 5
+Cards Remaining: 43
+Cards Remaining in Deck: 19
+
+Current Card: 14
+Current Weather: Overcast
+
+  Draw Card
+  Roll For Weather
+  Resources Phase
+  Deploy Non Panzer Div Reinforcements
+  Allied Advances Phase
+> Action Phase
+
+Press ENTER to perform next action
+Press G to see game summary
+
+=========================================
+NORMANDY SOLITAIRE! D-Day to Falaise 1944
+=========================================
+
+List of Drawn Cards: (1, 2, 15, 24, 14)
+Cards Drawn: 5
+Cards Remaining: 43
+Cards Remaining in Deck: 19
+
+Current Card: 14
+Current Weather: Overcast
+
+> Draw Card
+  Roll For Weather
+  Resources Phase
+  Deploy Non Panzer Div Reinforcements
+  Allied Advances Phase
+  Action Phase
+
+Press ENTER to perform next action
+Press G to see game summary
+Press S to save game
+Press L to load saved game
+Press Q to quit
+
+
+
+========================================
+DREW CARD 7
+========================================
+
+============================================================
+CARD #7 - Cotentin Offensive
+============================================================
+
+RESOURCES
+  NONE
+
+AIR POWER
+  +2 Jabos US 1st ARMY
+
+ALLIED ADVANCES
+  US 1st ARMY (3)
+
+ACTIONS
+  Actions Available: 3
+  +1 Attack Strength US 1st ARMY
+
+
+=========================================
+NORMANDY SOLITAIRE! D-Day to Falaise 1944
+=========================================
+
+List of Drawn Cards: (1, 2, 15, 24, 14, 7)
+Cards Drawn: 6
+Cards Remaining: 42
+Cards Remaining in Deck: 18
+
+Current Card: 7
+
+  Draw Card
+> Roll For Weather
+  Resources Phase
+  Deploy Non Panzer Div Reinforcements
+  Allied Advances Phase
+  Action Phase
+
+Press ENTER to perform next action
+Press G to see game summary
+
+
+========================================
+WEATHER ROLL
+========================================
+
+ROLL: 4
+RESULT: Clear
+
+
+=========================================
+NORMANDY SOLITAIRE! D-Day to Falaise 1944
+=========================================
+
+List of Drawn Cards: (1, 2, 15, 24, 14, 7)
+Cards Drawn: 6
+Cards Remaining: 42
+Cards Remaining in Deck: 18
+
+Current Card: 7
+Current Weather: Clear
+
+  Draw Card
+  Roll For Weather
+> Resources Phase
+  Deploy Non Panzer Div Reinforcements
+  Allied Advances Phase
+  Action Phase
+
+Press ENTER to perform next action
+Press G to see game summary
+
+EVENT
+
+RESOURCE ADJUSTMENTS
+RESOURCE PHASE - weather is Clear
+
+
+========================================
+ATTACK STRENGTHS (ALLIED ARMIES)
+========================================
+US 1st ARMY -> ATTACK STRENGTH: 3 (+2 Jabo, +1 Card modifier) ; AIR SUPPORT=True
+
+
+========================================
+DEFENSE STRENGTHS (ALLIED ARMIES)
+========================================
+
+N/A
+
+
+DEFENSE VALUES
+US 1st ARMY -> DEFENSE STRENGTH: 7 (+2 Terrain, +3 Army, +2 Jabo) ; AIR SUPPORT=True
+
+DEFENSE VALUES
+BRITISH XXX CORPS -> DEFENSE STRENGTH: 4 (+2 Terrain, +2 Army) ; AIR SUPPORT=False
+
+DEFENSE VALUES
+BRITISH I CORPS -> DEFENSE STRENGTH: 4 (+2 Terrain, +2 Army) ; AIR SUPPORT=False
+
+
+========================================
+REINFORCEMENTS
+========================================
+
+NONE
+
+
+=========================================
+NORMANDY SOLITAIRE! D-Day to Falaise 1944
+=========================================
+
+List of Drawn Cards: (1, 2, 15, 24, 14, 7)
+Cards Drawn: 6
+Cards Remaining: 42
+Cards Remaining in Deck: 18
+
+Current Card: 7
+Current Weather: Clear
+
+  Draw Card
+  Roll For Weather
+  Resources Phase
+> Deploy Non Panzer Div Reinforcements
+  Allied Advances Phase
+  Action Phase
+
+Press ENTER to perform next action
+Press G to see game summary
+
+=========================================
+NORMANDY SOLITAIRE! D-Day to Falaise 1944
+=========================================
+
+List of Drawn Cards: (1, 2, 15, 24, 14, 7)
+Cards Drawn: 6
+Cards Remaining: 42
+Cards Remaining in Deck: 18
+
+Current Card: 7
+Current Weather: Clear
+
+  Draw Card
+  Roll For Weather
+  Resources Phase
+  Deploy Non Panzer Div Reinforcements
+> Allied Advances Phase
+  Action Phase
+
+Press ENTER to perform next action
+Press G to see game summary
+
+
+========================================
+ALLIED ADVANCES PHASE
+========================================
+
+ADVANCING ARMIES
+ - US 1st ARMY
+
+ALLIED ATTACKS
+==============
+
+
+
+US 1st ARMY ADVANCING FROM UTAH-OMAHA BEACH
+===========================================
+
+GERMAN DEFENSE: CARENTAN
+TERRAIN: 2
+FORTIFIED VILLAGES: 1
+TOTAL DEFENSE: 3
+
+US 1st ARMY
+TARGET: CARENTAN
+ATTACK STRENGTH: 3
+DEFENSE STRENGTH: 3
+
+DIE ROLL: 4
+ATTACK TOTAL: 7
+
+ALLIED VICTORY
+<<SPACE CLEARED>>
+FORTIFIED VILLAGES REMOVED FROM CARENTAN
+>>>>>>> AFTER ALLIED ADVANCE -> ALLIED ARMY LOCATION:US 1st ARMY IS AT CARENTAN
+US 1st ARMY -> CARENTAN
+
+
+ACTIONS AVAILABLE: 3
+
+=========================================
+NORMANDY SOLITAIRE! D-Day to Falaise 1944
+=========================================
+
+List of Drawn Cards: (1, 2, 15, 24, 14, 7)
+Cards Drawn: 6
+Cards Remaining: 42
+Cards Remaining in Deck: 18
+
+Current Card: 7
+Current Weather: Clear
+
+  Draw Card
+  Roll For Weather
+  Resources Phase
+  Deploy Non Panzer Div Reinforcements
+  Allied Advances Phase
+> Action Phase
+
+Press ENTER to perform next action
+Press G to see game summary
+DQN DECISION | Turn: 7 | Decision: 12 | Type: action_phase | Action ID: 734 | Actions remaining: 3
+MOVE UNIT ONE SPACE
+
+
+SELECT DESTINATION FOR 12th SS Panzer
+
+
+12th SS Panzer MOVED FROM FALAISE GAP TO THURY HARCOURT
+ACTIONS REMAINING: 2
+DQN DECISION | Turn: 7 | Decision: 13 | Type: action_phase | Action ID: 1003 | Actions remaining: 2
+
+SUPPLY AUGMENTATION ROLL
+ROLL: 4
+BASE LEVEL: 3
+SUPPLY INCREASED TO 1
+DQN DECISION | Turn: 7 | Decision: 14 | Type: action_phase | Action ID: 694 | Actions remaining: 1
+MOVE UNIT ONE SPACE
+
+
+SELECT DESTINATION FOR Panzer Lehr
+
+
+Panzer Lehr MOVED FROM CHERBOURG TO VALOGNES
+ACTIONS REMAINING: 0
+
+=========================================
+NORMANDY SOLITAIRE! D-Day to Falaise 1944
+=========================================
+
+List of Drawn Cards: (1, 2, 15, 24, 14, 7)
+Cards Drawn: 6
+Cards Remaining: 42
+Cards Remaining in Deck: 18
+
+Current Card: 7
+Current Weather: Clear
+
+  Draw Card
+  Roll For Weather
+  Resources Phase
+  Deploy Non Panzer Div Reinforcements
+  Allied Advances Phase
+> Action Phase
+
+Press ENTER to perform next action
+Press G to see game summary
+
+=========================================
+NORMANDY SOLITAIRE! D-Day to Falaise 1944
+=========================================
+
+List of Drawn Cards: (1, 2, 15, 24, 14, 7)
+Cards Drawn: 6
+Cards Remaining: 42
+Cards Remaining in Deck: 18
+
+Current Card: 7
+Current Weather: Clear
+
+> Draw Card
+  Roll For Weather
+  Resources Phase
+  Deploy Non Panzer Div Reinforcements
+  Allied Advances Phase
+  Action Phase
+
+Press ENTER to perform next action
+Press G to see game summary
+Press S to save game
+Press L to load saved game
+Press Q to quit
+
+
+
+========================================
+DREW CARD 5
+========================================
+
+============================================================
+CARD #5 - Panzer Meyer
+============================================================
+
+RESOURCES
+  +1 Reinforcement 2nd Panzer
+
+AIR POWER
+  +1 Jabos BRITISH I CORPS
+
+ALLIED ADVANCES
+  BRITISH I CORPS (2)
+  Meyer marker available for any combat involving 12th SS Panzer Division
+
+ACTIONS
+  Actions Available: 2
+  +1 Meyer
+  -1 Defense Strength BRITISH XXX CORPS
+
+
+=========================================
+NORMANDY SOLITAIRE! D-Day to Falaise 1944
+=========================================
+
+List of Drawn Cards: (1, 2, 15, 24, 14, 7, 5)
+Cards Drawn: 7
+Cards Remaining: 41
+Cards Remaining in Deck: 17
+
+Current Card: 5
+
+  Draw Card
+> Roll For Weather
+  Resources Phase
+  Deploy Non Panzer Div Reinforcements
+  Allied Advances Phase
+  Action Phase
+
+Press ENTER to perform next action
+Press G to see game summary
+
+
+========================================
+WEATHER ROLL
+========================================
+
+ROLL: 3
+RESULT: Partly Clear
+
+
+=========================================
+NORMANDY SOLITAIRE! D-Day to Falaise 1944
+=========================================
+
+List of Drawn Cards: (1, 2, 15, 24, 14, 7, 5)
+Cards Drawn: 7
+Cards Remaining: 41
+Cards Remaining in Deck: 17
+
+Current Card: 5
+Current Weather: Partly Clear
+
+  Draw Card
+  Roll For Weather
+> Resources Phase
+  Deploy Non Panzer Div Reinforcements
+  Allied Advances Phase
+  Action Phase
+
+Press ENTER to perform next action
+Press G to see game summary
+
+EVENT
+MEYER PLACED IN THURY HARCOURT WITH 12th SS PANZER
+
+RESOURCE ADJUSTMENTS
+RESOURCE PHASE - weather is Partly Clear
+
+
+========================================
+ATTACK STRENGTHS (ALLIED ARMIES)
+========================================
+BRITISH I CORPS -> ATTACK STRENGTH: 1 (+1 Jabo) ; AIR SUPPORT=True
+
+
+========================================
+DEFENSE STRENGTHS (ALLIED ARMIES)
+========================================
+
+N/A
+
+
+DEFENSE VALUES
+US 1st ARMY -> DEFENSE STRENGTH: 5 (+2 Terrain, +3 Army) ; AIR SUPPORT=False
+
+DEFENSE VALUES
+APPLY -1: Defense modifier
+BRITISH XXX CORPS -> DEFENSE STRENGTH: 3 (+2 Terrain, +2 Army, -1 Defense modifier) ; AIR SUPPORT=False
+
+DEFENSE VALUES
+BRITISH I CORPS -> DEFENSE STRENGTH: 5 (+2 Terrain, +2 Army, +1 Jabo) ; AIR SUPPORT=True
+
+
+========================================
+REINFORCEMENTS
+========================================
+
+2nd Panzer -> IN TRANSIT
+Meyer -> STRATEGIC RESERVE
+
+
+
+=========================================
+NORMANDY SOLITAIRE! D-Day to Falaise 1944
+=========================================
+
+List of Drawn Cards: (1, 2, 15, 24, 14, 7, 5)
+Cards Drawn: 7
+Cards Remaining: 41
+Cards Remaining in Deck: 17
+
+Current Card: 5
+Current Weather: Partly Clear
+
+  Draw Card
+  Roll For Weather
+  Resources Phase
+> Deploy Non Panzer Div Reinforcements
+  Allied Advances Phase
+  Action Phase
+
+Press ENTER to perform next action
+Press G to see game summary
+
+=========================================
+NORMANDY SOLITAIRE! D-Day to Falaise 1944
+=========================================
+
+List of Drawn Cards: (1, 2, 15, 24, 14, 7, 5)
+Cards Drawn: 7
+Cards Remaining: 41
+Cards Remaining in Deck: 17
+
+Current Card: 5
+Current Weather: Partly Clear
+
+  Draw Card
+  Roll For Weather
+  Resources Phase
+  Deploy Non Panzer Div Reinforcements
+> Allied Advances Phase
+  Action Phase
+
+Press ENTER to perform next action
+Press G to see game summary
+
+
+========================================
+ALLIED ADVANCES PHASE
+========================================
+
+ADVANCING ARMIES
+ - BRITISH I CORPS
+
+ALLIED ATTACKS
+==============
+
+
+
+BRITISH I CORPS ADVANCING FROM LEBISEY WOOD
+===========================================
+
+GERMAN DEFENSE: CAEN
+TERRAIN: 4
+TOTAL DEFENSE: 4
+
+BRITISH I CORPS
+TARGET: CAEN
+ATTACK STRENGTH: 1
+DEFENSE STRENGTH: 4
+
+DIE ROLL: 5
+ATTACK TOTAL: 6
+
+NO UNITS IN SPACE - NO LOSSES
+ALLIED VICTORY
+<<SPACE CLEARED>>
+>>>>>>> AFTER ALLIED ADVANCE -> ALLIED ARMY LOCATION:BRITISH I CORPS IS AT CAEN
+BRITISH I CORPS -> CAEN
+Hitler Approval: LOSE 1 (4 -> 3)
+
+
+IN TRANSIT CHECK
+================
+2nd Panzer
+ROLL: 5
+DRM: +0
+MODIFIED ROLL: 5
+CHECK: 5 <= Transport 5
+	=>2nd Panzer MOVED TO STRATEGIC RESERVE
+ACTIONS AVAILABLE: 2
+
+=========================================
+NORMANDY SOLITAIRE! D-Day to Falaise 1944
+=========================================
+
+List of Drawn Cards: (1, 2, 15, 24, 14, 7, 5)
+Cards Drawn: 7
+Cards Remaining: 41
+Cards Remaining in Deck: 17
+
+Current Card: 5
+Current Weather: Partly Clear
+
+  Draw Card
+  Roll For Weather
+  Resources Phase
+  Deploy Non Panzer Div Reinforcements
+  Allied Advances Phase
+> Action Phase
+
+Press ENTER to perform next action
+Press G to see game summary
+DQN DECISION | Turn: 8 | Decision: 15 | Type: action_phase | Action ID: 276 | Actions remaining: 2
+MOVE PANZER DIVISION FROM STRATEGIC RESERVE
+
+SELECT PANZER DIVISION
+
+1. 10th SS Panzer (2)
+2. 2nd Panzer (2)
+
+0. Return to main menu
+
+
+SELECTED: 2nd Panzer
+
+HITLER APPROVAL CHECK
+ROLL: 6
+HITLER APPROVAL: 3
+RESULT: FAILED
+DQN DECISION | Turn: 8 | Decision: 16 | Type: action_phase | Action ID: 273 | Actions remaining: 1
+MOVE PANZER DIVISION FROM STRATEGIC RESERVE
+
+SELECT PANZER DIVISION
+
+1. 10th SS Panzer (2)
+2. 2nd Panzer (2)
+
+0. Return to main menu
+
+
+SELECTED: 2nd Panzer
+
+HITLER APPROVAL CHECK
+ROLL: 3
+HITLER APPROVAL: 3
+RESULT: PASSED
+
+2nd Panzer moved to RENNES
+
+=========================================
+NORMANDY SOLITAIRE! D-Day to Falaise 1944
+=========================================
+
+List of Drawn Cards: (1, 2, 15, 24, 14, 7, 5)
+Cards Drawn: 7
+Cards Remaining: 41
+Cards Remaining in Deck: 17
+
+Current Card: 5
+Current Weather: Partly Clear
+
+  Draw Card
+  Roll For Weather
+  Resources Phase
+  Deploy Non Panzer Div Reinforcements
+  Allied Advances Phase
+> Action Phase
+
+Press ENTER to perform next action
+Press G to see game summary
+
+=========================================
+NORMANDY SOLITAIRE! D-Day to Falaise 1944
+=========================================
+
+List of Drawn Cards: (1, 2, 15, 24, 14, 7, 5)
+Cards Drawn: 7
+Cards Remaining: 41
+Cards Remaining in Deck: 17
+
+Current Card: 5
+Current Weather: Partly Clear
+
+> Draw Card
+  Roll For Weather
+  Resources Phase
+  Deploy Non Panzer Div Reinforcements
+  Allied Advances Phase
+  Action Phase
+
+Press ENTER to perform next action
+Press G to see game summary
+Press S to save game
+Press L to load saved game
+Press Q to quit
+
+
+
+========================================
+DREW CARD 18
+========================================
+
+============================================================
+CARD #18 - Operation Charnwood
+============================================================
+
+RESOURCES
+  -1 Resource Loss Hitler Approval
+  -1 DRM Transport
+
+AIR POWER
+  +1 Jabos BRITISH I CORPS
+  +1 Jabos BRITISH XXX CORPS
+  Carpet Bombing
+
+ALLIED ADVANCES
+  BRITISH XXX CORPS (2)
+  BRITISH I CORPS (2)
+
+ACTIONS
+  Actions Available: 3
+  No Modifiers
+
+
+=========================================
+NORMANDY SOLITAIRE! D-Day to Falaise 1944
+=========================================
+
+List of Drawn Cards: (1, 2, 15, 24, 14, 7, 5, 18)
+Cards Drawn: 8
+Cards Remaining: 40
+Cards Remaining in Deck: 16
+
+Current Card: 18
+
+  Draw Card
+> Roll For Weather
+  Resources Phase
+  Deploy Non Panzer Div Reinforcements
+  Allied Advances Phase
+  Action Phase
+
+Press ENTER to perform next action
+Press G to see game summary
+
+
+========================================
+WEATHER ROLL
+========================================
+
+ROLL: 4
+RESULT: Clear
+
+========================================
+CARPET BOMBING
+========================================
+
+ROLL: 2
+DRM: 0
+RESULT: +2 ATTACK STRENGTH
+
+
+=========================================
+NORMANDY SOLITAIRE! D-Day to Falaise 1944
+=========================================
+
+List of Drawn Cards: (1, 2, 15, 24, 14, 7, 5, 18)
+Cards Drawn: 8
+Cards Remaining: 40
+Cards Remaining in Deck: 16
+
+Current Card: 18
+Current Weather: Clear
+
+  Draw Card
+  Roll For Weather
+> Resources Phase
+  Deploy Non Panzer Div Reinforcements
+  Allied Advances Phase
+  Action Phase
+
+Press ENTER to perform next action
+Press G to see game summary
+
+EVENT
+
+RESOURCE ADJUSTMENTS
+Hitler Approval: LOSE 1 (3 -> 2)
+RESOURCE PHASE - weather is Clear
+
+
+========================================
+ATTACK STRENGTHS (ALLIED ARMIES)
+========================================
+BRITISH XXX CORPS -> ATTACK STRENGTH: 3 (+1 Jabo, +2 Carpet Bombing) ; AIR SUPPORT=True
+BRITISH I CORPS -> ATTACK STRENGTH: 3 (+1 Jabo, +2 Carpet Bombing) ; AIR SUPPORT=True
+
+
+========================================
+DEFENSE STRENGTHS (ALLIED ARMIES)
+========================================
+
+N/A
+
+
+DEFENSE VALUES
+US 1st ARMY -> DEFENSE STRENGTH: 5 (+2 Terrain, +3 Army) ; AIR SUPPORT=False
+
+DEFENSE VALUES
+BRITISH XXX CORPS -> DEFENSE STRENGTH: 5 (+2 Terrain, +2 Army, +1 Jabo) ; AIR SUPPORT=True
+
+
+========================================
+REINFORCEMENTS
+========================================
+
+NONE
+
+
+=========================================
+NORMANDY SOLITAIRE! D-Day to Falaise 1944
+=========================================
+
+List of Drawn Cards: (1, 2, 15, 24, 14, 7, 5, 18)
+Cards Drawn: 8
+Cards Remaining: 40
+Cards Remaining in Deck: 16
+
+Current Card: 18
+Current Weather: Clear
+
+  Draw Card
+  Roll For Weather
+  Resources Phase
+> Deploy Non Panzer Div Reinforcements
+  Allied Advances Phase
+  Action Phase
+
+Press ENTER to perform next action
+Press G to see game summary
+
+=========================================
+NORMANDY SOLITAIRE! D-Day to Falaise 1944
+=========================================
+
+List of Drawn Cards: (1, 2, 15, 24, 14, 7, 5, 18)
+Cards Drawn: 8
+Cards Remaining: 40
+Cards Remaining in Deck: 16
+
+Current Card: 18
+Current Weather: Clear
+
+  Draw Card
+  Roll For Weather
+  Resources Phase
+  Deploy Non Panzer Div Reinforcements
+> Allied Advances Phase
+  Action Phase
+
+Press ENTER to perform next action
+Press G to see game summary
+
+
+========================================
+ALLIED ADVANCES PHASE
+========================================
+
+ADVANCING ARMIES
+ - BRITISH XXX CORPS
+ - BRITISH I CORPS
+
+ALLIED ATTACKS
+==============
+
+
+
+BRITISH XXX CORPS ADVANCING FROM GOLD-JUNO-SWORD BEACH (BRITISH TRACK)
+======================================================================
+
+GERMAN DEFENSE: BAYEUX
+TERRAIN: 1
+TOTAL DEFENSE: 1
+
+BRITISH XXX CORPS
+TARGET: BAYEUX
+ATTACK STRENGTH: 3
+DEFENSE STRENGTH: 1
+
+DIE ROLL: 3
+ATTACK TOTAL: 6
+
+NO UNITS IN SPACE - NO LOSSES
+ALLIED VICTORY
+<<SPACE CLEARED>>
+>>>>>>> AFTER ALLIED ADVANCE -> ALLIED ARMY LOCATION:BRITISH XXX CORPS IS AT BAYEUX
+BRITISH XXX CORPS -> BAYEUX
+
+
+
+BRITISH I CORPS ADVANCING FROM CAEN
+===================================
+
+GERMAN DEFENSE: CAGNY
+TERRAIN: 1
+TOTAL DEFENSE: 1
+
+BRITISH I CORPS
+TARGET: CAGNY
+ATTACK STRENGTH: 3
+DEFENSE STRENGTH: 1
+
+DIE ROLL: 6
+ATTACK TOTAL: 9
+
+NO UNITS IN SPACE - NO LOSSES
+ALLIED VICTORY
+<<SPACE CLEARED>>
+>>>>>>> AFTER ALLIED ADVANCE -> ALLIED ARMY LOCATION:BRITISH I CORPS IS AT CAGNY
+BRITISH I CORPS -> CAGNY
+
+
+ACTIONS AVAILABLE: 3
+
+=========================================
+NORMANDY SOLITAIRE! D-Day to Falaise 1944
+=========================================
+
+List of Drawn Cards: (1, 2, 15, 24, 14, 7, 5, 18)
+Cards Drawn: 8
+Cards Remaining: 40
+Cards Remaining in Deck: 16
+
+Current Card: 18
+Current Weather: Clear
+
+  Draw Card
+  Roll For Weather
+  Resources Phase
+  Deploy Non Panzer Div Reinforcements
+  Allied Advances Phase
+> Action Phase
+
+Press ENTER to perform next action
+Press G to see game summary
+DQN DECISION | Turn: 9 | Decision: 17 | Type: action_phase | Action ID: 1012 | Actions remaining: 3
+PLACE / UPGRADE FORTIFIED VILLAGES
+
+VIRE FORTIFIED VILLAGES +1
+
+ACTIONS USED: 3
+ACTIONS REMAINING: 0
+RESERVE ACTIONS USED: 0
+RESERVE ACTIONS REMAINING: 0
+
+=========================================
+NORMANDY SOLITAIRE! D-Day to Falaise 1944
+=========================================
+
+List of Drawn Cards: (1, 2, 15, 24, 14, 7, 5, 18)
+Cards Drawn: 8
+Cards Remaining: 40
+Cards Remaining in Deck: 16
+
+Current Card: 18
+Current Weather: Clear
+
+  Draw Card
+  Roll For Weather
+  Resources Phase
+  Deploy Non Panzer Div Reinforcements
+  Allied Advances Phase
+> Action Phase
+
+Press ENTER to perform next action
+Press G to see game summary
+
+=========================================
+NORMANDY SOLITAIRE! D-Day to Falaise 1944
+=========================================
+
+List of Drawn Cards: (1, 2, 15, 24, 14, 7, 5, 18)
+Cards Drawn: 8
+Cards Remaining: 40
+Cards Remaining in Deck: 16
+
+Current Card: 18
+Current Weather: Clear
+
+> Draw Card
+  Roll For Weather
+  Resources Phase
+  Deploy Non Panzer Div Reinforcements
+  Allied Advances Phase
+  Action Phase
+
+Press ENTER to perform next action
+Press G to see game summary
+Press S to save game
+Press L to load saved game
+Press Q to quit
+
+
+
+========================================
+DREW CARD 3
+========================================
+
+============================================================
+CARD #3 - Carentan
+============================================================
+
+RESOURCES
+  +1 Reinforcement 17th SS Panzergrenadier
+  -1 Resource Loss Transport
+  -1 Resource Loss Supply
+  -1 DRM Transport
+
+AIR POWER
+  +1 Jabos US 1st ARMY
+
+ALLIED ADVANCES
+  US 1st ARMY (3)
+
+ACTIONS
+  Actions Available: 2
+  +1 Attack Strength US 1st ARMY
+
+
+=========================================
+NORMANDY SOLITAIRE! D-Day to Falaise 1944
+=========================================
+
+List of Drawn Cards: (1, 2, 15, 24, 14, 7, 5, 18, 3)
+Cards Drawn: 9
+Cards Remaining: 39
+Cards Remaining in Deck: 15
+
+Current Card: 3
+
+  Draw Card
+> Roll For Weather
+  Resources Phase
+  Deploy Non Panzer Div Reinforcements
+  Allied Advances Phase
+  Action Phase
+
+Press ENTER to perform next action
+Press G to see game summary
+
+
+========================================
+WEATHER ROLL
+========================================
+
+ROLL: 5
+RESULT: Clear
+
+
+=========================================
+NORMANDY SOLITAIRE! D-Day to Falaise 1944
+=========================================
+
+List of Drawn Cards: (1, 2, 15, 24, 14, 7, 5, 18, 3)
+Cards Drawn: 9
+Cards Remaining: 39
+Cards Remaining in Deck: 15
+
+Current Card: 3
+Current Weather: Clear
+
+  Draw Card
+  Roll For Weather
+> Resources Phase
+  Deploy Non Panzer Div Reinforcements
+  Allied Advances Phase
+  Action Phase
+
+Press ENTER to perform next action
+Press G to see game summary
+
+EVENT
+
+RESOURCE ADJUSTMENTS
+Transport: LOSE 1 (5 -> 4)
+Supply: LOSE 1 (1 -> 0)
+RESOURCE PHASE - weather is Clear
+
+
+========================================
+ATTACK STRENGTHS (ALLIED ARMIES)
+========================================
+US 1st ARMY -> ATTACK STRENGTH: 2 (+1 Jabo, +1 Card modifier) ; AIR SUPPORT=True
+
+
+========================================
+DEFENSE STRENGTHS (ALLIED ARMIES)
+========================================
+
+N/A
+
+
+DEFENSE VALUES
+US 1st ARMY -> DEFENSE STRENGTH: 6 (+2 Terrain, +3 Army, +1 Jabo) ; AIR SUPPORT=True
+
+DEFENSE VALUES
+BRITISH XXX CORPS -> DEFENSE STRENGTH: 3 (+1 Terrain, +2 Army) ; AIR SUPPORT=False
+
+DEFENSE VALUES
+BRITISH I CORPS -> DEFENSE STRENGTH: 3 (+1 Terrain, +2 Army) ; AIR SUPPORT=False
+
+
+========================================
+REINFORCEMENTS
+========================================
+
+17th SS Panzergrenadier -> IN TRANSIT
+
+
+
+=========================================
+NORMANDY SOLITAIRE! D-Day to Falaise 1944
+=========================================
+
+List of Drawn Cards: (1, 2, 15, 24, 14, 7, 5, 18, 3)
+Cards Drawn: 9
+Cards Remaining: 39
+Cards Remaining in Deck: 15
+
+Current Card: 3
+Current Weather: Clear
+
+  Draw Card
+  Roll For Weather
+  Resources Phase
+> Deploy Non Panzer Div Reinforcements
+  Allied Advances Phase
+  Action Phase
+
+Press ENTER to perform next action
+Press G to see game summary
+
+=========================================
+NORMANDY SOLITAIRE! D-Day to Falaise 1944
+=========================================
+
+List of Drawn Cards: (1, 2, 15, 24, 14, 7, 5, 18, 3)
+Cards Drawn: 9
+Cards Remaining: 39
+Cards Remaining in Deck: 15
+
+Current Card: 3
+Current Weather: Clear
+
+  Draw Card
+  Roll For Weather
+  Resources Phase
+  Deploy Non Panzer Div Reinforcements
+> Allied Advances Phase
+  Action Phase
+
+Press ENTER to perform next action
+Press G to see game summary
+
+
+========================================
+ALLIED ADVANCES PHASE
+========================================
+
+ADVANCING ARMIES
+ - US 1st ARMY
+
+ALLIED ATTACKS
+==============
+
+
+
+US 1st ARMY ADVANCING FROM CARENTAN
+===================================
+
+GERMAN DEFENSE: VALOGNES
+TERRAIN: 2
+Panzer Lehr: 2
+TOTAL DEFENSE: 4
+
+US 1st ARMY
+TARGET: VALOGNES
+ATTACK STRENGTH: 2
+DEFENSE STRENGTH: 4
+
+DIE ROLL: 4
+ATTACK TOTAL: 6
+
+HITLER APPROVAL -1 → 1
+
+GERMAN LOSSES
+=============
+>>>> GlobalGameState.german_casualty_strategy= Strategy.AI
+REDUCED: Panzer Lehr now 1
+ALLIED VICTORY
+GERMANS RETREAT FROM VALOGNES TO CHERBOURG
+>>>>>>> AFTER ALLIED ADVANCE -> ALLIED ARMY LOCATION:US 1st ARMY IS AT VALOGNES
+US 1st ARMY -> VALOGNES
+
+
+IN TRANSIT CHECK
+================
+17th SS Panzergrenadier
+ROLL: 4
+DRM: -1
+MODIFIED ROLL: 3
+CHECK: 3 <= Transport 4
+	=>17th SS Panzergrenadier MOVED TO STRATEGIC RESERVE
+ACTIONS AVAILABLE: 2
+
+=========================================
+NORMANDY SOLITAIRE! D-Day to Falaise 1944
+=========================================
+
+List of Drawn Cards: (1, 2, 15, 24, 14, 7, 5, 18, 3)
+Cards Drawn: 9
+Cards Remaining: 39
+Cards Remaining in Deck: 15
+
+Current Card: 3
+Current Weather: Clear
+
+  Draw Card
+  Roll For Weather
+  Resources Phase
+  Deploy Non Panzer Div Reinforcements
+  Allied Advances Phase
+> Action Phase
+
+Press ENTER to perform next action
+Press G to see game summary
+Supply is 0 - Panzer Lehr Cannot Attack
+Supply is 0 - 21st Panzer Cannot Attack
+Supply is 0 - 9th SS Panzer Cannot Attack
+DQN DECISION | Turn: 10 | Decision: 18 | Type: action_phase | Action ID: 232 | Actions remaining: 2
+Supply is 0 - Panzer Lehr Cannot Attack
+Supply is 0 - 21st Panzer Cannot Attack
+Supply is 0 - 9th SS Panzer Cannot Attack
+Supply is 0 - Panzer Lehr Cannot Attack
+Supply is 0 - 21st Panzer Cannot Attack
+Supply is 0 - 9th SS Panzer Cannot Attack
+MOVE PANZER DIVISION FROM STRATEGIC RESERVE
+
+SELECT PANZER DIVISION
+
+1. 10th SS Panzer (2)
+2. 17th SS Panzergrenadier (2)
+
+0. Return to main menu
+
+
+SELECTED: 17th SS Panzergrenadier
+
+HITLER APPROVAL CHECK
+ROLL: 2
+HITLER APPROVAL: 1
+RESULT: FAILED
+Supply is 0 - Panzer Lehr Cannot Attack
+Supply is 0 - 21st Panzer Cannot Attack
+Supply is 0 - 9th SS Panzer Cannot Attack
+DQN DECISION | Turn: 10 | Decision: 19 | Type: action_phase | Action ID: 121 | Actions remaining: 1
+Supply is 0 - Panzer Lehr Cannot Attack
+Supply is 0 - 21st Panzer Cannot Attack
+Supply is 0 - 9th SS Panzer Cannot Attack
+Supply is 0 - Panzer Lehr Cannot Attack
+Supply is 0 - 21st Panzer Cannot Attack
+Supply is 0 - 9th SS Panzer Cannot Attack
+MOVE PANZER DIVISION FROM STRATEGIC RESERVE
+
+SELECT PANZER DIVISION
+
+1. 10th SS Panzer (2)
+2. 17th SS Panzergrenadier (2)
+
+0. Return to main menu
+
+
+SELECTED: 10th SS Panzer
+
+HITLER APPROVAL CHECK
+ROLL: 3
+HITLER APPROVAL: 1
+RESULT: FAILED
+
+=========================================
+NORMANDY SOLITAIRE! D-Day to Falaise 1944
+=========================================
+
+List of Drawn Cards: (1, 2, 15, 24, 14, 7, 5, 18, 3)
+Cards Drawn: 9
+Cards Remaining: 39
+Cards Remaining in Deck: 15
+
+Current Card: 3
+Current Weather: Clear
+
+  Draw Card
+  Roll For Weather
+  Resources Phase
+  Deploy Non Panzer Div Reinforcements
+  Allied Advances Phase
+> Action Phase
+
+Press ENTER to perform next action
+Press G to see game summary
+
+=========================================
+NORMANDY SOLITAIRE! D-Day to Falaise 1944
+=========================================
+
+List of Drawn Cards: (1, 2, 15, 24, 14, 7, 5, 18, 3)
+Cards Drawn: 9
+Cards Remaining: 39
+Cards Remaining in Deck: 15
+
+Current Card: 3
+Current Weather: Clear
+
+> Draw Card
+  Roll For Weather
+  Resources Phase
+  Deploy Non Panzer Div Reinforcements
+  Allied Advances Phase
+  Action Phase
+
+Press ENTER to perform next action
+Press G to see game summary
+Press S to save game
+Press L to load saved game
+Press Q to quit
+
+
+
+========================================
+DREW CARD 21
+========================================
+
+============================================================
+CARD #21 - Operation Jupiter
+============================================================
+
+RESOURCES
+  -1 Resource Loss Hitler Approval
+
+AIR POWER
+  +2 Jabos BRITISH I CORPS
+  Carpet Bombing
+
+ALLIED ADVANCES
+  BRITISH I CORPS (2)
+
+ACTIONS
+  Actions Available: 2
+  +1 Attack Strength BRITISH I CORPS
+
+
+=========================================
+NORMANDY SOLITAIRE! D-Day to Falaise 1944
+=========================================
+
+List of Drawn Cards: (1, 2, 15, 24, 14, 7, 5, 18, 3, 21)
+Cards Drawn: 10
+Cards Remaining: 38
+Cards Remaining in Deck: 14
+
+Current Card: 21
+
+  Draw Card
+> Roll For Weather
+  Resources Phase
+  Deploy Non Panzer Div Reinforcements
+  Allied Advances Phase
+  Action Phase
+
+Press ENTER to perform next action
+Press G to see game summary
+
+
+========================================
+WEATHER ROLL
+========================================
+
+ROLL: 2
+RESULT: Partly Clear
+
+========================================
+CARPET BOMBING
+========================================
+
+ROLL: 3
+DRM: +1
+RESULT: +2 ATTACK STRENGTH
+
+
+=========================================
+NORMANDY SOLITAIRE! D-Day to Falaise 1944
+=========================================
+
+List of Drawn Cards: (1, 2, 15, 24, 14, 7, 5, 18, 3, 21)
+Cards Drawn: 10
+Cards Remaining: 38
+Cards Remaining in Deck: 14
+
+Current Card: 21
+Current Weather: Partly Clear
+
+  Draw Card
+  Roll For Weather
+> Resources Phase
+  Deploy Non Panzer Div Reinforcements
+  Allied Advances Phase
+  Action Phase
+
+Press ENTER to perform next action
+Press G to see game summary
+
+EVENT
+
+RESOURCE ADJUSTMENTS
+Hitler Approval: LOSE 1 (1 -> 0)
+RESOURCE PHASE - weather is Partly Clear
+
+
+========================================
+ATTACK STRENGTHS (ALLIED ARMIES)
+========================================
+BRITISH I CORPS -> ATTACK STRENGTH: 4 (+1 Jabo, +2 Carpet Bombing, +1 Card modifier) ; AIR SUPPORT=True
+
+
+========================================
+DEFENSE STRENGTHS (ALLIED ARMIES)
+========================================
+
+N/A
+
+
+DEFENSE VALUES
+US 1st ARMY -> DEFENSE STRENGTH: 5 (+2 Terrain, +3 Army) ; AIR SUPPORT=False
+
+DEFENSE VALUES
+BRITISH XXX CORPS -> DEFENSE STRENGTH: 3 (+1 Terrain, +2 Army) ; AIR SUPPORT=False
+
+DEFENSE VALUES
+BRITISH I CORPS -> DEFENSE STRENGTH: 4 (+1 Terrain, +2 Army, +1 Jabo) ; AIR SUPPORT=True
+
+
+========================================
+REINFORCEMENTS
+========================================
+
+NONE
+
+
+=========================================
+NORMANDY SOLITAIRE! D-Day to Falaise 1944
+=========================================
+
+List of Drawn Cards: (1, 2, 15, 24, 14, 7, 5, 18, 3, 21)
+Cards Drawn: 10
+Cards Remaining: 38
+Cards Remaining in Deck: 14
+
+Current Card: 21
+Current Weather: Partly Clear
+
+  Draw Card
+  Roll For Weather
+  Resources Phase
+> Deploy Non Panzer Div Reinforcements
+  Allied Advances Phase
+  Action Phase
+
+Press ENTER to perform next action
+Press G to see game summary
+
+=========================================
+NORMANDY SOLITAIRE! D-Day to Falaise 1944
+=========================================
+
+List of Drawn Cards: (1, 2, 15, 24, 14, 7, 5, 18, 3, 21)
+Cards Drawn: 10
+Cards Remaining: 38
+Cards Remaining in Deck: 14
+
+Current Card: 21
+Current Weather: Partly Clear
+
+  Draw Card
+  Roll For Weather
+  Resources Phase
+  Deploy Non Panzer Div Reinforcements
+> Allied Advances Phase
+  Action Phase
+
+Press ENTER to perform next action
+Press G to see game summary
+
+
+========================================
+ALLIED ADVANCES PHASE
+========================================
+
+ADVANCING ARMIES
+ - BRITISH I CORPS
+
+ALLIED ATTACKS
+==============
+
+
+
+BRITISH I CORPS ADVANCING FROM CAGNY
+====================================
+
+GERMAN DEFENSE: BOURGUEBUS RIDGE
+TERRAIN: 2
+TOTAL DEFENSE: 2
+
+BRITISH I CORPS
+TARGET: BOURGUEBUS RIDGE
+ATTACK STRENGTH: 4
+DEFENSE STRENGTH: 2
+
+DIE ROLL: 3
+ATTACK TOTAL: 7
+
+NO UNITS IN SPACE - NO LOSSES
+ALLIED VICTORY
+<<SPACE CLEARED>>
+>>>>>>> AFTER ALLIED ADVANCE -> ALLIED ARMY LOCATION:BRITISH I CORPS IS AT BOURGUEBUS RIDGE
+BRITISH I CORPS -> BOURGUEBUS RIDGE
+
+
+ACTIONS AVAILABLE: 2
+
+=========================================
+NORMANDY SOLITAIRE! D-Day to Falaise 1944
+=========================================
+
+List of Drawn Cards: (1, 2, 15, 24, 14, 7, 5, 18, 3, 21)
+Cards Drawn: 10
+Cards Remaining: 38
+Cards Remaining in Deck: 14
+
+Current Card: 21
+Current Weather: Partly Clear
+
+  Draw Card
+  Roll For Weather
+  Resources Phase
+  Deploy Non Panzer Div Reinforcements
+  Allied Advances Phase
+> Action Phase
+
+Press ENTER to perform next action
+Press G to see game summary
+Supply is 0 - Panzer Lehr Cannot Attack
+Supply is 0 - 21st Panzer Cannot Attack
+Supply is 0 - 9th SS Panzer Cannot Attack
+DQN DECISION | Turn: 11 | Decision: 20 | Type: action_phase | Action ID: 729 | Actions remaining: 2
+Supply is 0 - Panzer Lehr Cannot Attack
+Supply is 0 - 21st Panzer Cannot Attack
+Supply is 0 - 9th SS Panzer Cannot Attack
+Supply is 0 - Panzer Lehr Cannot Attack
+Supply is 0 - 21st Panzer Cannot Attack
+Supply is 0 - 9th SS Panzer Cannot Attack
+MOVE UNIT ONE SPACE
+
+
+SELECT DESTINATION FOR 12th SS Panzer
+
+
+12th SS Panzer MOVED FROM THURY HARCOURT TO FALAISE GAP
+ACTIONS REMAINING: 1
+Supply is 0 - Panzer Lehr Cannot Attack
+Supply is 0 - 21st Panzer Cannot Attack
+Supply is 0 - 9th SS Panzer Cannot Attack
+DQN DECISION | Turn: 11 | Decision: 21 | Type: action_phase | Action ID: 229 | Actions remaining: 1
+Supply is 0 - Panzer Lehr Cannot Attack
+Supply is 0 - 21st Panzer Cannot Attack
+Supply is 0 - 9th SS Panzer Cannot Attack
+Supply is 0 - Panzer Lehr Cannot Attack
+Supply is 0 - 21st Panzer Cannot Attack
+Supply is 0 - 9th SS Panzer Cannot Attack
+MOVE PANZER DIVISION FROM STRATEGIC RESERVE
+
+SELECT PANZER DIVISION
+
+1. 10th SS Panzer (2)
+2. 17th SS Panzergrenadier (2)
+
+0. Return to main menu
+
+
+SELECTED: 17th SS Panzergrenadier
+
+HITLER APPROVAL CHECK
+ROLL: 6
+HITLER APPROVAL: 0
+RESULT: FAILED
+
+=========================================
+NORMANDY SOLITAIRE! D-Day to Falaise 1944
+=========================================
+
+List of Drawn Cards: (1, 2, 15, 24, 14, 7, 5, 18, 3, 21)
+Cards Drawn: 10
+Cards Remaining: 38
+Cards Remaining in Deck: 14
+
+Current Card: 21
+Current Weather: Partly Clear
+
+  Draw Card
+  Roll For Weather
+  Resources Phase
+  Deploy Non Panzer Div Reinforcements
+  Allied Advances Phase
+> Action Phase
+
+Press ENTER to perform next action
+Press G to see game summary
+
+=========================================
+NORMANDY SOLITAIRE! D-Day to Falaise 1944
+=========================================
+
+List of Drawn Cards: (1, 2, 15, 24, 14, 7, 5, 18, 3, 21)
+Cards Drawn: 10
+Cards Remaining: 38
+Cards Remaining in Deck: 14
+
+Current Card: 21
+Current Weather: Partly Clear
+
+> Draw Card
+  Roll For Weather
+  Resources Phase
+  Deploy Non Panzer Div Reinforcements
+  Allied Advances Phase
+  Action Phase
+
+Press ENTER to perform next action
+Press G to see game summary
+Press S to save game
+Press L to load saved game
+Press Q to quit
+
+
+
+========================================
+DREW CARD 22
+========================================
+
+============================================================
+CARD #22 - Naval Gunfire
+============================================================
+
+RESOURCES
+  NONE
+
+AIR POWER
+  +1 Jabos BRITISH I CORPS
+  +1 Jabos BRITISH XXX CORPS
+
+ALLIED ADVANCES
+  US 1st ARMY (3)
+  BRITISH XXX CORPS (2)
+  BRITISH I CORPS (2)
+
+ACTIONS
+  Actions Available: 3
+  +2 Attack Strength US 1st ARMY
+  +2 Attack Strength BRITISH XXX CORPS
+  +2 Attack Strength BRITISH I CORPS
+
+
+=========================================
+NORMANDY SOLITAIRE! D-Day to Falaise 1944
+=========================================
+
+List of Drawn Cards: (1, 2, 15, 24, 14, 7, 5, 18, 3, 21, 22)
+Cards Drawn: 11
+Cards Remaining: 37
+Cards Remaining in Deck: 13
+
+Current Card: 22
+
+  Draw Card
+> Roll For Weather
+  Resources Phase
+  Deploy Non Panzer Div Reinforcements
+  Allied Advances Phase
+  Action Phase
+
+Press ENTER to perform next action
+Press G to see game summary
+
+
+========================================
+WEATHER ROLL
+========================================
+
+ROLL: 1
+RESULT: Overcast
+
+
+=========================================
+NORMANDY SOLITAIRE! D-Day to Falaise 1944
+=========================================
+
+List of Drawn Cards: (1, 2, 15, 24, 14, 7, 5, 18, 3, 21, 22)
+Cards Drawn: 11
+Cards Remaining: 37
+Cards Remaining in Deck: 13
+
+Current Card: 22
+Current Weather: Overcast
+
+  Draw Card
+  Roll For Weather
+> Resources Phase
+  Deploy Non Panzer Div Reinforcements
+  Allied Advances Phase
+  Action Phase
+
+Press ENTER to perform next action
+Press G to see game summary
+
+EVENT
+
+RESOURCE ADJUSTMENTS
+RESOURCE PHASE - weather is Overcast
+
+
+========================================
+ATTACK STRENGTHS (ALLIED ARMIES)
+========================================
+US 1st ARMY -> ATTACK STRENGTH: 2 (+2 Card modifier) ; AIR SUPPORT=False
+BRITISH XXX CORPS -> ATTACK STRENGTH: 2 (+2 Card modifier) ; AIR SUPPORT=False
+BRITISH I CORPS -> ATTACK STRENGTH: 2 (+2 Card modifier) ; AIR SUPPORT=False
+
+
+========================================
+DEFENSE STRENGTHS (ALLIED ARMIES)
+========================================
+
+N/A
+
+
+DEFENSE VALUES
+US 1st ARMY -> DEFENSE STRENGTH: 5 (+2 Terrain, +3 Army) ; AIR SUPPORT=False
+
+DEFENSE VALUES
+BRITISH XXX CORPS -> DEFENSE STRENGTH: 3 (+1 Terrain, +2 Army) ; AIR SUPPORT=False
+
+DEFENSE VALUES
+BRITISH I CORPS -> DEFENSE STRENGTH: 4 (+2 Terrain, +2 Army) ; AIR SUPPORT=False
+
+
+========================================
+REINFORCEMENTS
+========================================
+
+NONE
+
+
+=========================================
+NORMANDY SOLITAIRE! D-Day to Falaise 1944
+=========================================
+
+List of Drawn Cards: (1, 2, 15, 24, 14, 7, 5, 18, 3, 21, 22)
+Cards Drawn: 11
+Cards Remaining: 37
+Cards Remaining in Deck: 13
+
+Current Card: 22
+Current Weather: Overcast
+
+  Draw Card
+  Roll For Weather
+  Resources Phase
+> Deploy Non Panzer Div Reinforcements
+  Allied Advances Phase
+  Action Phase
+
+Press ENTER to perform next action
+Press G to see game summary
+
+=========================================
+NORMANDY SOLITAIRE! D-Day to Falaise 1944
+=========================================
+
+List of Drawn Cards: (1, 2, 15, 24, 14, 7, 5, 18, 3, 21, 22)
+Cards Drawn: 11
+Cards Remaining: 37
+Cards Remaining in Deck: 13
+
+Current Card: 22
+Current Weather: Overcast
+
+  Draw Card
+  Roll For Weather
+  Resources Phase
+  Deploy Non Panzer Div Reinforcements
+> Allied Advances Phase
+  Action Phase
+
+Press ENTER to perform next action
+Press G to see game summary
+
+
+========================================
+ALLIED ADVANCES PHASE
+========================================
+
+ADVANCING ARMIES
+ - US 1st ARMY
+ - BRITISH XXX CORPS
+ - BRITISH I CORPS
+
+ALLIED ATTACKS
+==============
+
+
+
+US 1st ARMY ADVANCING FROM VALOGNES
+===================================
+
+GERMAN DEFENSE: CHERBOURG
+TERRAIN: 1
+Panzer Lehr: 1
+TOTAL DEFENSE: 2
+
+US 1st ARMY
+TARGET: CHERBOURG
+ATTACK STRENGTH: 2
+DEFENSE STRENGTH: 2
+
+DIE ROLL: 5
+ATTACK TOTAL: 7
+
+HITLER APPROVAL -1 → 0
+
+GERMAN LOSSES
+=============
+>>>> GlobalGameState.german_casualty_strategy= Strategy.AI
+ELIMINATED: Panzer Lehr
+ALLIED VICTORY
+<<SPACE CLEARED>>
+>>>>>>> AFTER ALLIED ADVANCE -> ALLIED ARMY LOCATION:US 1st ARMY IS AT CHERBOURG
+US 1st ARMY -> CHERBOURG
+Hitler Approval: LOSE 1 (0 -> -1)
+
+
+
+BRITISH XXX CORPS ADVANCING FROM BAYEUX
+=======================================
+
+GERMAN DEFENSE: TILLY
+TERRAIN: 2
+21st Panzer: 2
+9th SS Panzer: 2
+TOTAL DEFENSE: 6
+
+BRITISH XXX CORPS
+TARGET: TILLY
+ATTACK STRENGTH: 2
+DEFENSE STRENGTH: 6
+
+DIE ROLL: 1
+ATTACK TOTAL: 3
+
+
+GERMAN LOSSES
+=============
+>>>> GlobalGameState.german_casualty_strategy= Strategy.AI
+REDUCED: 9th SS Panzer now 1
+ALLIED DEFEAT (UNMODIFIED 1)
+
+
+
+BRITISH I CORPS ADVANCING FROM BOURGUEBUS RIDGE
+===============================================
+
+GERMAN DEFENSE: FALAISE
+TERRAIN: 1
+TOTAL DEFENSE: 1
+
+BRITISH I CORPS
+TARGET: FALAISE
+ATTACK STRENGTH: 2
+DEFENSE STRENGTH: 1
+
+DIE ROLL: 2
+ATTACK TOTAL: 4
+
+NO UNITS IN SPACE - NO LOSSES
+ALLIED VICTORY
+<<SPACE CLEARED>>
+>>>>>>> AFTER ALLIED ADVANCE -> ALLIED ARMY LOCATION:BRITISH I CORPS IS AT FALAISE
+BRITISH I CORPS -> FALAISE
+
+
+ACTIONS AVAILABLE: 3
+
+=========================================
+NORMANDY SOLITAIRE! D-Day to Falaise 1944
+=========================================
+
+List of Drawn Cards: (1, 2, 15, 24, 14, 7, 5, 18, 3, 21, 22)
+Cards Drawn: 11
+Cards Remaining: 37
+Cards Remaining in Deck: 13
+
+Current Card: 22
+Current Weather: Overcast
+
+  Draw Card
+  Roll For Weather
+  Resources Phase
+  Deploy Non Panzer Div Reinforcements
+  Allied Advances Phase
+> Action Phase
+
+Press ENTER to perform next action
+Press G to see game summary
+Supply is 0 - 21st Panzer Cannot Attack
+Supply is 0 - 9th SS Panzer Cannot Attack
+Supply is 0 - 12th SS Panzer Cannot Attack
+DQN DECISION | Turn: 12 | Decision: 22 | Type: action_phase | Action ID: 246 | Actions remaining: 3
+Supply is 0 - 21st Panzer Cannot Attack
+Supply is 0 - 9th SS Panzer Cannot Attack
+Supply is 0 - 12th SS Panzer Cannot Attack
+Supply is 0 - 21st Panzer Cannot Attack
+Supply is 0 - 9th SS Panzer Cannot Attack
+Supply is 0 - 12th SS Panzer Cannot Attack
+MOVE PANZER DIVISION FROM STRATEGIC RESERVE
+
+SELECT PANZER DIVISION
+
+1. 10th SS Panzer (2)
+2. 17th SS Panzergrenadier (2)
+
+0. Return to main menu
+
+
+SELECTED: 17th SS Panzergrenadier
+
+HITLER APPROVAL CHECK
+ROLL: 5
+HITLER APPROVAL: -1
+RESULT: FAILED
+Supply is 0 - 21st Panzer Cannot Attack
+Supply is 0 - 9th SS Panzer Cannot Attack
+Supply is 0 - 12th SS Panzer Cannot Attack
+DQN DECISION | Turn: 12 | Decision: 23 | Type: action_phase | Action ID: 141 | Actions remaining: 2
+Supply is 0 - 21st Panzer Cannot Attack
+Supply is 0 - 9th SS Panzer Cannot Attack
+Supply is 0 - 12th SS Panzer Cannot Attack
+Supply is 0 - 21st Panzer Cannot Attack
+Supply is 0 - 9th SS Panzer Cannot Attack
+Supply is 0 - 12th SS Panzer Cannot Attack
+MOVE PANZER DIVISION FROM STRATEGIC RESERVE
+
+SELECT PANZER DIVISION
+
+1. 10th SS Panzer (2)
+2. 17th SS Panzergrenadier (2)
+
+0. Return to main menu
+
+
+SELECTED: 10th SS Panzer
+
+HITLER APPROVAL CHECK
+ROLL: 1
+HITLER APPROVAL: -1
+RESULT: FAILED
+Supply is 0 - 21st Panzer Cannot Attack
+Supply is 0 - 9th SS Panzer Cannot Attack
+Supply is 0 - 12th SS Panzer Cannot Attack
+DQN DECISION | Turn: 12 | Decision: 24 | Type: action_phase | Action ID: 124 | Actions remaining: 1
+Supply is 0 - 21st Panzer Cannot Attack
+Supply is 0 - 9th SS Panzer Cannot Attack
+Supply is 0 - 12th SS Panzer Cannot Attack
+Supply is 0 - 21st Panzer Cannot Attack
+Supply is 0 - 9th SS Panzer Cannot Attack
+Supply is 0 - 12th SS Panzer Cannot Attack
+MOVE PANZER DIVISION FROM STRATEGIC RESERVE
+
+SELECT PANZER DIVISION
+
+1. 10th SS Panzer (2)
+2. 17th SS Panzergrenadier (2)
+
+0. Return to main menu
+
+
+SELECTED: 10th SS Panzer
+
+HITLER APPROVAL CHECK
+ROLL: 4
+HITLER APPROVAL: -1
+RESULT: FAILED
+
+=========================================
+NORMANDY SOLITAIRE! D-Day to Falaise 1944
+=========================================
+
+List of Drawn Cards: (1, 2, 15, 24, 14, 7, 5, 18, 3, 21, 22)
+Cards Drawn: 11
+Cards Remaining: 37
+Cards Remaining in Deck: 13
+
+Current Card: 22
+Current Weather: Overcast
+
+  Draw Card
+  Roll For Weather
+  Resources Phase
+  Deploy Non Panzer Div Reinforcements
+  Allied Advances Phase
+> Action Phase
+
+Press ENTER to perform next action
+Press G to see game summary
+
+=========================================
+NORMANDY SOLITAIRE! D-Day to Falaise 1944
+=========================================
+
+List of Drawn Cards: (1, 2, 15, 24, 14, 7, 5, 18, 3, 21, 22)
+Cards Drawn: 11
+Cards Remaining: 37
+Cards Remaining in Deck: 13
+
+Current Card: 22
+Current Weather: Overcast
+
+> Draw Card
+  Roll For Weather
+  Resources Phase
+  Deploy Non Panzer Div Reinforcements
+  Allied Advances Phase
+  Action Phase
+
+Press ENTER to perform next action
+Press G to see game summary
+Press S to save game
+Press L to load saved game
+Press Q to quit
+
+
+
+========================================
+DREW CARD 13
+========================================
+
+============================================================
+CARD #13 - The Great Storm
+============================================================
+
+RESOURCES
+  +1 Reinforcement 2nd SS Panzer
+  +2 Resource Gain Supply
+
+AIR POWER
+  N/A
+
+ALLIED ADVANCES
+  Weather automatically Overcast
+
+ACTIONS
+  Actions Available: 4
+  No Modifiers
+
+
+=========================================
+NORMANDY SOLITAIRE! D-Day to Falaise 1944
+=========================================
+
+List of Drawn Cards: (1, 2, 15, 24, 14, 7, 5, 18, 3, 21, 22, 13)
+Cards Drawn: 12
+Cards Remaining: 36
+Cards Remaining in Deck: 12
+
+Current Card: 13
+
+  Draw Card
+> Roll For Weather
+  Resources Phase
+  Deploy Non Panzer Div Reinforcements
+  Allied Advances Phase
+  Action Phase
+
+Press ENTER to perform next action
+Press G to see game summary
+
+
+========================================
+WEATHER ROLL
+========================================
+
+ROLL: N/A
+RESULT: Overcast
+
+
+=========================================
+NORMANDY SOLITAIRE! D-Day to Falaise 1944
+=========================================
+
+List of Drawn Cards: (1, 2, 15, 24, 14, 7, 5, 18, 3, 21, 22, 13)
+Cards Drawn: 12
+Cards Remaining: 36
+Cards Remaining in Deck: 12
+
+Current Card: 13
+Current Weather: Overcast
+
+  Draw Card
+  Roll For Weather
+> Resources Phase
+  Deploy Non Panzer Div Reinforcements
+  Allied Advances Phase
+  Action Phase
+
+Press ENTER to perform next action
+Press G to see game summary
+
+EVENT
+
+RESOURCE ADJUSTMENTS
+Supply: GAIN 2 (0 -> 2)
+RESOURCE PHASE - weather is Overcast
+
+
+========================================
+ATTACK STRENGTHS (ALLIED ARMIES)
+========================================
+	=>NO ARMIES ATTACKING
+
+
+========================================
+DEFENSE STRENGTHS (ALLIED ARMIES)
+========================================
+
+N/A
+
+
+DEFENSE VALUES
+US 1st ARMY -> DEFENSE STRENGTH: 4 (+1 Terrain, +3 Army) ; AIR SUPPORT=False
+
+DEFENSE VALUES
+BRITISH XXX CORPS -> DEFENSE STRENGTH: 3 (+1 Terrain, +2 Army) ; AIR SUPPORT=False
+
+DEFENSE VALUES
+BRITISH I CORPS -> DEFENSE STRENGTH: 3 (+1 Terrain, +2 Army) ; AIR SUPPORT=False
+
+
+========================================
+REINFORCEMENTS
+========================================
+
+2nd SS Panzer -> IN TRANSIT
+
+
+
+=========================================
+NORMANDY SOLITAIRE! D-Day to Falaise 1944
+=========================================
+
+List of Drawn Cards: (1, 2, 15, 24, 14, 7, 5, 18, 3, 21, 22, 13)
+Cards Drawn: 12
+Cards Remaining: 36
+Cards Remaining in Deck: 12
+
+Current Card: 13
+Current Weather: Overcast
+
+  Draw Card
+  Roll For Weather
+  Resources Phase
+> Deploy Non Panzer Div Reinforcements
+  Allied Advances Phase
+  Action Phase
+
+Press ENTER to perform next action
+Press G to see game summary
+
+=========================================
+NORMANDY SOLITAIRE! D-Day to Falaise 1944
+=========================================
+
+List of Drawn Cards: (1, 2, 15, 24, 14, 7, 5, 18, 3, 21, 22, 13)
+Cards Drawn: 12
+Cards Remaining: 36
+Cards Remaining in Deck: 12
+
+Current Card: 13
+Current Weather: Overcast
+
+  Draw Card
+  Roll For Weather
+  Resources Phase
+  Deploy Non Panzer Div Reinforcements
+> Allied Advances Phase
+  Action Phase
+
+Press ENTER to perform next action
+Press G to see game summary
+
+
+========================================
+ALLIED ADVANCES PHASE
+========================================
+
+NO ATTACKING ARMIES
+
+IN TRANSIT CHECK
+================
+2nd SS Panzer
+ROLL: 4
+DRM: +0
+MODIFIED ROLL: 4
+CHECK: 4 <= Transport 4
+	=>2nd SS Panzer MOVED TO STRATEGIC RESERVE
+ACTIONS AVAILABLE: 4
+
+=========================================
+NORMANDY SOLITAIRE! D-Day to Falaise 1944
+=========================================
+
+List of Drawn Cards: (1, 2, 15, 24, 14, 7, 5, 18, 3, 21, 22, 13)
+Cards Drawn: 12
+Cards Remaining: 36
+Cards Remaining in Deck: 12
+
+Current Card: 13
+Current Weather: Overcast
+
+  Draw Card
+  Roll For Weather
+  Resources Phase
+  Deploy Non Panzer Div Reinforcements
+  Allied Advances Phase
+> Action Phase
+
+Press ENTER to perform next action
+Press G to see game summary
+DQN DECISION | Turn: 13 | Decision: 25 | Type: action_phase | Action ID: 1018 | Actions remaining: 4
+PLACE / UPGRADE FORTIFIED VILLAGES
+
+MONT PINCON FORTIFIED VILLAGES +1
+
+ACTIONS USED: 3
+ACTIONS REMAINING: 1
+RESERVE ACTIONS USED: 0
+RESERVE ACTIONS REMAINING: 0
+DQN DECISION | Turn: 13 | Decision: 26 | Type: action_phase | Action ID: 249 | Actions remaining: 1
+MOVE PANZER DIVISION FROM STRATEGIC RESERVE
+
+SELECT PANZER DIVISION
+
+1. 10th SS Panzer (2)
+2. 17th SS Panzergrenadier (2)
+3. 2nd SS Panzer (2)
+
+0. Return to main menu
+
+
+SELECTED: 17th SS Panzergrenadier
+
+HITLER APPROVAL CHECK
+ROLL: 5
+HITLER APPROVAL: -1
+RESULT: FAILED
+
+=========================================
+NORMANDY SOLITAIRE! D-Day to Falaise 1944
+=========================================
+
+List of Drawn Cards: (1, 2, 15, 24, 14, 7, 5, 18, 3, 21, 22, 13)
+Cards Drawn: 12
+Cards Remaining: 36
+Cards Remaining in Deck: 12
+
+Current Card: 13
+Current Weather: Overcast
+
+  Draw Card
+  Roll For Weather
+  Resources Phase
+  Deploy Non Panzer Div Reinforcements
+  Allied Advances Phase
+> Action Phase
+
+Press ENTER to perform next action
+Press G to see game summary
+
+=========================================
+NORMANDY SOLITAIRE! D-Day to Falaise 1944
+=========================================
+
+List of Drawn Cards: (1, 2, 15, 24, 14, 7, 5, 18, 3, 21, 22, 13)
+Cards Drawn: 12
+Cards Remaining: 36
+Cards Remaining in Deck: 12
+
+Current Card: 13
+Current Weather: Overcast
+
+> Draw Card
+  Roll For Weather
+  Resources Phase
+  Deploy Non Panzer Div Reinforcements
+  Allied Advances Phase
+  Action Phase
+
+Press ENTER to perform next action
+Press G to see game summary
+Press S to save game
+Press L to load saved game
+Press Q to quit
+
+
+
+========================================
+DREW CARD 9
+========================================
+
+============================================================
+CARD #9 - Michael Wittmann
+============================================================
+
+RESOURCES
+  +1 Reinforcement 101st Tiger Battalion
+  +2 Resource Gain Hitler Approval
+  +1 Resource Gain Supply
+
+AIR POWER
+  N/A
+
+ALLIED ADVANCES
+  None
+
+ACTIONS
+  Actions Available: 3
+  No Modifiers
+
+
+=========================================
+NORMANDY SOLITAIRE! D-Day to Falaise 1944
+=========================================
+
+List of Drawn Cards: (1, 2, 15, 24, 14, 7, 5, 18, 3, 21, 22, 13, 9)
+Cards Drawn: 13
+Cards Remaining: 35
+Cards Remaining in Deck: 11
+
+Current Card: 9
+
+  Draw Card
+> Roll For Weather
+  Resources Phase
+  Deploy Non Panzer Div Reinforcements
+  Allied Advances Phase
+  Action Phase
+
+Press ENTER to perform next action
+Press G to see game summary
+
+
+========================================
+WEATHER ROLL
+========================================
+
+ROLL: 3
+RESULT: Partly Clear
+
+
+=========================================
+NORMANDY SOLITAIRE! D-Day to Falaise 1944
+=========================================
+
+List of Drawn Cards: (1, 2, 15, 24, 14, 7, 5, 18, 3, 21, 22, 13, 9)
+Cards Drawn: 13
+Cards Remaining: 35
+Cards Remaining in Deck: 11
+
+Current Card: 9
+Current Weather: Partly Clear
+
+  Draw Card
+  Roll For Weather
+> Resources Phase
+  Deploy Non Panzer Div Reinforcements
+  Allied Advances Phase
+  Action Phase
+
+Press ENTER to perform next action
+Press G to see game summary
+
+EVENT
+
+RESOURCE ADJUSTMENTS
+Hitler Approval: GAIN 2 (-1 -> 1)
+Supply: GAIN 1 (2 -> 3)
+RESOURCE PHASE - weather is Partly Clear
+
+
+========================================
+ATTACK STRENGTHS (ALLIED ARMIES)
+========================================
+	=>NO ARMIES ATTACKING
+
+
+========================================
+DEFENSE STRENGTHS (ALLIED ARMIES)
+========================================
+
+N/A
+
+
+DEFENSE VALUES
+US 1st ARMY -> DEFENSE STRENGTH: 4 (+1 Terrain, +3 Army) ; AIR SUPPORT=False
+
+DEFENSE VALUES
+BRITISH XXX CORPS -> DEFENSE STRENGTH: 3 (+1 Terrain, +2 Army) ; AIR SUPPORT=False
+
+DEFENSE VALUES
+BRITISH I CORPS -> DEFENSE STRENGTH: 3 (+1 Terrain, +2 Army) ; AIR SUPPORT=False
+
+
+========================================
+REINFORCEMENTS
+========================================
+
+101st Tiger Battalion -> STRATEGIC RESERVE
+
+
+
+=========================================
+NORMANDY SOLITAIRE! D-Day to Falaise 1944
+=========================================
+
+List of Drawn Cards: (1, 2, 15, 24, 14, 7, 5, 18, 3, 21, 22, 13, 9)
+Cards Drawn: 13
+Cards Remaining: 35
+Cards Remaining in Deck: 11
+
+Current Card: 9
+Current Weather: Partly Clear
+
+  Draw Card
+  Roll For Weather
+  Resources Phase
+> Deploy Non Panzer Div Reinforcements
+  Allied Advances Phase
+  Action Phase
+
+Press ENTER to perform next action
+Press G to see game summary
+MOVE OTHER UNIT FROM STRATEGIC RESERVE
+
+SELECT UNIT
+
+1. 101st Tiger Battalion (3)
+
+0. Return to main menu
+
+
+SELECTED: 101st Tiger Battalion
+
+101st Tiger Battalion moved to TILLY
+
+=========================================
+NORMANDY SOLITAIRE! D-Day to Falaise 1944
+=========================================
+
+List of Drawn Cards: (1, 2, 15, 24, 14, 7, 5, 18, 3, 21, 22, 13, 9)
+Cards Drawn: 13
+Cards Remaining: 35
+Cards Remaining in Deck: 11
+
+Current Card: 9
+Current Weather: Partly Clear
+
+  Draw Card
+  Roll For Weather
+  Resources Phase
+  Deploy Non Panzer Div Reinforcements
+> Allied Advances Phase
+  Action Phase
+
+Press ENTER to perform next action
+Press G to see game summary
+
+
+========================================
+ALLIED ADVANCES PHASE
+========================================
+
+NO ATTACKING ARMIES
+
+ACTIONS AVAILABLE: 3
+
+=========================================
+NORMANDY SOLITAIRE! D-Day to Falaise 1944
+=========================================
+
+List of Drawn Cards: (1, 2, 15, 24, 14, 7, 5, 18, 3, 21, 22, 13, 9)
+Cards Drawn: 13
+Cards Remaining: 35
+Cards Remaining in Deck: 11
+
+Current Card: 9
+Current Weather: Partly Clear
+
+  Draw Card
+  Roll For Weather
+  Resources Phase
+  Deploy Non Panzer Div Reinforcements
+  Allied Advances Phase
+> Action Phase
+
+Press ENTER to perform next action
+Press G to see game summary
+DQN DECISION | Turn: 14 | Decision: 27 | Type: action_phase | Action ID: 249 | Actions remaining: 3
+MOVE PANZER DIVISION FROM STRATEGIC RESERVE
+
+SELECT PANZER DIVISION
+
+1. 10th SS Panzer (2)
+2. 17th SS Panzergrenadier (2)
+3. 2nd SS Panzer (2)
+
+0. Return to main menu
+
+
+SELECTED: 17th SS Panzergrenadier
+
+HITLER APPROVAL CHECK
+ROLL: 4
+HITLER APPROVAL: 1
+RESULT: FAILED
+DQN DECISION | Turn: 14 | Decision: 28 | Type: action_phase | Action ID: 153 | Actions remaining: 2
+MOVE PANZER DIVISION FROM STRATEGIC RESERVE
+
+SELECT PANZER DIVISION
+
+1. 10th SS Panzer (2)
+2. 17th SS Panzergrenadier (2)
+3. 2nd SS Panzer (2)
+
+0. Return to main menu
+
+
+SELECTED: 2nd SS Panzer
+
+HITLER APPROVAL CHECK
+ROLL: 3
+HITLER APPROVAL: 1
+RESULT: FAILED
+DQN DECISION | Turn: 14 | Decision: 29 | Type: action_phase | Action ID: 310 | Actions remaining: 1
+MOVE PANZER DIVISION TO STRATEGIC RESERVE
+
+SELECT PANZER DIVISION
+
+1. 12th SS Panzer (2) - FALAISE GAP
+2. 21st Panzer (2) - TILLY
+3. 9th SS Panzer (1) - TILLY
+4. 2nd Panzer (2) - RENNES
+
+0. Return to main menu
+
+
+SELECTED: 21st Panzer
+
+TRANSPORT CHECK
+ROLL: 6
+TRANSPORT LEVEL: 4
+RESULT: FAILED
+
+=========================================
+NORMANDY SOLITAIRE! D-Day to Falaise 1944
+=========================================
+
+List of Drawn Cards: (1, 2, 15, 24, 14, 7, 5, 18, 3, 21, 22, 13, 9)
+Cards Drawn: 13
+Cards Remaining: 35
+Cards Remaining in Deck: 11
+
+Current Card: 9
+Current Weather: Partly Clear
+
+  Draw Card
+  Roll For Weather
+  Resources Phase
+  Deploy Non Panzer Div Reinforcements
+  Allied Advances Phase
+> Action Phase
+
+Press ENTER to perform next action
+Press G to see game summary
+
+=========================================
+NORMANDY SOLITAIRE! D-Day to Falaise 1944
+=========================================
+
+List of Drawn Cards: (1, 2, 15, 24, 14, 7, 5, 18, 3, 21, 22, 13, 9)
+Cards Drawn: 13
+Cards Remaining: 35
+Cards Remaining in Deck: 11
+
+Current Card: 9
+Current Weather: Partly Clear
+
+> Draw Card
+  Roll For Weather
+  Resources Phase
+  Deploy Non Panzer Div Reinforcements
+  Allied Advances Phase
+  Action Phase
+
+Press ENTER to perform next action
+Press G to see game summary
+Press S to save game
+Press L to load saved game
+Press Q to quit
+
+
+
+========================================
+MID DECK ADDED
+DRAW DECK SHUFFLED
+========================================
+
+
+
+========================================
+DREW CARD 20
+========================================
+
+============================================================
+CARD #20 - Operation Goodwood
+============================================================
+
+RESOURCES
+  -2 Resource Loss Hitler Approval
+
+AIR POWER
+  +2 Jabos BRITISH XXX CORPS
+  Carpet Bombing
+
+ALLIED ADVANCES
+  BRITISH XXX CORPS (2)
+  BRITISH I CORPS (2)
+
+ACTIONS
+  Actions Available: 2
+  +1 Attack Strength BRITISH XXX CORPS
+  +2 Montgomery BRITISH I CORPS
+
+
+=========================================
+NORMANDY SOLITAIRE! D-Day to Falaise 1944
+=========================================
+
+List of Drawn Cards: (1, 2, 15, 24, 14, 7, 5, 18, 3, 21, 22, 13, 9, 20)
+Cards Drawn: 14
+Cards Remaining: 34
+Cards Remaining in Deck: 22
+
+Current Card: 20
+
+  Draw Card
+> Roll For Weather
+  Resources Phase
+  Deploy Non Panzer Div Reinforcements
+  Allied Advances Phase
+  Action Phase
+
+Press ENTER to perform next action
+Press G to see game summary
+
+
+========================================
+WEATHER ROLL
+========================================
+
+ROLL: 1
+RESULT: Overcast
+
+
+=========================================
+NORMANDY SOLITAIRE! D-Day to Falaise 1944
+=========================================
+
+List of Drawn Cards: (1, 2, 15, 24, 14, 7, 5, 18, 3, 21, 22, 13, 9, 20)
+Cards Drawn: 14
+Cards Remaining: 34
+Cards Remaining in Deck: 22
+
+Current Card: 20
+Current Weather: Overcast
+
+  Draw Card
+  Roll For Weather
+> Resources Phase
+  Deploy Non Panzer Div Reinforcements
+  Allied Advances Phase
+  Action Phase
+
+Press ENTER to perform next action
+Press G to see game summary
+
+EVENT
+
+RESOURCE ADJUSTMENTS
+Hitler Approval: LOSE 2 (1 -> -1)
+RESOURCE PHASE - weather is Overcast
+
+
+========================================
+ATTACK STRENGTHS (ALLIED ARMIES)
+========================================
+BRITISH XXX CORPS -> ATTACK STRENGTH: 1 (+1 Card modifier) ; AIR SUPPORT=False
+BRITISH I CORPS -> ATTACK STRENGTH: 2 (+2 Montgomery) ; AIR SUPPORT=False
+
+
+========================================
+DEFENSE STRENGTHS (ALLIED ARMIES)
+========================================
+
+N/A
+
+
+DEFENSE VALUES
+US 1st ARMY -> DEFENSE STRENGTH: 4 (+1 Terrain, +3 Army) ; AIR SUPPORT=False
+
+DEFENSE VALUES
+BRITISH XXX CORPS -> DEFENSE STRENGTH: 3 (+1 Terrain, +2 Army) ; AIR SUPPORT=False
+
+DEFENSE VALUES
+APPLY +2: Montgomery
+BRITISH I CORPS -> DEFENSE STRENGTH: 5 (+1 Terrain, +2 Army, +2 Montgomery) ; AIR SUPPORT=False
+
+
+========================================
+REINFORCEMENTS
+========================================
+
+NONE
+
+
+=========================================
+NORMANDY SOLITAIRE! D-Day to Falaise 1944
+=========================================
+
+List of Drawn Cards: (1, 2, 15, 24, 14, 7, 5, 18, 3, 21, 22, 13, 9, 20)
+Cards Drawn: 14
+Cards Remaining: 34
+Cards Remaining in Deck: 22
+
+Current Card: 20
+Current Weather: Overcast
+
+  Draw Card
+  Roll For Weather
+  Resources Phase
+> Deploy Non Panzer Div Reinforcements
+  Allied Advances Phase
+  Action Phase
+
+Press ENTER to perform next action
+Press G to see game summary
+
+=========================================
+NORMANDY SOLITAIRE! D-Day to Falaise 1944
+=========================================
+
+List of Drawn Cards: (1, 2, 15, 24, 14, 7, 5, 18, 3, 21, 22, 13, 9, 20)
+Cards Drawn: 14
+Cards Remaining: 34
+Cards Remaining in Deck: 22
+
+Current Card: 20
+Current Weather: Overcast
+
+  Draw Card
+  Roll For Weather
+  Resources Phase
+  Deploy Non Panzer Div Reinforcements
+> Allied Advances Phase
+  Action Phase
+
+Press ENTER to perform next action
+Press G to see game summary
+
+
+========================================
+ALLIED ADVANCES PHASE
+========================================
+
+ADVANCING ARMIES
+ - BRITISH XXX CORPS
+ - BRITISH I CORPS
+
+ALLIED ATTACKS
+==============
+
+
+
+BRITISH XXX CORPS ADVANCING FROM BAYEUX
+=======================================
+
+GERMAN DEFENSE: TILLY
+TERRAIN: 2
+21st Panzer: 2
+9th SS Panzer: 1
+101st Tiger Battalion: 3
+TOTAL DEFENSE: 8
+
+BRITISH XXX CORPS
+TARGET: TILLY
+ATTACK STRENGTH: 1
+DEFENSE STRENGTH: 8
+
+DIE ROLL: 6
+ATTACK TOTAL: 7
+
+HITLER APPROVAL -1 → 0
+
+GERMAN LOSSES
+=============
+>>>> GlobalGameState.german_casualty_strategy= Strategy.AI
+REDUCED: 21st Panzer now 1
+ALLIED VICTORY
+GERMANS RETREAT FROM TILLY TO VILLERS-BOCAGE
+>>>>>>> AFTER ALLIED ADVANCE -> ALLIED ARMY LOCATION:BRITISH XXX CORPS IS AT TILLY
+BRITISH XXX CORPS -> TILLY
+
+
+
+BRITISH I CORPS ADVANCING FROM FALAISE
+======================================
+
+GERMAN DEFENSE: FALAISE GAP
+TERRAIN: 1
+12th SS Panzer: 2
+TOTAL DEFENSE: 3
+
+BRITISH I CORPS
+TARGET: FALAISE GAP
+ATTACK STRENGTH: 2
+DEFENSE STRENGTH: 3
+
+DIE ROLL: 1
+ATTACK TOTAL: 3
+
+
+GERMAN LOSSES
+=============
+>>>> GlobalGameState.german_casualty_strategy= Strategy.AI
+REDUCED: 12th SS Panzer now 1
+ALLIED DEFEAT (UNMODIFIED 1)
+
+
+ACTIONS AVAILABLE: 2
+
+=========================================
+NORMANDY SOLITAIRE! D-Day to Falaise 1944
+=========================================
+
+List of Drawn Cards: (1, 2, 15, 24, 14, 7, 5, 18, 3, 21, 22, 13, 9, 20)
+Cards Drawn: 14
+Cards Remaining: 34
+Cards Remaining in Deck: 22
+
+Current Card: 20
+Current Weather: Overcast
+
+  Draw Card
+  Roll For Weather
+  Resources Phase
+  Deploy Non Panzer Div Reinforcements
+  Allied Advances Phase
+> Action Phase
+
+Press ENTER to perform next action
+Press G to see game summary
+DQN DECISION | Turn: 15 | Decision: 30 | Type: action_phase | Action ID: 226 | Actions remaining: 2
+MOVE PANZER DIVISION FROM STRATEGIC RESERVE
+
+SELECT PANZER DIVISION
+
+1. 10th SS Panzer (2)
+2. 17th SS Panzergrenadier (2)
+3. 2nd SS Panzer (2)
+
+0. Return to main menu
+
+
+SELECTED: 17th SS Panzergrenadier
+
+HITLER APPROVAL CHECK
+ROLL: 5
+HITLER APPROVAL: 0
+RESULT: FAILED
+DQN DECISION | Turn: 15 | Decision: 31 | Type: action_phase | Action ID: 162 | Actions remaining: 1
+MOVE PANZER DIVISION FROM STRATEGIC RESERVE
+
+SELECT PANZER DIVISION
+
+1. 10th SS Panzer (2)
+2. 17th SS Panzergrenadier (2)
+3. 2nd SS Panzer (2)
+
+0. Return to main menu
+
+
+SELECTED: 2nd SS Panzer
+
+HITLER APPROVAL CHECK
+ROLL: 4
+HITLER APPROVAL: 0
+RESULT: FAILED
+
+=========================================
+NORMANDY SOLITAIRE! D-Day to Falaise 1944
+=========================================
+
+List of Drawn Cards: (1, 2, 15, 24, 14, 7, 5, 18, 3, 21, 22, 13, 9, 20)
+Cards Drawn: 14
+Cards Remaining: 34
+Cards Remaining in Deck: 22
+
+Current Card: 20
+Current Weather: Overcast
+
+  Draw Card
+  Roll For Weather
+  Resources Phase
+  Deploy Non Panzer Div Reinforcements
+  Allied Advances Phase
+> Action Phase
+
+Press ENTER to perform next action
+Press G to see game summary
+
+=========================================
+NORMANDY SOLITAIRE! D-Day to Falaise 1944
+=========================================
+
+List of Drawn Cards: (1, 2, 15, 24, 14, 7, 5, 18, 3, 21, 22, 13, 9, 20)
+Cards Drawn: 14
+Cards Remaining: 34
+Cards Remaining in Deck: 22
+
+Current Card: 20
+Current Weather: Overcast
+
+> Draw Card
+  Roll For Weather
+  Resources Phase
+  Deploy Non Panzer Div Reinforcements
+  Allied Advances Phase
+  Action Phase
+
+Press ENTER to perform next action
+Press G to see game summary
+Press S to save game
+Press L to load saved game
+Press Q to quit
+
+
+
+========================================
+DREW CARD 35
+========================================
+
+============================================================
+CARD #35 - Hitler Intervention - ULTRA
+============================================================
+
+RESOURCES
+  +1 Resource Gain Hitler Approval
+  +2 Resource Gain Supply
+
+AIR POWER
+  +1 Jabos BRITISH XXX CORPS
+
+ALLIED ADVANCES
+  BRITISH XXX CORPS (2)
+  Hitler redeploys two Panzer Divisions (player's choice) and attacks any Allied Army (*ignore if player passes Hitler Approval Check)
+
+ACTIONS
+  Actions Available: 0
+  Conditional Actions:
+    +2
+  +2 Defense Strength US 1st ARMY
+  +2 Defense Strength BRITISH XXX CORPS
+  +2 Defense Strength BRITISH I CORPS
+  +2 Defense Strength US 3rd ARMY
+
+
+=========================================
+NORMANDY SOLITAIRE! D-Day to Falaise 1944
+=========================================
+
+List of Drawn Cards: (1, 2, 15, 24, 14, 7, 5, 18, 3, 21, 22, 13, 9, 20, 35)
+Cards Drawn: 15
+Cards Remaining: 33
+Cards Remaining in Deck: 21
+
+Current Card: 35
+
+  Draw Card
+> Roll For Weather
+  Resources Phase
+  Deploy Non Panzer Div Reinforcements
+  Allied Advances Phase
+  Action Phase
+
+Press ENTER to perform next action
+Press G to see game summary
+
+
+========================================
+WEATHER ROLL
+========================================
+
+ROLL: 4
+RESULT: Clear
+
+
+=========================================
+NORMANDY SOLITAIRE! D-Day to Falaise 1944
+=========================================
+
+List of Drawn Cards: (1, 2, 15, 24, 14, 7, 5, 18, 3, 21, 22, 13, 9, 20, 35)
+Cards Drawn: 15
+Cards Remaining: 33
+Cards Remaining in Deck: 21
+
+Current Card: 35
+Current Weather: Clear
+
+  Draw Card
+  Roll For Weather
+> Resources Phase
+  Deploy Non Panzer Div Reinforcements
+  Allied Advances Phase
+  Action Phase
+
+Press ENTER to perform next action
+Press G to see game summary
+
+EVENT
+
+RESOURCE ADJUSTMENTS
+Hitler Approval: GAIN 1 (0 -> 1)
+Supply: GAIN 2 (3 -> 5)
+RESOURCE PHASE - weather is Clear
+
+
+========================================
+ATTACK STRENGTHS (ALLIED ARMIES)
+========================================
+BRITISH XXX CORPS -> ATTACK STRENGTH: 1 (+1 Jabo) ; AIR SUPPORT=True
+
+
+========================================
+DEFENSE STRENGTHS (ALLIED ARMIES)
+========================================
+
+N/A
+
+
+DEFENSE VALUES
+APPLY +2: Defense modifier
+US 1st ARMY -> DEFENSE STRENGTH: 6 (+1 Terrain, +3 Army, +2 Defense modifier) ; AIR SUPPORT=False
+
+DEFENSE VALUES
+APPLY +2: Defense modifier
+BRITISH XXX CORPS -> DEFENSE STRENGTH: 7 (+2 Terrain, +2 Army, +1 Jabo, +2 Defense modifier) ; AIR SUPPORT=True
+
+DEFENSE VALUES
+APPLY +2: Defense modifier
+BRITISH I CORPS -> DEFENSE STRENGTH: 5 (+1 Terrain, +2 Army, +2 Defense modifier) ; AIR SUPPORT=False
+
+
+========================================
+REINFORCEMENTS
+========================================
+
+NONE
+
+
+=========================================
+NORMANDY SOLITAIRE! D-Day to Falaise 1944
+=========================================
+
+List of Drawn Cards: (1, 2, 15, 24, 14, 7, 5, 18, 3, 21, 22, 13, 9, 20, 35)
+Cards Drawn: 15
+Cards Remaining: 33
+Cards Remaining in Deck: 21
+
+Current Card: 35
+Current Weather: Clear
+
+  Draw Card
+  Roll For Weather
+  Resources Phase
+> Deploy Non Panzer Div Reinforcements
+  Allied Advances Phase
+  Action Phase
+
+Press ENTER to perform next action
+Press G to see game summary
+
+=========================================
+NORMANDY SOLITAIRE! D-Day to Falaise 1944
+=========================================
+
+List of Drawn Cards: (1, 2, 15, 24, 14, 7, 5, 18, 3, 21, 22, 13, 9, 20, 35)
+Cards Drawn: 15
+Cards Remaining: 33
+Cards Remaining in Deck: 21
+
+Current Card: 35
+Current Weather: Clear
+
+  Draw Card
+  Roll For Weather
+  Resources Phase
+  Deploy Non Panzer Div Reinforcements
+> Allied Advances Phase
+  Action Phase
+
+Press ENTER to perform next action
+Press G to see game summary
+
+
+========================================
+ALLIED ADVANCES PHASE
+========================================
+
+ADVANCING ARMIES
+ - BRITISH XXX CORPS
+
+ALLIED ATTACKS
+==============
+
+
+
+BRITISH XXX CORPS ADVANCING FROM TILLY
+======================================
+
+GERMAN DEFENSE: VILLERS-BOCAGE
+TERRAIN: 2
+21st Panzer: 1
+9th SS Panzer: 1
+101st Tiger Battalion: 3
+TOTAL DEFENSE: 7
+
+BRITISH XXX CORPS
+TARGET: VILLERS-BOCAGE
+ATTACK STRENGTH: 1
+DEFENSE STRENGTH: 7
+
+DIE ROLL: 4
+ATTACK TOTAL: 5
+
+
+GERMAN LOSSES
+=============
+>>>> GlobalGameState.german_casualty_strategy= Strategy.AI
+ELIMINATED: 9th SS Panzer
+ALLIED DEFEAT
+
+
+HITLER INTERVENTION DEBUG: card = Card(card_id=35, title='Hitler Intervention - ULTRA', military=MilitarySection(formations=[AlliedArmy(name='BRITISH XXX CORPS', nation=<Nation.BRIT_2: 'BRIT SECOND ARMY'>, location=MapSpace(name='TILLY', track=<Nation.BRIT_2: 'BRIT SECOND ARMY'>, terrain=<TerrainType.BOCAGE: ('Bocage', 2)>, controlling_player=<SideType.ALLIED: ('ALLIED',)>, terrain_value=2, track_number=4, fortified_village_modifier=0, fortified=False, model_modifier=0, under_siege=False, units=[...]), reverse_name='BRITISH 2nd ARMY', _strength=2, reverse_strength=4, flipped=False, merged=False)], effects=[], text=["Hitler redeploys two Panzer Divisions (player's choice) and attacks any Allied Army (*ignore if player passes Hitler Approval Check)"], display_text=None), air_power=AirPowerSection(effects=[Effect(modifier_type=<ModifierType.AIR_POWER: 'Air Power'>, value=1, target=AlliedArmy(name='BRITISH XXX CORPS', nation=<Nation.BRIT_2: 'BRIT SECOND ARMY'>, location=MapSpace(name='TILLY', track=<Nation.BRIT_2: 'BRIT SECOND ARMY'>, terrain=<TerrainType.BOCAGE: ('Bocage', 2)>, controlling_player=<SideType.ALLIED: ('ALLIED',)>, terrain_value=2, track_number=4, fortified_village_modifier=0, fortified=False, model_modifier=0, under_siege=False, units=[...]), reverse_name='BRITISH 2nd ARMY', _strength=2, reverse_strength=4, flipped=False, merged=False), resource_type=None, condition=None, description=None, label=None)], text=[], display_text=None), resources=ResourceSection(effects=[Effect(modifier_type=<ModifierType.RESOURCE_GAIN: 'Resource Gain'>, value=1, target=None, resource_type=<ResourceType.HITLER_APPROVAL: 'Hitler Approval'>, condition=None, description=None, label=None), Effect(modifier_type=<ModifierType.RESOURCE_GAIN: 'Resource Gain'>, value=2, target=None, resource_type=<ResourceType.SUPPLY: 'Supply'>, condition=None, description=None, label=None)], display_text=None), actions=ActionSection(actions_available=0, conditional_actions=[Effect(modifier_type=None, value=2, target=None, resource_type=None, condition=<core.conditions.HitlerInterventionNoEffect object at 0x0000022DCD9C74D0>, description=None, label=None)], effects=[Effect(modifier_type=<ModifierType.DEFENSE_STRENGTH: 'Defense Strength'>, value=2, target=AlliedArmy(name='US 1st ARMY', nation=<Nation.US_1: 'US FIRST ARMY'>, location=MapSpace(name='CHERBOURG', track=<Nation.US_1: 'US FIRST ARMY'>, terrain=<TerrainType.TOWN: ('Town', 1)>, controlling_player=<SideType.ALLIED: ('ALLIED',)>, terrain_value=1, track_number=7, fortified_village_modifier=0, fortified=False, model_modifier=0, under_siege=False, units=[...]), reverse_name='US 1st ARMY', _strength=3, reverse_strength=4, flipped=False, merged=False), resource_type=None, condition=<core.conditions.HitlerInterventionNoEffect object at 0x0000022DCDA025D0>, description=None, label=None), Effect(modifier_type=<ModifierType.DEFENSE_STRENGTH: 'Defense Strength'>, value=2, target=AlliedArmy(name='BRITISH XXX CORPS', nation=<Nation.BRIT_2: 'BRIT SECOND ARMY'>, location=MapSpace(name='TILLY', track=<Nation.BRIT_2: 'BRIT SECOND ARMY'>, terrain=<TerrainType.BOCAGE: ('Bocage', 2)>, controlling_player=<SideType.ALLIED: ('ALLIED',)>, terrain_value=2, track_number=4, fortified_village_modifier=0, fortified=False, model_modifier=0, under_siege=False, units=[...]), reverse_name='BRITISH 2nd ARMY', _strength=2, reverse_strength=4, flipped=False, merged=False), resource_type=None, condition=<core.conditions.HitlerInterventionNoEffect object at 0x0000022DCDA02710>, description=None, label=None), Effect(modifier_type=<ModifierType.DEFENSE_STRENGTH: 'Defense Strength'>, value=2, target=AlliedArmy(name='BRITISH I CORPS', nation=<Nation.CAN_1: 'CANADIAN FIRST ARMY'>, location=MapSpace(name='FALAISE', track=<Nation.CAN_1: 'CANADIAN FIRST ARMY'>, terrain=<TerrainType.TOWN: ('Town', 1)>, controlling_player=<SideType.ALLIED: ('ALLIED',)>, terrain_value=1, track_number=1, fortified_village_modifier=0, fortified=False, model_modifier=0, under_siege=False, units=[...]), reverse_name='CANADIAN 1st ARMY', _strength=2, reverse_strength=4, flipped=False, merged=False), resource_type=None, condition=<core.conditions.HitlerInterventionNoEffect object at 0x0000022DCD99BBB0>, description=None, label=None), Effect(modifier_type=<ModifierType.DEFENSE_STRENGTH: 'Defense Strength'>, value=2, target=AlliedArmy(name='US 3rd ARMY', nation=<Nation.US_3: 'US THIRD ARMY'>, location=None, reverse_name=None, _strength=4, reverse_strength=0, flipped=False, merged=False), resource_type=None, condition=<core.conditions.HitlerInterventionNoEffect object at 0x0000022DCD99BCE0>, description=None, label=None)]), hitler_intervention=True, hitler_intervention_target_armies=[AlliedArmy(name='US 1st ARMY', nation=<Nation.US_1: 'US FIRST ARMY'>, location=MapSpace(name='CHERBOURG', track=<Nation.US_1: 'US FIRST ARMY'>, terrain=<TerrainType.TOWN: ('Town', 1)>, controlling_player=<SideType.ALLIED: ('ALLIED',)>, terrain_value=1, track_number=7, fortified_village_modifier=0, fortified=False, model_modifier=0, under_siege=False, units=[...]), reverse_name='US 1st ARMY', _strength=3, reverse_strength=4, flipped=False, merged=False), AlliedArmy(name='US 3rd ARMY', nation=<Nation.US_3: 'US THIRD ARMY'>, location=None, reverse_name=None, _strength=4, reverse_strength=0, flipped=False, merged=False), AlliedArmy(name='BRITISH XXX CORPS', nation=<Nation.BRIT_2: 'BRIT SECOND ARMY'>, location=MapSpace(name='TILLY', track=<Nation.BRIT_2: 'BRIT SECOND ARMY'>, terrain=<TerrainType.BOCAGE: ('Bocage', 2)>, controlling_player=<SideType.ALLIED: ('ALLIED',)>, terrain_value=2, track_number=4, fortified_village_modifier=0, fortified=False, model_modifier=0, under_siege=False, units=[...]), reverse_name='BRITISH 2nd ARMY', _strength=2, reverse_strength=4, flipped=False, merged=False), AlliedArmy(name='BRITISH I CORPS', nation=<Nation.CAN_1: 'CANADIAN FIRST ARMY'>, location=MapSpace(name='FALAISE', track=<Nation.CAN_1: 'CANADIAN FIRST ARMY'>, terrain=<TerrainType.TOWN: ('Town', 1)>, controlling_player=<SideType.ALLIED: ('ALLIED',)>, terrain_value=1, track_number=1, fortified_village_modifier=0, fortified=False, model_modifier=0, under_siege=False, units=[...]), reverse_name='CANADIAN 1st ARMY', _strength=2, reverse_strength=4, flipped=False, merged=False)], hitler_intervention_panzer_count=2) targets = [AlliedArmy(name='US 1st ARMY', nation=<Nation.US_1: 'US FIRST ARMY'>, location=MapSpace(name='CHERBOURG', track=<Nation.US_1: 'US FIRST ARMY'>, terrain=<TerrainType.TOWN: ('Town', 1)>, controlling_player=<SideType.ALLIED: ('ALLIED',)>, terrain_value=1, track_number=7, fortified_village_modifier=0, fortified=False, model_modifier=0, under_siege=False, units=[...]), reverse_name='US 1st ARMY', _strength=3, reverse_strength=4, flipped=False, merged=False), AlliedArmy(name='US 3rd ARMY', nation=<Nation.US_3: 'US THIRD ARMY'>, location=None, reverse_name=None, _strength=4, reverse_strength=0, flipped=False, merged=False), AlliedArmy(name='BRITISH XXX CORPS', nation=<Nation.BRIT_2: 'BRIT SECOND ARMY'>, location=MapSpace(name='TILLY', track=<Nation.BRIT_2: 'BRIT SECOND ARMY'>, terrain=<TerrainType.BOCAGE: ('Bocage', 2)>, controlling_player=<SideType.ALLIED: ('ALLIED',)>, terrain_value=2, track_number=4, fortified_village_modifier=0, fortified=False, model_modifier=0, under_siege=False, units=[...]), reverse_name='BRITISH 2nd ARMY', _strength=2, reverse_strength=4, flipped=False, merged=False), AlliedArmy(name='BRITISH I CORPS', nation=<Nation.CAN_1: 'CANADIAN FIRST ARMY'>, location=MapSpace(name='FALAISE', track=<Nation.CAN_1: 'CANADIAN FIRST ARMY'>, terrain=<TerrainType.TOWN: ('Town', 1)>, controlling_player=<SideType.ALLIED: ('ALLIED',)>, terrain_value=1, track_number=1, fortified_village_modifier=0, fortified=False, model_modifier=0, under_siege=False, units=[...]), reverse_name='CANADIAN 1st ARMY', _strength=2, reverse_strength=4, flipped=False, merged=False)]
+DQN DECISION | Turn: 16 | Decision: 32 | Type: hitler_intervention | Action ID: 0 | Actions remaining: 0
+HITLER INTERVENTION DEBUG: card = Card(card_id=35, title='Hitler Intervention - ULTRA', military=MilitarySection(formations=[AlliedArmy(name='BRITISH XXX CORPS', nation=<Nation.BRIT_2: 'BRIT SECOND ARMY'>, location=MapSpace(name='TILLY', track=<Nation.BRIT_2: 'BRIT SECOND ARMY'>, terrain=<TerrainType.BOCAGE: ('Bocage', 2)>, controlling_player=<SideType.ALLIED: ('ALLIED',)>, terrain_value=2, track_number=4, fortified_village_modifier=0, fortified=False, model_modifier=0, under_siege=False, units=[...]), reverse_name='BRITISH 2nd ARMY', _strength=2, reverse_strength=4, flipped=False, merged=False)], effects=[], text=["Hitler redeploys two Panzer Divisions (player's choice) and attacks any Allied Army (*ignore if player passes Hitler Approval Check)"], display_text=None), air_power=AirPowerSection(effects=[Effect(modifier_type=<ModifierType.AIR_POWER: 'Air Power'>, value=1, target=AlliedArmy(name='BRITISH XXX CORPS', nation=<Nation.BRIT_2: 'BRIT SECOND ARMY'>, location=MapSpace(name='TILLY', track=<Nation.BRIT_2: 'BRIT SECOND ARMY'>, terrain=<TerrainType.BOCAGE: ('Bocage', 2)>, controlling_player=<SideType.ALLIED: ('ALLIED',)>, terrain_value=2, track_number=4, fortified_village_modifier=0, fortified=False, model_modifier=0, under_siege=False, units=[...]), reverse_name='BRITISH 2nd ARMY', _strength=2, reverse_strength=4, flipped=False, merged=False), resource_type=None, condition=None, description=None, label=None)], text=[], display_text=None), resources=ResourceSection(effects=[Effect(modifier_type=<ModifierType.RESOURCE_GAIN: 'Resource Gain'>, value=1, target=None, resource_type=<ResourceType.HITLER_APPROVAL: 'Hitler Approval'>, condition=None, description=None, label=None), Effect(modifier_type=<ModifierType.RESOURCE_GAIN: 'Resource Gain'>, value=2, target=None, resource_type=<ResourceType.SUPPLY: 'Supply'>, condition=None, description=None, label=None)], display_text=None), actions=ActionSection(actions_available=0, conditional_actions=[Effect(modifier_type=None, value=2, target=None, resource_type=None, condition=<core.conditions.HitlerInterventionNoEffect object at 0x0000022DCD9C74D0>, description=None, label=None)], effects=[Effect(modifier_type=<ModifierType.DEFENSE_STRENGTH: 'Defense Strength'>, value=2, target=AlliedArmy(name='US 1st ARMY', nation=<Nation.US_1: 'US FIRST ARMY'>, location=MapSpace(name='CHERBOURG', track=<Nation.US_1: 'US FIRST ARMY'>, terrain=<TerrainType.TOWN: ('Town', 1)>, controlling_player=<SideType.ALLIED: ('ALLIED',)>, terrain_value=1, track_number=7, fortified_village_modifier=0, fortified=False, model_modifier=0, under_siege=False, units=[...]), reverse_name='US 1st ARMY', _strength=3, reverse_strength=4, flipped=False, merged=False), resource_type=None, condition=<core.conditions.HitlerInterventionNoEffect object at 0x0000022DCDA025D0>, description=None, label=None), Effect(modifier_type=<ModifierType.DEFENSE_STRENGTH: 'Defense Strength'>, value=2, target=AlliedArmy(name='BRITISH XXX CORPS', nation=<Nation.BRIT_2: 'BRIT SECOND ARMY'>, location=MapSpace(name='TILLY', track=<Nation.BRIT_2: 'BRIT SECOND ARMY'>, terrain=<TerrainType.BOCAGE: ('Bocage', 2)>, controlling_player=<SideType.ALLIED: ('ALLIED',)>, terrain_value=2, track_number=4, fortified_village_modifier=0, fortified=False, model_modifier=0, under_siege=False, units=[...]), reverse_name='BRITISH 2nd ARMY', _strength=2, reverse_strength=4, flipped=False, merged=False), resource_type=None, condition=<core.conditions.HitlerInterventionNoEffect object at 0x0000022DCDA02710>, description=None, label=None), Effect(modifier_type=<ModifierType.DEFENSE_STRENGTH: 'Defense Strength'>, value=2, target=AlliedArmy(name='BRITISH I CORPS', nation=<Nation.CAN_1: 'CANADIAN FIRST ARMY'>, location=MapSpace(name='FALAISE', track=<Nation.CAN_1: 'CANADIAN FIRST ARMY'>, terrain=<TerrainType.TOWN: ('Town', 1)>, controlling_player=<SideType.ALLIED: ('ALLIED',)>, terrain_value=1, track_number=1, fortified_village_modifier=0, fortified=False, model_modifier=0, under_siege=False, units=[...]), reverse_name='CANADIAN 1st ARMY', _strength=2, reverse_strength=4, flipped=False, merged=False), resource_type=None, condition=<core.conditions.HitlerInterventionNoEffect object at 0x0000022DCD99BBB0>, description=None, label=None), Effect(modifier_type=<ModifierType.DEFENSE_STRENGTH: 'Defense Strength'>, value=2, target=AlliedArmy(name='US 3rd ARMY', nation=<Nation.US_3: 'US THIRD ARMY'>, location=None, reverse_name=None, _strength=4, reverse_strength=0, flipped=False, merged=False), resource_type=None, condition=<core.conditions.HitlerInterventionNoEffect object at 0x0000022DCD99BCE0>, description=None, label=None)]), hitler_intervention=True, hitler_intervention_target_armies=[AlliedArmy(name='US 1st ARMY', nation=<Nation.US_1: 'US FIRST ARMY'>, location=MapSpace(name='CHERBOURG', track=<Nation.US_1: 'US FIRST ARMY'>, terrain=<TerrainType.TOWN: ('Town', 1)>, controlling_player=<SideType.ALLIED: ('ALLIED',)>, terrain_value=1, track_number=7, fortified_village_modifier=0, fortified=False, model_modifier=0, under_siege=False, units=[...]), reverse_name='US 1st ARMY', _strength=3, reverse_strength=4, flipped=False, merged=False), AlliedArmy(name='US 3rd ARMY', nation=<Nation.US_3: 'US THIRD ARMY'>, location=None, reverse_name=None, _strength=4, reverse_strength=0, flipped=False, merged=False), AlliedArmy(name='BRITISH XXX CORPS', nation=<Nation.BRIT_2: 'BRIT SECOND ARMY'>, location=MapSpace(name='TILLY', track=<Nation.BRIT_2: 'BRIT SECOND ARMY'>, terrain=<TerrainType.BOCAGE: ('Bocage', 2)>, controlling_player=<SideType.ALLIED: ('ALLIED',)>, terrain_value=2, track_number=4, fortified_village_modifier=0, fortified=False, model_modifier=0, under_siege=False, units=[...]), reverse_name='BRITISH 2nd ARMY', _strength=2, reverse_strength=4, flipped=False, merged=False), AlliedArmy(name='BRITISH I CORPS', nation=<Nation.CAN_1: 'CANADIAN FIRST ARMY'>, location=MapSpace(name='FALAISE', track=<Nation.CAN_1: 'CANADIAN FIRST ARMY'>, terrain=<TerrainType.TOWN: ('Town', 1)>, controlling_player=<SideType.ALLIED: ('ALLIED',)>, terrain_value=1, track_number=1, fortified_village_modifier=0, fortified=False, model_modifier=0, under_siege=False, units=[...]), reverse_name='CANADIAN 1st ARMY', _strength=2, reverse_strength=4, flipped=False, merged=False)], hitler_intervention_panzer_count=2) targets = [AlliedArmy(name='US 1st ARMY', nation=<Nation.US_1: 'US FIRST ARMY'>, location=MapSpace(name='CHERBOURG', track=<Nation.US_1: 'US FIRST ARMY'>, terrain=<TerrainType.TOWN: ('Town', 1)>, controlling_player=<SideType.ALLIED: ('ALLIED',)>, terrain_value=1, track_number=7, fortified_village_modifier=0, fortified=False, model_modifier=0, under_siege=False, units=[...]), reverse_name='US 1st ARMY', _strength=3, reverse_strength=4, flipped=False, merged=False), AlliedArmy(name='US 3rd ARMY', nation=<Nation.US_3: 'US THIRD ARMY'>, location=None, reverse_name=None, _strength=4, reverse_strength=0, flipped=False, merged=False), AlliedArmy(name='BRITISH XXX CORPS', nation=<Nation.BRIT_2: 'BRIT SECOND ARMY'>, location=MapSpace(name='TILLY', track=<Nation.BRIT_2: 'BRIT SECOND ARMY'>, terrain=<TerrainType.BOCAGE: ('Bocage', 2)>, controlling_player=<SideType.ALLIED: ('ALLIED',)>, terrain_value=2, track_number=4, fortified_village_modifier=0, fortified=False, model_modifier=0, under_siege=False, units=[...]), reverse_name='BRITISH 2nd ARMY', _strength=2, reverse_strength=4, flipped=False, merged=False), AlliedArmy(name='BRITISH I CORPS', nation=<Nation.CAN_1: 'CANADIAN FIRST ARMY'>, location=MapSpace(name='FALAISE', track=<Nation.CAN_1: 'CANADIAN FIRST ARMY'>, terrain=<TerrainType.TOWN: ('Town', 1)>, controlling_player=<SideType.ALLIED: ('ALLIED',)>, terrain_value=1, track_number=1, fortified_village_modifier=0, fortified=False, model_modifier=0, under_siege=False, units=[...]), reverse_name='CANADIAN 1st ARMY', _strength=2, reverse_strength=4, flipped=False, merged=False)]
+HITLER INTERVENTION DEBUG: card = Card(card_id=35, title='Hitler Intervention - ULTRA', military=MilitarySection(formations=[AlliedArmy(name='BRITISH XXX CORPS', nation=<Nation.BRIT_2: 'BRIT SECOND ARMY'>, location=MapSpace(name='TILLY', track=<Nation.BRIT_2: 'BRIT SECOND ARMY'>, terrain=<TerrainType.BOCAGE: ('Bocage', 2)>, controlling_player=<SideType.ALLIED: ('ALLIED',)>, terrain_value=2, track_number=4, fortified_village_modifier=0, fortified=False, model_modifier=0, under_siege=False, units=[...]), reverse_name='BRITISH 2nd ARMY', _strength=2, reverse_strength=4, flipped=False, merged=False)], effects=[], text=["Hitler redeploys two Panzer Divisions (player's choice) and attacks any Allied Army (*ignore if player passes Hitler Approval Check)"], display_text=None), air_power=AirPowerSection(effects=[Effect(modifier_type=<ModifierType.AIR_POWER: 'Air Power'>, value=1, target=AlliedArmy(name='BRITISH XXX CORPS', nation=<Nation.BRIT_2: 'BRIT SECOND ARMY'>, location=MapSpace(name='TILLY', track=<Nation.BRIT_2: 'BRIT SECOND ARMY'>, terrain=<TerrainType.BOCAGE: ('Bocage', 2)>, controlling_player=<SideType.ALLIED: ('ALLIED',)>, terrain_value=2, track_number=4, fortified_village_modifier=0, fortified=False, model_modifier=0, under_siege=False, units=[...]), reverse_name='BRITISH 2nd ARMY', _strength=2, reverse_strength=4, flipped=False, merged=False), resource_type=None, condition=None, description=None, label=None)], text=[], display_text=None), resources=ResourceSection(effects=[Effect(modifier_type=<ModifierType.RESOURCE_GAIN: 'Resource Gain'>, value=1, target=None, resource_type=<ResourceType.HITLER_APPROVAL: 'Hitler Approval'>, condition=None, description=None, label=None), Effect(modifier_type=<ModifierType.RESOURCE_GAIN: 'Resource Gain'>, value=2, target=None, resource_type=<ResourceType.SUPPLY: 'Supply'>, condition=None, description=None, label=None)], display_text=None), actions=ActionSection(actions_available=0, conditional_actions=[Effect(modifier_type=None, value=2, target=None, resource_type=None, condition=<core.conditions.HitlerInterventionNoEffect object at 0x0000022DCD9C74D0>, description=None, label=None)], effects=[Effect(modifier_type=<ModifierType.DEFENSE_STRENGTH: 'Defense Strength'>, value=2, target=AlliedArmy(name='US 1st ARMY', nation=<Nation.US_1: 'US FIRST ARMY'>, location=MapSpace(name='CHERBOURG', track=<Nation.US_1: 'US FIRST ARMY'>, terrain=<TerrainType.TOWN: ('Town', 1)>, controlling_player=<SideType.ALLIED: ('ALLIED',)>, terrain_value=1, track_number=7, fortified_village_modifier=0, fortified=False, model_modifier=0, under_siege=False, units=[...]), reverse_name='US 1st ARMY', _strength=3, reverse_strength=4, flipped=False, merged=False), resource_type=None, condition=<core.conditions.HitlerInterventionNoEffect object at 0x0000022DCDA025D0>, description=None, label=None), Effect(modifier_type=<ModifierType.DEFENSE_STRENGTH: 'Defense Strength'>, value=2, target=AlliedArmy(name='BRITISH XXX CORPS', nation=<Nation.BRIT_2: 'BRIT SECOND ARMY'>, location=MapSpace(name='TILLY', track=<Nation.BRIT_2: 'BRIT SECOND ARMY'>, terrain=<TerrainType.BOCAGE: ('Bocage', 2)>, controlling_player=<SideType.ALLIED: ('ALLIED',)>, terrain_value=2, track_number=4, fortified_village_modifier=0, fortified=False, model_modifier=0, under_siege=False, units=[...]), reverse_name='BRITISH 2nd ARMY', _strength=2, reverse_strength=4, flipped=False, merged=False), resource_type=None, condition=<core.conditions.HitlerInterventionNoEffect object at 0x0000022DCDA02710>, description=None, label=None), Effect(modifier_type=<ModifierType.DEFENSE_STRENGTH: 'Defense Strength'>, value=2, target=AlliedArmy(name='BRITISH I CORPS', nation=<Nation.CAN_1: 'CANADIAN FIRST ARMY'>, location=MapSpace(name='FALAISE', track=<Nation.CAN_1: 'CANADIAN FIRST ARMY'>, terrain=<TerrainType.TOWN: ('Town', 1)>, controlling_player=<SideType.ALLIED: ('ALLIED',)>, terrain_value=1, track_number=1, fortified_village_modifier=0, fortified=False, model_modifier=0, under_siege=False, units=[...]), reverse_name='CANADIAN 1st ARMY', _strength=2, reverse_strength=4, flipped=False, merged=False), resource_type=None, condition=<core.conditions.HitlerInterventionNoEffect object at 0x0000022DCD99BBB0>, description=None, label=None), Effect(modifier_type=<ModifierType.DEFENSE_STRENGTH: 'Defense Strength'>, value=2, target=AlliedArmy(name='US 3rd ARMY', nation=<Nation.US_3: 'US THIRD ARMY'>, location=None, reverse_name=None, _strength=4, reverse_strength=0, flipped=False, merged=False), resource_type=None, condition=<core.conditions.HitlerInterventionNoEffect object at 0x0000022DCD99BCE0>, description=None, label=None)]), hitler_intervention=True, hitler_intervention_target_armies=[AlliedArmy(name='US 1st ARMY', nation=<Nation.US_1: 'US FIRST ARMY'>, location=MapSpace(name='CHERBOURG', track=<Nation.US_1: 'US FIRST ARMY'>, terrain=<TerrainType.TOWN: ('Town', 1)>, controlling_player=<SideType.ALLIED: ('ALLIED',)>, terrain_value=1, track_number=7, fortified_village_modifier=0, fortified=False, model_modifier=0, under_siege=False, units=[...]), reverse_name='US 1st ARMY', _strength=3, reverse_strength=4, flipped=False, merged=False), AlliedArmy(name='US 3rd ARMY', nation=<Nation.US_3: 'US THIRD ARMY'>, location=None, reverse_name=None, _strength=4, reverse_strength=0, flipped=False, merged=False), AlliedArmy(name='BRITISH XXX CORPS', nation=<Nation.BRIT_2: 'BRIT SECOND ARMY'>, location=MapSpace(name='TILLY', track=<Nation.BRIT_2: 'BRIT SECOND ARMY'>, terrain=<TerrainType.BOCAGE: ('Bocage', 2)>, controlling_player=<SideType.ALLIED: ('ALLIED',)>, terrain_value=2, track_number=4, fortified_village_modifier=0, fortified=False, model_modifier=0, under_siege=False, units=[...]), reverse_name='BRITISH 2nd ARMY', _strength=2, reverse_strength=4, flipped=False, merged=False), AlliedArmy(name='BRITISH I CORPS', nation=<Nation.CAN_1: 'CANADIAN FIRST ARMY'>, location=MapSpace(name='FALAISE', track=<Nation.CAN_1: 'CANADIAN FIRST ARMY'>, terrain=<TerrainType.TOWN: ('Town', 1)>, controlling_player=<SideType.ALLIED: ('ALLIED',)>, terrain_value=1, track_number=1, fortified_village_modifier=0, fortified=False, model_modifier=0, under_siege=False, units=[...]), reverse_name='CANADIAN 1st ARMY', _strength=2, reverse_strength=4, flipped=False, merged=False)], hitler_intervention_panzer_count=2) targets = [AlliedArmy(name='US 1st ARMY', nation=<Nation.US_1: 'US FIRST ARMY'>, location=MapSpace(name='CHERBOURG', track=<Nation.US_1: 'US FIRST ARMY'>, terrain=<TerrainType.TOWN: ('Town', 1)>, controlling_player=<SideType.ALLIED: ('ALLIED',)>, terrain_value=1, track_number=7, fortified_village_modifier=0, fortified=False, model_modifier=0, under_siege=False, units=[...]), reverse_name='US 1st ARMY', _strength=3, reverse_strength=4, flipped=False, merged=False), AlliedArmy(name='US 3rd ARMY', nation=<Nation.US_3: 'US THIRD ARMY'>, location=None, reverse_name=None, _strength=4, reverse_strength=0, flipped=False, merged=False), AlliedArmy(name='BRITISH XXX CORPS', nation=<Nation.BRIT_2: 'BRIT SECOND ARMY'>, location=MapSpace(name='TILLY', track=<Nation.BRIT_2: 'BRIT SECOND ARMY'>, terrain=<TerrainType.BOCAGE: ('Bocage', 2)>, controlling_player=<SideType.ALLIED: ('ALLIED',)>, terrain_value=2, track_number=4, fortified_village_modifier=0, fortified=False, model_modifier=0, under_siege=False, units=[...]), reverse_name='BRITISH 2nd ARMY', _strength=2, reverse_strength=4, flipped=False, merged=False), AlliedArmy(name='BRITISH I CORPS', nation=<Nation.CAN_1: 'CANADIAN FIRST ARMY'>, location=MapSpace(name='FALAISE', track=<Nation.CAN_1: 'CANADIAN FIRST ARMY'>, terrain=<TerrainType.TOWN: ('Town', 1)>, controlling_player=<SideType.ALLIED: ('ALLIED',)>, terrain_value=1, track_number=1, fortified_village_modifier=0, fortified=False, model_modifier=0, under_siege=False, units=[...]), reverse_name='CANADIAN 1st ARMY', _strength=2, reverse_strength=4, flipped=False, merged=False)]
+DQN DECISION | Turn: 16 | Decision: 33 | Type: hitler_intervention | Action ID: 2 | Actions remaining: 0
+HITLER INTERVENTION DEBUG: card = Card(card_id=35, title='Hitler Intervention - ULTRA', military=MilitarySection(formations=[AlliedArmy(name='BRITISH XXX CORPS', nation=<Nation.BRIT_2: 'BRIT SECOND ARMY'>, location=MapSpace(name='TILLY', track=<Nation.BRIT_2: 'BRIT SECOND ARMY'>, terrain=<TerrainType.BOCAGE: ('Bocage', 2)>, controlling_player=<SideType.ALLIED: ('ALLIED',)>, terrain_value=2, track_number=4, fortified_village_modifier=0, fortified=False, model_modifier=0, under_siege=False, units=[...]), reverse_name='BRITISH 2nd ARMY', _strength=2, reverse_strength=4, flipped=False, merged=False)], effects=[], text=["Hitler redeploys two Panzer Divisions (player's choice) and attacks any Allied Army (*ignore if player passes Hitler Approval Check)"], display_text=None), air_power=AirPowerSection(effects=[Effect(modifier_type=<ModifierType.AIR_POWER: 'Air Power'>, value=1, target=AlliedArmy(name='BRITISH XXX CORPS', nation=<Nation.BRIT_2: 'BRIT SECOND ARMY'>, location=MapSpace(name='TILLY', track=<Nation.BRIT_2: 'BRIT SECOND ARMY'>, terrain=<TerrainType.BOCAGE: ('Bocage', 2)>, controlling_player=<SideType.ALLIED: ('ALLIED',)>, terrain_value=2, track_number=4, fortified_village_modifier=0, fortified=False, model_modifier=0, under_siege=False, units=[...]), reverse_name='BRITISH 2nd ARMY', _strength=2, reverse_strength=4, flipped=False, merged=False), resource_type=None, condition=None, description=None, label=None)], text=[], display_text=None), resources=ResourceSection(effects=[Effect(modifier_type=<ModifierType.RESOURCE_GAIN: 'Resource Gain'>, value=1, target=None, resource_type=<ResourceType.HITLER_APPROVAL: 'Hitler Approval'>, condition=None, description=None, label=None), Effect(modifier_type=<ModifierType.RESOURCE_GAIN: 'Resource Gain'>, value=2, target=None, resource_type=<ResourceType.SUPPLY: 'Supply'>, condition=None, description=None, label=None)], display_text=None), actions=ActionSection(actions_available=0, conditional_actions=[Effect(modifier_type=None, value=2, target=None, resource_type=None, condition=<core.conditions.HitlerInterventionNoEffect object at 0x0000022DCD9C74D0>, description=None, label=None)], effects=[Effect(modifier_type=<ModifierType.DEFENSE_STRENGTH: 'Defense Strength'>, value=2, target=AlliedArmy(name='US 1st ARMY', nation=<Nation.US_1: 'US FIRST ARMY'>, location=MapSpace(name='CHERBOURG', track=<Nation.US_1: 'US FIRST ARMY'>, terrain=<TerrainType.TOWN: ('Town', 1)>, controlling_player=<SideType.ALLIED: ('ALLIED',)>, terrain_value=1, track_number=7, fortified_village_modifier=0, fortified=False, model_modifier=0, under_siege=False, units=[...]), reverse_name='US 1st ARMY', _strength=3, reverse_strength=4, flipped=False, merged=False), resource_type=None, condition=<core.conditions.HitlerInterventionNoEffect object at 0x0000022DCDA025D0>, description=None, label=None), Effect(modifier_type=<ModifierType.DEFENSE_STRENGTH: 'Defense Strength'>, value=2, target=AlliedArmy(name='BRITISH XXX CORPS', nation=<Nation.BRIT_2: 'BRIT SECOND ARMY'>, location=MapSpace(name='TILLY', track=<Nation.BRIT_2: 'BRIT SECOND ARMY'>, terrain=<TerrainType.BOCAGE: ('Bocage', 2)>, controlling_player=<SideType.ALLIED: ('ALLIED',)>, terrain_value=2, track_number=4, fortified_village_modifier=0, fortified=False, model_modifier=0, under_siege=False, units=[...]), reverse_name='BRITISH 2nd ARMY', _strength=2, reverse_strength=4, flipped=False, merged=False), resource_type=None, condition=<core.conditions.HitlerInterventionNoEffect object at 0x0000022DCDA02710>, description=None, label=None), Effect(modifier_type=<ModifierType.DEFENSE_STRENGTH: 'Defense Strength'>, value=2, target=AlliedArmy(name='BRITISH I CORPS', nation=<Nation.CAN_1: 'CANADIAN FIRST ARMY'>, location=MapSpace(name='FALAISE', track=<Nation.CAN_1: 'CANADIAN FIRST ARMY'>, terrain=<TerrainType.TOWN: ('Town', 1)>, controlling_player=<SideType.ALLIED: ('ALLIED',)>, terrain_value=1, track_number=1, fortified_village_modifier=0, fortified=False, model_modifier=0, under_siege=False, units=[...]), reverse_name='CANADIAN 1st ARMY', _strength=2, reverse_strength=4, flipped=False, merged=False), resource_type=None, condition=<core.conditions.HitlerInterventionNoEffect object at 0x0000022DCD99BBB0>, description=None, label=None), Effect(modifier_type=<ModifierType.DEFENSE_STRENGTH: 'Defense Strength'>, value=2, target=AlliedArmy(name='US 3rd ARMY', nation=<Nation.US_3: 'US THIRD ARMY'>, location=None, reverse_name=None, _strength=4, reverse_strength=0, flipped=False, merged=False), resource_type=None, condition=<core.conditions.HitlerInterventionNoEffect object at 0x0000022DCD99BCE0>, description=None, label=None)]), hitler_intervention=True, hitler_intervention_target_armies=[AlliedArmy(name='US 1st ARMY', nation=<Nation.US_1: 'US FIRST ARMY'>, location=MapSpace(name='CHERBOURG', track=<Nation.US_1: 'US FIRST ARMY'>, terrain=<TerrainType.TOWN: ('Town', 1)>, controlling_player=<SideType.ALLIED: ('ALLIED',)>, terrain_value=1, track_number=7, fortified_village_modifier=0, fortified=False, model_modifier=0, under_siege=False, units=[...]), reverse_name='US 1st ARMY', _strength=3, reverse_strength=4, flipped=False, merged=False), AlliedArmy(name='US 3rd ARMY', nation=<Nation.US_3: 'US THIRD ARMY'>, location=None, reverse_name=None, _strength=4, reverse_strength=0, flipped=False, merged=False), AlliedArmy(name='BRITISH XXX CORPS', nation=<Nation.BRIT_2: 'BRIT SECOND ARMY'>, location=MapSpace(name='TILLY', track=<Nation.BRIT_2: 'BRIT SECOND ARMY'>, terrain=<TerrainType.BOCAGE: ('Bocage', 2)>, controlling_player=<SideType.ALLIED: ('ALLIED',)>, terrain_value=2, track_number=4, fortified_village_modifier=0, fortified=False, model_modifier=0, under_siege=False, units=[...]), reverse_name='BRITISH 2nd ARMY', _strength=2, reverse_strength=4, flipped=False, merged=False), AlliedArmy(name='BRITISH I CORPS', nation=<Nation.CAN_1: 'CANADIAN FIRST ARMY'>, location=MapSpace(name='FALAISE', track=<Nation.CAN_1: 'CANADIAN FIRST ARMY'>, terrain=<TerrainType.TOWN: ('Town', 1)>, controlling_player=<SideType.ALLIED: ('ALLIED',)>, terrain_value=1, track_number=1, fortified_village_modifier=0, fortified=False, model_modifier=0, under_siege=False, units=[...]), reverse_name='CANADIAN 1st ARMY', _strength=2, reverse_strength=4, flipped=False, merged=False)], hitler_intervention_panzer_count=2) targets = [AlliedArmy(name='US 1st ARMY', nation=<Nation.US_1: 'US FIRST ARMY'>, location=MapSpace(name='CHERBOURG', track=<Nation.US_1: 'US FIRST ARMY'>, terrain=<TerrainType.TOWN: ('Town', 1)>, controlling_player=<SideType.ALLIED: ('ALLIED',)>, terrain_value=1, track_number=7, fortified_village_modifier=0, fortified=False, model_modifier=0, under_siege=False, units=[...]), reverse_name='US 1st ARMY', _strength=3, reverse_strength=4, flipped=False, merged=False), AlliedArmy(name='US 3rd ARMY', nation=<Nation.US_3: 'US THIRD ARMY'>, location=None, reverse_name=None, _strength=4, reverse_strength=0, flipped=False, merged=False), AlliedArmy(name='BRITISH XXX CORPS', nation=<Nation.BRIT_2: 'BRIT SECOND ARMY'>, location=MapSpace(name='TILLY', track=<Nation.BRIT_2: 'BRIT SECOND ARMY'>, terrain=<TerrainType.BOCAGE: ('Bocage', 2)>, controlling_player=<SideType.ALLIED: ('ALLIED',)>, terrain_value=2, track_number=4, fortified_village_modifier=0, fortified=False, model_modifier=0, under_siege=False, units=[...]), reverse_name='BRITISH 2nd ARMY', _strength=2, reverse_strength=4, flipped=False, merged=False), AlliedArmy(name='BRITISH I CORPS', nation=<Nation.CAN_1: 'CANADIAN FIRST ARMY'>, location=MapSpace(name='FALAISE', track=<Nation.CAN_1: 'CANADIAN FIRST ARMY'>, terrain=<TerrainType.TOWN: ('Town', 1)>, controlling_player=<SideType.ALLIED: ('ALLIED',)>, terrain_value=1, track_number=1, fortified_village_modifier=0, fortified=False, model_modifier=0, under_siege=False, units=[...]), reverse_name='CANADIAN 1st ARMY', _strength=2, reverse_strength=4, flipped=False, merged=False)]
+SELECTED TARGET: US 1st ARMY
+HITLER INTERVENTION DEBUG: card = Card(card_id=35, title='Hitler Intervention - ULTRA', military=MilitarySection(formations=[AlliedArmy(name='BRITISH XXX CORPS', nation=<Nation.BRIT_2: 'BRIT SECOND ARMY'>, location=MapSpace(name='TILLY', track=<Nation.BRIT_2: 'BRIT SECOND ARMY'>, terrain=<TerrainType.BOCAGE: ('Bocage', 2)>, controlling_player=<SideType.ALLIED: ('ALLIED',)>, terrain_value=2, track_number=4, fortified_village_modifier=0, fortified=False, model_modifier=0, under_siege=False, units=[...]), reverse_name='BRITISH 2nd ARMY', _strength=2, reverse_strength=4, flipped=False, merged=False)], effects=[], text=["Hitler redeploys two Panzer Divisions (player's choice) and attacks any Allied Army (*ignore if player passes Hitler Approval Check)"], display_text=None), air_power=AirPowerSection(effects=[Effect(modifier_type=<ModifierType.AIR_POWER: 'Air Power'>, value=1, target=AlliedArmy(name='BRITISH XXX CORPS', nation=<Nation.BRIT_2: 'BRIT SECOND ARMY'>, location=MapSpace(name='TILLY', track=<Nation.BRIT_2: 'BRIT SECOND ARMY'>, terrain=<TerrainType.BOCAGE: ('Bocage', 2)>, controlling_player=<SideType.ALLIED: ('ALLIED',)>, terrain_value=2, track_number=4, fortified_village_modifier=0, fortified=False, model_modifier=0, under_siege=False, units=[...]), reverse_name='BRITISH 2nd ARMY', _strength=2, reverse_strength=4, flipped=False, merged=False), resource_type=None, condition=None, description=None, label=None)], text=[], display_text=None), resources=ResourceSection(effects=[Effect(modifier_type=<ModifierType.RESOURCE_GAIN: 'Resource Gain'>, value=1, target=None, resource_type=<ResourceType.HITLER_APPROVAL: 'Hitler Approval'>, condition=None, description=None, label=None), Effect(modifier_type=<ModifierType.RESOURCE_GAIN: 'Resource Gain'>, value=2, target=None, resource_type=<ResourceType.SUPPLY: 'Supply'>, condition=None, description=None, label=None)], display_text=None), actions=ActionSection(actions_available=0, conditional_actions=[Effect(modifier_type=None, value=2, target=None, resource_type=None, condition=<core.conditions.HitlerInterventionNoEffect object at 0x0000022DCD9C74D0>, description=None, label=None)], effects=[Effect(modifier_type=<ModifierType.DEFENSE_STRENGTH: 'Defense Strength'>, value=2, target=AlliedArmy(name='US 1st ARMY', nation=<Nation.US_1: 'US FIRST ARMY'>, location=MapSpace(name='CHERBOURG', track=<Nation.US_1: 'US FIRST ARMY'>, terrain=<TerrainType.TOWN: ('Town', 1)>, controlling_player=<SideType.ALLIED: ('ALLIED',)>, terrain_value=1, track_number=7, fortified_village_modifier=0, fortified=False, model_modifier=0, under_siege=False, units=[...]), reverse_name='US 1st ARMY', _strength=3, reverse_strength=4, flipped=False, merged=False), resource_type=None, condition=<core.conditions.HitlerInterventionNoEffect object at 0x0000022DCDA025D0>, description=None, label=None), Effect(modifier_type=<ModifierType.DEFENSE_STRENGTH: 'Defense Strength'>, value=2, target=AlliedArmy(name='BRITISH XXX CORPS', nation=<Nation.BRIT_2: 'BRIT SECOND ARMY'>, location=MapSpace(name='TILLY', track=<Nation.BRIT_2: 'BRIT SECOND ARMY'>, terrain=<TerrainType.BOCAGE: ('Bocage', 2)>, controlling_player=<SideType.ALLIED: ('ALLIED',)>, terrain_value=2, track_number=4, fortified_village_modifier=0, fortified=False, model_modifier=0, under_siege=False, units=[...]), reverse_name='BRITISH 2nd ARMY', _strength=2, reverse_strength=4, flipped=False, merged=False), resource_type=None, condition=<core.conditions.HitlerInterventionNoEffect object at 0x0000022DCDA02710>, description=None, label=None), Effect(modifier_type=<ModifierType.DEFENSE_STRENGTH: 'Defense Strength'>, value=2, target=AlliedArmy(name='BRITISH I CORPS', nation=<Nation.CAN_1: 'CANADIAN FIRST ARMY'>, location=MapSpace(name='FALAISE', track=<Nation.CAN_1: 'CANADIAN FIRST ARMY'>, terrain=<TerrainType.TOWN: ('Town', 1)>, controlling_player=<SideType.ALLIED: ('ALLIED',)>, terrain_value=1, track_number=1, fortified_village_modifier=0, fortified=False, model_modifier=0, under_siege=False, units=[...]), reverse_name='CANADIAN 1st ARMY', _strength=2, reverse_strength=4, flipped=False, merged=False), resource_type=None, condition=<core.conditions.HitlerInterventionNoEffect object at 0x0000022DCD99BBB0>, description=None, label=None), Effect(modifier_type=<ModifierType.DEFENSE_STRENGTH: 'Defense Strength'>, value=2, target=AlliedArmy(name='US 3rd ARMY', nation=<Nation.US_3: 'US THIRD ARMY'>, location=None, reverse_name=None, _strength=4, reverse_strength=0, flipped=False, merged=False), resource_type=None, condition=<core.conditions.HitlerInterventionNoEffect object at 0x0000022DCD99BCE0>, description=None, label=None)]), hitler_intervention=True, hitler_intervention_target_armies=[AlliedArmy(name='US 1st ARMY', nation=<Nation.US_1: 'US FIRST ARMY'>, location=MapSpace(name='CHERBOURG', track=<Nation.US_1: 'US FIRST ARMY'>, terrain=<TerrainType.TOWN: ('Town', 1)>, controlling_player=<SideType.ALLIED: ('ALLIED',)>, terrain_value=1, track_number=7, fortified_village_modifier=0, fortified=False, model_modifier=0, under_siege=False, units=[...]), reverse_name='US 1st ARMY', _strength=3, reverse_strength=4, flipped=False, merged=False), AlliedArmy(name='US 3rd ARMY', nation=<Nation.US_3: 'US THIRD ARMY'>, location=None, reverse_name=None, _strength=4, reverse_strength=0, flipped=False, merged=False), AlliedArmy(name='BRITISH XXX CORPS', nation=<Nation.BRIT_2: 'BRIT SECOND ARMY'>, location=MapSpace(name='TILLY', track=<Nation.BRIT_2: 'BRIT SECOND ARMY'>, terrain=<TerrainType.BOCAGE: ('Bocage', 2)>, controlling_player=<SideType.ALLIED: ('ALLIED',)>, terrain_value=2, track_number=4, fortified_village_modifier=0, fortified=False, model_modifier=0, under_siege=False, units=[...]), reverse_name='BRITISH 2nd ARMY', _strength=2, reverse_strength=4, flipped=False, merged=False), AlliedArmy(name='BRITISH I CORPS', nation=<Nation.CAN_1: 'CANADIAN FIRST ARMY'>, location=MapSpace(name='FALAISE', track=<Nation.CAN_1: 'CANADIAN FIRST ARMY'>, terrain=<TerrainType.TOWN: ('Town', 1)>, controlling_player=<SideType.ALLIED: ('ALLIED',)>, terrain_value=1, track_number=1, fortified_village_modifier=0, fortified=False, model_modifier=0, under_siege=False, units=[...]), reverse_name='CANADIAN 1st ARMY', _strength=2, reverse_strength=4, flipped=False, merged=False)], hitler_intervention_panzer_count=2) targets = [AlliedArmy(name='US 1st ARMY', nation=<Nation.US_1: 'US FIRST ARMY'>, location=MapSpace(name='CHERBOURG', track=<Nation.US_1: 'US FIRST ARMY'>, terrain=<TerrainType.TOWN: ('Town', 1)>, controlling_player=<SideType.ALLIED: ('ALLIED',)>, terrain_value=1, track_number=7, fortified_village_modifier=0, fortified=False, model_modifier=0, under_siege=False, units=[...]), reverse_name='US 1st ARMY', _strength=3, reverse_strength=4, flipped=False, merged=False), AlliedArmy(name='US 3rd ARMY', nation=<Nation.US_3: 'US THIRD ARMY'>, location=None, reverse_name=None, _strength=4, reverse_strength=0, flipped=False, merged=False), AlliedArmy(name='BRITISH XXX CORPS', nation=<Nation.BRIT_2: 'BRIT SECOND ARMY'>, location=MapSpace(name='TILLY', track=<Nation.BRIT_2: 'BRIT SECOND ARMY'>, terrain=<TerrainType.BOCAGE: ('Bocage', 2)>, controlling_player=<SideType.ALLIED: ('ALLIED',)>, terrain_value=2, track_number=4, fortified_village_modifier=0, fortified=False, model_modifier=0, under_siege=False, units=[...]), reverse_name='BRITISH 2nd ARMY', _strength=2, reverse_strength=4, flipped=False, merged=False), AlliedArmy(name='BRITISH I CORPS', nation=<Nation.CAN_1: 'CANADIAN FIRST ARMY'>, location=MapSpace(name='FALAISE', track=<Nation.CAN_1: 'CANADIAN FIRST ARMY'>, terrain=<TerrainType.TOWN: ('Town', 1)>, controlling_player=<SideType.ALLIED: ('ALLIED',)>, terrain_value=1, track_number=1, fortified_village_modifier=0, fortified=False, model_modifier=0, under_siege=False, units=[...]), reverse_name='CANADIAN 1st ARMY', _strength=2, reverse_strength=4, flipped=False, merged=False)]
+
+[DEBUG] Entering get_german_space_facing_front_line for: US 1st ARMY
+[DEBUG] front_line_space: CHERBOURG (Track # 7)
+[DEBUG] Full Track Spaces Available: ['1ST US START BOX (Track # 11)', 'UTAH-OMAHA BEACH (Track # 10)', 'CARENTAN (Track # 9)', 'VALOGNES (Track # 8)', 'CHERBOURG (Track # 7)', 'ST. LO (Track # 6)', 'COUTANCES (Track # 5)', 'AVRANCHES (Track # 4)', 'MORTAIN (Track # 3)', 'VIRE (Track # 2)', 'FLERS (Track # 1)', 'FALAISE GAP (Track # 0)']
+[DEBUG] Successfully located backward facing space: ST. LO
+DQN DECISION | Turn: 16 | Decision: 34 | Type: hitler_intervention | Action ID: 9 | Actions remaining: 0
+HITLER INTERVENTION DEBUG: card = Card(card_id=35, title='Hitler Intervention - ULTRA', military=MilitarySection(formations=[AlliedArmy(name='BRITISH XXX CORPS', nation=<Nation.BRIT_2: 'BRIT SECOND ARMY'>, location=MapSpace(name='TILLY', track=<Nation.BRIT_2: 'BRIT SECOND ARMY'>, terrain=<TerrainType.BOCAGE: ('Bocage', 2)>, controlling_player=<SideType.ALLIED: ('ALLIED',)>, terrain_value=2, track_number=4, fortified_village_modifier=0, fortified=False, model_modifier=0, under_siege=False, units=[...]), reverse_name='BRITISH 2nd ARMY', _strength=2, reverse_strength=4, flipped=False, merged=False)], effects=[], text=["Hitler redeploys two Panzer Divisions (player's choice) and attacks any Allied Army (*ignore if player passes Hitler Approval Check)"], display_text=None), air_power=AirPowerSection(effects=[Effect(modifier_type=<ModifierType.AIR_POWER: 'Air Power'>, value=1, target=AlliedArmy(name='BRITISH XXX CORPS', nation=<Nation.BRIT_2: 'BRIT SECOND ARMY'>, location=MapSpace(name='TILLY', track=<Nation.BRIT_2: 'BRIT SECOND ARMY'>, terrain=<TerrainType.BOCAGE: ('Bocage', 2)>, controlling_player=<SideType.ALLIED: ('ALLIED',)>, terrain_value=2, track_number=4, fortified_village_modifier=0, fortified=False, model_modifier=0, under_siege=False, units=[...]), reverse_name='BRITISH 2nd ARMY', _strength=2, reverse_strength=4, flipped=False, merged=False), resource_type=None, condition=None, description=None, label=None)], text=[], display_text=None), resources=ResourceSection(effects=[Effect(modifier_type=<ModifierType.RESOURCE_GAIN: 'Resource Gain'>, value=1, target=None, resource_type=<ResourceType.HITLER_APPROVAL: 'Hitler Approval'>, condition=None, description=None, label=None), Effect(modifier_type=<ModifierType.RESOURCE_GAIN: 'Resource Gain'>, value=2, target=None, resource_type=<ResourceType.SUPPLY: 'Supply'>, condition=None, description=None, label=None)], display_text=None), actions=ActionSection(actions_available=0, conditional_actions=[Effect(modifier_type=None, value=2, target=None, resource_type=None, condition=<core.conditions.HitlerInterventionNoEffect object at 0x0000022DCD9C74D0>, description=None, label=None)], effects=[Effect(modifier_type=<ModifierType.DEFENSE_STRENGTH: 'Defense Strength'>, value=2, target=AlliedArmy(name='US 1st ARMY', nation=<Nation.US_1: 'US FIRST ARMY'>, location=MapSpace(name='CHERBOURG', track=<Nation.US_1: 'US FIRST ARMY'>, terrain=<TerrainType.TOWN: ('Town', 1)>, controlling_player=<SideType.ALLIED: ('ALLIED',)>, terrain_value=1, track_number=7, fortified_village_modifier=0, fortified=False, model_modifier=0, under_siege=False, units=[...]), reverse_name='US 1st ARMY', _strength=3, reverse_strength=4, flipped=False, merged=False), resource_type=None, condition=<core.conditions.HitlerInterventionNoEffect object at 0x0000022DCDA025D0>, description=None, label=None), Effect(modifier_type=<ModifierType.DEFENSE_STRENGTH: 'Defense Strength'>, value=2, target=AlliedArmy(name='BRITISH XXX CORPS', nation=<Nation.BRIT_2: 'BRIT SECOND ARMY'>, location=MapSpace(name='TILLY', track=<Nation.BRIT_2: 'BRIT SECOND ARMY'>, terrain=<TerrainType.BOCAGE: ('Bocage', 2)>, controlling_player=<SideType.ALLIED: ('ALLIED',)>, terrain_value=2, track_number=4, fortified_village_modifier=0, fortified=False, model_modifier=0, under_siege=False, units=[...]), reverse_name='BRITISH 2nd ARMY', _strength=2, reverse_strength=4, flipped=False, merged=False), resource_type=None, condition=<core.conditions.HitlerInterventionNoEffect object at 0x0000022DCDA02710>, description=None, label=None), Effect(modifier_type=<ModifierType.DEFENSE_STRENGTH: 'Defense Strength'>, value=2, target=AlliedArmy(name='BRITISH I CORPS', nation=<Nation.CAN_1: 'CANADIAN FIRST ARMY'>, location=MapSpace(name='FALAISE', track=<Nation.CAN_1: 'CANADIAN FIRST ARMY'>, terrain=<TerrainType.TOWN: ('Town', 1)>, controlling_player=<SideType.ALLIED: ('ALLIED',)>, terrain_value=1, track_number=1, fortified_village_modifier=0, fortified=False, model_modifier=0, under_siege=False, units=[...]), reverse_name='CANADIAN 1st ARMY', _strength=2, reverse_strength=4, flipped=False, merged=False), resource_type=None, condition=<core.conditions.HitlerInterventionNoEffect object at 0x0000022DCD99BBB0>, description=None, label=None), Effect(modifier_type=<ModifierType.DEFENSE_STRENGTH: 'Defense Strength'>, value=2, target=AlliedArmy(name='US 3rd ARMY', nation=<Nation.US_3: 'US THIRD ARMY'>, location=None, reverse_name=None, _strength=4, reverse_strength=0, flipped=False, merged=False), resource_type=None, condition=<core.conditions.HitlerInterventionNoEffect object at 0x0000022DCD99BCE0>, description=None, label=None)]), hitler_intervention=True, hitler_intervention_target_armies=[AlliedArmy(name='US 1st ARMY', nation=<Nation.US_1: 'US FIRST ARMY'>, location=MapSpace(name='CHERBOURG', track=<Nation.US_1: 'US FIRST ARMY'>, terrain=<TerrainType.TOWN: ('Town', 1)>, controlling_player=<SideType.ALLIED: ('ALLIED',)>, terrain_value=1, track_number=7, fortified_village_modifier=0, fortified=False, model_modifier=0, under_siege=False, units=[...]), reverse_name='US 1st ARMY', _strength=3, reverse_strength=4, flipped=False, merged=False), AlliedArmy(name='US 3rd ARMY', nation=<Nation.US_3: 'US THIRD ARMY'>, location=None, reverse_name=None, _strength=4, reverse_strength=0, flipped=False, merged=False), AlliedArmy(name='BRITISH XXX CORPS', nation=<Nation.BRIT_2: 'BRIT SECOND ARMY'>, location=MapSpace(name='TILLY', track=<Nation.BRIT_2: 'BRIT SECOND ARMY'>, terrain=<TerrainType.BOCAGE: ('Bocage', 2)>, controlling_player=<SideType.ALLIED: ('ALLIED',)>, terrain_value=2, track_number=4, fortified_village_modifier=0, fortified=False, model_modifier=0, under_siege=False, units=[...]), reverse_name='BRITISH 2nd ARMY', _strength=2, reverse_strength=4, flipped=False, merged=False), AlliedArmy(name='BRITISH I CORPS', nation=<Nation.CAN_1: 'CANADIAN FIRST ARMY'>, location=MapSpace(name='FALAISE', track=<Nation.CAN_1: 'CANADIAN FIRST ARMY'>, terrain=<TerrainType.TOWN: ('Town', 1)>, controlling_player=<SideType.ALLIED: ('ALLIED',)>, terrain_value=1, track_number=1, fortified_village_modifier=0, fortified=False, model_modifier=0, under_siege=False, units=[...]), reverse_name='CANADIAN 1st ARMY', _strength=2, reverse_strength=4, flipped=False, merged=False)], hitler_intervention_panzer_count=2) targets = [AlliedArmy(name='US 1st ARMY', nation=<Nation.US_1: 'US FIRST ARMY'>, location=MapSpace(name='CHERBOURG', track=<Nation.US_1: 'US FIRST ARMY'>, terrain=<TerrainType.TOWN: ('Town', 1)>, controlling_player=<SideType.ALLIED: ('ALLIED',)>, terrain_value=1, track_number=7, fortified_village_modifier=0, fortified=False, model_modifier=0, under_siege=False, units=[...]), reverse_name='US 1st ARMY', _strength=3, reverse_strength=4, flipped=False, merged=False), AlliedArmy(name='US 3rd ARMY', nation=<Nation.US_3: 'US THIRD ARMY'>, location=None, reverse_name=None, _strength=4, reverse_strength=0, flipped=False, merged=False), AlliedArmy(name='BRITISH XXX CORPS', nation=<Nation.BRIT_2: 'BRIT SECOND ARMY'>, location=MapSpace(name='TILLY', track=<Nation.BRIT_2: 'BRIT SECOND ARMY'>, terrain=<TerrainType.BOCAGE: ('Bocage', 2)>, controlling_player=<SideType.ALLIED: ('ALLIED',)>, terrain_value=2, track_number=4, fortified_village_modifier=0, fortified=False, model_modifier=0, under_siege=False, units=[...]), reverse_name='BRITISH 2nd ARMY', _strength=2, reverse_strength=4, flipped=False, merged=False), AlliedArmy(name='BRITISH I CORPS', nation=<Nation.CAN_1: 'CANADIAN FIRST ARMY'>, location=MapSpace(name='FALAISE', track=<Nation.CAN_1: 'CANADIAN FIRST ARMY'>, terrain=<TerrainType.TOWN: ('Town', 1)>, controlling_player=<SideType.ALLIED: ('ALLIED',)>, terrain_value=1, track_number=1, fortified_village_modifier=0, fortified=False, model_modifier=0, under_siege=False, units=[...]), reverse_name='CANADIAN 1st ARMY', _strength=2, reverse_strength=4, flipped=False, merged=False)]
+
+[DEBUG] Entering get_german_space_facing_front_line for: US 1st ARMY
+[DEBUG] front_line_space: CHERBOURG (Track # 7)
+[DEBUG] Full Track Spaces Available: ['1ST US START BOX (Track # 11)', 'UTAH-OMAHA BEACH (Track # 10)', 'CARENTAN (Track # 9)', 'VALOGNES (Track # 8)', 'CHERBOURG (Track # 7)', 'ST. LO (Track # 6)', 'COUTANCES (Track # 5)', 'AVRANCHES (Track # 4)', 'MORTAIN (Track # 3)', 'VIRE (Track # 2)', 'FLERS (Track # 1)', 'FALAISE GAP (Track # 0)']
+[DEBUG] Successfully located backward facing space: ST. LO
+
+[DEBUG] Entering get_german_space_facing_front_line for: US 1st ARMY
+[DEBUG] front_line_space: CHERBOURG (Track # 7)
+[DEBUG] Full Track Spaces Available: ['1ST US START BOX (Track # 11)', 'UTAH-OMAHA BEACH (Track # 10)', 'CARENTAN (Track # 9)', 'VALOGNES (Track # 8)', 'CHERBOURG (Track # 7)', 'ST. LO (Track # 6)', 'COUTANCES (Track # 5)', 'AVRANCHES (Track # 4)', 'MORTAIN (Track # 3)', 'VIRE (Track # 2)', 'FLERS (Track # 1)', 'FALAISE GAP (Track # 0)']
+[DEBUG] Successfully located backward facing space: ST. LO
+
+[DEBUG] Entering get_german_space_facing_front_line for: US 1st ARMY
+[DEBUG] front_line_space: CHERBOURG (Track # 7)
+[DEBUG] Full Track Spaces Available: ['1ST US START BOX (Track # 11)', 'UTAH-OMAHA BEACH (Track # 10)', 'CARENTAN (Track # 9)', 'VALOGNES (Track # 8)', 'CHERBOURG (Track # 7)', 'ST. LO (Track # 6)', 'COUTANCES (Track # 5)', 'AVRANCHES (Track # 4)', 'MORTAIN (Track # 3)', 'VIRE (Track # 2)', 'FLERS (Track # 1)', 'FALAISE GAP (Track # 0)']
+[DEBUG] Successfully located backward facing space: ST. LO
+
+HITLER INTERVENTION
+===================
+
+TARGET ARMY: US 1st ARMY
+
+[DEBUG] Entering get_german_space_facing_front_line for: US 1st ARMY
+[DEBUG] front_line_space: CHERBOURG (Track # 7)
+[DEBUG] Full Track Spaces Available: ['1ST US START BOX (Track # 11)', 'UTAH-OMAHA BEACH (Track # 10)', 'CARENTAN (Track # 9)', 'VALOGNES (Track # 8)', 'CHERBOURG (Track # 7)', 'ST. LO (Track # 6)', 'COUTANCES (Track # 5)', 'AVRANCHES (Track # 4)', 'MORTAIN (Track # 3)', 'VIRE (Track # 2)', 'FLERS (Track # 1)', 'FALAISE GAP (Track # 0)']
+[DEBUG] Successfully located backward facing space: ST. LO
+TARGET LOCATION: CHERBOURG
+ATTACKING SPACE: ST. LO
+
+AVAILABLE PANZER FORCES
+=======================
+1. 12th SS Panzer (1) - FALAISE GAP
+2. 21st Panzer (1) - VILLERS-BOCAGE
+3. 2nd Panzer (2) - RENNES
+4. 10th SS Panzer (2) - STRATEGIC RESERVE
+5. 17th SS Panzergrenadier (2) - STRATEGIC RESERVE
+6. 2nd SS Panzer (2) - STRATEGIC RESERVE
+
+Moved 12th SS Panzer from FALAISE GAP to ST. LO
+AVAILABLE PANZER FORCES
+=======================
+1. 21st Panzer (1) - VILLERS-BOCAGE
+2. 2nd Panzer (2) - RENNES
+3. 10th SS Panzer (2) - STRATEGIC RESERVE
+4. 17th SS Panzergrenadier (2) - STRATEGIC RESERVE
+5. 2nd SS Panzer (2) - STRATEGIC RESERVE
+
+REDEPLOYED: 1 PANZER FORCES
+
+HITLER INTERVENTION DEBUG: card = Card(card_id=35, title='Hitler Intervention - ULTRA', military=MilitarySection(formations=[AlliedArmy(name='BRITISH XXX CORPS', nation=<Nation.BRIT_2: 'BRIT SECOND ARMY'>, location=MapSpace(name='TILLY', track=<Nation.BRIT_2: 'BRIT SECOND ARMY'>, terrain=<TerrainType.BOCAGE: ('Bocage', 2)>, controlling_player=<SideType.ALLIED: ('ALLIED',)>, terrain_value=2, track_number=4, fortified_village_modifier=0, fortified=False, model_modifier=0, under_siege=False, units=[...]), reverse_name='BRITISH 2nd ARMY', _strength=2, reverse_strength=4, flipped=False, merged=False)], effects=[], text=["Hitler redeploys two Panzer Divisions (player's choice) and attacks any Allied Army (*ignore if player passes Hitler Approval Check)"], display_text=None), air_power=AirPowerSection(effects=[Effect(modifier_type=<ModifierType.AIR_POWER: 'Air Power'>, value=1, target=AlliedArmy(name='BRITISH XXX CORPS', nation=<Nation.BRIT_2: 'BRIT SECOND ARMY'>, location=MapSpace(name='TILLY', track=<Nation.BRIT_2: 'BRIT SECOND ARMY'>, terrain=<TerrainType.BOCAGE: ('Bocage', 2)>, controlling_player=<SideType.ALLIED: ('ALLIED',)>, terrain_value=2, track_number=4, fortified_village_modifier=0, fortified=False, model_modifier=0, under_siege=False, units=[...]), reverse_name='BRITISH 2nd ARMY', _strength=2, reverse_strength=4, flipped=False, merged=False), resource_type=None, condition=None, description=None, label=None)], text=[], display_text=None), resources=ResourceSection(effects=[Effect(modifier_type=<ModifierType.RESOURCE_GAIN: 'Resource Gain'>, value=1, target=None, resource_type=<ResourceType.HITLER_APPROVAL: 'Hitler Approval'>, condition=None, description=None, label=None), Effect(modifier_type=<ModifierType.RESOURCE_GAIN: 'Resource Gain'>, value=2, target=None, resource_type=<ResourceType.SUPPLY: 'Supply'>, condition=None, description=None, label=None)], display_text=None), actions=ActionSection(actions_available=0, conditional_actions=[Effect(modifier_type=None, value=2, target=None, resource_type=None, condition=<core.conditions.HitlerInterventionNoEffect object at 0x0000022DCD9C74D0>, description=None, label=None)], effects=[Effect(modifier_type=<ModifierType.DEFENSE_STRENGTH: 'Defense Strength'>, value=2, target=AlliedArmy(name='US 1st ARMY', nation=<Nation.US_1: 'US FIRST ARMY'>, location=MapSpace(name='CHERBOURG', track=<Nation.US_1: 'US FIRST ARMY'>, terrain=<TerrainType.TOWN: ('Town', 1)>, controlling_player=<SideType.ALLIED: ('ALLIED',)>, terrain_value=1, track_number=7, fortified_village_modifier=0, fortified=False, model_modifier=0, under_siege=False, units=[...]), reverse_name='US 1st ARMY', _strength=3, reverse_strength=4, flipped=False, merged=False), resource_type=None, condition=<core.conditions.HitlerInterventionNoEffect object at 0x0000022DCDA025D0>, description=None, label=None), Effect(modifier_type=<ModifierType.DEFENSE_STRENGTH: 'Defense Strength'>, value=2, target=AlliedArmy(name='BRITISH XXX CORPS', nation=<Nation.BRIT_2: 'BRIT SECOND ARMY'>, location=MapSpace(name='TILLY', track=<Nation.BRIT_2: 'BRIT SECOND ARMY'>, terrain=<TerrainType.BOCAGE: ('Bocage', 2)>, controlling_player=<SideType.ALLIED: ('ALLIED',)>, terrain_value=2, track_number=4, fortified_village_modifier=0, fortified=False, model_modifier=0, under_siege=False, units=[...]), reverse_name='BRITISH 2nd ARMY', _strength=2, reverse_strength=4, flipped=False, merged=False), resource_type=None, condition=<core.conditions.HitlerInterventionNoEffect object at 0x0000022DCDA02710>, description=None, label=None), Effect(modifier_type=<ModifierType.DEFENSE_STRENGTH: 'Defense Strength'>, value=2, target=AlliedArmy(name='BRITISH I CORPS', nation=<Nation.CAN_1: 'CANADIAN FIRST ARMY'>, location=MapSpace(name='FALAISE', track=<Nation.CAN_1: 'CANADIAN FIRST ARMY'>, terrain=<TerrainType.TOWN: ('Town', 1)>, controlling_player=<SideType.ALLIED: ('ALLIED',)>, terrain_value=1, track_number=1, fortified_village_modifier=0, fortified=False, model_modifier=0, under_siege=False, units=[...]), reverse_name='CANADIAN 1st ARMY', _strength=2, reverse_strength=4, flipped=False, merged=False), resource_type=None, condition=<core.conditions.HitlerInterventionNoEffect object at 0x0000022DCD99BBB0>, description=None, label=None), Effect(modifier_type=<ModifierType.DEFENSE_STRENGTH: 'Defense Strength'>, value=2, target=AlliedArmy(name='US 3rd ARMY', nation=<Nation.US_3: 'US THIRD ARMY'>, location=None, reverse_name=None, _strength=4, reverse_strength=0, flipped=False, merged=False), resource_type=None, condition=<core.conditions.HitlerInterventionNoEffect object at 0x0000022DCD99BCE0>, description=None, label=None)]), hitler_intervention=True, hitler_intervention_target_armies=[AlliedArmy(name='US 1st ARMY', nation=<Nation.US_1: 'US FIRST ARMY'>, location=MapSpace(name='CHERBOURG', track=<Nation.US_1: 'US FIRST ARMY'>, terrain=<TerrainType.TOWN: ('Town', 1)>, controlling_player=<SideType.ALLIED: ('ALLIED',)>, terrain_value=1, track_number=7, fortified_village_modifier=0, fortified=False, model_modifier=0, under_siege=False, units=[...]), reverse_name='US 1st ARMY', _strength=3, reverse_strength=4, flipped=False, merged=False), AlliedArmy(name='US 3rd ARMY', nation=<Nation.US_3: 'US THIRD ARMY'>, location=None, reverse_name=None, _strength=4, reverse_strength=0, flipped=False, merged=False), AlliedArmy(name='BRITISH XXX CORPS', nation=<Nation.BRIT_2: 'BRIT SECOND ARMY'>, location=MapSpace(name='TILLY', track=<Nation.BRIT_2: 'BRIT SECOND ARMY'>, terrain=<TerrainType.BOCAGE: ('Bocage', 2)>, controlling_player=<SideType.ALLIED: ('ALLIED',)>, terrain_value=2, track_number=4, fortified_village_modifier=0, fortified=False, model_modifier=0, under_siege=False, units=[...]), reverse_name='BRITISH 2nd ARMY', _strength=2, reverse_strength=4, flipped=False, merged=False), AlliedArmy(name='BRITISH I CORPS', nation=<Nation.CAN_1: 'CANADIAN FIRST ARMY'>, location=MapSpace(name='FALAISE', track=<Nation.CAN_1: 'CANADIAN FIRST ARMY'>, terrain=<TerrainType.TOWN: ('Town', 1)>, controlling_player=<SideType.ALLIED: ('ALLIED',)>, terrain_value=1, track_number=1, fortified_village_modifier=0, fortified=False, model_modifier=0, under_siege=False, units=[...]), reverse_name='CANADIAN 1st ARMY', _strength=2, reverse_strength=4, flipped=False, merged=False)], hitler_intervention_panzer_count=2) targets = [AlliedArmy(name='US 1st ARMY', nation=<Nation.US_1: 'US FIRST ARMY'>, location=MapSpace(name='CHERBOURG', track=<Nation.US_1: 'US FIRST ARMY'>, terrain=<TerrainType.TOWN: ('Town', 1)>, controlling_player=<SideType.ALLIED: ('ALLIED',)>, terrain_value=1, track_number=7, fortified_village_modifier=0, fortified=False, model_modifier=0, under_siege=False, units=[...]), reverse_name='US 1st ARMY', _strength=3, reverse_strength=4, flipped=False, merged=False), AlliedArmy(name='US 3rd ARMY', nation=<Nation.US_3: 'US THIRD ARMY'>, location=None, reverse_name=None, _strength=4, reverse_strength=0, flipped=False, merged=False), AlliedArmy(name='BRITISH XXX CORPS', nation=<Nation.BRIT_2: 'BRIT SECOND ARMY'>, location=MapSpace(name='TILLY', track=<Nation.BRIT_2: 'BRIT SECOND ARMY'>, terrain=<TerrainType.BOCAGE: ('Bocage', 2)>, controlling_player=<SideType.ALLIED: ('ALLIED',)>, terrain_value=2, track_number=4, fortified_village_modifier=0, fortified=False, model_modifier=0, under_siege=False, units=[...]), reverse_name='BRITISH 2nd ARMY', _strength=2, reverse_strength=4, flipped=False, merged=False), AlliedArmy(name='BRITISH I CORPS', nation=<Nation.CAN_1: 'CANADIAN FIRST ARMY'>, location=MapSpace(name='FALAISE', track=<Nation.CAN_1: 'CANADIAN FIRST ARMY'>, terrain=<TerrainType.TOWN: ('Town', 1)>, controlling_player=<SideType.ALLIED: ('ALLIED',)>, terrain_value=1, track_number=1, fortified_village_modifier=0, fortified=False, model_modifier=0, under_siege=False, units=[...]), reverse_name='CANADIAN 1st ARMY', _strength=2, reverse_strength=4, flipped=False, merged=False)]
+
+[DEBUG] Entering get_german_space_facing_front_line for: US 1st ARMY
+[DEBUG] front_line_space: CHERBOURG (Track # 7)
+[DEBUG] Full Track Spaces Available: ['1ST US START BOX (Track # 11)', 'UTAH-OMAHA BEACH (Track # 10)', 'CARENTAN (Track # 9)', 'VALOGNES (Track # 8)', 'CHERBOURG (Track # 7)', 'ST. LO (Track # 6)', 'COUTANCES (Track # 5)', 'AVRANCHES (Track # 4)', 'MORTAIN (Track # 3)', 'VIRE (Track # 2)', 'FLERS (Track # 1)', 'FALAISE GAP (Track # 0)']
+[DEBUG] Successfully located backward facing space: ST. LO
+DQN DECISION | Turn: 16 | Decision: 35 | Type: hitler_intervention | Action ID: 14 | Actions remaining: 0
+HITLER INTERVENTION DEBUG: card = Card(card_id=35, title='Hitler Intervention - ULTRA', military=MilitarySection(formations=[AlliedArmy(name='BRITISH XXX CORPS', nation=<Nation.BRIT_2: 'BRIT SECOND ARMY'>, location=MapSpace(name='TILLY', track=<Nation.BRIT_2: 'BRIT SECOND ARMY'>, terrain=<TerrainType.BOCAGE: ('Bocage', 2)>, controlling_player=<SideType.ALLIED: ('ALLIED',)>, terrain_value=2, track_number=4, fortified_village_modifier=0, fortified=False, model_modifier=0, under_siege=False, units=[...]), reverse_name='BRITISH 2nd ARMY', _strength=2, reverse_strength=4, flipped=False, merged=False)], effects=[], text=["Hitler redeploys two Panzer Divisions (player's choice) and attacks any Allied Army (*ignore if player passes Hitler Approval Check)"], display_text=None), air_power=AirPowerSection(effects=[Effect(modifier_type=<ModifierType.AIR_POWER: 'Air Power'>, value=1, target=AlliedArmy(name='BRITISH XXX CORPS', nation=<Nation.BRIT_2: 'BRIT SECOND ARMY'>, location=MapSpace(name='TILLY', track=<Nation.BRIT_2: 'BRIT SECOND ARMY'>, terrain=<TerrainType.BOCAGE: ('Bocage', 2)>, controlling_player=<SideType.ALLIED: ('ALLIED',)>, terrain_value=2, track_number=4, fortified_village_modifier=0, fortified=False, model_modifier=0, under_siege=False, units=[...]), reverse_name='BRITISH 2nd ARMY', _strength=2, reverse_strength=4, flipped=False, merged=False), resource_type=None, condition=None, description=None, label=None)], text=[], display_text=None), resources=ResourceSection(effects=[Effect(modifier_type=<ModifierType.RESOURCE_GAIN: 'Resource Gain'>, value=1, target=None, resource_type=<ResourceType.HITLER_APPROVAL: 'Hitler Approval'>, condition=None, description=None, label=None), Effect(modifier_type=<ModifierType.RESOURCE_GAIN: 'Resource Gain'>, value=2, target=None, resource_type=<ResourceType.SUPPLY: 'Supply'>, condition=None, description=None, label=None)], display_text=None), actions=ActionSection(actions_available=0, conditional_actions=[Effect(modifier_type=None, value=2, target=None, resource_type=None, condition=<core.conditions.HitlerInterventionNoEffect object at 0x0000022DCD9C74D0>, description=None, label=None)], effects=[Effect(modifier_type=<ModifierType.DEFENSE_STRENGTH: 'Defense Strength'>, value=2, target=AlliedArmy(name='US 1st ARMY', nation=<Nation.US_1: 'US FIRST ARMY'>, location=MapSpace(name='CHERBOURG', track=<Nation.US_1: 'US FIRST ARMY'>, terrain=<TerrainType.TOWN: ('Town', 1)>, controlling_player=<SideType.ALLIED: ('ALLIED',)>, terrain_value=1, track_number=7, fortified_village_modifier=0, fortified=False, model_modifier=0, under_siege=False, units=[...]), reverse_name='US 1st ARMY', _strength=3, reverse_strength=4, flipped=False, merged=False), resource_type=None, condition=<core.conditions.HitlerInterventionNoEffect object at 0x0000022DCDA025D0>, description=None, label=None), Effect(modifier_type=<ModifierType.DEFENSE_STRENGTH: 'Defense Strength'>, value=2, target=AlliedArmy(name='BRITISH XXX CORPS', nation=<Nation.BRIT_2: 'BRIT SECOND ARMY'>, location=MapSpace(name='TILLY', track=<Nation.BRIT_2: 'BRIT SECOND ARMY'>, terrain=<TerrainType.BOCAGE: ('Bocage', 2)>, controlling_player=<SideType.ALLIED: ('ALLIED',)>, terrain_value=2, track_number=4, fortified_village_modifier=0, fortified=False, model_modifier=0, under_siege=False, units=[...]), reverse_name='BRITISH 2nd ARMY', _strength=2, reverse_strength=4, flipped=False, merged=False), resource_type=None, condition=<core.conditions.HitlerInterventionNoEffect object at 0x0000022DCDA02710>, description=None, label=None), Effect(modifier_type=<ModifierType.DEFENSE_STRENGTH: 'Defense Strength'>, value=2, target=AlliedArmy(name='BRITISH I CORPS', nation=<Nation.CAN_1: 'CANADIAN FIRST ARMY'>, location=MapSpace(name='FALAISE', track=<Nation.CAN_1: 'CANADIAN FIRST ARMY'>, terrain=<TerrainType.TOWN: ('Town', 1)>, controlling_player=<SideType.ALLIED: ('ALLIED',)>, terrain_value=1, track_number=1, fortified_village_modifier=0, fortified=False, model_modifier=0, under_siege=False, units=[...]), reverse_name='CANADIAN 1st ARMY', _strength=2, reverse_strength=4, flipped=False, merged=False), resource_type=None, condition=<core.conditions.HitlerInterventionNoEffect object at 0x0000022DCD99BBB0>, description=None, label=None), Effect(modifier_type=<ModifierType.DEFENSE_STRENGTH: 'Defense Strength'>, value=2, target=AlliedArmy(name='US 3rd ARMY', nation=<Nation.US_3: 'US THIRD ARMY'>, location=None, reverse_name=None, _strength=4, reverse_strength=0, flipped=False, merged=False), resource_type=None, condition=<core.conditions.HitlerInterventionNoEffect object at 0x0000022DCD99BCE0>, description=None, label=None)]), hitler_intervention=True, hitler_intervention_target_armies=[AlliedArmy(name='US 1st ARMY', nation=<Nation.US_1: 'US FIRST ARMY'>, location=MapSpace(name='CHERBOURG', track=<Nation.US_1: 'US FIRST ARMY'>, terrain=<TerrainType.TOWN: ('Town', 1)>, controlling_player=<SideType.ALLIED: ('ALLIED',)>, terrain_value=1, track_number=7, fortified_village_modifier=0, fortified=False, model_modifier=0, under_siege=False, units=[...]), reverse_name='US 1st ARMY', _strength=3, reverse_strength=4, flipped=False, merged=False), AlliedArmy(name='US 3rd ARMY', nation=<Nation.US_3: 'US THIRD ARMY'>, location=None, reverse_name=None, _strength=4, reverse_strength=0, flipped=False, merged=False), AlliedArmy(name='BRITISH XXX CORPS', nation=<Nation.BRIT_2: 'BRIT SECOND ARMY'>, location=MapSpace(name='TILLY', track=<Nation.BRIT_2: 'BRIT SECOND ARMY'>, terrain=<TerrainType.BOCAGE: ('Bocage', 2)>, controlling_player=<SideType.ALLIED: ('ALLIED',)>, terrain_value=2, track_number=4, fortified_village_modifier=0, fortified=False, model_modifier=0, under_siege=False, units=[...]), reverse_name='BRITISH 2nd ARMY', _strength=2, reverse_strength=4, flipped=False, merged=False), AlliedArmy(name='BRITISH I CORPS', nation=<Nation.CAN_1: 'CANADIAN FIRST ARMY'>, location=MapSpace(name='FALAISE', track=<Nation.CAN_1: 'CANADIAN FIRST ARMY'>, terrain=<TerrainType.TOWN: ('Town', 1)>, controlling_player=<SideType.ALLIED: ('ALLIED',)>, terrain_value=1, track_number=1, fortified_village_modifier=0, fortified=False, model_modifier=0, under_siege=False, units=[...]), reverse_name='CANADIAN 1st ARMY', _strength=2, reverse_strength=4, flipped=False, merged=False)], hitler_intervention_panzer_count=2) targets = [AlliedArmy(name='US 1st ARMY', nation=<Nation.US_1: 'US FIRST ARMY'>, location=MapSpace(name='CHERBOURG', track=<Nation.US_1: 'US FIRST ARMY'>, terrain=<TerrainType.TOWN: ('Town', 1)>, controlling_player=<SideType.ALLIED: ('ALLIED',)>, terrain_value=1, track_number=7, fortified_village_modifier=0, fortified=False, model_modifier=0, under_siege=False, units=[...]), reverse_name='US 1st ARMY', _strength=3, reverse_strength=4, flipped=False, merged=False), AlliedArmy(name='US 3rd ARMY', nation=<Nation.US_3: 'US THIRD ARMY'>, location=None, reverse_name=None, _strength=4, reverse_strength=0, flipped=False, merged=False), AlliedArmy(name='BRITISH XXX CORPS', nation=<Nation.BRIT_2: 'BRIT SECOND ARMY'>, location=MapSpace(name='TILLY', track=<Nation.BRIT_2: 'BRIT SECOND ARMY'>, terrain=<TerrainType.BOCAGE: ('Bocage', 2)>, controlling_player=<SideType.ALLIED: ('ALLIED',)>, terrain_value=2, track_number=4, fortified_village_modifier=0, fortified=False, model_modifier=0, under_siege=False, units=[...]), reverse_name='BRITISH 2nd ARMY', _strength=2, reverse_strength=4, flipped=False, merged=False), AlliedArmy(name='BRITISH I CORPS', nation=<Nation.CAN_1: 'CANADIAN FIRST ARMY'>, location=MapSpace(name='FALAISE', track=<Nation.CAN_1: 'CANADIAN FIRST ARMY'>, terrain=<TerrainType.TOWN: ('Town', 1)>, controlling_player=<SideType.ALLIED: ('ALLIED',)>, terrain_value=1, track_number=1, fortified_village_modifier=0, fortified=False, model_modifier=0, under_siege=False, units=[...]), reverse_name='CANADIAN 1st ARMY', _strength=2, reverse_strength=4, flipped=False, merged=False)]
+
+[DEBUG] Entering get_german_space_facing_front_line for: US 1st ARMY
+[DEBUG] front_line_space: CHERBOURG (Track # 7)
+[DEBUG] Full Track Spaces Available: ['1ST US START BOX (Track # 11)', 'UTAH-OMAHA BEACH (Track # 10)', 'CARENTAN (Track # 9)', 'VALOGNES (Track # 8)', 'CHERBOURG (Track # 7)', 'ST. LO (Track # 6)', 'COUTANCES (Track # 5)', 'AVRANCHES (Track # 4)', 'MORTAIN (Track # 3)', 'VIRE (Track # 2)', 'FLERS (Track # 1)', 'FALAISE GAP (Track # 0)']
+[DEBUG] Successfully located backward facing space: ST. LO
+
+[DEBUG] Entering get_german_space_facing_front_line for: US 1st ARMY
+[DEBUG] front_line_space: CHERBOURG (Track # 7)
+[DEBUG] Full Track Spaces Available: ['1ST US START BOX (Track # 11)', 'UTAH-OMAHA BEACH (Track # 10)', 'CARENTAN (Track # 9)', 'VALOGNES (Track # 8)', 'CHERBOURG (Track # 7)', 'ST. LO (Track # 6)', 'COUTANCES (Track # 5)', 'AVRANCHES (Track # 4)', 'MORTAIN (Track # 3)', 'VIRE (Track # 2)', 'FLERS (Track # 1)', 'FALAISE GAP (Track # 0)']
+[DEBUG] Successfully located backward facing space: ST. LO
+
+[DEBUG] Entering get_german_space_facing_front_line for: US 1st ARMY
+[DEBUG] front_line_space: CHERBOURG (Track # 7)
+[DEBUG] Full Track Spaces Available: ['1ST US START BOX (Track # 11)', 'UTAH-OMAHA BEACH (Track # 10)', 'CARENTAN (Track # 9)', 'VALOGNES (Track # 8)', 'CHERBOURG (Track # 7)', 'ST. LO (Track # 6)', 'COUTANCES (Track # 5)', 'AVRANCHES (Track # 4)', 'MORTAIN (Track # 3)', 'VIRE (Track # 2)', 'FLERS (Track # 1)', 'FALAISE GAP (Track # 0)']
+[DEBUG] Successfully located backward facing space: ST. LO
+
+HITLER INTERVENTION
+===================
+
+TARGET ARMY: US 1st ARMY
+
+[DEBUG] Entering get_german_space_facing_front_line for: US 1st ARMY
+[DEBUG] front_line_space: CHERBOURG (Track # 7)
+[DEBUG] Full Track Spaces Available: ['1ST US START BOX (Track # 11)', 'UTAH-OMAHA BEACH (Track # 10)', 'CARENTAN (Track # 9)', 'VALOGNES (Track # 8)', 'CHERBOURG (Track # 7)', 'ST. LO (Track # 6)', 'COUTANCES (Track # 5)', 'AVRANCHES (Track # 4)', 'MORTAIN (Track # 3)', 'VIRE (Track # 2)', 'FLERS (Track # 1)', 'FALAISE GAP (Track # 0)']
+[DEBUG] Successfully located backward facing space: ST. LO
+TARGET LOCATION: CHERBOURG
+ATTACKING SPACE: ST. LO
+
+AVAILABLE PANZER FORCES
+=======================
+1. 21st Panzer (1) - VILLERS-BOCAGE
+2. 2nd Panzer (2) - RENNES
+3. 10th SS Panzer (2) - STRATEGIC RESERVE
+4. 17th SS Panzergrenadier (2) - STRATEGIC RESERVE
+5. 2nd SS Panzer (2) - STRATEGIC RESERVE
+
+Moved 21st Panzer from VILLERS-BOCAGE to ST. LO
+AVAILABLE PANZER FORCES
+=======================
+1. 2nd Panzer (2) - RENNES
+2. 10th SS Panzer (2) - STRATEGIC RESERVE
+3. 17th SS Panzergrenadier (2) - STRATEGIC RESERVE
+4. 2nd SS Panzer (2) - STRATEGIC RESERVE
+
+REDEPLOYED: 1 PANZER FORCES
+
+HITLER INTERVENTION DEBUG: card = Card(card_id=35, title='Hitler Intervention - ULTRA', military=MilitarySection(formations=[AlliedArmy(name='BRITISH XXX CORPS', nation=<Nation.BRIT_2: 'BRIT SECOND ARMY'>, location=MapSpace(name='TILLY', track=<Nation.BRIT_2: 'BRIT SECOND ARMY'>, terrain=<TerrainType.BOCAGE: ('Bocage', 2)>, controlling_player=<SideType.ALLIED: ('ALLIED',)>, terrain_value=2, track_number=4, fortified_village_modifier=0, fortified=False, model_modifier=0, under_siege=False, units=[...]), reverse_name='BRITISH 2nd ARMY', _strength=2, reverse_strength=4, flipped=False, merged=False)], effects=[], text=["Hitler redeploys two Panzer Divisions (player's choice) and attacks any Allied Army (*ignore if player passes Hitler Approval Check)"], display_text=None), air_power=AirPowerSection(effects=[Effect(modifier_type=<ModifierType.AIR_POWER: 'Air Power'>, value=1, target=AlliedArmy(name='BRITISH XXX CORPS', nation=<Nation.BRIT_2: 'BRIT SECOND ARMY'>, location=MapSpace(name='TILLY', track=<Nation.BRIT_2: 'BRIT SECOND ARMY'>, terrain=<TerrainType.BOCAGE: ('Bocage', 2)>, controlling_player=<SideType.ALLIED: ('ALLIED',)>, terrain_value=2, track_number=4, fortified_village_modifier=0, fortified=False, model_modifier=0, under_siege=False, units=[...]), reverse_name='BRITISH 2nd ARMY', _strength=2, reverse_strength=4, flipped=False, merged=False), resource_type=None, condition=None, description=None, label=None)], text=[], display_text=None), resources=ResourceSection(effects=[Effect(modifier_type=<ModifierType.RESOURCE_GAIN: 'Resource Gain'>, value=1, target=None, resource_type=<ResourceType.HITLER_APPROVAL: 'Hitler Approval'>, condition=None, description=None, label=None), Effect(modifier_type=<ModifierType.RESOURCE_GAIN: 'Resource Gain'>, value=2, target=None, resource_type=<ResourceType.SUPPLY: 'Supply'>, condition=None, description=None, label=None)], display_text=None), actions=ActionSection(actions_available=0, conditional_actions=[Effect(modifier_type=None, value=2, target=None, resource_type=None, condition=<core.conditions.HitlerInterventionNoEffect object at 0x0000022DCD9C74D0>, description=None, label=None)], effects=[Effect(modifier_type=<ModifierType.DEFENSE_STRENGTH: 'Defense Strength'>, value=2, target=AlliedArmy(name='US 1st ARMY', nation=<Nation.US_1: 'US FIRST ARMY'>, location=MapSpace(name='CHERBOURG', track=<Nation.US_1: 'US FIRST ARMY'>, terrain=<TerrainType.TOWN: ('Town', 1)>, controlling_player=<SideType.ALLIED: ('ALLIED',)>, terrain_value=1, track_number=7, fortified_village_modifier=0, fortified=False, model_modifier=0, under_siege=False, units=[...]), reverse_name='US 1st ARMY', _strength=3, reverse_strength=4, flipped=False, merged=False), resource_type=None, condition=<core.conditions.HitlerInterventionNoEffect object at 0x0000022DCDA025D0>, description=None, label=None), Effect(modifier_type=<ModifierType.DEFENSE_STRENGTH: 'Defense Strength'>, value=2, target=AlliedArmy(name='BRITISH XXX CORPS', nation=<Nation.BRIT_2: 'BRIT SECOND ARMY'>, location=MapSpace(name='TILLY', track=<Nation.BRIT_2: 'BRIT SECOND ARMY'>, terrain=<TerrainType.BOCAGE: ('Bocage', 2)>, controlling_player=<SideType.ALLIED: ('ALLIED',)>, terrain_value=2, track_number=4, fortified_village_modifier=0, fortified=False, model_modifier=0, under_siege=False, units=[...]), reverse_name='BRITISH 2nd ARMY', _strength=2, reverse_strength=4, flipped=False, merged=False), resource_type=None, condition=<core.conditions.HitlerInterventionNoEffect object at 0x0000022DCDA02710>, description=None, label=None), Effect(modifier_type=<ModifierType.DEFENSE_STRENGTH: 'Defense Strength'>, value=2, target=AlliedArmy(name='BRITISH I CORPS', nation=<Nation.CAN_1: 'CANADIAN FIRST ARMY'>, location=MapSpace(name='FALAISE', track=<Nation.CAN_1: 'CANADIAN FIRST ARMY'>, terrain=<TerrainType.TOWN: ('Town', 1)>, controlling_player=<SideType.ALLIED: ('ALLIED',)>, terrain_value=1, track_number=1, fortified_village_modifier=0, fortified=False, model_modifier=0, under_siege=False, units=[...]), reverse_name='CANADIAN 1st ARMY', _strength=2, reverse_strength=4, flipped=False, merged=False), resource_type=None, condition=<core.conditions.HitlerInterventionNoEffect object at 0x0000022DCD99BBB0>, description=None, label=None), Effect(modifier_type=<ModifierType.DEFENSE_STRENGTH: 'Defense Strength'>, value=2, target=AlliedArmy(name='US 3rd ARMY', nation=<Nation.US_3: 'US THIRD ARMY'>, location=None, reverse_name=None, _strength=4, reverse_strength=0, flipped=False, merged=False), resource_type=None, condition=<core.conditions.HitlerInterventionNoEffect object at 0x0000022DCD99BCE0>, description=None, label=None)]), hitler_intervention=True, hitler_intervention_target_armies=[AlliedArmy(name='US 1st ARMY', nation=<Nation.US_1: 'US FIRST ARMY'>, location=MapSpace(name='CHERBOURG', track=<Nation.US_1: 'US FIRST ARMY'>, terrain=<TerrainType.TOWN: ('Town', 1)>, controlling_player=<SideType.ALLIED: ('ALLIED',)>, terrain_value=1, track_number=7, fortified_village_modifier=0, fortified=False, model_modifier=0, under_siege=False, units=[...]), reverse_name='US 1st ARMY', _strength=3, reverse_strength=4, flipped=False, merged=False), AlliedArmy(name='US 3rd ARMY', nation=<Nation.US_3: 'US THIRD ARMY'>, location=None, reverse_name=None, _strength=4, reverse_strength=0, flipped=False, merged=False), AlliedArmy(name='BRITISH XXX CORPS', nation=<Nation.BRIT_2: 'BRIT SECOND ARMY'>, location=MapSpace(name='TILLY', track=<Nation.BRIT_2: 'BRIT SECOND ARMY'>, terrain=<TerrainType.BOCAGE: ('Bocage', 2)>, controlling_player=<SideType.ALLIED: ('ALLIED',)>, terrain_value=2, track_number=4, fortified_village_modifier=0, fortified=False, model_modifier=0, under_siege=False, units=[...]), reverse_name='BRITISH 2nd ARMY', _strength=2, reverse_strength=4, flipped=False, merged=False), AlliedArmy(name='BRITISH I CORPS', nation=<Nation.CAN_1: 'CANADIAN FIRST ARMY'>, location=MapSpace(name='FALAISE', track=<Nation.CAN_1: 'CANADIAN FIRST ARMY'>, terrain=<TerrainType.TOWN: ('Town', 1)>, controlling_player=<SideType.ALLIED: ('ALLIED',)>, terrain_value=1, track_number=1, fortified_village_modifier=0, fortified=False, model_modifier=0, under_siege=False, units=[...]), reverse_name='CANADIAN 1st ARMY', _strength=2, reverse_strength=4, flipped=False, merged=False)], hitler_intervention_panzer_count=2) targets = [AlliedArmy(name='US 1st ARMY', nation=<Nation.US_1: 'US FIRST ARMY'>, location=MapSpace(name='CHERBOURG', track=<Nation.US_1: 'US FIRST ARMY'>, terrain=<TerrainType.TOWN: ('Town', 1)>, controlling_player=<SideType.ALLIED: ('ALLIED',)>, terrain_value=1, track_number=7, fortified_village_modifier=0, fortified=False, model_modifier=0, under_siege=False, units=[...]), reverse_name='US 1st ARMY', _strength=3, reverse_strength=4, flipped=False, merged=False), AlliedArmy(name='US 3rd ARMY', nation=<Nation.US_3: 'US THIRD ARMY'>, location=None, reverse_name=None, _strength=4, reverse_strength=0, flipped=False, merged=False), AlliedArmy(name='BRITISH XXX CORPS', nation=<Nation.BRIT_2: 'BRIT SECOND ARMY'>, location=MapSpace(name='TILLY', track=<Nation.BRIT_2: 'BRIT SECOND ARMY'>, terrain=<TerrainType.BOCAGE: ('Bocage', 2)>, controlling_player=<SideType.ALLIED: ('ALLIED',)>, terrain_value=2, track_number=4, fortified_village_modifier=0, fortified=False, model_modifier=0, under_siege=False, units=[...]), reverse_name='BRITISH 2nd ARMY', _strength=2, reverse_strength=4, flipped=False, merged=False), AlliedArmy(name='BRITISH I CORPS', nation=<Nation.CAN_1: 'CANADIAN FIRST ARMY'>, location=MapSpace(name='FALAISE', track=<Nation.CAN_1: 'CANADIAN FIRST ARMY'>, terrain=<TerrainType.TOWN: ('Town', 1)>, controlling_player=<SideType.ALLIED: ('ALLIED',)>, terrain_value=1, track_number=1, fortified_village_modifier=0, fortified=False, model_modifier=0, under_siege=False, units=[...]), reverse_name='CANADIAN 1st ARMY', _strength=2, reverse_strength=4, flipped=False, merged=False)]
+
+[DEBUG] Entering get_german_space_facing_front_line for: US 1st ARMY
+[DEBUG] front_line_space: CHERBOURG (Track # 7)
+[DEBUG] Full Track Spaces Available: ['1ST US START BOX (Track # 11)', 'UTAH-OMAHA BEACH (Track # 10)', 'CARENTAN (Track # 9)', 'VALOGNES (Track # 8)', 'CHERBOURG (Track # 7)', 'ST. LO (Track # 6)', 'COUTANCES (Track # 5)', 'AVRANCHES (Track # 4)', 'MORTAIN (Track # 3)', 'VIRE (Track # 2)', 'FLERS (Track # 1)', 'FALAISE GAP (Track # 0)']
+[DEBUG] Successfully located backward facing space: ST. LO
+DQN DECISION | Turn: 16 | Decision: 36 | Type: hitler_intervention | Action ID: 0 | Actions remaining: 0
+HITLER INTERVENTION DEBUG: card = Card(card_id=35, title='Hitler Intervention - ULTRA', military=MilitarySection(formations=[AlliedArmy(name='BRITISH XXX CORPS', nation=<Nation.BRIT_2: 'BRIT SECOND ARMY'>, location=MapSpace(name='TILLY', track=<Nation.BRIT_2: 'BRIT SECOND ARMY'>, terrain=<TerrainType.BOCAGE: ('Bocage', 2)>, controlling_player=<SideType.ALLIED: ('ALLIED',)>, terrain_value=2, track_number=4, fortified_village_modifier=0, fortified=False, model_modifier=0, under_siege=False, units=[...]), reverse_name='BRITISH 2nd ARMY', _strength=2, reverse_strength=4, flipped=False, merged=False)], effects=[], text=["Hitler redeploys two Panzer Divisions (player's choice) and attacks any Allied Army (*ignore if player passes Hitler Approval Check)"], display_text=None), air_power=AirPowerSection(effects=[Effect(modifier_type=<ModifierType.AIR_POWER: 'Air Power'>, value=1, target=AlliedArmy(name='BRITISH XXX CORPS', nation=<Nation.BRIT_2: 'BRIT SECOND ARMY'>, location=MapSpace(name='TILLY', track=<Nation.BRIT_2: 'BRIT SECOND ARMY'>, terrain=<TerrainType.BOCAGE: ('Bocage', 2)>, controlling_player=<SideType.ALLIED: ('ALLIED',)>, terrain_value=2, track_number=4, fortified_village_modifier=0, fortified=False, model_modifier=0, under_siege=False, units=[...]), reverse_name='BRITISH 2nd ARMY', _strength=2, reverse_strength=4, flipped=False, merged=False), resource_type=None, condition=None, description=None, label=None)], text=[], display_text=None), resources=ResourceSection(effects=[Effect(modifier_type=<ModifierType.RESOURCE_GAIN: 'Resource Gain'>, value=1, target=None, resource_type=<ResourceType.HITLER_APPROVAL: 'Hitler Approval'>, condition=None, description=None, label=None), Effect(modifier_type=<ModifierType.RESOURCE_GAIN: 'Resource Gain'>, value=2, target=None, resource_type=<ResourceType.SUPPLY: 'Supply'>, condition=None, description=None, label=None)], display_text=None), actions=ActionSection(actions_available=0, conditional_actions=[Effect(modifier_type=None, value=2, target=None, resource_type=None, condition=<core.conditions.HitlerInterventionNoEffect object at 0x0000022DCD9C74D0>, description=None, label=None)], effects=[Effect(modifier_type=<ModifierType.DEFENSE_STRENGTH: 'Defense Strength'>, value=2, target=AlliedArmy(name='US 1st ARMY', nation=<Nation.US_1: 'US FIRST ARMY'>, location=MapSpace(name='CHERBOURG', track=<Nation.US_1: 'US FIRST ARMY'>, terrain=<TerrainType.TOWN: ('Town', 1)>, controlling_player=<SideType.ALLIED: ('ALLIED',)>, terrain_value=1, track_number=7, fortified_village_modifier=0, fortified=False, model_modifier=0, under_siege=False, units=[...]), reverse_name='US 1st ARMY', _strength=3, reverse_strength=4, flipped=False, merged=False), resource_type=None, condition=<core.conditions.HitlerInterventionNoEffect object at 0x0000022DCDA025D0>, description=None, label=None), Effect(modifier_type=<ModifierType.DEFENSE_STRENGTH: 'Defense Strength'>, value=2, target=AlliedArmy(name='BRITISH XXX CORPS', nation=<Nation.BRIT_2: 'BRIT SECOND ARMY'>, location=MapSpace(name='TILLY', track=<Nation.BRIT_2: 'BRIT SECOND ARMY'>, terrain=<TerrainType.BOCAGE: ('Bocage', 2)>, controlling_player=<SideType.ALLIED: ('ALLIED',)>, terrain_value=2, track_number=4, fortified_village_modifier=0, fortified=False, model_modifier=0, under_siege=False, units=[...]), reverse_name='BRITISH 2nd ARMY', _strength=2, reverse_strength=4, flipped=False, merged=False), resource_type=None, condition=<core.conditions.HitlerInterventionNoEffect object at 0x0000022DCDA02710>, description=None, label=None), Effect(modifier_type=<ModifierType.DEFENSE_STRENGTH: 'Defense Strength'>, value=2, target=AlliedArmy(name='BRITISH I CORPS', nation=<Nation.CAN_1: 'CANADIAN FIRST ARMY'>, location=MapSpace(name='FALAISE', track=<Nation.CAN_1: 'CANADIAN FIRST ARMY'>, terrain=<TerrainType.TOWN: ('Town', 1)>, controlling_player=<SideType.ALLIED: ('ALLIED',)>, terrain_value=1, track_number=1, fortified_village_modifier=0, fortified=False, model_modifier=0, under_siege=False, units=[...]), reverse_name='CANADIAN 1st ARMY', _strength=2, reverse_strength=4, flipped=False, merged=False), resource_type=None, condition=<core.conditions.HitlerInterventionNoEffect object at 0x0000022DCD99BBB0>, description=None, label=None), Effect(modifier_type=<ModifierType.DEFENSE_STRENGTH: 'Defense Strength'>, value=2, target=AlliedArmy(name='US 3rd ARMY', nation=<Nation.US_3: 'US THIRD ARMY'>, location=None, reverse_name=None, _strength=4, reverse_strength=0, flipped=False, merged=False), resource_type=None, condition=<core.conditions.HitlerInterventionNoEffect object at 0x0000022DCD99BCE0>, description=None, label=None)]), hitler_intervention=True, hitler_intervention_target_armies=[AlliedArmy(name='US 1st ARMY', nation=<Nation.US_1: 'US FIRST ARMY'>, location=MapSpace(name='CHERBOURG', track=<Nation.US_1: 'US FIRST ARMY'>, terrain=<TerrainType.TOWN: ('Town', 1)>, controlling_player=<SideType.ALLIED: ('ALLIED',)>, terrain_value=1, track_number=7, fortified_village_modifier=0, fortified=False, model_modifier=0, under_siege=False, units=[...]), reverse_name='US 1st ARMY', _strength=3, reverse_strength=4, flipped=False, merged=False), AlliedArmy(name='US 3rd ARMY', nation=<Nation.US_3: 'US THIRD ARMY'>, location=None, reverse_name=None, _strength=4, reverse_strength=0, flipped=False, merged=False), AlliedArmy(name='BRITISH XXX CORPS', nation=<Nation.BRIT_2: 'BRIT SECOND ARMY'>, location=MapSpace(name='TILLY', track=<Nation.BRIT_2: 'BRIT SECOND ARMY'>, terrain=<TerrainType.BOCAGE: ('Bocage', 2)>, controlling_player=<SideType.ALLIED: ('ALLIED',)>, terrain_value=2, track_number=4, fortified_village_modifier=0, fortified=False, model_modifier=0, under_siege=False, units=[...]), reverse_name='BRITISH 2nd ARMY', _strength=2, reverse_strength=4, flipped=False, merged=False), AlliedArmy(name='BRITISH I CORPS', nation=<Nation.CAN_1: 'CANADIAN FIRST ARMY'>, location=MapSpace(name='FALAISE', track=<Nation.CAN_1: 'CANADIAN FIRST ARMY'>, terrain=<TerrainType.TOWN: ('Town', 1)>, controlling_player=<SideType.ALLIED: ('ALLIED',)>, terrain_value=1, track_number=1, fortified_village_modifier=0, fortified=False, model_modifier=0, under_siege=False, units=[...]), reverse_name='CANADIAN 1st ARMY', _strength=2, reverse_strength=4, flipped=False, merged=False)], hitler_intervention_panzer_count=2) targets = [AlliedArmy(name='US 1st ARMY', nation=<Nation.US_1: 'US FIRST ARMY'>, location=MapSpace(name='CHERBOURG', track=<Nation.US_1: 'US FIRST ARMY'>, terrain=<TerrainType.TOWN: ('Town', 1)>, controlling_player=<SideType.ALLIED: ('ALLIED',)>, terrain_value=1, track_number=7, fortified_village_modifier=0, fortified=False, model_modifier=0, under_siege=False, units=[...]), reverse_name='US 1st ARMY', _strength=3, reverse_strength=4, flipped=False, merged=False), AlliedArmy(name='US 3rd ARMY', nation=<Nation.US_3: 'US THIRD ARMY'>, location=None, reverse_name=None, _strength=4, reverse_strength=0, flipped=False, merged=False), AlliedArmy(name='BRITISH XXX CORPS', nation=<Nation.BRIT_2: 'BRIT SECOND ARMY'>, location=MapSpace(name='TILLY', track=<Nation.BRIT_2: 'BRIT SECOND ARMY'>, terrain=<TerrainType.BOCAGE: ('Bocage', 2)>, controlling_player=<SideType.ALLIED: ('ALLIED',)>, terrain_value=2, track_number=4, fortified_village_modifier=0, fortified=False, model_modifier=0, under_siege=False, units=[...]), reverse_name='BRITISH 2nd ARMY', _strength=2, reverse_strength=4, flipped=False, merged=False), AlliedArmy(name='BRITISH I CORPS', nation=<Nation.CAN_1: 'CANADIAN FIRST ARMY'>, location=MapSpace(name='FALAISE', track=<Nation.CAN_1: 'CANADIAN FIRST ARMY'>, terrain=<TerrainType.TOWN: ('Town', 1)>, controlling_player=<SideType.ALLIED: ('ALLIED',)>, terrain_value=1, track_number=1, fortified_village_modifier=0, fortified=False, model_modifier=0, under_siege=False, units=[...]), reverse_name='CANADIAN 1st ARMY', _strength=2, reverse_strength=4, flipped=False, merged=False)]
+
+[DEBUG] Entering get_german_space_facing_front_line for: US 1st ARMY
+[DEBUG] front_line_space: CHERBOURG (Track # 7)
+[DEBUG] Full Track Spaces Available: ['1ST US START BOX (Track # 11)', 'UTAH-OMAHA BEACH (Track # 10)', 'CARENTAN (Track # 9)', 'VALOGNES (Track # 8)', 'CHERBOURG (Track # 7)', 'ST. LO (Track # 6)', 'COUTANCES (Track # 5)', 'AVRANCHES (Track # 4)', 'MORTAIN (Track # 3)', 'VIRE (Track # 2)', 'FLERS (Track # 1)', 'FALAISE GAP (Track # 0)']
+[DEBUG] Successfully located backward facing space: ST. LO
+
+[DEBUG] Entering get_german_space_facing_front_line for: US 1st ARMY
+[DEBUG] front_line_space: CHERBOURG (Track # 7)
+[DEBUG] Full Track Spaces Available: ['1ST US START BOX (Track # 11)', 'UTAH-OMAHA BEACH (Track # 10)', 'CARENTAN (Track # 9)', 'VALOGNES (Track # 8)', 'CHERBOURG (Track # 7)', 'ST. LO (Track # 6)', 'COUTANCES (Track # 5)', 'AVRANCHES (Track # 4)', 'MORTAIN (Track # 3)', 'VIRE (Track # 2)', 'FLERS (Track # 1)', 'FALAISE GAP (Track # 0)']
+[DEBUG] Successfully located backward facing space: ST. LO
+
+[DEBUG] Entering get_german_space_facing_front_line for: US 1st ARMY
+[DEBUG] front_line_space: CHERBOURG (Track # 7)
+[DEBUG] Full Track Spaces Available: ['1ST US START BOX (Track # 11)', 'UTAH-OMAHA BEACH (Track # 10)', 'CARENTAN (Track # 9)', 'VALOGNES (Track # 8)', 'CHERBOURG (Track # 7)', 'ST. LO (Track # 6)', 'COUTANCES (Track # 5)', 'AVRANCHES (Track # 4)', 'MORTAIN (Track # 3)', 'VIRE (Track # 2)', 'FLERS (Track # 1)', 'FALAISE GAP (Track # 0)']
+[DEBUG] Successfully located backward facing space: ST. LO
+
+RESOLVING COUNTER-ATTACK
+Attack Strength: 2
+Defense Strength: 6
+
+Die Roll: 6
+SUPPLY -1 (Attacking Panzer Unit)
+Natural 6 → AUTOMATIC GERMAN WIN
+
+
+POST-COMBAT
+===========
+GERMAN VICTORY
+US 1st ARMY RETREATS TO VALOGNES
+GERMANS ADVANCE INTO CHERBOURG
+HITLER APPROVAL +1 → 2
+
+=========================================
+NORMANDY SOLITAIRE! D-Day to Falaise 1944
+=========================================
+
+List of Drawn Cards: (1, 2, 15, 24, 14, 7, 5, 18, 3, 21, 22, 13, 9, 20, 35)
+Cards Drawn: 15
+Cards Remaining: 33
+Cards Remaining in Deck: 21
+
+Current Card: 35
+Current Weather: Clear
+
+> Draw Card
+  Roll For Weather
+  Resources Phase
+  Deploy Non Panzer Div Reinforcements
+  Allied Advances Phase
+  Action Phase
+
+Press ENTER to perform next action
+Press G to see game summary
+Press S to save game
+Press L to load saved game
+Press Q to quit
+
+
+
+========================================
+DREW CARD 10
+========================================
+
+============================================================
+CARD #10 - V1 Rockets
+============================================================
+
+RESOURCES
+  +2 Resource Gain Hitler Approval
+
+AIR POWER
+  +1 Jabos BRITISH I CORPS
+  +1 Jabos BRITISH XXX CORPS
+
+ALLIED ADVANCES
+  BRITISH XXX CORPS (2)
+  BRITISH I CORPS (2)
+
+ACTIONS
+  Actions Available: 3
+  No Modifiers
+
+
+=========================================
+NORMANDY SOLITAIRE! D-Day to Falaise 1944
+=========================================
+
+List of Drawn Cards: (1, 2, 15, 24, 14, 7, 5, 18, 3, 21, 22, 13, 9, 20, 35, 10)
+Cards Drawn: 16
+Cards Remaining: 32
+Cards Remaining in Deck: 20
+
+Current Card: 10
+
+  Draw Card
+> Roll For Weather
+  Resources Phase
+  Deploy Non Panzer Div Reinforcements
+  Allied Advances Phase
+  Action Phase
+
+Press ENTER to perform next action
+Press G to see game summary
+
+
+========================================
+WEATHER ROLL
+========================================
+
+ROLL: 2
+RESULT: Partly Clear
+
+
+=========================================
+NORMANDY SOLITAIRE! D-Day to Falaise 1944
+=========================================
+
+List of Drawn Cards: (1, 2, 15, 24, 14, 7, 5, 18, 3, 21, 22, 13, 9, 20, 35, 10)
+Cards Drawn: 16
+Cards Remaining: 32
+Cards Remaining in Deck: 20
+
+Current Card: 10
+Current Weather: Partly Clear
+
+  Draw Card
+  Roll For Weather
+> Resources Phase
+  Deploy Non Panzer Div Reinforcements
+  Allied Advances Phase
+  Action Phase
+
+Press ENTER to perform next action
+Press G to see game summary
+
+EVENT
+
+RESOURCE ADJUSTMENTS
+Hitler Approval: GAIN 2 (2 -> 4)
+RESOURCE PHASE - weather is Partly Clear
+
+
+========================================
+ATTACK STRENGTHS (ALLIED ARMIES)
+========================================
+BRITISH XXX CORPS -> ATTACK STRENGTH: 0 () ; AIR SUPPORT=False
+BRITISH I CORPS -> ATTACK STRENGTH: 1 (+1 Jabo) ; AIR SUPPORT=True
+
+
+========================================
+DEFENSE STRENGTHS (ALLIED ARMIES)
+========================================
+
+N/A
+
+
+DEFENSE VALUES
+US 1st ARMY -> DEFENSE STRENGTH: 5 (+2 Terrain, +3 Army) ; AIR SUPPORT=False
+
+DEFENSE VALUES
+BRITISH XXX CORPS -> DEFENSE STRENGTH: 4 (+2 Terrain, +2 Army) ; AIR SUPPORT=False
+
+DEFENSE VALUES
+BRITISH I CORPS -> DEFENSE STRENGTH: 4 (+1 Terrain, +2 Army, +1 Jabo) ; AIR SUPPORT=True
+
+
+========================================
+REINFORCEMENTS
+========================================
+
+NONE
+
+
+=========================================
+NORMANDY SOLITAIRE! D-Day to Falaise 1944
+=========================================
+
+List of Drawn Cards: (1, 2, 15, 24, 14, 7, 5, 18, 3, 21, 22, 13, 9, 20, 35, 10)
+Cards Drawn: 16
+Cards Remaining: 32
+Cards Remaining in Deck: 20
+
+Current Card: 10
+Current Weather: Partly Clear
+
+  Draw Card
+  Roll For Weather
+  Resources Phase
+> Deploy Non Panzer Div Reinforcements
+  Allied Advances Phase
+  Action Phase
+
+Press ENTER to perform next action
+Press G to see game summary
+
+=========================================
+NORMANDY SOLITAIRE! D-Day to Falaise 1944
+=========================================
+
+List of Drawn Cards: (1, 2, 15, 24, 14, 7, 5, 18, 3, 21, 22, 13, 9, 20, 35, 10)
+Cards Drawn: 16
+Cards Remaining: 32
+Cards Remaining in Deck: 20
+
+Current Card: 10
+Current Weather: Partly Clear
+
+  Draw Card
+  Roll For Weather
+  Resources Phase
+  Deploy Non Panzer Div Reinforcements
+> Allied Advances Phase
+  Action Phase
+
+Press ENTER to perform next action
+Press G to see game summary
+
+
+========================================
+ALLIED ADVANCES PHASE
+========================================
+
+ADVANCING ARMIES
+ - BRITISH XXX CORPS
+ - BRITISH I CORPS
+
+ALLIED ATTACKS
+==============
+
+
+
+BRITISH XXX CORPS ADVANCING FROM TILLY
+======================================
+
+GERMAN DEFENSE: VILLERS-BOCAGE
+TERRAIN: 2
+101st Tiger Battalion: 3
+TOTAL DEFENSE: 5
+
+BRITISH XXX CORPS
+TARGET: VILLERS-BOCAGE
+ATTACK STRENGTH: 0
+DEFENSE STRENGTH: 5
+
+DIE ROLL: 1
+ATTACK TOTAL: 1
+
+
+GERMAN LOSSES
+=============
+>>>> GlobalGameState.german_casualty_strategy= Strategy.AI
+NO ELIGIBLE UNIT TO TAKE LOSS
+ALLIED DEFEAT (UNMODIFIED 1)
+
+
+
+BRITISH I CORPS ADVANCING FROM FALAISE
+======================================
+
+GERMAN DEFENSE: FALAISE GAP
+TERRAIN: 1
+TOTAL DEFENSE: 1
+
+BRITISH I CORPS
+TARGET: FALAISE GAP
+ATTACK STRENGTH: 1
+DEFENSE STRENGTH: 1
+
+DIE ROLL: 4
+ATTACK TOTAL: 5
+
+NO UNITS IN SPACE - NO LOSSES
+ALLIED VICTORY
+<<SPACE CLEARED>>
+>>>>>>> AFTER ALLIED ADVANCE -> ALLIED ARMY LOCATION:BRITISH I CORPS IS AT FALAISE GAP
+BRITISH I CORPS -> FALAISE GAP
+
+
+========================================
+ALLIED FORMATION HAS REACHED FALAISE GAP
+
+YOU LOSE!
+========================================
+
+========================================
+GAME OVER
+
+You lost!
+========================================
