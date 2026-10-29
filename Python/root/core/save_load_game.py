@@ -220,7 +220,7 @@ def load_global_game_state(saved_state):
 # ---------------------------------------------------------
 
 
-BASE_DIR = Path(__file__).resolve().parent.parent   # goes up from /core → /root
+BASE_DIR = Path(__file__).resolve().parent.parent   # goes up from /core - /root
 DATA_DIR = BASE_DIR / "data"
 
 

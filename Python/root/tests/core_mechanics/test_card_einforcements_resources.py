@@ -83,5 +83,17 @@ class TestResourcesAndReinforcements(unittest.TestCase):
         self.assertEqual(card_25.reinforcements(), [])
 
 
+    def test_card_31_reinforcement_is_independent(self):
+        # Check whether reinforcement objects are shared
+        first = card_31.reinforcements()
+        second = card_31.reinforcements()
+
+        for (unit_1, _), (unit_2, _) in zip(first, second):
+            self.assertIsNot(
+                unit_1,
+                unit_2,
+                "Card 31 returns the same mutable reinforcement object",
+            )
+
 if __name__ == "__main__":
     unittest.main()

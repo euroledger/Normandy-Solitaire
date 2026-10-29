@@ -441,6 +441,8 @@ def advance_to_next_decision(draw_deck, mid_deck, late_deck):
                 GlobalGameState.actions_left_this_turn == 0
                 and GlobalGameState.reserve_actions == 0
             ):
+                # Count the successfully completed turn
+                GlobalGameState.cards_drawn += 1
                 GlobalGameState.current_step = 1
                 continue
 

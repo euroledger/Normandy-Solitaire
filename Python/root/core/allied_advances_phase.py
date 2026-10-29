@@ -163,7 +163,7 @@ def adjust_hitler_approval(space):
 
     if panzer_present_before_losses:
         hitler_approval_track.value = max(0, hitler_approval_track.value - 1)
-        print(f"HITLER APPROVAL -1 → {hitler_approval_track.value}")
+        print(f"HITLER APPROVAL -1 -> {hitler_approval_track.value}")
 
 
 def check_hitler_approval(space):

@@ -1,6 +1,7 @@
 from random import randint
 from core.actions.counter_attack_action import do_post_combat, get_german_space_facing_front_line, resolve_counter_attack
 from core.actions.stacking_limits import PANZER_STACKING_LIMIT
+from core.ai.dqn import debug
 from core.allied_advances_phase import get_track_for
 from core.card_utilities import calculate_defense_modifiers
 from core.global_game_state import GlobalGameState
@@ -179,7 +180,20 @@ def do_hitler_intervention_redeploy(card, target_army, deployment_choices=None):
         card.hitler_intervention_panzer_count,
         PANZER_STACKING_LIMIT - panzer_count
     )
-
+    
+    # debug.debug_pants(
+    #     f"HITLER DESTINATION CHECK | "
+    #     f"Target army: {target_army.name} | "
+    #     f"Destination: {attacking_space.name} | "
+    #     f"Terrain: {attacking_space.terrain.name} | "
+    #     f"Under siege: {attacking_space.under_siege} | "
+    #     f"Panzer count: {panzer_count} | "
+    #     f"Stacking limit: {PANZER_STACKING_LIMIT} | "
+    #     f"Card allowance: {card.hitler_intervention_panzer_count} | "
+    #     f"Max redeployments: {max_redeployments} | "
+    #     f"Available Panzers: "
+    #     f"{[(u.name, s.name) for u, s in available_panzers]}"
+    # )
     provided_choices = deployment_choices is not None
     selected_space_units = []
     redeployed = 0
@@ -219,6 +233,14 @@ def do_hitler_intervention_redeploy(card, target_army, deployment_choices=None):
             continue
 
         selected_unit, selected_space = available_panzers.pop(selected_index)
+        # debug.debug_pants(
+        #     f"HITLER TRANSFER START | "
+        #     f"Unit: {selected_unit.name} | "
+        #     f"Source: {selected_space.name} | "
+        #     f"Destination: {attacking_space.name} | "
+        #     f"In source: {selected_unit in selected_space.units} | "
+        #     f"In destination: {selected_unit in attacking_space.units}"
+        # )
         selected_space.units.remove(selected_unit)
         attacking_space.units.append(selected_unit)
         selected_space_units.append(selected_unit)
@@ -228,8 +250,15 @@ def do_hitler_intervention_redeploy(card, target_army, deployment_choices=None):
             f"Moved {selected_unit.name} from {selected_space.name} "
             f"to {attacking_space.name}"
         )
+        # debug.debug_pants(
+        #     f"HITLER TRANSFER COMPLETE | "
+        #     f"Unit: {selected_unit.name} | "
+        #     f"In source: {selected_unit in selected_space.units} | "
+        #     f"In destination: {selected_unit in attacking_space.units}"
+        # )
 
     print(f"REDEPLOYED: {redeployed} PANZER FORCES\n")
+    
     return target_army, attacking_space
 
 def do_hitler_intervention_attack(card, weather, target_army, attacking_space):

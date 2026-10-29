@@ -13,7 +13,69 @@ from core.ai.dqn.dqn_action_adapter import (
 )
 
 
+from core.ai.headless_action_masks import (
+    german_eligible_spaces,
+    panzer_divisions_list,
+)
+from core.allied_armies import armies_list
 
+
+def debug_action_mask(decision_type, mask):
+    legal_ids = np.flatnonzero(mask == 1.0).tolist()
+
+    # debug_pants(
+    #     f"ACTION MASK DEBUG | "
+    #     f"Decision type: {decision_type} | "
+    #     f"Legal actions: {legal_ids}"
+    # )
+
+    for action_id in legal_ids:
+
+        if decision_type == "action_phase":
+
+            if action_id == 0:
+                description = "END TURN / PASS"
+
+            elif 1 <= action_id <= len(armies_list):
+                army = armies_list[action_id - 1]
+                description = f"COUNTERATTACK: {army.name}"
+
+            elif 7 <= action_id < (
+                7 + len(panzer_divisions_list)
+                * len(german_eligible_spaces)
+            ):
+                relative_id = action_id - 7
+
+                panzer_index = (
+                    relative_id // len(german_eligible_spaces)
+                )
+                space_index = (
+                    relative_id % len(german_eligible_spaces)
+                )
+
+                panzer = panzer_divisions_list[panzer_index]
+                space = german_eligible_spaces[space_index]
+
+                description = (
+                    f"DEPLOY PANZER: {panzer.name} -> {space.name}"
+                )
+
+            else:
+                description = "OTHER ACTION"
+
+        elif decision_type == "hitler_intervention":
+            description = (
+                "HITLER INTERVENTION ACTION "
+                "(interpretation depends on intervention stage)"
+            )
+
+        else:
+            description = "UNKNOWN DECISION TYPE"
+
+        # debug_pants(
+        #     f"ACTION MASK DEBUG | "
+        #     f"ID {action_id}: {description}"
+        # )
 class NormandyEnv(gym.Env):
 
     def __init__(self):
@@ -71,13 +133,14 @@ class NormandyEnv(gym.Env):
 
         return execute_action_phase_decision(action_id)
 
-
     def step(self, action_id):
         reward = 0.0
         terminated = False
         truncated = False
 
-        # Check legality before executing the action
+        # Record the number of cards before the action
+        cards_before = GlobalGameState.cards_drawn
+
         if self.current_decision_type == "hitler_intervention":
             _, mask = get_hitler_intervention_decision(
                 GlobalGameState.current_card
@@ -85,6 +148,10 @@ class NormandyEnv(gym.Env):
         else:
             _, mask = get_action_phase_decision()
 
+
+        # debug_action_mask(self.current_decision_type, mask)
+        
+        
         if (
             action_id < 0
             or action_id >= len(mask)
@@ -92,17 +159,14 @@ class NormandyEnv(gym.Env):
         ):
             raise ValueError(f"Illegal action: {action_id}")
 
-        # Execute the action
         result = self.execute_action(action_id)
 
         if self.current_decision_type == "hitler_intervention":
             if result:
-                # Same intervention, next decision
                 observation, mask = get_hitler_intervention_decision(
                     GlobalGameState.current_card
                 )
             else:
-                # Intervention complete; resume game progression
                 self.current_decision_type = "action_phase"
 
                 if (
@@ -119,6 +183,16 @@ class NormandyEnv(gym.Env):
 
                     if "result" in decision:
                         terminated = True
+
+                        # Reward survived cards
+                        reward = float(
+                            GlobalGameState.cards_drawn - cards_before
+                        )
+
+                        # Include the final card on victory
+                        if decision["result"] == "won":
+                            reward += 101.0
+
                         self.current_decision_type = None
                         observation, _ = get_action_phase_decision()
                         mask = np.zeros(
@@ -134,6 +208,7 @@ class NormandyEnv(gym.Env):
                             {
                                 "result": decision["result"],
                                 "action_mask": mask,
+                                "turn_reached": int(GlobalGameState.cards_drawn),
                             },
                         )
 
@@ -143,11 +218,11 @@ class NormandyEnv(gym.Env):
 
                 else:
                     observation, mask = get_action_phase_decision()
+
         elif (
             GlobalGameState.actions_left_this_turn == 0
             and GlobalGameState.reserve_actions == 0
         ):
-            # Advance to the next decision or game result
             decision = advance_to_next_decision(
                 self.draw_deck,
                 self.mid_deck,
@@ -156,9 +231,22 @@ class NormandyEnv(gym.Env):
 
             if "result" in decision:
                 terminated = True
+
+                # Reward survived cards
+                reward = float(
+                    GlobalGameState.cards_drawn - cards_before
+                )
+
+                # Include the final card on victory
+                if decision["result"] == "won":
+                    reward += 101.0
+
                 self.current_decision_type = None
                 observation, _ = get_action_phase_decision()
-                mask = np.zeros(self.action_space.n, dtype=np.float32)
+                mask = np.zeros(
+                    self.action_space.n,
+                    dtype=np.float32,
+                )
 
                 return (
                     observation,
@@ -168,6 +256,7 @@ class NormandyEnv(gym.Env):
                     {
                         "result": decision["result"],
                         "action_mask": mask,
+                        "turn_reached": int(GlobalGameState.cards_drawn),
                     },
                 )
 
@@ -176,8 +265,12 @@ class NormandyEnv(gym.Env):
             mask = decision["action_mask"]
 
         else:
-            # Normal Action Phase continues
             observation, mask = get_action_phase_decision()
+
+        # Reward survival when the next card is reached
+        reward = float(
+            GlobalGameState.cards_drawn - cards_before
+        )
 
         return (
             observation,

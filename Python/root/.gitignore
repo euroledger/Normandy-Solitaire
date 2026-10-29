@@ -25,3 +25,7 @@ Thumbs.db
 
 # Game save files
 *.json
+
+# DQN log files
+*.pt
+*.csv

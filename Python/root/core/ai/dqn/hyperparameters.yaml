@@ -5,9 +5,9 @@ normandy_v1:
   learning_rate: 0.0001
   discount_factor: 0.99
 
-  # Exploration
-  epsilon_init: 1.0
-  epsilon_decay: 0.99995
+  # Exploration/Exploitation
+  epsilon_init: 0.9
+  epsilon_decay: 0.99999895
   epsilon_min: 0.05
 
   # Target network
@@ -19,3 +19,6 @@ normandy_v1:
   # DQN variants
   enable_double_dqn: true
   enable_dueling_dqn: false
+
+    # Number of decisions between gradient updates
+  train_frequency: 4

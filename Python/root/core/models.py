@@ -1,3 +1,4 @@
+from copy import deepcopy
 from dataclasses import dataclass, field
 from enum import auto
 from typing import Optional, Union
@@ -236,12 +237,16 @@ class Card:
 
     def reinforcements(self):
         results = []
+
         for effect in self.resources.effects:
-            if effect.modifier_type == ModifierType.REINFORCEMENT and effect.target:
-                results.append((effect.target, effect.value))
+            if (
+                effect.modifier_type == ModifierType.REINFORCEMENT
+                and effect.target
+            ):
+                # Return a fresh unit instead of the card's template
+                results.append((deepcopy(effect.target), effect.value))
 
         return results
-
     # =====================================================
     # STRENGTH MODIFIERS
     # =====================================================

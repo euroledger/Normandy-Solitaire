@@ -182,11 +182,11 @@ def resolve_counter_attack(attack, defense, selected_units, die_roll):
     # --- Resolution ---
     if die_roll == 6:
         result = "WIN"
-        print("Natural 6 → AUTOMATIC GERMAN WIN")
+        print("Natural 6 -> AUTOMATIC GERMAN WIN")
 
     elif die_roll == 1:
         result = "LOSS"
-        print("Natural 1 → AUTOMATIC GERMAN LOSS")
+        print("Natural 1 -> AUTOMATIC GERMAN LOSS")
 
     else:
         total = attack + die_roll
@@ -267,7 +267,7 @@ def do_post_combat(result, selected_option, selected_units):
         # --- Hitler Approval +1 (max 6) ---
         if hitler_approval_track.value < 6:
             hitler_approval_track.value += 1
-            print(f"HITLER APPROVAL +1 → {hitler_approval_track.value}")
+            print(f"HITLER APPROVAL +1 -> {hitler_approval_track.value}")
         else:
             print("HITLER APPROVAL ALREADY AT MAX (6)")
 

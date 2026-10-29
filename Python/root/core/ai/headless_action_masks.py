@@ -4,6 +4,7 @@ from core.actions.move_action_point_to_reserve import do_move_action_point_to_st
 from core.actions.move_unit_one_space_action import do_move_unit_one_space
 from core.actions.refit_panzer_division_action import do_refit_panzer_division
 from core.actions.resource_actions import do_resource_augmentation_roll
+from core.ai.dqn.debug import debug_pants
 from core.german_units import MEYER, MODEL, PZ_116, PZ_2, PZ_21, PZ_9, PZ_LEHR, ROMMEL, SS_1, SS_10, SS_12, SS_17_PZGRD, SS_2, SS_9, TIGER_101, FS_3, FS_5
 from random import choice, randint
 
@@ -166,7 +167,7 @@ def get_total_actions():
         + 3  # augmentation rolls
         + len(german_eligible_spaces)  # Fortified Villages
         + len(MOVE_UNIT_TYPES) * len(german_eligible_spaces)
-        + len(panzer_divisions_list) # refit panzer divisions
+        + len(panzer_divisions_list)  # refit panzer divisions
 
 
     )
@@ -244,7 +245,7 @@ def print_action_phase_action_mask(mask, legal_only=False):
         action_names.append(
             f"REFIT PANZER DIVISION: {panzer.name}"
         )
-        
+
     # ---------------------------------------------------------
     # MOVE ACTION POINT TO STRATEGIC RESERVE
     # ---------------------------------------------------------
@@ -298,6 +299,7 @@ def print_action_phase_action_mask(mask, legal_only=False):
         )
 
     print()
+
 
 def get_pass_action_mask(is_legal):
     # PASS has one local action slot.
@@ -505,6 +507,7 @@ def get_refit_panzer_division_mask():
 
     return mask
 
+
 def get_move_unit_one_space_mask():
     # Local mask layout:
     # unit_type_index * number_of_spaces + destination_space_index
@@ -594,7 +597,7 @@ def get_action_phase_action_mask():
             print(
                 f"REFIT AVAILABLE: {', '.join(eligible_panzers)}"
             )
-            
+
         augmentation_mask = augmentation_roll_mask()
     else:
         counter_attack_mask = np.zeros(
@@ -634,7 +637,6 @@ def get_action_phase_action_mask():
     # MOVE ACTION POINT TO STRATEGIC RESERVE
     # This specifically requires a normal AP.
 
-    
     move_action_point_to_reserve_mask = get_move_action_point_to_strategic_reserve_mask()
 
     # FORTIFIED VILLAGES
@@ -666,6 +668,7 @@ def get_action_phase_action_mask():
         )
     )
     return mask
+
 
 def augmentation_roll_mask():
     mask = np.zeros(3, dtype=np.float32)
@@ -992,6 +995,7 @@ def get_casualty_from_action(action_id, german_units):
 
     return casualty
 
+
 def select_random_casualty_ai(german_units):
     casualty_mask = get_casualty_mask(german_units)
     legal_actions = np.where(casualty_mask == 1.0)[0]
@@ -1000,13 +1004,14 @@ def select_random_casualty_ai(german_units):
     # This can occur when 101st Tiger Battalion is the only attacking unit.
     if len(legal_actions) == 0:
         return None
-    
+
     action_id = choice(legal_actions)
 
     return get_casualty_from_action(
         action_id,
         german_units
     )
+
 
 def get_casualty_mask(german_units):
     # One fixed slot for each valid unit / strength combination
@@ -1244,12 +1249,13 @@ def execute_flat_move_other_units_from_strategic_reserve_ai():
 
         if selected_unit is None:
             continue
-        
+
         do_move_other_unit_from_strategic_reserve(
             unit_choice=selected_unit,
             space_choice=selected_space,
         )
-        
+
+
 def execute_flat_hitler_intervention_ai(action_id, card, weather):
     targets = get_hitler_intervention_targets(card)
     stage = HeadlessDecisionState.hitler_intervention_stage
@@ -1354,17 +1360,37 @@ def execute_flat_hitler_intervention_ai(action_id, card, weather):
 
         selected_panzer = panzer_divisions_list[action_id - 8]
 
+        # debug_pants(
+        #     f"HITLER REDEPLOY | "
+        #     f"Action {action_id} | "
+        #     f"Stage {stage} | "
+        #     f"Target {target_army.name} | "
+        #     f"Destination {attacking_space.name} | "
+        #     f"Selected {selected_panzer.name} | "
+        #     f"Available {[(u.name, s.name) for u, s in available_panzers]} | "
+        #     f"Redeployments {HeadlessDecisionState.hitler_intervention_redeployments}"
+        # )
         selected_index = next(
             (
                 index
                 for index, (unit, source_space)
                 in enumerate(available_panzers)
-                if unit is selected_panzer
+                if unit.name == selected_panzer.name
             ),
             None
         )
 
+        # debug_pants(
+        #     f"*************** HITLER SELECTION CHECK | "
+        #     f"Action: {action_id} | "
+        #     f"Selected: {selected_panzer.name} | "
+        #     f"Selected index: {selected_index} | "
+        #     f"Available: "
+        #     f"{[(i, u.name, u is selected_panzer) for i, (u, s) in enumerate(available_panzers)]}"
+        # )
         if selected_index is None:
+            # debug_pants(" ********* RETURNING (selected_index = None) ********* "
+            #         )
             return True
 
         do_hitler_intervention_redeploy(
@@ -1417,11 +1443,7 @@ def execute_flat_hitler_intervention_ai(action_id, card, weather):
             target_army,
             deployment_choices=[selected_index + 1]
         )
-
         HeadlessDecisionState.hitler_intervention_redeployments += 1
         return True
 
     return False
-
-
-

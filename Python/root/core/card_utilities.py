@@ -88,7 +88,6 @@ def calculate_attack_modifiers(card, army, num_jabos=0, carpet_bombing=0, print_
         # ONLY ONE JABO AVAILABLE
         else:
             first_air_power_target = None
-
             for effect in card.air_power.effects:
                 if effect.modifier_type == ModifierType.AIR_POWER:
                     first_air_power_target = effect.target
