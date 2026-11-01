@@ -31,9 +31,16 @@ def retreat_formation(army):
     if retreat_space is None:
         return False
 
+
     current_space.units.remove(army)
     retreat_space.units.append(army)
     army.location = retreat_space
+
+    # An Allied formation occupying a space makes it Allied-controlled.
+    # This is essential when Bradley's Halt Order moves an army
+    # into a space that was previously German-controlled.
+    retreat_space.controlling_player = SideType.ALLIED
+
 
     if army in [US_VIII_CORPS, US_XV_CORPS]:
         from core.allied_advances_phase import check_and_merge_us_third_army

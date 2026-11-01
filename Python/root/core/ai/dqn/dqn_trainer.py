@@ -13,84 +13,36 @@ from gymnasium.vector import AsyncVectorEnv, AutoresetMode
 import multiprocessing
 import sys
 import pickle
+from functools import partial
+from core.ai.dqn.dqn_agent import load_hyperparameters
+from core.ai.dqn.normandy_logging_env import NormandyLoggingEnv
 
 
-def make_silent_normandy_env():
+# def make_silent_normandy_env():
 
+#     if multiprocessing.current_process().name != "MainProcess":
+#         sys.stdout = open(os.devnull, "w", encoding="utf-8")
+#         sys.stderr = open(os.devnull, "w", encoding="utf-8")
+
+#     return NormandyEnv()
+
+def make_silent_normandy_env(
+    log_config=None,
+    shared_count=None,
+    shared_lock=None,
+):
     if multiprocessing.current_process().name != "MainProcess":
         sys.stdout = open(os.devnull, "w", encoding="utf-8")
         sys.stderr = open(os.devnull, "w", encoding="utf-8")
 
+    if log_config is not None and log_config["enabled"]:
+        return NormandyLoggingEnv(
+            log_config,
+            shared_count,
+            shared_lock,
+        )
+
     return NormandyEnv()
-
-
-def run_greedy_evaluation(policy_state, observation_size, action_size):
-    """
-    Play one Normandy game with epsilon = 0.
-
-    Runs in a separate process to isolate GlobalGameState.
-    Does not train, update replay memory or modify training counters.
-    """
-
-    import torch
-    import numpy as np
-
-    sys.stdout = open(os.devnull, "w", encoding="utf-8")
-    torch.set_num_threads(1)
-
-    network = DQNNetwork(
-        observation_size,
-        action_size,
-    )
-
-    network.load_state_dict(policy_state)
-    network.eval()
-
-    env = NormandyEnv()
-
-    try:
-        with torch.no_grad():
-
-            observation, info = env.reset()
-
-            done = False
-
-            while not done:
-
-                mask = info["action_mask"]
-
-                legal_actions = np.flatnonzero(mask)
-
-                if len(legal_actions) == 0:
-                    raise RuntimeError(
-                        "No legal actions during evaluation"
-                    )
-
-                state = torch.as_tensor(
-                    observation,
-                    dtype=torch.float32,
-                ).unsqueeze(0)
-
-                q_values = network(state).squeeze(0).numpy()
-
-                q_values[mask == 0] = -np.inf
-
-                action = int(np.argmax(q_values))
-
-                observation, reward, terminated, truncated, info = (
-                    env.step(action)
-                )
-
-                done = terminated or truncated
-
-        return {
-            "turn_reached": int(info["turn_reached"]),
-            "result": info["result"],
-        }
-
-    finally:
-        env.close()
-
 
 class DQNTrainer:
 
@@ -127,33 +79,12 @@ class DQNTrainer:
         Run one greedy evaluation game in a separate process.
         """
 
-        observation_size = self.env.observation_space.shape[0]
-        action_size = self.env.action_space.n
-
-        policy_state = {
-            key: value.detach().cpu().clone()
-            for key, value in self.agent.policy_net.state_dict().items()
-        }
-
-        # Create one persistent evaluation worker, not a new pool per game.
+         # Create one persistent evaluation worker, not a new pool per game.
         if self._evaluation_pool is None:
             self._evaluation_pool = multiprocessing.get_context("spawn").Pool(
                 processes=1
             )
 
-        pending = self._evaluation_pool.apply_async(
-            run_greedy_evaluation,
-            (policy_state, observation_size, action_size),
-        )
-
-        try:
-            # Avoid an indefinite wait if the evaluation worker fails.
-            return pending.get(timeout=180)
-        except multiprocessing.TimeoutError as exc:
-            self.close_evaluation_pool(force=True)
-            raise RuntimeError(
-                "Greedy evaluation exceeded 180 seconds; worker terminated"
-            ) from exc
 
     def close_evaluation_pool(self, force=False):
         """Shut down the persistent evaluation process."""
@@ -517,8 +448,10 @@ class DQNTrainer:
                     raise ValueError("Unsupported checkpoint version")
 
                 if checkpoint["train_frequency"] != self.agent.train_frequency:
-                    raise ValueError(
-                        "Checkpoint train_frequency does not match configuration"
+                    print(
+                        f"Training frequency changed: "
+                        f"{checkpoint['train_frequency']} -> "
+                        f"{self.agent.train_frequency}"
                     )
 
                 # Restore neural networks.
@@ -589,7 +522,8 @@ class DQNTrainer:
         num_workers=4,
         progress_interval=200,
         evaluation_interval=500,
-        evaluation_games=1
+        evaluation_games=1,
+        greedy_mode=False
     ):
         # --------------------------------------------------
         # CHECKPOINT INITIALISATION
@@ -611,8 +545,12 @@ class DQNTrainer:
             checkpoint_path = Path(checkpoint_path)
 
             if resume:
-                try:
+                try:                    
                     self.load_checkpoint(checkpoint_path)
+
+                    # Override checkpoint epsilon TEMP
+                    # self.agent.epsilon = 0.50
+                    # print(f"Epsilon restarted at: {self.agent.epsilon:.4f}")
                 except FileNotFoundError:
                     print("No checkpoint found. Starting fresh.")
 
@@ -622,10 +560,16 @@ class DQNTrainer:
                     "Use resume=True or overwrite=True."
                 )
 
+
+        window_start_checkpoint = self.games_completed
+
         # --------------------------------------------------
         # INITIALISE TRAINING
         # --------------------------------------------------
-
+        if greedy_mode:
+            self.agent.epsilon = 0
+            print("GREEDY MODE: epsilon = 0")
+            
         results = []
         evaluation_results = []
 
@@ -661,14 +605,36 @@ class DQNTrainer:
         # CREATE PARALLEL ENVIRONMENTS
         # --------------------------------------------------
 
-        env = AsyncVectorEnv(
-            [
-                make_silent_normandy_env
-                for _ in range(num_workers)
-            ],
-            autoreset_mode=AutoresetMode.NEXT_STEP,
+
+        # env = AsyncVectorEnv(
+        #     [
+        #         make_silent_normandy_env
+        #         for _ in range(num_workers)
+        #     ],
+        #     autoreset_mode=AutoresetMode.NEXT_STEP,
+        # )
+        log_config = load_hyperparameters("normandy_v1")["game_logging"]
+
+        log_manager = None
+        shared_count = None
+        shared_lock = None
+
+        if log_config["enabled"]:
+            log_manager = multiprocessing.Manager()
+            shared_count = log_manager.Value("i", 0)
+            shared_lock = log_manager.Lock()
+
+        env_factory = partial(
+            make_silent_normandy_env,
+            log_config=log_config,
+            shared_count=shared_count,
+            shared_lock=shared_lock,
         )
 
+        env = AsyncVectorEnv(
+            [env_factory for _ in range(num_workers)],
+            autoreset_mode=AutoresetMode.NEXT_STEP,
+        )
         try:
 
             observations, info = env.reset()
@@ -752,6 +718,8 @@ class DQNTrainer:
 
                         start = perf_counter()
 
+
+                        # if not greedy_mode:
                         loss = self.agent.train_step()
 
                         duration = perf_counter() - start
@@ -770,15 +738,21 @@ class DQNTrainer:
 
                         self.total_training_updates += 1
 
+
                     # ------------------------------------------
                     # UPDATE EPSILON
                     # ------------------------------------------
-
-                    self.agent.epsilon = max(
-                        self.agent.epsilon_min,
-                        self.agent.epsilon
-                        * self.agent.epsilon_decay,
-                    )
+                    if not greedy_mode:
+                        self.agent.epsilon = max(
+                            self.agent.epsilon_min,
+                            self.agent.epsilon * self.agent.epsilon_decay
+                        )
+                    # self.agent.epsilon = max(
+                    #     self.agent.epsilon_min,
+                    #     self.agent.epsilon
+                    #     * self.agent.epsilon_decay,
+                    # )
+                
 
                     # ------------------------------------------
                     # UPDATE DECISION STATISTICS
@@ -817,6 +791,13 @@ class DQNTrainer:
                             game_result = next_info["result"][i]
                             turn_reached = int(next_info["turn_reached"][i])
 
+                        cards_in_drawn_pile = int(
+                            next_info.get(
+                                "cards_in_drawn_pile",
+                                next_info["turn_reached"]
+                            )[i]
+                        )
+
                         result = {
                             "game": self.games_completed,
                             "reward": float(
@@ -833,6 +814,7 @@ class DQNTrainer:
                                 else None
                             ),
                             "turn_reached": turn_reached,
+                            "cards_in_drawn_pile": cards_in_drawn_pile,
                         }
 
                         results.append(result)
@@ -870,22 +852,24 @@ class DQNTrainer:
                             turns_in_window.clear()
                             window_start_game = self.games_completed + 1
 
-                        self.log_game(result)
+                        if greedy_mode:
+                            csv_path = (
+                                "core/ai/dqn/logs/"
+                                f"evaluation_checkpoint_{window_start_checkpoint}_eps0.csv"
+                            )
+                        else:
+                            csv_path = "core/ai/dqn/logs/training_history.csv"
 
-                        loss_text = (
-                            f"{result['average_loss']:.4f}"
-                            if result["average_loss"] is not None
-                            else "N/A"
-                        )
-
+                        self.log_game(result, path=csv_path)
                         print(
                             f"Game {self.games_completed:6d} | "
                             f"Worker: {i} | "
-                            f"Result: {str(game_result):6s} | "
-                            f"Reward: {episode_rewards[i]:5.1f} | "
+                            f"Result: {game_result!s:6s} | "
+                            f"Turns: {turn_reached:2d} | "
+                            f"Cards Drawn: {cards_in_drawn_pile:2d} | "
+                            f"Reward: {episode_rewards[i]:6.1f} | "
                             f"Decisions: {episode_decisions[i]:4d} | "
-                            f"Epsilon: {self.agent.epsilon:.4f} | "
-                            f"Loss: {loss_text}"
+                            f"Epsilon: {self.agent.epsilon:.4f}"
                         )
 
                 # ----------------------------------------------
@@ -922,17 +906,20 @@ class DQNTrainer:
                 # ----------------------------------------------
 
 
-                if checkpointing and completed - last_save_game >= save_interval:
+                if checkpointing and completed - last_save_game >= save_interval and not greedy_mode:
                     self.save_checkpoint(checkpoint_path)
                     last_save_game = completed
 
-        finally:
 
+        finally:
             try:
                 env.close()
             finally:
-                # Always release the evaluation worker, including on errors.
-                self.close_evaluation_pool(force=True)
+                try:
+                    self.close_evaluation_pool(force=True)
+                finally:
+                    if log_manager is not None:
+                        log_manager.shutdown()
 
         # --------------------------------------------------
         # PERFORMANCE STATISTICS
@@ -940,6 +927,12 @@ class DQNTrainer:
 
         elapsed = perf_counter() - run_start
 
+        games_won = sum(
+            1 for result in results
+            if result["result"] == "won"
+        )
+
+        win_rate = 100 * games_won / len(results) if results else 0.0
         games_per_second = (
             len(results) / elapsed
             if elapsed > 0
@@ -974,6 +967,8 @@ class DQNTrainer:
         print(f"Parallel workers:      {num_workers}")
         print(f"Train frequency:       {self.agent.train_frequency}")
         print(f"Games completed:       {len(results)}")
+        print(f"Games won:             {games_won}")
+        print(f"Win rate:              {win_rate:.3f}%")
         print(f"Cumulative games:      {self.games_completed}")
         print(f"Cumulative decisions:  {self.total_decisions}")
         print(f"Cumulative updates:    {self.total_training_updates}")
@@ -1027,7 +1022,7 @@ class DQNTrainer:
 
             # Avoid saving twice if the final game already
             # triggered a periodic checkpoint.
-            if last_save_game != completed:
+            if last_save_game != completed and not greedy_mode:
                 self.save_checkpoint(checkpoint_path)
 
             # Training completed successfully.
@@ -1038,20 +1033,18 @@ class DQNTrainer:
 
 
 if __name__ == "__main__":
-
     torch.set_num_threads(3)
-
     trainer = DQNTrainer()
-
     trainer.train(
-        num_games=10000,
+        num_games=20000,
         num_workers=8,
         progress_interval=200,
         evaluation_interval=999999999,
         evaluation_games=1,
         resume=True,
         checkpoint_path="core/ai/dqn/checkpoints/normandy_latest.pt",
-        save_interval=5000,
+        save_interval=10000,
+        greedy_mode=False
     )
     
 # if __name__ == "__main__":
@@ -1060,12 +1053,13 @@ if __name__ == "__main__":
 #     trainer = DQNTrainer()
 
 #     trainer.train(
-#         num_games=10,
+#         num_games=5000,
 #         num_workers=8,
-#         progress_interval=10,
-#         evaluation_interval=5,
+#         progress_interval=100,
+#         evaluation_interval=99999999999,
 #         evaluation_games=1,
 #         resume=True,
 #         checkpoint_path="core/ai/dqn/checkpoints/normandy_latest.pt",
-#         save_interval=900,
+#         save_interval=100,
+#         greedy_mode=True
 #     )

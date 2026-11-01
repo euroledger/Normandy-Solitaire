@@ -1,14 +1,17 @@
 normandy_v1:
   # Replay memory and training
-  replay_memory_size: 100000
+  replay_memory_size: 250000
   mini_batch_size: 64
   learning_rate: 0.0001
   discount_factor: 0.99
 
   # Exploration/Exploitation
-  epsilon_init: 0.9
-  epsilon_decay: 0.99999895
+  epsilon_init: 0.99
+  # epsilon_decay: 0.99999895
+  epsilon_decay: 0.99999960
   epsilon_min: 0.05
+
+
 
   # Target network
   network_sync_rate: 1000
@@ -22,3 +25,12 @@ normandy_v1:
 
     # Number of decisions between gradient updates
   train_frequency: 4
+
+  greedy_mode: false
+
+  game_logging:
+    enabled: true
+    result: "lost"
+    target_turn: [25,30]
+    max_files: 1
+    output_dir: "core/ai/dqn/logs/games"

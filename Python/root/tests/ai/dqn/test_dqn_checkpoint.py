@@ -123,21 +123,29 @@ class TestDQNCheckpoint(unittest.TestCase):
             len(original_optimizer["state"]),
         )
 
-
-
-
     def test_incompatible_training_frequency(self):
+
+        # Save checkpoint with original training frequency
+        original_frequency = self.trainer.agent.train_frequency
+
         saved_path = self.trainer.save_checkpoint(self.checkpoint_path)
         self.assertTrue(saved_path.is_file())
 
-        self.trainer.agent.train_frequency += 1
+        # Change training frequency
+        new_frequency = 1 if original_frequency != 1 else 2
+        self.trainer.agent.train_frequency = new_frequency
 
-        with self.assertRaisesRegex(
-            RuntimeError,
-            "No valid checkpoint could be loaded"
-        ):
-            self.trainer.load_checkpoint(self.checkpoint_path)
+        # Loading should now succeed
+        loaded_path = self.trainer.load_checkpoint(self.checkpoint_path)
 
+        # Verify the checkpoint was loaded
+        self.assertEqual(loaded_path, saved_path)
+
+        # Verify the new training frequency was NOT overwritten
+        self.assertEqual(
+            self.trainer.agent.train_frequency,
+            new_frequency,
+        )
 
 
     def test_replay_buffer_capacity_preserved(self):

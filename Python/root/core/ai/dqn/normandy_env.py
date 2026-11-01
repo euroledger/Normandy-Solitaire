@@ -173,8 +173,6 @@ class NormandyEnv(gym.Env):
                     GlobalGameState.actions_left_this_turn == 0
                     and GlobalGameState.reserve_actions == 0
                 ):
-                    GlobalGameState.current_step = 1
-
                     decision = advance_to_next_decision(
                         self.draw_deck,
                         self.mid_deck,
@@ -184,14 +182,17 @@ class NormandyEnv(gym.Env):
                     if "result" in decision:
                         terminated = True
 
-                        # Reward survived cards
-                        reward = float(
-                            GlobalGameState.cards_drawn - cards_before
-                        )
 
-                        # Include the final card on victory
+                        # Reward each newly survived card by exponent to power of turn number
+                        reward = float(
+                            sum(
+                                1.12 ** t
+                                for t in range(cards_before + 1, GlobalGameState.cards_drawn + 1)
+                            )
+                        )
+                        # Include turn 48 and the victory bonus
                         if decision["result"] == "won":
-                            reward += 101.0
+                            reward += 10000.0
 
                         self.current_decision_type = None
                         observation, _ = get_action_phase_decision()
@@ -209,6 +210,7 @@ class NormandyEnv(gym.Env):
                                 "result": decision["result"],
                                 "action_mask": mask,
                                 "turn_reached": int(GlobalGameState.cards_drawn),
+                                "cards_in_drawn_pile": len(GlobalGameState.drawn_cards),
                             },
                         )
 
@@ -232,14 +234,17 @@ class NormandyEnv(gym.Env):
             if "result" in decision:
                 terminated = True
 
-                # Reward survived cards
-                reward = float(
-                    GlobalGameState.cards_drawn - cards_before
-                )
 
-                # Include the final card on victory
+                reward = float(
+                        sum(
+                            1.12 ** t
+                            for t in range(cards_before + 1, GlobalGameState.cards_drawn + 1)
+                        )
+                    )
+
+                # Include turn 48 and the victory bonus
                 if decision["result"] == "won":
-                    reward += 101.0
+                    reward += 10000.0
 
                 self.current_decision_type = None
                 observation, _ = get_action_phase_decision()
@@ -257,6 +262,7 @@ class NormandyEnv(gym.Env):
                         "result": decision["result"],
                         "action_mask": mask,
                         "turn_reached": int(GlobalGameState.cards_drawn),
+                        "cards_in_drawn_pile": len(GlobalGameState.drawn_cards),
                     },
                 )
 
@@ -267,11 +273,12 @@ class NormandyEnv(gym.Env):
         else:
             observation, mask = get_action_phase_decision()
 
-        # Reward survival when the next card is reached
         reward = float(
-            GlobalGameState.cards_drawn - cards_before
-        )
-
+                sum(
+                    1.12 ** t
+                    for t in range(cards_before + 1, GlobalGameState.cards_drawn + 1)
+                )
+            )
         return (
             observation,
             reward,

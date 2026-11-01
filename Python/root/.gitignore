@@ -29,3 +29,7 @@ Thumbs.db
 # DQN log files
 *.pt
 *.csv
+*.npz
+
+# Generated DQN game logs
+/core/ai/dqn/logs/games/

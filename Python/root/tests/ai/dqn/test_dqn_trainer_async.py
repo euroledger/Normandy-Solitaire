@@ -12,7 +12,6 @@ import torch
 
 from pathlib import Path
 from unittest.mock import MagicMock
-from core.ai.dqn.dqn_trainer import run_greedy_evaluation
 
 
 class FakeNormandyEnv:
@@ -530,72 +529,7 @@ class TestDQNTrainer(unittest.TestCase):
             decisions,
         )
         
-            
-    def test_greedy_evaluation_selects_legal_actions(self):
-
-        class FakeNetwork(torch.nn.Module):
-
-            def __init__(self, observation_size, action_size):
-                super().__init__()
-
-            def load_state_dict(self, state):
-                pass
-
-            def forward(self, observation):
-                # Action 0 has highest Q but is illegal.
-                # Legal actions are 1, then 2.
-                return torch.tensor(
-                    [[100.0, 10.0, 20.0, 0.0, 0.0]],
-                    dtype=torch.float32,
-                )
-
-        class FakeEvaluationEnv(FakeNormandyEnv):
-
-            def reset(self):
-                observation, info = super().reset()
-
-                info["action_mask"] = np.array(
-                    [0, 1, 1, 0, 0],
-                    dtype=np.float32,
-                )
-
-                return observation, info
-
-            def step(self, action_id):
-                self.actions_received.append(action_id)
-
-                return (
-                    np.zeros(4, dtype=np.float32),
-                    0.0,
-                    True,
-                    False,
-                    {
-                        "result": "lost",
-                        "turn_reached": 10,
-                    },
-                )
-
-        fake_env = FakeEvaluationEnv()
-
-        with patch(
-            "core.ai.dqn.dqn_trainer.DQNNetwork",
-            FakeNetwork,
-        ), patch(
-            "core.ai.dqn.dqn_trainer.NormandyEnv",
-            return_value=fake_env,
-        ):
-
-            result = run_greedy_evaluation(
-                policy_state={},
-                observation_size=4,
-                action_size=5,
-            )
-
-        self.assertEqual(fake_env.actions_received, [2])
-        self.assertEqual(result["turn_reached"], 10)
-        self.assertEqual(result["result"], "lost")
-            
-                
+                         
     def test_evaluation_does_not_modify_training_state(self):
 
         self.agent.epsilon = 0.5856

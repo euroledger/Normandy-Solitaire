@@ -51,11 +51,12 @@ def make_silent_normandy_env():
 
     return NormandyEnv()
 
+
 class TestNormandyEnv(unittest.TestCase):
     @staticmethod
     def remove_ansi_codes(text):
         return re.sub(r"\x1b\[[0-9;]*[A-Za-z]", "", text)
-    
+
     def select_legal_destination(self):
         # Select a legal destination
         destinations = [
@@ -64,7 +65,7 @@ class TestNormandyEnv(unittest.TestCase):
         ]
         self.assertTrue(destinations)
         return destinations[0]
-        
+
     def create_agent_for_action(self, action_id):
         # Create a network that prefers the specified action
         network = torch.nn.Linear(
@@ -81,10 +82,10 @@ class TestNormandyEnv(unittest.TestCase):
         agent.epsilon = 0.0
 
         return agent
+
     def setUp(self):
         self.env = NormandyEnv()
         self.LOG_GAME = True
-
 
     def test_observation_space_shape(self):
         self.assertEqual(
@@ -151,7 +152,6 @@ class TestNormandyEnv(unittest.TestCase):
 
         with self.assertRaises(ValueError):
             self.env.pad_action_mask(mask)
-            
 
     def test_reset(self):
         HeadlessDecisionState.hitler_intervention_stage = "TARGET"
@@ -173,9 +173,6 @@ class TestNormandyEnv(unittest.TestCase):
         self.assertEqual(mask.dtype, np.float32)
         self.assertGreater(mask.sum(), 0)
 
-
-
-
         self.assertIsNotNone(self.env.draw_deck)
         self.assertIsNotNone(self.env.mid_deck)
         self.assertIsNotNone(self.env.late_deck)
@@ -185,9 +182,8 @@ class TestNormandyEnv(unittest.TestCase):
 
         self.assertIsNone(HeadlessDecisionState.hitler_intervention_stage)
         self.assertIsNone(HeadlessDecisionState.hitler_intervention_target)
-        self.assertEqual(HeadlessDecisionState.hitler_intervention_redeployments, 0)        
-    
-    
+        self.assertEqual(HeadlessDecisionState.hitler_intervention_redeployments, 0)
+
     def test_action(self):
         self.env.reset()
 
@@ -212,7 +208,6 @@ class TestNormandyEnv(unittest.TestCase):
         agent = DQNAgent(network, torch.device("cpu"))
         agent.epsilon = 1.0
 
-
         # Select an action from the actual game mask
         legal_actions = np.flatnonzero(mask)
         self.assertGreater(len(legal_actions), 0)
@@ -223,7 +218,6 @@ class TestNormandyEnv(unittest.TestCase):
 
         result = self.env.execute_action(action_id)
         self.assertTrue(result)
-        
 
     def test_opening_panzer_movement(self):
         # Establish opening state
@@ -277,7 +271,6 @@ class TestNormandyEnv(unittest.TestCase):
         self.assertEqual(observation_after[ACTIONS_LEFT_INDEX], 0.0)
         self.assertFalse(np.array_equal(observation_before, observation_after))
 
-
     def test_illegal_panzer_movement(self):
         # Establish opening state
         self.env.reset()
@@ -313,7 +306,6 @@ class TestNormandyEnv(unittest.TestCase):
             observation_before,
             observation_after,
         )
-
 
     def test_step_panzer_movement(self):
         # Establish opening state
@@ -355,7 +347,6 @@ class TestNormandyEnv(unittest.TestCase):
             observation,
             expected_observation,
         )
-        
 
     def test_step_advances_to_next_turn(self):
         # Reach the first Action Phase
@@ -410,10 +401,9 @@ class TestNormandyEnv(unittest.TestCase):
             self.env.pad_action_mask(expected_mask),
         )
 
-        self.assertEqual(reward, 1.0)
+        self.assertEqual(reward, 1.12)
         self.assertFalse(terminated)
         self.assertFalse(truncated)
-
 
     def test_step_game_termination(self):
         # Establish opening state
@@ -447,7 +437,6 @@ class TestNormandyEnv(unittest.TestCase):
         self.assertEqual(info["result"], "lost")
         self.assertEqual(observation.shape, (OBSERVATION_SIZE,))
         self.assertTrue(np.all(info["action_mask"] == 0.0))
-
 
     def test_hitler_intervention_no_targets(self):
         # Establish opening game state
@@ -490,7 +479,6 @@ class TestNormandyEnv(unittest.TestCase):
             0,
         )
 
-
     def test_hitler_intervention_decline_cancel(self):
         # Establish opening game state
         self.env.reset()
@@ -526,7 +514,6 @@ class TestNormandyEnv(unittest.TestCase):
                 HeadlessDecisionState.hitler_intervention_stage,
                 "TARGET",
             )
-            
 
     def test_hitler_intervention_single_target(self):
         # Establish opening game state
@@ -575,7 +562,6 @@ class TestNormandyEnv(unittest.TestCase):
 
             # Redeployment stage must expose a legal action
             self.assertGreater(next_mask.sum(), 0)
-
 
     def test_hitler_intervention_multiple_targets(self):
         # Establish opening game state
@@ -645,7 +631,6 @@ class TestNormandyEnv(unittest.TestCase):
                 HeadlessDecisionState.hitler_intervention_target,
                 BRITISH_SECOND_ARMY,
             )
-            
 
     def test_hitler_intervention_completion(self):
         # Establish opening game state
@@ -663,12 +648,11 @@ class TestNormandyEnv(unittest.TestCase):
             BRITISH_SECOND_ARMY
         )
 
-
         # Both permitted redeployments have been completed
         HeadlessDecisionState.hitler_intervention_redeployments = (
             card.hitler_intervention_panzer_count
         )
-        
+
         with patch(
             "core.ai.headless_action_masks.get_hitler_intervention_targets",
             return_value=[BRITISH_SECOND_ARMY],
@@ -703,7 +687,6 @@ class TestNormandyEnv(unittest.TestCase):
             HeadlessDecisionState.hitler_intervention_redeployments,
             0,
         )
-
 
     def test_step_hitler_intervention_cancel(self):
         # Establish opening game state
@@ -768,7 +751,6 @@ class TestNormandyEnv(unittest.TestCase):
             self.assertEqual(reward, 0.0)
             self.assertFalse(terminated)
             self.assertFalse(truncated)
-
 
     def test_step_hitler_intervention_target_selection(self):
         # Establish opening game state
@@ -839,7 +821,6 @@ class TestNormandyEnv(unittest.TestCase):
             self.assertFalse(terminated)
             self.assertFalse(truncated)
 
-
     def test_step_hitler_intervention_completion(self):
         # Establish opening game state
         self.env.reset()
@@ -908,7 +889,6 @@ class TestNormandyEnv(unittest.TestCase):
         self.assertEqual(reward, 0.0)
         self.assertFalse(terminated)
         self.assertFalse(truncated)
-
 
     def test_step_hitler_intervention_no_targets(self):
         # Establish opening game state
@@ -1010,7 +990,6 @@ class TestNormandyEnv(unittest.TestCase):
             GlobalGameState.current_step,
             6,
         )
-        
 
     def test_step_action_phase_to_hitler_intervention(self):
         # Establish opening game state
@@ -1020,7 +999,6 @@ class TestNormandyEnv(unittest.TestCase):
 
         GlobalGameState.current_card = card
         self.env.current_decision_type = "action_phase"
-
 
         # Simulate the final action of the turn
         GlobalGameState.actions_left_this_turn = 1
@@ -1086,12 +1064,11 @@ class TestNormandyEnv(unittest.TestCase):
             self.env.pad_action_mask(intervention_mask),
         )
 
-        # Game continues        
+        # Game continues
         # The final action completes the turn and earns +1
         self.assertEqual(reward, 0.0)
         self.assertFalse(terminated)
         self.assertFalse(truncated)
-
 
     def test_step_real_transition_to_hitler_intervention(self):
         # Establish opening game state
@@ -1145,10 +1122,9 @@ class TestNormandyEnv(unittest.TestCase):
         )
         self.assertGreater(info["action_mask"].sum(), 0)
 
-        self.assertEqual(reward, 1.0)
+        self.assertEqual(reward, 1.12)
         self.assertFalse(terminated)
         self.assertFalse(truncated)
-
 
     def test_step_hitler_intervention_completion_advances_game(self):
         # Establish opening game state
@@ -1181,7 +1157,6 @@ class TestNormandyEnv(unittest.TestCase):
             HeadlessDecisionState.hitler_intervention_stage
         )
 
-
         # Game has advanced to the next turn's Action Phase
         self.assertEqual(
             self.env.current_decision_type,
@@ -1211,7 +1186,6 @@ class TestNormandyEnv(unittest.TestCase):
         )
         self.assertEqual(reward, 0.0)
         self.assertFalse(truncated)
-
 
     def test_complete_random_game(self):
         # Start a new game
@@ -1249,7 +1223,7 @@ class TestNormandyEnv(unittest.TestCase):
                 # Log the decision made by the random agent
                 print(
                     f"DQN DECISION | "
-                    f"Turn: {len(GlobalGameState.drawn_cards)+1} | "
+                    f"Turn: {len(GlobalGameState.drawn_cards) + 1} | "
                     f"Decision: {decisions + 1} | "
                     f"Type: {self.env.current_decision_type} | "
                     f"Action ID: {action_id} | "
@@ -1289,7 +1263,6 @@ class TestNormandyEnv(unittest.TestCase):
 
         if self.LOG_GAME:
             print(f"Game log saved to: {log_path.resolve()}")
-            
 
     @unittest.skip("")
     def test_100_complete_random_games(self):
@@ -1314,7 +1287,6 @@ class TestNormandyEnv(unittest.TestCase):
         rng = np.random.default_rng(42)
 
         start_time = time.perf_counter()
-
 
         # Support Unicode characters in suppressed game output
         with open(os.devnull, "w", encoding="utf-8") as devnull, redirect_stdout(devnull):
@@ -1563,6 +1535,65 @@ class TestNormandyEnv(unittest.TestCase):
         print("All reward checks passed")
 
 
+    def test_commanders_removed_at_end_of_turn(self):
+        from core.german_units import ROMMEL, MEYER, MODEL, TIGER_101, PZ_21
+        from core.map.map_model import strategic_reserve_box
+        from core.map.map_spaces_brit_2 import bayeux
+        from core.card_utilities import get_all_map_spaces_excluding_boxes
+
+        self.env.reset()
+
+        # Place commanders on the map and in Strategic Reserve
+        commanders = [ROMMEL, MEYER, MODEL, TIGER_101]
+
+        for commander in commanders:
+            for space in get_all_map_spaces_excluding_boxes():
+                if commander in space.units:
+                    space.units.remove(commander)
+            if commander in strategic_reserve_box.units:
+                strategic_reserve_box.units.remove(commander)
+
+        bayeux.units.extend([ROMMEL, MEYER])
+        strategic_reserve_box.units.extend([MODEL, TIGER_101])
+        GlobalGameState.meyer_available = True
+
+        # Ordinary units must not be removed
+        self.assertIn(PZ_21, bayeux.units)
+
+        # Force the DQN engine to finish the current turn
+        GlobalGameState.current_step = 6
+        GlobalGameState.actions_left_this_turn = 0
+        GlobalGameState.reserve_actions = 0
+
+        cards_before = GlobalGameState.cards_drawn
+
+        # Prevent the engine from starting the next card;
+        # stop after the end-of-turn transition.
+        with patch(
+            "core.ai.normandy_full_game_ai_dqn.configure_automated_inputs"
+        ), patch(
+            "core.ai.normandy_full_game_ai_dqn.check_for_game_end",
+            create=True,
+        ):
+            # Use the real end-of-turn function, rather than mocking cleanup.
+            from game_phases.action_phase import common_post_action_phase
+            common_post_action_phase()
+
+        all_spaces = get_all_map_spaces_excluding_boxes()
+
+        for commander in commanders:
+            for space in all_spaces:
+                self.assertNotIn(
+                    commander, space.units,
+                    f"{commander.name} remains in {space.name}"
+                )
+            self.assertNotIn(commander, strategic_reserve_box.units)
+
+        self.assertFalse(GlobalGameState.meyer_available)
+        self.assertIn(PZ_21, bayeux.units)
+        self.assertEqual(GlobalGameState.cards_drawn, cards_before + 1)
+        self.assertEqual(GlobalGameState.current_step, 1)
+   
     def test_single_game_survival_rewards(self):
         import contextlib
         import os
@@ -1593,8 +1624,22 @@ class TestNormandyEnv(unittest.TestCase):
         print(f"Turns completed: {turns_completed}")
         print(f"Total reward: {total_reward}")
 
-        # Every completed turn earns one point
-        self.assertEqual(total_reward, float(turns_completed))
+        # Each completed turn earns an exponentially increasing reward
+        expected_reward = sum(
+            1.12 ** t
+            for t in range(1, turns_completed + 1)
+        )
+
+        # A German victory earns an additional 10,000 points
+        if info["result"] == "won":
+            expected_reward += 10000.0
+
+        self.assertAlmostEqual(
+            total_reward,
+            expected_reward,
+            places=6,
+        )
+
 
 if __name__ == "__main__":
     unittest.main()

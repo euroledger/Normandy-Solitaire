@@ -31,6 +31,21 @@ def get_german_units_on_map():
 
 
 def can_add_unit_to_space(space, unit):
+    
+    from core.global_game_state import GlobalGameState
+
+
+    for existing_unit in space.units:
+        if not hasattr(existing_unit, "type"):
+            raise RuntimeError(
+                "Invalid unit in German stacking check: "
+                f"space={space.name}, "
+                f"controller={space.controlling_player}, "
+                f"unit_class={type(existing_unit).__name__}, "
+                f"unit={existing_unit!r}, "
+                f"turn={GlobalGameState.cards_drawn}, "
+                f"card={GlobalGameState.current_card!r}"
+            )
     counts = {
         ReinforcementType.PZ_DIV: sum(1 for u in space.units if u.type in [ReinforcementType.PZ_DIV, ReinforcementType.KAMPFGRUPPE]),
         ReinforcementType.KAMPFGRUPPE: 0,

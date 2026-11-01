@@ -34,6 +34,7 @@ from core.card_utilities import (
         get_armies_as_objects,
         calculate_defense_modifiers,
 )
+from game_phases.action_phase import common_post_action_phase
 
 
 def advance_to_next_decision(draw_deck, mid_deck, late_deck):
@@ -136,8 +137,7 @@ def advance_to_next_decision(draw_deck, mid_deck, late_deck):
         print()
 
         game_result = check_for_game_end()
-
-        if game_result == GAME_LOST:
+        if game_result in (GAME_WON, GAME_LOST):
             break
 
         if GlobalGameState.drawn_cards:
@@ -204,11 +204,21 @@ def advance_to_next_decision(draw_deck, mid_deck, late_deck):
             print("Press Q to quit")
             print()
 
+
         if GlobalGameState.current_step == 1:
             if cards_remaining == 0:
-                print()
-                print("DRAW DECK EMPTY")
-                break
+                if GlobalGameState.cards_drawn == 48:
+                    game_result = GAME_WON
+                    print("DRAW DECK EXHAUSTED — GERMAN VICTORY!")
+                    break
+
+                raise RuntimeError(
+                    "Draw deck exhausted unexpectedly: "
+                    f"cards_drawn={GlobalGameState.cards_drawn}, "
+                    f"drawn_cards={len(GlobalGameState.drawn_cards)}, "
+                    f"current_step={GlobalGameState.current_step}, "
+                    f"remaining_deck={len(draw_deck)}"
+                )   
 
             drawn_card = draw_deck[0]
 
@@ -440,10 +450,9 @@ def advance_to_next_decision(draw_deck, mid_deck, late_deck):
             if (
                 GlobalGameState.actions_left_this_turn == 0
                 and GlobalGameState.reserve_actions == 0
-            ):
-                # Count the successfully completed turn
-                GlobalGameState.cards_drawn += 1
-                GlobalGameState.current_step = 1
+            ):                
+                common_post_action_phase()
+    
                 continue
 
             observation, action_mask = get_action_phase_decision()
