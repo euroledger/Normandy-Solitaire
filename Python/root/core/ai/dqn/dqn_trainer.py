@@ -18,31 +18,23 @@ from core.ai.dqn.dqn_agent import load_hyperparameters
 from core.ai.dqn.normandy_logging_env import NormandyLoggingEnv
 
 
-# def make_silent_normandy_env():
-
-#     if multiprocessing.current_process().name != "MainProcess":
-#         sys.stdout = open(os.devnull, "w", encoding="utf-8")
-#         sys.stderr = open(os.devnull, "w", encoding="utf-8")
-
-#     return NormandyEnv()
-
 def make_silent_normandy_env(
-    log_config=None,
-    shared_count=None,
-    shared_lock=None,
+    game_config,
+    error_config,
+    shared_count,
+    shared_lock,
 ):
     if multiprocessing.current_process().name != "MainProcess":
         sys.stdout = open(os.devnull, "w", encoding="utf-8")
         sys.stderr = open(os.devnull, "w", encoding="utf-8")
 
-    if log_config is not None and log_config["enabled"]:
-        return NormandyLoggingEnv(
-            log_config,
-            shared_count,
-            shared_lock,
-        )
+    return NormandyLoggingEnv(
+        config=game_config,
+        shared_count=shared_count,
+        shared_lock=shared_lock,
+        error_config=error_config,
+    )
 
-    return NormandyEnv()
 
 class DQNTrainer:
 
@@ -133,6 +125,156 @@ class DQNTrainer:
         with open(os.devnull, "w") as null_output, contextlib.redirect_stdout(null_output):
             return function(*args, **kwargs)
 
+
+
+    def print_checkpoint_performance(
+        self,
+        results,
+        progress_interval,
+        run_start,
+        decisions_before,
+        updates_before,
+        num_workers,
+    ):
+        """Print cumulative run statistics and first-vs-last batch."""
+
+        if not results:
+            return
+
+        elapsed = perf_counter() - run_start
+        n = len(results)
+
+        turns = np.array(
+            [r["turn_reached"] for r in results],
+            dtype=np.int32,
+        )
+
+        wins = sum(r["result"] == "won" for r in results)
+
+        decisions = self.total_decisions - decisions_before
+        updates = self.total_training_updates - updates_before
+
+        def batch_stats(batch):
+            values = np.array(
+                [r["turn_reached"] for r in batch],
+                dtype=np.int32,
+            )
+            return {
+                "avg": float(np.mean(values)),
+                "p20": 100 * float(np.mean(values >= 20)),
+                "p30": 100 * float(np.mean(values >= 30)),
+                "p40": 100 * float(np.mean(values >= 40)),
+            }
+
+        # Compare equal-sized, complete batches only.
+        complete_batches = n // progress_interval
+
+        print()
+        print("=" * 70)
+        print("DQN CHECKPOINT PERFORMANCE")
+        print("=" * 70)
+
+        print(f"Cumulative games:       {self.games_completed:,}")
+        print(f"Games this run:         {n:,}")
+        print(f"Parallel workers:       {num_workers}")
+        print(f"Train frequency:        {self.agent.train_frequency}")
+        print(f"Games won this run:     {wins}")
+        print(f"Win rate:               {100 * wins / n:.3f}%")
+        print(f"Average turn reached:   {np.mean(turns):.2f}")
+        print(f"Reached turn 20+:       {100 * np.mean(turns >= 20):.1f}%")
+        print(f"Reached turn 30+:       {100 * np.mean(turns >= 30):.1f}%")
+        print(f"Reached turn 40+:       {100 * np.mean(turns >= 40):.1f}%")
+        print(f"Maximum turn reached:   {int(np.max(turns))}")
+
+        print(f"Cumulative decisions:   {self.total_decisions:,}")
+        print(f"Cumulative updates:     {self.total_training_updates:,}")
+        print(f"Training updates:       {updates:,}")
+        print(f"Elapsed time:           {elapsed:.1f} seconds")
+        print(f"Games/second:           {n / elapsed if elapsed > 0 else 0:.2f}")
+        print(f"Decisions/second:       {decisions / elapsed if elapsed > 0 else 0:.2f}")
+        print(f"Updates/second:         {updates / elapsed if elapsed > 0 else 0:.2f}")
+        print(f"Current epsilon:        {self.agent.epsilon:.4f}")
+        print(f"PyTorch CPU threads:    {torch.get_num_threads()}")
+
+        if complete_batches >= 2:
+            first_batch = results[:progress_interval]
+
+            last_start = (
+                complete_batches - 1
+            ) * progress_interval
+
+            last_batch = results[
+                last_start:last_start + progress_interval
+            ]
+
+            first = batch_stats(first_batch)
+            last = batch_stats(last_batch)
+
+            print()
+            print("CHANGE OVER RUN")
+            print("-" * 70)
+
+            print(
+                f"First batch: "
+                f"{first_batch[0]['game']:,}–"
+                f"{first_batch[-1]['game']:,}"
+            )
+            print(
+                f"Last batch:  "
+                f"{last_batch[0]['game']:,}–"
+                f"{last_batch[-1]['game']:,}"
+            )
+
+            print()
+            print(
+                f"{'Metric':<25}"
+                f"{'First Batch':>14}"
+                f"{'Last Batch':>14}"
+                f"{'Change':>14}"
+            )
+            print("-" * 67)
+
+            print(
+                f"{'Average turn':<25}"
+                f"{first['avg']:>14.2f}"
+                f"{last['avg']:>14.2f}"
+                f"{last['avg'] - first['avg']:>+14.2f}"
+            )
+
+            for label, key in [
+                ("Games reaching turn 20", "p20"),
+                ("Games reaching turn 30", "p30"),
+                ("Games reaching turn 40", "p40"),
+            ]:
+                print(
+                    f"{label:<25}"
+                    f"{first[key]:>13.1f}%"
+                    f"{last[key]:>13.1f}%"
+                    f"{last[key] - first[key]:>+13.1f}pp"
+                )
+
+            relative_change = (
+                100 * (last["avg"] - first["avg"])
+                / first["avg"]
+                if first["avg"] else 0.0
+            )
+
+            print()
+            print(
+                f"Average turn relative change: "
+                f"{relative_change:+.1f}%"
+            )
+            
+
+        else:
+            print()
+            print(
+                "First-vs-last comparison requires "
+                "at least two complete batches."
+            )
+
+        print("=" * 70)
+        print()
 
     def print_learning_summary(self, results, interval=100):
 
@@ -549,8 +691,8 @@ class DQNTrainer:
                     self.load_checkpoint(checkpoint_path)
 
                     # Override checkpoint epsilon TEMP
-                    # self.agent.epsilon = 0.50
-                    # print(f"Epsilon restarted at: {self.agent.epsilon:.4f}")
+                    self.agent.epsilon = 0.2
+                    print(f"Epsilon restarted at: {self.agent.epsilon:.4f}")
                 except FileNotFoundError:
                     print("No checkpoint found. Starting fresh.")
 
@@ -605,28 +747,28 @@ class DQNTrainer:
         # CREATE PARALLEL ENVIRONMENTS
         # --------------------------------------------------
 
+        # --------------------------------------------------
+        # CREATE PARALLEL ENVIRONMENTS
+        # --------------------------------------------------
 
-        # env = AsyncVectorEnv(
-        #     [
-        #         make_silent_normandy_env
-        #         for _ in range(num_workers)
-        #     ],
-        #     autoreset_mode=AutoresetMode.NEXT_STEP,
-        # )
-        log_config = load_hyperparameters("normandy_v1")["game_logging"]
+        hyperparameters = load_hyperparameters("normandy_v1")
 
-        log_manager = None
-        shared_count = None
-        shared_lock = None
+        game_logging_config = hyperparameters.get(
+            "game_logging", {"enabled": False}
+        )
 
-        if log_config["enabled"]:
-            log_manager = multiprocessing.Manager()
-            shared_count = log_manager.Value("i", 0)
-            shared_lock = log_manager.Lock()
+        error_logging_config = hyperparameters.get(
+            "error_logging", {"enabled": False}
+        )
+
+        log_manager = multiprocessing.Manager()
+        shared_count = log_manager.Value("i", 0)
+        shared_lock = log_manager.Lock()
 
         env_factory = partial(
             make_silent_normandy_env,
-            log_config=log_config,
+            game_config=game_logging_config,
+            error_config=error_logging_config,
             shared_count=shared_count,
             shared_lock=shared_lock,
         )
@@ -832,6 +974,14 @@ class DQNTrainer:
                                 f"Average turn reached: "
                                 f"{np.mean(turns_in_window):.2f}"
                             )
+   
+                            early_defeat_pct = 100.0 * sum(
+                                r["result"] == "lost" and r["turn_reached"] < 10
+                                for r in results[-len(turns_in_window):]
+                            ) / len(turns_in_window)
+
+                            print(f"Defeated before turn 10: {early_defeat_pct:.1f}%")
+   
                             n = len(turns_in_window)
 
                             pct_20 = 100 * sum(t >= 20 for t in turns_in_window) / n
@@ -905,10 +1055,23 @@ class DQNTrainer:
                 # PERIODIC CHECKPOINT
                 # ----------------------------------------------
 
-
-                if checkpointing and completed - last_save_game >= save_interval and not greedy_mode:
+                if (
+                    checkpointing
+                    and completed - last_save_game >= save_interval
+                    and not greedy_mode
+                ):
                     self.save_checkpoint(checkpoint_path)
                     last_save_game = completed
+
+                    self.print_checkpoint_performance(
+                        results=results,
+                        progress_interval=progress_interval,
+                        run_start=run_start,
+                        decisions_before=decisions_before,
+                        updates_before=updates_before,
+                        num_workers=num_workers,
+                    )
+
 
 
         finally:
@@ -982,10 +1145,6 @@ class DQNTrainer:
         print(f"PyTorch CPU threads: {torch.get_num_threads()}")
         print("=" * 65)
 
-        self.print_learning_summary(
-            results,
-            interval=progress_interval,
-        )
 
         if evaluation_results:
             print()
@@ -1018,12 +1177,22 @@ class DQNTrainer:
         # FINAL CHECKPOINT
         # --------------------------------------------------
 
-        if checkpointing:
+
+        if checkpointing and not greedy_mode:
 
             # Avoid saving twice if the final game already
             # triggered a periodic checkpoint.
-            if last_save_game != completed and not greedy_mode:
+            if last_save_game != completed:
                 self.save_checkpoint(checkpoint_path)
+
+                self.print_checkpoint_performance(
+                    results=results,
+                    progress_interval=progress_interval,
+                    run_start=run_start,
+                    decisions_before=decisions_before,
+                    updates_before=updates_before,
+                    num_workers=num_workers,
+                )
 
             # Training completed successfully.
             # Keep only the newest numbered checkpoint.
@@ -1036,7 +1205,7 @@ if __name__ == "__main__":
     torch.set_num_threads(3)
     trainer = DQNTrainer()
     trainer.train(
-        num_games=20000,
+        num_games=100000,
         num_workers=8,
         progress_interval=200,
         evaluation_interval=999999999,
@@ -1053,13 +1222,13 @@ if __name__ == "__main__":
 #     trainer = DQNTrainer()
 
 #     trainer.train(
-#         num_games=5000,
+#         num_games=1000,
 #         num_workers=8,
 #         progress_interval=100,
 #         evaluation_interval=99999999999,
 #         evaluation_games=1,
 #         resume=True,
 #         checkpoint_path="core/ai/dqn/checkpoints/normandy_latest.pt",
-#         save_interval=100,
+#         save_interval=1000000000,
 #         greedy_mode=True
 #     )

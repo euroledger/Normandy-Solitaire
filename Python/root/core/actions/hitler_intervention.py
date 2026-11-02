@@ -24,6 +24,29 @@ def is_valid_target(army):
     target_space = next((space for space in get_track_for(army) if space.track_number == army.location.track_number - 1), None)
     return not (target_space is None or target_space.under_siege)
 
+# def get_hitler_intervention_targets(card):
+#     targets = []
+
+#     for army in card.hitler_intervention_target_armies:
+#         if army == US_THIRD_ARMY:
+#             if GlobalGameState.us_third_army_activated == False:
+#                 continue
+#             corps_on_map = [corps for corps in [US_VIII_CORPS, US_XV_CORPS] if corps.location is not None]
+#             if corps_on_map:
+#                 for corps in corps_on_map:
+#                     if is_valid_target(corps):
+#                         targets.append(corps)
+#             else:
+#                 if US_THIRD_ARMY.location is not None:  # noqa: SIM102
+#                     if is_valid_target(army):
+#                         targets.append(army)
+#             continue
+
+#         if is_valid_target(army):
+#             targets.append(army)
+#     return targets
+
+
 def get_hitler_intervention_targets(card):
     targets = []
 
@@ -31,19 +54,36 @@ def get_hitler_intervention_targets(card):
         if army == US_THIRD_ARMY:
             if GlobalGameState.us_third_army_activated == False:
                 continue
-            corps_on_map = [corps for corps in [US_VIII_CORPS, US_XV_CORPS] if corps.location is not None]
+
+            corps_on_map = [
+                corps for corps in [US_VIII_CORPS, US_XV_CORPS]
+                if corps.location is not None
+            ]
+
             if corps_on_map:
                 for corps in corps_on_map:
+
+                    # VIII Corps cannot be targeted once it
+                    # enters the shared XV Corps track.
+                    if (
+                        corps is US_VIII_CORPS
+                        and corps.location in us_xv_track
+                    ):
+                        continue
+
                     if is_valid_target(corps):
                         targets.append(corps)
+
             else:
-                if US_THIRD_ARMY.location is not None:  # noqa: SIM102
+                if US_THIRD_ARMY.location is not None:
                     if is_valid_target(army):
                         targets.append(army)
+
             continue
 
         if is_valid_target(army):
             targets.append(army)
+
     return targets
 
 
@@ -233,14 +273,7 @@ def do_hitler_intervention_redeploy(card, target_army, deployment_choices=None):
             continue
 
         selected_unit, selected_space = available_panzers.pop(selected_index)
-        # debug.debug_pants(
-        #     f"HITLER TRANSFER START | "
-        #     f"Unit: {selected_unit.name} | "
-        #     f"Source: {selected_space.name} | "
-        #     f"Destination: {attacking_space.name} | "
-        #     f"In source: {selected_unit in selected_space.units} | "
-        #     f"In destination: {selected_unit in attacking_space.units}"
-        # )
+
         selected_space.units.remove(selected_unit)
         attacking_space.units.append(selected_unit)
         selected_space_units.append(selected_unit)
@@ -250,12 +283,7 @@ def do_hitler_intervention_redeploy(card, target_army, deployment_choices=None):
             f"Moved {selected_unit.name} from {selected_space.name} "
             f"to {attacking_space.name}"
         )
-        # debug.debug_pants(
-        #     f"HITLER TRANSFER COMPLETE | "
-        #     f"Unit: {selected_unit.name} | "
-        #     f"In source: {selected_unit in selected_space.units} | "
-        #     f"In destination: {selected_unit in attacking_space.units}"
-        # )
+
 
     print(f"REDEPLOYED: {redeployed} PANZER FORCES\n")
     

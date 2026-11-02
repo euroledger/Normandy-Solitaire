@@ -59,6 +59,9 @@ def do_build_fortified_villages(space=None):
 
         selected_space = display_spaces[selected_index]
     else:
+        if space not in spaces:
+            print("INVALID SPACE FOR FORTIFIED VILLAGES")
+            return
         selected_space = space
 
     if selected_space.fortified_village_modifier == 2:

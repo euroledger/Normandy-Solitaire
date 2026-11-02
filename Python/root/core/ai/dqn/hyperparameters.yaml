@@ -7,11 +7,9 @@ normandy_v1:
 
   # Exploration/Exploitation
   epsilon_init: 0.99
-  # epsilon_decay: 0.99999895
-  epsilon_decay: 0.99999960
   epsilon_min: 0.05
 
-
+  epsilon_decay: 1.0
 
   # Target network
   network_sync_rate: 1000
@@ -29,8 +27,14 @@ normandy_v1:
   greedy_mode: false
 
   game_logging:
-    enabled: true
-    result: "lost"
-    target_turn: [25,30]
+    enabled: false
+    result: "won"
+    target_turn: [48]
     max_files: 1
     output_dir: "core/ai/dqn/logs/games"
+
+  error_logging:
+    enabled: true
+    output_dir: "core/ai/dqn/logs/errors"
+
+  

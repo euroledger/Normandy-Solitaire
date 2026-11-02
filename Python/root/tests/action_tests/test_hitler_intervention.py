@@ -12,6 +12,9 @@ from core.map.map_spaces_brit_2 import bayeux
 from core.map.map_spaces_can_1 import caen
 from core.map.map_utilities import add_units_to_space, do_opening_setup, get_all_map_spaces, reset_map
 from core.models import GermanUnit
+from core.map.map_spaces_us_3 import (
+    brest, rennes, st_malo, le_mans, alencon
+)
 
 
 class TestHitlerInterventionTargets(unittest.TestCase):
@@ -116,6 +119,18 @@ class TestHitlerInterventionTargets(unittest.TestCase):
         self.assertEqual(targets, [US_XV_CORPS])
         self.assertNotIn(US_THIRD_ARMY, targets)
 
+    def test_card_46_excludes_viii_corps_at_rennes_when_xv_at_alencon(self):
+        GlobalGameState.us_third_army_activated = True
+
+        add_units_to_space(rennes, US_VIII_CORPS)
+        add_units_to_space(alencon, US_XV_CORPS)
+
+        targets = get_hitler_intervention_targets(card_046)
+
+        self.assertNotIn(US_VIII_CORPS, targets)
+        self.assertIn(US_XV_CORPS, targets)
+        self.assertEqual(targets, [US_XV_CORPS])
+        
     def test_card_46_does_not_use_third_army_when_corps_are_on_map(self):
         GlobalGameState.us_third_army_activated = True
         add_units_to_space(st_malo, US_VIII_CORPS)
