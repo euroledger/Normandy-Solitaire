@@ -8,6 +8,7 @@ import uuid
 from datetime import datetime
 from pathlib import Path
 
+from core.ai.dqn.midgame_config import MIDGAME_CONFIG
 from core.ai.dqn.normandy_env import NormandyEnv
 from core.global_game_state import GlobalGameState
 
@@ -69,10 +70,16 @@ class NormandyLoggingEnv(NormandyEnv):
     def _capture(self):
         return self.log_buffer is not None
 
+
     def reset(self, *, seed=None, options=None):
         self._discard()
         self.game_number += 1
         self.last_action = None
+
+        # Request the configured midgame snapshot on EVERY reset,
+        # including Gymnasium's automatic worker resets.
+        options = dict(options or {})
+        options["midgame"] = MIDGAME_CONFIG["enabled"]
 
         capture_needed = (
             self._error_enabled()
@@ -88,15 +95,22 @@ class NormandyLoggingEnv(NormandyEnv):
         try:
             if self._capture():
                 with contextlib.redirect_stdout(self.log_buffer):
-                    return super().reset(
+                    result = super().reset(
                         seed=seed,
                         options=options,
                     )
+            else:
+                result = super().reset(
+                    seed=seed,
+                    options=options,
+                )
 
-            return super().reset(
-                seed=seed,
-                options=options,
-            )
+            if result is None:
+                raise RuntimeError(
+                    "NormandyEnv.reset() returned None"
+                )
+
+            return result
 
         except BaseException as error:
             self._handle_error(error, "reset")

@@ -1594,51 +1594,118 @@ class TestNormandyEnv(unittest.TestCase):
         self.assertEqual(GlobalGameState.cards_drawn, cards_before + 1)
         self.assertEqual(GlobalGameState.current_step, 1)
    
-    def test_single_game_survival_rewards(self):
-        import contextlib
-        import os
 
-        rng = np.random.default_rng(42)
-        with open(os.devnull, "w") as devnull, contextlib.redirect_stdout(devnull):
-            observation, info = self.env.reset()
+    def test_early_loss_penalty_values(self):
+        """Check the quadratic penalty at every early turn."""
 
-            total_reward = 0.0
-            terminated = False
-            truncated = False
+        for turn in range(1, 10):
+            with self.subTest(turn=turn):
+                expected = -1000.0 * ((10 - turn) / 9.0) ** 2
 
-            while not terminated and not truncated:
-                legal_actions = np.flatnonzero(info["action_mask"])
-                action_id = int(rng.choice(legal_actions))
-
-                observation, reward, terminated, truncated, info = (
-                    self.env.step(action_id)
+                self.assertAlmostEqual(
+                    self.env.early_loss_penalty(turn),
+                    expected,
+                    places=6,
                 )
 
-                total_reward += reward
+        # Boundary checks
+        self.assertEqual(self.env.early_loss_penalty(10), 0.0)
+        self.assertEqual(self.env.early_loss_penalty(20), 0.0)
+        self.assertEqual(self.env.early_loss_penalty(47), 0.0)
 
-        turns_completed = GlobalGameState.cards_drawn
-        cards_drawn = len(GlobalGameState.drawn_cards)
 
-        print(f"\nGame result: {info['result']}")
-        print(f"Cards drawn: {cards_drawn}")
-        print(f"Turns completed: {turns_completed}")
-        print(f"Total reward: {total_reward}")
+        def test_early_loss_rewards_total(self):
+            """Check cumulative episode rewards for losses on turns 1-47."""
 
-        # Each completed turn earns an exponentially increasing reward
-        expected_reward = sum(
-            1.12 ** t
-            for t in range(1, turns_completed + 1)
-        )
+            for turn in range(1, 48):
+                with self.subTest(turn=turn):
 
-        # A German victory earns an additional 10,000 points
-        if info["result"] == "won":
-            expected_reward += 10000.0
+                    survival_reward = sum(
+                        1.12 ** t
+                        for t in range(1, turn + 1)
+                    )
 
-        self.assertAlmostEqual(
-            total_reward,
-            expected_reward,
-            places=6,
-        )
+                    expected_total = survival_reward
+
+                    if turn <= 9:
+                        expected_total -= (
+                            1000.0 * ((10 - turn) / 9.0) ** 2
+                        )
+
+                    actual_total = (
+                        survival_reward + self.env.early_loss_penalty(turn)
+                    )
+
+                    self.assertAlmostEqual(
+                        actual_total,
+                        expected_total,
+                        places=6,
+                    )
+
+
+        def test_victory_reward_unchanged(self):
+            """Victory retains the original 10,000-point bonus."""
+
+            survival_reward = sum(
+                1.12 ** t
+                for t in range(1, 49)
+            )
+
+            expected = survival_reward + 10000.0
+
+            self.assertAlmostEqual(
+                expected,
+                10000.0 + sum(1.12 ** t for t in range(1, 49)),
+                places=6,
+            )
+
+        def test_single_game_survival_rewards(self):
+            import contextlib
+            import os
+
+            rng = np.random.default_rng(42)
+            with open(os.devnull, "w") as devnull, contextlib.redirect_stdout(devnull):
+                observation, info = self.env.reset()
+
+                total_reward = 0.0
+                terminated = False
+                truncated = False
+
+                while not terminated and not truncated:
+                    legal_actions = np.flatnonzero(info["action_mask"])
+                    action_id = int(rng.choice(legal_actions))
+
+                    observation, reward, terminated, truncated, info = (
+                        self.env.step(action_id)
+                    )
+
+                    total_reward += reward
+
+            turns_completed = GlobalGameState.cards_drawn
+            cards_drawn = len(GlobalGameState.drawn_cards)
+
+            print(f"\nGame result: {info['result']}")
+            print(f"Cards drawn: {cards_drawn}")
+            print(f"Turns completed: {turns_completed}")
+            print(f"Total reward: {total_reward}")
+
+            # Each completed turn earns an exponentially increasing reward
+            expected_reward = sum(
+                1.12 ** t
+                for t in range(1, turns_completed + 1)
+            )
+
+            # A German victory earns an additional 10,000 points
+            if info["result"] == "won":
+                expected_reward += 10000.0
+
+            self.assertAlmostEqual(
+                total_reward,
+                expected_reward,
+                places=6,
+            )
+            
+
 
 
 if __name__ == "__main__":

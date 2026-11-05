@@ -9,7 +9,7 @@ normandy_v1:
   epsilon_init: 0.99
   epsilon_min: 0.05
 
-  epsilon_decay: 1.0
+  epsilon_decay: 0.9999997
 
   # Target network
   network_sync_rate: 1000
@@ -34,7 +34,7 @@ normandy_v1:
     output_dir: "core/ai/dqn/logs/games"
 
   error_logging:
-    enabled: true
+    enabled: false
     output_dir: "core/ai/dqn/logs/errors"
 
   

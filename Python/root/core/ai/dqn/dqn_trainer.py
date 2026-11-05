@@ -6,7 +6,6 @@ from time import perf_counter
 from core.ai.dqn.normandy_env import NormandyEnv
 from core.ai.dqn.dqn_network import DQNNetwork
 from core.ai.dqn.dqn_agent import DQNAgent
-from core.ai.dqn.debug import debug_pants
 import numpy as np
 import torch
 from gymnasium.vector import AsyncVectorEnv, AutoresetMode
@@ -16,6 +15,8 @@ import pickle
 from functools import partial
 from core.ai.dqn.dqn_agent import load_hyperparameters
 from core.ai.dqn.normandy_logging_env import NormandyLoggingEnv
+import json
+from core.ai.dqn.midgame_config import MIDGAME_CONFIG
 
 
 def make_silent_normandy_env(
@@ -184,6 +185,15 @@ class DQNTrainer:
         print(f"Reached turn 20+:       {100 * np.mean(turns >= 20):.1f}%")
         print(f"Reached turn 30+:       {100 * np.mean(turns >= 30):.1f}%")
         print(f"Reached turn 40+:       {100 * np.mean(turns >= 40):.1f}%")
+        
+
+        if MIDGAME_CONFIG["enabled"]:
+            original_end = self.previous_end_turn
+            print(
+                f"Exceeded original end ({original_end}): "
+                f"{100 * np.mean(turns > original_end):.1f}%"
+            )
+
         print(f"Maximum turn reached:   {int(np.max(turns))}")
 
         print(f"Cumulative decisions:   {self.total_decisions:,}")
@@ -427,7 +437,7 @@ class DQNTrainer:
             "result",
             "epsilon",
             "average_loss",
-            "turn_reached"
+            "turn_reached",
         ]
 
         new_file = not path.exists() or path.stat().st_size == 0
@@ -469,15 +479,15 @@ class DQNTrainer:
         print(f"Keeping checkpoint: {latest_file.name}")
 
         # Delete all older numbered checkpoints.
-        for number, file in numbered_checkpoints[1:]:
-            try:
-                file.unlink()
-                print(f"Deleted old checkpoint: {file.name}")
+        # for number, file in numbered_checkpoints[1:]:
+        #     try:
+        #         file.unlink()
+        #         print(f"Deleted old checkpoint: {file.name}")
 
-            except OSError as error:
-                print(
-                    f"WARNING: Could not delete {file.name}: {error}"
-                )
+        #     except OSError as error:
+        #         print(
+        #             f"WARNING: Could not delete {file.name}: {error}"
+        #         )
 
 
     def save_checkpoint(self, path="core/ai/dqn/checkpoints/normandy_latest.pt"):
@@ -665,7 +675,8 @@ class DQNTrainer:
         progress_interval=200,
         evaluation_interval=500,
         evaluation_games=1,
-        greedy_mode=False
+        greedy_mode=False,
+        save_checkpoints=True
     ):
         # --------------------------------------------------
         # CHECKPOINT INITIALISATION
@@ -702,6 +713,18 @@ class DQNTrainer:
                     "Use resume=True or overwrite=True."
                 )
 
+
+        start_turn = 1
+        previous_end_turn = None
+
+        if MIDGAME_CONFIG["enabled"]:
+            snapshot_path = Path(MIDGAME_CONFIG["fixed_snapshot"])
+            with snapshot_path.open("r", encoding="utf-8") as f:
+                snapshot_metadata = json.load(f)["metadata"]
+
+            start_turn = int(snapshot_metadata["start_turn"])
+            previous_end_turn = int(snapshot_metadata["original_final_turn"])
+            self.previous_end_turn = previous_end_turn
 
         window_start_checkpoint = self.games_completed
 
@@ -980,7 +1003,7 @@ class DQNTrainer:
                                 for r in results[-len(turns_in_window):]
                             ) / len(turns_in_window)
 
-                            print(f"Defeated before turn 10: {early_defeat_pct:.1f}%")
+                            print(f"Loss before turn 10: {early_defeat_pct:.1f}%")
    
                             n = len(turns_in_window)
 
@@ -991,6 +1014,16 @@ class DQNTrainer:
                             print(f"Reached turn 20+:     {pct_20:.1f}%")
                             print(f"Reached turn 30+:     {pct_30:.1f}%")
                             print(f"Reached turn 40+:     {pct_40:.1f}%")
+                            if MIDGAME_CONFIG["enabled"]:
+                                original_end = self.previous_end_turn
+                                pct_exceeded = 100 * sum(
+                                    t > original_end for t in turns_in_window
+                                ) / n
+                                print(
+                                    f"Exceeded original end ({original_end}): "
+                                    f"{pct_exceeded:.1f}%"
+                                )
+
                             print("===========================================")
                             print(
                                 f"Maximum turn reached: "
@@ -998,6 +1031,7 @@ class DQNTrainer:
                             )
                             print("===========================================")
                             print()
+                            
 
                             turns_in_window.clear()
                             window_start_game = self.games_completed + 1
@@ -1011,16 +1045,38 @@ class DQNTrainer:
                             csv_path = "core/ai/dqn/logs/training_history.csv"
 
                         self.log_game(result, path=csv_path)
+
+
+                        WHITE_ON_RED = "\033[97;41m"
+                        WHITE_ON_GREEN = "\033[97;42m"
+                        WHITE_ON_BLUE = "\033[97;44m"
+                        RESET = "\033[0m"
+                        
+
+                        if game_result == "won":
+                            row_color = WHITE_ON_BLUE
+                        elif turn_reached < 10:
+                            row_color = WHITE_ON_RED
+                        elif turn_reached >= 40:
+                            row_color = WHITE_ON_GREEN
+                        else:
+                            row_color = RESET
+
                         print(
-                            f"Game {self.games_completed:6d} | "
+                            row_color
+                            + f"Game {self.games_completed:6d} | "
                             f"Worker: {i} | "
                             f"Result: {game_result!s:6s} | "
                             f"Turns: {turn_reached:2d} | "
+                            f"Previous End: {previous_end_turn if previous_end_turn is not None else '-'} | "
                             f"Cards Drawn: {cards_in_drawn_pile:2d} | "
                             f"Reward: {episode_rewards[i]:6.1f} | "
                             f"Decisions: {episode_decisions[i]:4d} | "
                             f"Epsilon: {self.agent.epsilon:.4f}"
+                            + RESET,
+                            flush=True,
                         )
+
 
                 # ----------------------------------------------
                 # ADVANCE VECTOR OBSERVATIONS
@@ -1059,6 +1115,7 @@ class DQNTrainer:
                     checkpointing
                     and completed - last_save_game >= save_interval
                     and not greedy_mode
+                    and save_checkpoints
                 ):
                     self.save_checkpoint(checkpoint_path)
                     last_save_game = completed
@@ -1177,8 +1234,7 @@ class DQNTrainer:
         # FINAL CHECKPOINT
         # --------------------------------------------------
 
-
-        if checkpointing and not greedy_mode:
+        if checkpointing and not greedy_mode and save_checkpoints:
 
             # Avoid saving twice if the final game already
             # triggered a periodic checkpoint.
@@ -1200,12 +1256,12 @@ class DQNTrainer:
 
         return results
 
-
+# NORMAL RUN
 if __name__ == "__main__":
     torch.set_num_threads(3)
     trainer = DQNTrainer()
     trainer.train(
-        num_games=100000,
+        num_games=30000,
         num_workers=8,
         progress_interval=200,
         evaluation_interval=999999999,
@@ -1213,9 +1269,27 @@ if __name__ == "__main__":
         resume=True,
         checkpoint_path="core/ai/dqn/checkpoints/normandy_latest.pt",
         save_interval=10000,
-        greedy_mode=False
+        greedy_mode=False,
+        save_checkpoints=True
     )
-    
+
+# SAVE GAMES
+# if __name__ == "__main__":
+#     torch.set_num_threads(3)
+#     trainer = DQNTrainer()
+#     trainer.train(
+#         num_games=10,
+#         num_workers=8,
+#         progress_interval=10,
+#         evaluation_interval=999999999,
+#         evaluation_games=1,
+#         resume=True,
+#         checkpoint_path="core/ai/dqn/checkpoints/normandy_latest.pt",
+#         save_interval=10000,
+#         greedy_mode=True
+#     )
+
+# GREEDY RUN
 # if __name__ == "__main__":
 #     torch.set_num_threads(3)
 
@@ -1224,7 +1298,7 @@ if __name__ == "__main__":
 #     trainer.train(
 #         num_games=1000,
 #         num_workers=8,
-#         progress_interval=100,
+#         progress_interval=200,
 #         evaluation_interval=99999999999,
 #         evaluation_games=1,
 #         resume=True,

@@ -33,7 +33,7 @@ from core.german_units import (
     PZ_9,
 )
 
-
+_last_supply_warning_turn = None
 def add_units_to_space(space, units):
     if not isinstance(units, list):
         units = [units]
@@ -198,7 +198,12 @@ def get_eligible_german_units(space):
 
         # Supply constraint
         if supply_track.value == 0 and unit.is_panzer():
-            print(f"{RED}Supply is 0 - {unit.name} Cannot Attack{RESET}")
+            global _last_supply_warning_turn
+
+            if _last_supply_warning_turn != GlobalGameState.cards_drawn:
+                print(f"{RED}Supply is 0 - {unit.name} Cannot Attack{RESET}")
+                _last_supply_warning_turn = GlobalGameState.cards_drawn
+
             continue
 
         eligible.append(unit)

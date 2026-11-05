@@ -32,4 +32,4 @@ Thumbs.db
 *.npz
 
 # Generated DQN game logs
-/core/ai/dqn/logs/games/
+/core/ai/dqn/logs/
