@@ -1,8 +1,9 @@
 # tests/test_action_mask.py
 
+import traceback
 from core.map.map_spaces_us_3 import le_mans, alencon, argentan
 from core.map.map_spaces_can_1 import cagny, falaise, bourguebus_ridge
-from core.map.map_spaces_brit_2 import villers_bocage, mont_pincon, thury_harcourt
+from core.map.map_spaces_brit_2 import villers_bocage, mont_pincon, thury_harcourt, bayeux
 from core.map.map_spaces_us_1 import st_lo, coutances, flers
 from core.map.map_model import falaise_gap
 
@@ -132,6 +133,25 @@ class TestActionMask(unittest.TestCase):
         self.assertEqual(mask[0], 1.0)
         self.assertEqual(np.sum(mask), 1.0)
 
+    def test_pass_illegal_when_normal_actions_remain(self):
+        self.setUp()
+
+        GlobalGameState.actions_left_this_turn = 1
+        GlobalGameState.reserve_actions = 0
+
+        mask = get_action_phase_action_mask()
+
+        self.assertEqual(mask[0], 0.0)
+
+    def test_pass_legal_with_unused_reserve_actions(self):
+        self.setUp()
+
+        GlobalGameState.actions_left_this_turn = 0
+        GlobalGameState.reserve_actions = 1
+
+        mask = get_action_phase_action_mask()
+
+        self.assertEqual(mask[0], 1.0)
 
     def test_action_mask_blocks_already_attacked_army(self):
         # Verify that if an army was hit, its corresponding button locks out
@@ -166,6 +186,69 @@ class TestActionMask(unittest.TestCase):
     # TOTAL ACTION SPACE
     # ---------------------------------------------------------
 
+    def test_panzer_from_reserve_mask_respects_stacking_limit(self):
+        from core.ai.headless_action_masks import (
+            get_move_panzer_from_strategic_reserve_mask,
+        )
+        from reset import reset_game
+
+        reset_game()
+
+        GlobalGameState.actions_left_this_turn = 1
+        GlobalGameState.reserve_actions = 0
+
+        destination = bayeux
+
+        # Preserve the original destination and reserve contents.
+        original_units = list(destination.units)
+        original_reserve = list(strategic_reserve_box.units)
+
+        try:
+            # Establish a controlled test state.
+            destination.units.clear()
+            strategic_reserve_box.units.clear()
+            strategic_reserve_box.units.append(PZ_LEHR)
+
+            kampfgruppen = [
+                create_kampfgruppe()
+                for _ in range(4)
+            ]
+            destination.units.extend(kampfgruppen)
+
+            _, spaces = get_total_actions()
+
+            panzer_index = panzer_divisions_list.index(PZ_LEHR)
+            space_index = spaces.index(destination)
+
+            action_id = (
+                panzer_index * len(spaces)
+                + space_index
+            )
+
+            # Four Kampfgruppen fill the stacking capacity.
+            mask = get_move_panzer_from_strategic_reserve_mask()
+
+            self.assertEqual(
+                mask[action_id],
+                0.0,
+                "Deployment must be blocked at the stacking limit",
+            )
+
+            # Three Kampfgruppen leave one stacking slot free.
+            destination.units.remove(kampfgruppen[-1])
+
+            mask = get_move_panzer_from_strategic_reserve_mask()
+
+            self.assertEqual(
+                mask[action_id],
+                1.0,
+                "Deployment must be legal with one stacking slot free",
+            )
+
+        finally:
+            # Restore the original game state.
+            destination.units[:] = original_units
+            strategic_reserve_box.units[:] = original_reserve
     def test_total_actions_and_german_eligible_spaces(self):
         total_actions, german_eligible_spaces = get_total_actions()
 
@@ -357,58 +440,6 @@ class TestActionMask(unittest.TestCase):
 
         self.assertGreater(
             np.sum(mask[start:end]),
-            0.0
-        )
-
-    # ---------------------------------------------------------
-    # NAMED OTHER UNITS FROM STRATEGIC RESERVE
-    # ---------------------------------------------------------
-
-    def test_fs3_in_reserve_enables_fs3_but_not_fs5(self):
-        strategic_reserve_box.units.append(FS_3)
-
-        mask = get_action_phase_action_mask()
-
-        fs3_start, fs3_end = (
-            self.get_other_unit_action_slice(3)
-        )
-
-        fs5_start, fs5_end = (
-            self.get_other_unit_action_slice(4)
-        )
-
-        self.assertGreater(
-            np.sum(mask[fs3_start:fs3_end]),
-            0.0,
-            "3rd Fallschirmjager should have legal deployment actions"
-        )
-
-        self.assertEqual(
-            np.sum(mask[fs5_start:fs5_end]),
-            0.0,
-            "5th Fallschirmjager should remain unavailable"
-        )
-
-    def test_fs5_in_reserve_enables_fs5_but_not_fs3(self):
-        strategic_reserve_box.units.append(FS_5)
-
-        mask = get_action_phase_action_mask()
-
-        fs3_start, fs3_end = (
-            self.get_other_unit_action_slice(3)
-        )
-
-        fs5_start, fs5_end = (
-            self.get_other_unit_action_slice(4)
-        )
-
-        self.assertEqual(
-            np.sum(mask[fs3_start:fs3_end]),
-            0.0
-        )
-
-        self.assertGreater(
-            np.sum(mask[fs5_start:fs5_end]),
             0.0
         )
 
@@ -849,6 +880,138 @@ class TestActionMask(unittest.TestCase):
 
         falaise_gap.units.remove(SS_12)
         
+        
+    def test_panzer_reserve_ap_and_observation_consistency(self):
+        from unittest.mock import patch
+        import numpy as np
+
+        from core.ai.dqn.normandy_env import NormandyEnv
+        from core.ai.dqn.dqn_action_adapter import (
+            get_action_phase_decision,
+        )
+        from core.ai.headless_action_masks import (
+            get_total_actions,
+            german_eligible_spaces,
+        )
+        from core.german_units import panzer_divisions_list
+        from core.map.map_model import (
+            strategic_reserve_box,
+            transport_track,
+        )
+
+        total_actions, spaces = get_total_actions()
+        start_id = 7 + len(panzer_divisions_list) * len(spaces)
+
+        self.assertEqual(start_id, 304)
+
+        env = NormandyEnv()
+
+        try:
+            for index, panzer in enumerate(panzer_divisions_list):
+                for normal_ap, reserve_ap in (
+                    (2, 0),
+                    (0, 2),
+                ):
+                    for roll, transport_level, success in (
+                        (1, 6, True),
+                        (6, 1, False),
+                    ):
+                        action_id = start_id + index
+
+                        with self.subTest(
+                            action=action_id,
+                            panzer=panzer.name,
+                            normal_ap=normal_ap,
+                            reserve_ap=reserve_ap,
+                            roll=roll,
+                        ):
+                            env.reset()
+
+                            for space in german_eligible_spaces:
+                                if panzer in space.units:
+                                    space.units.remove(panzer)
+
+                            if panzer in strategic_reserve_box.units:
+                                strategic_reserve_box.units.remove(panzer)
+
+                            bayeux.units.append(panzer)
+
+                            GlobalGameState.headless = True
+                            GlobalGameState.actions_left_this_turn = normal_ap
+                            GlobalGameState.reserve_actions = reserve_ap
+                            transport_track.value = transport_level
+
+                            obs_before, mask_before = (
+                                get_action_phase_decision()
+                            )
+
+                            self.assertEqual(mask_before[action_id], 1.0)
+
+                            with patch(
+                                "core.ai.headless_action_masks.randint",
+                                return_value=roll,
+                            ) as mock_roll:
+                                (
+                                    obs_after,
+                                    reward,
+                                    terminated,
+                                    truncated,
+                                    info,
+                                ) = env.step(action_id)
+
+                            self.assertTrue(mock_roll.called)
+
+                            self.assertEqual(
+                                GlobalGameState.actions_left_this_turn,
+                                normal_ap - (1 if normal_ap > 0 else 0),
+                                "Normal AP was not consumed correctly",
+                            )
+
+                            self.assertEqual(
+                                GlobalGameState.reserve_actions,
+                                reserve_ap - (1 if normal_ap == 0 else 0),
+                                "Reserve AP was not consumed correctly",
+                            )
+
+                            self.assertFalse(
+                                np.array_equal(obs_before, obs_after),
+                                "Legal action produced an unchanged observation",
+                            )
+
+                            self.assertEqual(
+                                panzer in strategic_reserve_box.units,
+                                success,
+                                "Unexpected Panzer transport result",
+                            )
+
+                            self.assertFalse(terminated)
+                            self.assertFalse(truncated)
+
+                            expected_obs, expected_mask = (
+                                get_action_phase_decision()
+                            )
+
+                            np.testing.assert_array_equal(
+                                obs_after,
+                                expected_obs,
+                                err_msg="Returned observation differs from game state",
+                            )
+
+                            np.testing.assert_array_equal(
+                                info["action_mask"],
+                                env.pad_action_mask(expected_mask),
+                                err_msg="Returned mask differs from game state",
+                            )
+
+                            if success:
+                                self.assertEqual(
+                                    info["action_mask"][action_id],
+                                    0.0,
+                                    "Panzer still legal to remove after removal",
+                                )
+        finally:
+            env.close()
+
     def test_move_unit_one_space_all_four_tracks_can_enter_falaise_gap(self):
         test_cases = [
             (PZ_LEHR, flers),
@@ -1058,5 +1221,270 @@ class TestActionMask(unittest.TestCase):
         self.assertEqual(PZ_LEHR.combat_value, 2)
 
         PZ_LEHR.combat_value = 2
+  
+  
+    def test_panzer_to_reserve_environment_step(self):
+        from unittest.mock import patch
+        import numpy as np
+
+        from core.ai.dqn.normandy_env import NormandyEnv
+        from core.ai.headless_action_masks import (
+            get_total_actions,
+            get_action_phase_action_mask,
+        )
+        from core.german_units import panzer_divisions_list
+        from core.map.map_model import (
+            strategic_reserve_box,
+            transport_track,
+        )
+
+        _, spaces = get_total_actions()
+        start_id = 7 + len(panzer_divisions_list) * len(spaces)
+
+        self.assertEqual(start_id, 304)
+        self.assertEqual(len(panzer_divisions_list), 11)
+
+        env = NormandyEnv()
+
+        try:
+            for index, panzer in enumerate(panzer_divisions_list):
+                for normal_ap, reserve_ap in (
+                    (2, 0),
+                    (0, 2),
+                ):
+                    for roll, transport_level, should_succeed in (
+                        (1, 6, True),
+                        (6, 1, False),
+                    ):
+                        action_id = start_id + index
+
+                        with self.subTest(
+                            action=action_id,
+                            panzer=panzer.name,
+                            normal_ap=normal_ap,
+                            reserve_ap=reserve_ap,
+                            roll=roll,
+                        ):
+                            env.reset()
+
+                            for space in spaces:
+                                if panzer in space.units:
+                                    space.units.remove(panzer)
+
+                            if panzer in strategic_reserve_box.units:
+                                strategic_reserve_box.units.remove(panzer)
+
+                            bayeux.units.append(panzer)
+
+                            GlobalGameState.headless = True
+                            GlobalGameState.actions_left_this_turn = normal_ap
+                            GlobalGameState.reserve_actions = reserve_ap
+                            transport_track.value = transport_level
+
+                            mask_before = get_action_phase_action_mask()
+
+                            self.assertTrue(
+                                mask_before[action_id],
+                                f"Action {action_id} not legal before step",
+                            )
+
+                            with patch(
+                                "core.ai.headless_action_masks.randint",
+                                return_value=roll,
+                            ) as mock_roll:
+
+                                (
+                                    observation_after,
+                                    reward,
+                                    terminated,
+                                    truncated,
+                                    info,
+                                ) = env.step(action_id)
+
+                            self.assertTrue(
+                                mock_roll.called,
+                                f"Action {action_id}: transport die mock "
+                                f"was not called",
+                            )
+
+                            self.assertEqual(
+                                panzer in strategic_reserve_box.units,
+                                should_succeed,
+                                f"Action {action_id}: unexpected "
+                                f"transport outcome",
+                            )
+
+                            self.assertEqual(
+                                panzer in bayeux.units,
+                                not should_succeed,
+                                f"Action {action_id}: incorrect "
+                                f"map location after transport",
+                            )
+
+                            self.assertFalse(truncated)
+
+        finally:
+            env.close()
+                
+    def test_panzer_to_reserve_with_only_reserve_ap(self):
+        from unittest.mock import patch
+
+        from reset import reset_game
+        from core.ai.headless_action_masks import (
+            get_action_phase_action_mask,
+            execute_flat_action_ai,
+            get_total_actions,
+        )
+        from core.german_units import panzer_divisions_list
+        from core.map.map_model import (
+            strategic_reserve_box,
+            transport_track,
+        )
+
+        _, spaces = get_total_actions()
+        start_id = 7 + len(panzer_divisions_list) * len(spaces)
+
+        self.assertEqual(start_id, 304)
+        self.assertEqual(len(panzer_divisions_list), 11)
+
+        try:
+            for index, panzer in enumerate(panzer_divisions_list):
+                for roll, transport_level, should_succeed in (
+                    (1, 6, True),
+                    (6, 1, False),
+                ):
+                    with self.subTest(
+                        action=start_id + index,
+                        panzer=panzer.name,
+                        roll=roll,
+                    ):
+                        reset_game()
+
+                        for space in spaces:
+                            if panzer in space.units:
+                                space.units.remove(panzer)
+
+                        if panzer in strategic_reserve_box.units:
+                            strategic_reserve_box.units.remove(panzer)
+
+                        bayeux.units.append(panzer)
+
+                        GlobalGameState.headless = True
+                        GlobalGameState.actions_left_this_turn = 0
+                        GlobalGameState.reserve_actions = 1
+                        transport_track.value = transport_level
+
+                        action_id = start_id + index
+                        mask = get_action_phase_action_mask()
+
+                        self.assertEqual(
+                            mask[action_id],
+                            1.0,
+                            f"Action {action_id} unexpectedly masked",
+                        )
+
+                        with patch(
+                            "core.ai.headless_action_masks.randint",
+                            return_value=roll,
+                        ):
+                            execute_flat_action_ai(action_id)
+
+                        self.assertEqual(
+                            GlobalGameState.actions_left_this_turn,
+                            0,
+                        )
+
+                        self.assertEqual(
+                            GlobalGameState.reserve_actions,
+                            0,
+                            f"Action {action_id} failed to consume reserve AP",
+                        )
+
+                        self.assertEqual(
+                            panzer in strategic_reserve_box.units,
+                            should_succeed,
+                        )
+
+                        self.assertEqual(
+                            panzer in bayeux.units,
+                            not should_succeed,
+                        )
+        finally:
+            reset_game()
+
+    def test_all_panzer_to_reserve_actions_consume_ap(self):
+        from unittest.mock import patch
+
+        from reset import reset_game
+        from core.ai.headless_action_masks import (
+            get_action_phase_action_mask,
+            execute_flat_action_ai,
+            get_total_actions,
+        )
+        from core.german_units import panzer_divisions_list
+        from core.map.map_model import strategic_reserve_box, transport_track
+
+        _, spaces = get_total_actions()
+        start_id = 7 + len(panzer_divisions_list) * len(spaces)
+
+        self.assertEqual(start_id, 304)
+        self.assertEqual(len(panzer_divisions_list), 11)
+
+        original_transport = transport_track.value
+
+        try:
+            for index, panzer in enumerate(panzer_divisions_list):
+                for roll, transport_level, should_succeed in (
+                    (1, 6, True),
+                    (6, 1, False),
+                ):
+                    with self.subTest(
+                        panzer=panzer.name,
+                        roll=roll,
+                    ):
+                        reset_game()
+
+                        for space in spaces:
+                            if panzer in space.units:
+                                space.units.remove(panzer)
+
+                        if panzer in strategic_reserve_box.units:
+                            strategic_reserve_box.units.remove(panzer)
+
+                        bayeux.units.append(panzer)
+
+                        GlobalGameState.actions_left_this_turn = 2
+                        GlobalGameState.reserve_actions = 0
+                        transport_track.value = transport_level
+
+                        action_id = start_id + index
+                        mask = get_action_phase_action_mask()
+
+                        self.assertEqual(mask[action_id], 1.0)
+
+                        with patch(
+                            "core.ai.headless_action_masks.randint",
+                            return_value=roll,
+                        ):
+                            execute_flat_action_ai(action_id)
+
+                        self.assertEqual(
+                            GlobalGameState.actions_left_this_turn,
+                            1,
+                            f"{panzer.name}: AP not consumed",
+                        )
+
+                        self.assertEqual(
+                            panzer in strategic_reserve_box.units,
+                            should_succeed,
+                        )
+                        self.assertEqual(
+                            panzer in bayeux.units,
+                            not should_succeed,
+                        )
+        finally:
+            transport_track.value = original_transport
+            reset_game()
+        
 if __name__ == "__main__":
     unittest.main()

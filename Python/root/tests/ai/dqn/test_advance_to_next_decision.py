@@ -34,7 +34,6 @@ class TestAdvanceToNextDecision(unittest.TestCase):
 
         self.assertEqual(len(action_mask), self.total_actions)
         self.assertTrue(np.any(action_mask == 1.0))
-        
 
     def test_action_phase_initialization(self):
         decision = advance_to_next_decision(
@@ -54,7 +53,6 @@ class TestAdvanceToNextDecision(unittest.TestCase):
 
         self.assertEqual(GlobalGameState.actions_left_this_turn, expected_actions)
 
-
     def test_advances_after_action_phase(self):
         # Reach the first Action Phase
         decision = advance_to_next_decision(
@@ -65,7 +63,7 @@ class TestAdvanceToNextDecision(unittest.TestCase):
 
         self.assertEqual(decision["decision_type"], "action_phase")
 
-        first_card = GlobalGameState.current_card        
+        first_card = GlobalGameState.current_card
         first_cards_drawn = len(GlobalGameState.drawn_cards)
 
         # Finish the Action Phase
@@ -88,6 +86,39 @@ class TestAdvanceToNextDecision(unittest.TestCase):
             first_cards_drawn + 1,
         )
 
+    def test_pass_with_unused_reserve_ap_advances_turn(self):
+
+        # Reach the first Action Phase.
+        decision = advance_to_next_decision(
+            self.draw_deck,
+            self.mid_deck,
+            self.late_deck,
+        )
+
+        self.assertEqual(decision["decision_type"], "action_phase")
+
+        first_card = GlobalGameState.current_card
+        first_cards_drawn = len(GlobalGameState.drawn_cards)
+
+        # Simulate PASS with unused reserve AP.
+        GlobalGameState.actions_left_this_turn = 0
+        GlobalGameState.reserve_actions = 1
+
+        # Request advancement.
+        decision = advance_to_next_decision(
+            self.draw_deck,
+            self.mid_deck,
+            self.late_deck,
+            pass_selected=True,
+        )
+
+        # PASS should end the turn despite unused reserve AP.
+        self.assertEqual(decision["decision_type"], "action_phase")
+        self.assertIsNot(GlobalGameState.current_card, first_card)
+        self.assertEqual(
+            len(GlobalGameState.drawn_cards),
+            first_cards_drawn + 1,
+        )
 
     def test_returns_hitler_intervention_decision(self):
         # Simulate Hitler Intervention during pre-action processing

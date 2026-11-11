@@ -33,3 +33,4 @@ Thumbs.db
 
 # Generated DQN game logs
 /core/ai/dqn/logs/
+/core/ai/dqn/checkpoints/bakup

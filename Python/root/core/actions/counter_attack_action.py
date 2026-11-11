@@ -137,7 +137,7 @@ def print_counter_attack_options(options):
 
     for index, option in enumerate(options, start=1):
         print(
-            f"{BLUE}{index}. {option['army'].name} at "
+            f"{BLUE}{index}. {option['army'].display_name} at "
             f"{option['target_space'].name} "
             f"({option['german_attack']} attack from "
             f"{option['attacking_space'].name} vs "
@@ -309,7 +309,8 @@ def do_counter_attack(selected_option=None, selected_units=None):
     attack = calculate_german_attack_strength(selected_option["attacking_space"], selected_units)
     defense = selected_option["allied_defense"]
 
-    print(f"COUNTER-ATTACK: {selected_option['army'].name} at {selected_option['target_space'].name}")
+
+    print(f"COUNTER-ATTACK: {selected_option['army'].display_name} at {selected_option['target_space'].name}")
     print(f"Final attack strength: {attack} vs defense: {defense}")
 
     result = resolve_counter_attack(

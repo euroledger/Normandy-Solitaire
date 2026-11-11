@@ -3,6 +3,7 @@ from pathlib import Path
 import os
 import contextlib
 from time import perf_counter
+from core.ai.dqn.dqn_n_step import NStepTransitionCollector
 from core.ai.dqn.normandy_env import NormandyEnv
 from core.ai.dqn.dqn_network import DQNNetwork
 from core.ai.dqn.dqn_agent import DQNAgent
@@ -25,10 +26,15 @@ def make_silent_normandy_env(
     shared_count,
     shared_lock,
 ):
+    # if multiprocessing.current_process().name != "MainProcess":
+    #     sys.stdout = open(os.devnull, "w", encoding="utf-8")
+    #     sys.stderr = open(os.devnull, "w", encoding="utf-8")
+
+
     if multiprocessing.current_process().name != "MainProcess":
         sys.stdout = open(os.devnull, "w", encoding="utf-8")
-        sys.stderr = open(os.devnull, "w", encoding="utf-8")
-
+        # Keep stderr visible to diagnose worker crashes.
+        # sys.stderr = open(os.devnull, "w", encoding="utf-8")
     return NormandyLoggingEnv(
         config=game_config,
         shared_count=shared_count,
@@ -301,6 +307,11 @@ class DQNTrainer:
             f"{'Turn 30+':>12}"
             f"{'Turn 40+':>12}"
         )
+        # Report PER importance-sampling beta
+        if self.agent.replay_buffer_type == "priority":
+            print(f"PER alpha:            {self.agent.per_alpha:.3f}")
+            print(f"PER beta:             {self.agent.current_per_beta():.6f}")
+            print(f"PER beta steps:       {self.agent.per_beta_steps:,}")
 
         print("-" * 70)
 
@@ -519,16 +530,22 @@ class DQNTrainer:
 
                     checkpoint = {
                         "version": 1,
+                        "n_step": self.agent.n_step,
                         "policy_net": self.agent.policy_net.state_dict(),
                         "target_net": self.agent.target_net.state_dict(),
                         "optimizer": self.agent.optimizer.state_dict(),
-                        "replay_buffer": list(self.agent.replay_buffer.buffer),
+                        "replay_buffer": (
+                            self.agent.replay_buffer.state_dict()
+                            if self.agent.replay_buffer_type == "priority"
+                            else list(self.agent.replay_buffer.buffer)
+                        ),
                         "epsilon": self.agent.epsilon,
                         "training_steps": self.agent.training_steps,
                         "games_completed": self.games_completed,
                         "total_decisions": self.total_decisions,
                         "total_training_updates": self.total_training_updates,
                         "train_frequency": self.agent.train_frequency,
+                        "per_beta_steps": self.agent.per_beta_steps,
                     }
 
                     torch.save(checkpoint, checkpoint_file)
@@ -622,15 +639,40 @@ class DQNTrainer:
                     checkpoint["optimizer"]
                 )
 
-                # Restore replay buffer.
-                self.agent.replay_buffer.buffer.clear()
-                self.agent.replay_buffer.buffer.extend(
-                    checkpoint["replay_buffer"]
-                )
 
-                # Restore training state.
+                # Restore replay buffer only when both n-step and buffer type match
+                saved_n_step = int(checkpoint.get("n_step", 1))
+                saved_buffer = checkpoint.get("replay_buffer")
+
+                if saved_n_step != self.agent.n_step:
+                    print(
+                        f"n_step changed: {saved_n_step} -> {self.agent.n_step}. "
+                        "Starting with a fresh replay buffer."
+                    )
+
+                elif self.agent.replay_buffer_type == "uniform":
+                    if isinstance(saved_buffer, list):
+                        self.agent.restore_replay_buffer(saved_buffer)
+                    else:
+                        print(
+                            "Checkpoint contains a priority replay buffer. "
+                            "Ignoring it and using a fresh uniform replay buffer."
+                        )
+
+                elif self.agent.replay_buffer_type == "priority":
+                    if isinstance(saved_buffer, dict):
+                        self.agent.restore_priority_replay_buffer(saved_buffer)
+                    else:
+                        print(
+                            "Checkpoint contains an incompatible replay buffer. "
+                            "Starting with a fresh priority replay buffer."
+                        )
+        # Restore training state.
                 self.agent.epsilon = checkpoint["epsilon"]
                 self.agent.training_steps = checkpoint["training_steps"]
+
+                # Restore PER beta annealing progress.
+                self.agent.per_beta_steps = checkpoint.get("per_beta_steps", 0)
 
                 self.games_completed = checkpoint["games_completed"]
                 self.total_decisions = checkpoint["total_decisions"]
@@ -701,8 +743,13 @@ class DQNTrainer:
                 try:                    
                     self.load_checkpoint(checkpoint_path)
 
+
+                    # Check replay buffer after checkpoint loading
+                    print(f"Replay buffer type: {type(self.agent.replay_buffer).__name__}")
+                    print(f"Replay buffer size: {len(self.agent.replay_buffer):,}")
+                    # print(f"Replay buffer capacity: {self.agent.replay_buffer.capacity:,}")
                     # Override checkpoint epsilon TEMP
-                    self.agent.epsilon = 0.2
+                    self.agent.epsilon = 0.15
                     print(f"Epsilon restarted at: {self.agent.epsilon:.4f}")
                 except FileNotFoundError:
                     print("No checkpoint found. Starting fresh.")
@@ -765,6 +812,15 @@ class DQNTrainer:
         needs_reset = np.zeros(
             num_workers, dtype=bool
         )
+        
+        # Independent multi-step transition history for each worker
+        n_step_collectors = [
+            NStepTransitionCollector(
+                n_step=self.agent.n_step,
+                gamma=self.agent.discount_factor,
+            )
+            for _ in range(num_workers)
+]
 
         # --------------------------------------------------
         # CREATE PARALLEL ENVIRONMENTS
@@ -822,6 +878,7 @@ class DQNTrainer:
                 # EXECUTE PARALLEL ENVIRONMENT STEPS
                 # ----------------------------------------------
 
+
                 (
                     next_observations,
                     rewards,
@@ -830,7 +887,10 @@ class DQNTrainer:
                     next_info,
                 ) = env.step(actions)
 
+
+
                 next_masks = next_info["action_mask"]
+            
 
                 # ----------------------------------------------
                 # PROCESS EACH WORKER
@@ -850,6 +910,8 @@ class DQNTrainer:
                         episode_decisions[i] = 0
                         episode_losses[i] = []
 
+                     
+
                         continue
 
                     # ------------------------------------------
@@ -860,7 +922,9 @@ class DQNTrainer:
                         terminated[i] or truncated[i]
                     )
 
-                    self.agent.replay_buffer.add(
+
+                    # Collect transitions independently for each worker
+                    completed_transitions = n_step_collectors[i].add(
                         observation=observations[i],
                         action_id=int(actions[i]),
                         reward=float(rewards[i]),
@@ -868,6 +932,28 @@ class DQNTrainer:
                         terminated=done,
                         next_action_mask=next_masks[i],
                     )
+
+                    # Store completed transitions in replay memory
+                    for transition in completed_transitions:
+                        (
+                            observation,
+                            action_id,
+                            reward,
+                            next_observation,
+                            transition_done,
+                            next_action_mask,
+                            n_steps,
+                        ) = transition
+
+                        self.agent.replay_buffer.add(
+                            observation=observation,
+                            action_id=action_id,
+                            reward=reward,
+                            next_observation=next_observation,
+                            terminated=transition_done,
+                            next_action_mask=next_action_mask,
+                            n_steps=n_steps,
+                        )
 
                     # ------------------------------------------
                     # TRAIN DQN
@@ -881,22 +967,10 @@ class DQNTrainer:
                         == 0
                     ):
 
-                        start = perf_counter()
-
-
                         # if not greedy_mode:
                         loss = self.agent.train_step()
 
-                        duration = perf_counter() - start
-
-                        if duration > 1.0:
-                            print(
-                                f"SLOW TRAINING UPDATE: "
-                                f"Worker {i}, "
-                                f"Decision {episode_decisions[i] + 1}, "
-                                f"Duration {duration:.2f}s"
-                            )
-
+                      
                     if loss is not None:
 
                         episode_losses[i].append(loss)
@@ -926,8 +1000,7 @@ class DQNTrainer:
                     episode_rewards[i] += float(rewards[i])
 
                     episode_decisions[i] += 1
-
-                    self.total_decisions += 1
+                    self.total_decisions += 1     
 
                     # ------------------------------------------
                     # GAME COMPLETED
@@ -1014,6 +1087,33 @@ class DQNTrainer:
                             print(f"Reached turn 20+:     {pct_20:.1f}%")
                             print(f"Reached turn 30+:     {pct_30:.1f}%")
                             print(f"Reached turn 40+:     {pct_40:.1f}%")
+                            
+                            if self.agent.grad_norm_count > 0:
+                                avg_grad_norm = (
+                                    self.agent.grad_norm_sum /
+                                    self.agent.grad_norm_count
+                                )
+
+                                clipped_pct = (
+                                    100.0 * self.agent.grad_norm_clipped_count
+                                    / self.agent.grad_norm_count
+                                )
+
+                                print(f"Gradient norm AVG:    {avg_grad_norm:.2f}")
+                                print(f"Gradient norm MAX:    {self.agent.grad_norm_max:.2f}")
+                                print(f"Gradient samples:     {self.agent.grad_norm_count:,}")
+                                print(f"Gradient clipped:     {clipped_pct:.1f}%")
+
+                                self.agent.grad_norm_sum = 0.0
+                                self.agent.grad_norm_max = 0.0
+                                self.agent.grad_norm_count = 0
+                                self.agent.grad_norm_clipped_count = 0
+                                
+                            # Report PER hyperparameters at each progress interval.
+                            if self.agent.replay_buffer_type == "priority":
+                                print(f"PER alpha:            {self.agent.per_alpha:.3f}")
+                                print(f"PER beta:             {self.agent.current_per_beta():.6f}")
+                                print(f"PER beta steps:       {self.agent.per_beta_steps:,}")
                             if MIDGAME_CONFIG["enabled"]:
                                 original_end = self.previous_end_turn
                                 pct_exceeded = 100 * sum(
@@ -1114,7 +1214,7 @@ class DQNTrainer:
                 if (
                     checkpointing
                     and completed - last_save_game >= save_interval
-                    and not greedy_mode
+                    # and not greedy_mode
                     and save_checkpoints
                 ):
                     self.save_checkpoint(checkpoint_path)
@@ -1141,6 +1241,7 @@ class DQNTrainer:
                     if log_manager is not None:
                         log_manager.shutdown()
 
+      
         # --------------------------------------------------
         # PERFORMANCE STATISTICS
         # --------------------------------------------------
@@ -1261,7 +1362,7 @@ if __name__ == "__main__":
     torch.set_num_threads(3)
     trainer = DQNTrainer()
     trainer.train(
-        num_games=30000,
+        num_games=10000,
         num_workers=8,
         progress_interval=200,
         evaluation_interval=999999999,
@@ -1276,7 +1377,7 @@ if __name__ == "__main__":
 # SAVE GAMES
 # if __name__ == "__main__":
 #     torch.set_num_threads(3)
-#     trainer = DQNTrainer()
+#     trainer = DQNTrainer()f
 #     trainer.train(
 #         num_games=10,
 #         num_workers=8,
@@ -1303,6 +1404,7 @@ if __name__ == "__main__":
 #         evaluation_games=1,
 #         resume=True,
 #         checkpoint_path="core/ai/dqn/checkpoints/normandy_latest.pt",
-#         save_interval=1000000000,
-#         greedy_mode=True
+#         save_interval=1000,
+#         greedy_mode=True,
+#         save_checkpoints=True
 #     )

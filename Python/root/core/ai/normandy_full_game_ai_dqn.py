@@ -37,7 +37,7 @@ from core.card_utilities import (
 from game_phases.action_phase import common_post_action_phase
 
 
-def advance_to_next_decision(draw_deck, mid_deck, late_deck):
+def advance_to_next_decision(draw_deck, mid_deck, late_deck, pass_selected=False):
     configure_automated_inputs(GlobalGameState.headless)
     GAME_WON = "won"
     GAME_LOST = "lost"
@@ -448,12 +448,15 @@ def advance_to_next_decision(draw_deck, mid_deck, late_deck):
         if GlobalGameState.current_step == 6:
             # Advance to the next turn when the Action Phase is finished
             if (
-                GlobalGameState.actions_left_this_turn == 0
-                and GlobalGameState.reserve_actions == 0
-            ):                
+                pass_selected
+                or (
+                    GlobalGameState.actions_left_this_turn == 0
+                    and GlobalGameState.reserve_actions == 0
+                )
+            ):
                 common_post_action_phase()
-    
-                continue
+                pass_selected = False
+                continue   
 
             observation, action_mask = get_action_phase_decision()
             return {

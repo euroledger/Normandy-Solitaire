@@ -8,6 +8,7 @@ import torch
 from torch import nn
 
 from core.ai.dqn.dqn_agent import DQNAgent
+from core.ai.dqn.dqn_priority_replay_buffer import DQNPriorityReplayBuffer
 from core.ai.dqn.dqn_trainer import DQNTrainer
 
 
@@ -128,24 +129,41 @@ class TestDQNCheckpoint(unittest.TestCase):
             self.trainer.load_checkpoint(self.checkpoint_path)
 
 
-
-            
     def test_replay_buffer_capacity_preserved(self):
         self.add_experiences()
-        capacity = self.trainer.agent.replay_buffer.buffer.maxlen
 
+        # Read capacity from the appropriate replay buffer type
+        buffer = self.trainer.agent.replay_buffer
+
+        if isinstance(buffer, DQNPriorityReplayBuffer):
+            capacity = buffer.capacity
+        else:
+            capacity = buffer.buffer.maxlen
+
+        # Save checkpoint
         saved_path = self.trainer.save_checkpoint(self.checkpoint_path)
         self.assertTrue(saved_path.is_file())
 
+        # Clear replay buffer and reload checkpoint
         self.trainer.agent.replay_buffer.buffer.clear()
         self.trainer.load_checkpoint(self.checkpoint_path)
 
+        # Check restored capacity
+        restored_buffer = self.trainer.agent.replay_buffer
+
+        if isinstance(restored_buffer, DQNPriorityReplayBuffer):
+            restored_capacity = restored_buffer.capacity
+        else:
+            restored_capacity = restored_buffer.buffer.maxlen
+
+        self.assertEqual(restored_capacity, capacity)
+
+        # Check that all three experiences were restored
         self.assertEqual(
-            self.trainer.agent.replay_buffer.buffer.maxlen,
-            capacity,
+            len(self.trainer.agent.replay_buffer),
+            3,
         )
-        self.assertEqual(len(self.trainer.agent.replay_buffer), 3)
-        
+
     def test_training_frequency_change_allowed(self):
         saved_path = self.trainer.save_checkpoint(self.checkpoint_path)
         self.assertTrue(saved_path.is_file())

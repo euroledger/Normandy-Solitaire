@@ -6,8 +6,10 @@ from pathlib import Path
 import yaml
 
 from core.ai.dqn.dqn_replay_buffer import DQNReplayBuffer
+from core.ai.dqn.dqn_priority_replay_buffer import DQNPriorityReplayBuffer
 import copy
 import torch.nn.functional as F
+
 
 def load_hyperparameters(config_name="normandy_v1"):
     config_path = Path(__file__).with_name("hyperparameters.yaml")
@@ -17,6 +19,7 @@ def load_hyperparameters(config_name="normandy_v1"):
 
     return configurations[config_name]
 
+
 class DQNAgent:
 
     def __init__(self, policy_net, device):
@@ -25,6 +28,8 @@ class DQNAgent:
 
         params = load_hyperparameters("normandy_v1")
 
+
+        self.gradient_clip_norm = params.get("gradient_clip_norm", None)
         self.replay_memory_size = params["replay_memory_size"]
         self.mini_batch_size = params["mini_batch_size"]
         self.learning_rate = params["learning_rate"]
@@ -33,6 +38,10 @@ class DQNAgent:
         self.epsilon = params["epsilon_init"]
         self.epsilon_decay = params["epsilon_decay"]
         self.epsilon_min = params["epsilon_min"]
+        
+        self.n_step = int(params.get("n_step", 1))
+        if self.n_step < 1:
+            raise ValueError("n_step must be at least 1")
 
         self.network_sync_rate = params["network_sync_rate"]
         self.hidden_layers = params["hidden_layers"]
@@ -40,9 +49,32 @@ class DQNAgent:
         self.enable_double_dqn = params["enable_double_dqn"]
         self.enable_dueling_dqn = params["enable_dueling_dqn"]
 
-        # Create replay buffer
-        self.replay_buffer = DQNReplayBuffer(self.replay_memory_size)
+        # Create replay buffer based on configuration
+        self.replay_buffer_type = params.get("replay_buffer_type", "uniform")
         
+        # PER hyperparameters
+        self.per_alpha = params.get("per_alpha", 0.6)
+        self.per_beta_initial = params.get("per_beta_initial", 0.4)
+        self.per_beta_final = params.get("per_beta_final", 1.0)
+        self.per_beta_anneal_steps = params.get("per_beta_anneal_steps", 500000)
+
+        # Track annealing independently of historical training updates
+        self.per_beta_steps = 0
+
+        if self.replay_buffer_type == "priority":
+            self.replay_buffer = DQNPriorityReplayBuffer(
+                capacity=self.replay_memory_size,
+                alpha=self.per_alpha,
+            )
+        elif self.replay_buffer_type == "uniform":
+            self.replay_buffer = DQNReplayBuffer(
+                capacity=self.replay_memory_size
+            )
+        else:
+            raise ValueError(
+                f"Unknown replay_buffer_type: {self.replay_buffer_type}"
+            )
+
         # Create target network with identical initial weights
         self.target_net = copy.deepcopy(self.policy_net)
         self.target_net.to(self.device)
@@ -56,12 +88,25 @@ class DQNAgent:
 
         # Count training updates
         self.training_steps = 0
-        
+
         # Frequency of gradient updates
         self.train_frequency = params["train_frequency"]
 
         if self.train_frequency < 1:
             raise ValueError("train_frequency must be at least 1")
+        
+        self.grad_norm_sum = 0.0
+        self.grad_norm_max = 0.0
+        self.grad_norm_count = 0
+        self.grad_norm_clipped_count = 0
+
+
+    def restore_priority_replay_buffer(self, state):
+        self.replay_buffer = DQNPriorityReplayBuffer(
+            capacity=self.replay_memory_size,
+            alpha=self.per_alpha,
+        )
+        self.replay_buffer.load_state_dict(state)
         
     def select_action(self, observation, action_mask):
         legal_actions = np.flatnonzero(action_mask)
@@ -86,22 +131,73 @@ class DQNAgent:
             )
 
             return int(torch.argmax(q_values).item())
-        
 
+
+    def restore_replay_buffer(self, experiences):
+        # Restore experiences using the configured replay buffer type
+        if self.replay_buffer_type == "priority":
+            self.replay_buffer = DQNPriorityReplayBuffer(
+                capacity=self.replay_memory_size
+            )
+
+            for experience in experiences:
+                self.replay_buffer.add(*experience)
+
+        else:
+            self.replay_buffer = DQNReplayBuffer(
+                capacity=self.replay_memory_size
+            )
+
+            for experience in experiences:
+                self.replay_buffer.add(*experience)
+         
+                
+    def current_per_beta(self):
+        # Linearly increase beta from its initial to final value.
+        progress = min(
+            1.0,
+            self.per_beta_steps / self.per_beta_anneal_steps,
+        )
+
+        return (
+            self.per_beta_initial
+            + progress * (self.per_beta_final - self.per_beta_initial)
+        )
+        
     def train_step(self):
         # Wait until enough experiences are available
         if len(self.replay_buffer) < self.mini_batch_size:
             return None
 
         # Sample experiences
-        (
-            observations,
-            actions,
-            rewards,
-            next_observations,
-            terminated,
-            next_masks,
-        ) = self.replay_buffer.sample(self.mini_batch_size)
+        if self.replay_buffer_type == "priority":
+            (
+                observations,
+                actions,
+                rewards,
+                next_observations,
+                terminated,
+                next_masks,
+                indices,
+                weights,
+                n_steps
+            ) = self.replay_buffer.sample(
+                self.mini_batch_size,
+                beta=self.current_per_beta(),
+            )
+        else:
+            (
+                observations,
+                actions,
+                rewards,
+                next_observations,
+                terminated,
+                next_masks,
+                n_steps,
+            ) = self.replay_buffer.sample(self.mini_batch_size)
+
+            indices = None
+            weights = None
 
         # Convert batch to tensors
         states = torch.as_tensor(
@@ -112,6 +208,9 @@ class DQNAgent:
         )
         rewards = torch.as_tensor(
             rewards, dtype=torch.float32, device=self.device
+        )
+        n_steps = torch.as_tensor(
+            n_steps, dtype=torch.float32, device=self.device
         )
         next_states = torch.as_tensor(
             next_observations, dtype=torch.float32, device=self.device
@@ -160,20 +259,76 @@ class DQNAgent:
                     )
                     next_q[valid_next] = target_q.max(dim=1).values
 
-            # Bellman target
+            # Apply the correct bootstrap discount for each experience
+            discounts = self.discount_factor ** n_steps
+
             target_values = (
-                rewards + self.discount_factor * next_q
+                rewards + discounts * next_q
             )
 
-        # Calculate Huber loss
-        loss = F.smooth_l1_loss(current_q, target_values)
+        # Calculate TD errors
+        td_errors = target_values - current_q
+
+
+        if isinstance(self.replay_buffer, DQNPriorityReplayBuffer):            # Calculate individual Huber losses
+            individual_losses = F.smooth_l1_loss(
+                current_q,
+                target_values,
+                reduction="none",
+            )
+
+            # Apply importance-sampling weights
+            importance_weights = torch.as_tensor(
+                weights,
+                dtype=torch.float32,
+                device=self.device,
+            )
+
+            loss = (individual_losses * importance_weights).mean()
+
+            # Update replay priorities using TD errors
+            self.replay_buffer.update_priorities(
+                indices,
+                td_errors.detach().abs().cpu().numpy(),
+            )
+        else:
+            # Preserve original uniform replay behaviour
+            loss = F.smooth_l1_loss(current_q, target_values)
+
 
         # Update policy network
+        # self.optimizer.zero_grad()
+        # loss.backward()
+        # self.optimizer.step()
         self.optimizer.zero_grad()
         loss.backward()
-        self.optimizer.step()
 
+
+        grad_norm = torch.nn.utils.clip_grad_norm_(
+            self.policy_net.parameters(),
+            max_norm=(
+                self.gradient_clip_norm
+                if self.gradient_clip_norm is not None
+                else float("inf")
+            ),
+        )
+        
+        grad_norm_value = float(grad_norm.item())
+        self.grad_norm_sum += grad_norm_value
+        self.grad_norm_max = max(self.grad_norm_max, grad_norm_value)
+        self.grad_norm_count += 1
+
+
+        if (
+            self.gradient_clip_norm is not None
+            and grad_norm_value > self.gradient_clip_norm
+        ):
+            self.grad_norm_clipped_count += 1
+
+        self.optimizer.step()
         self.training_steps += 1
+        if self.replay_buffer_type == "priority":
+            self.per_beta_steps += 1
 
         # Periodically synchronize target network
         if self.training_steps % self.network_sync_rate == 0:
@@ -182,7 +337,6 @@ class DQNAgent:
             )
 
         return float(loss.item())
-    
 
     def select_actions(self, observations, action_masks, needs_reset=None):
         """

@@ -1,0 +1,1526 @@
+import csv
+from collections import Counter
+from pathlib import Path
+import os
+import contextlib
+from time import perf_counter
+from core.ai.dqn.dqn_n_step import NStepTransitionCollector
+from core.ai.dqn.normandy_env import NormandyEnv
+from core.ai.dqn.dqn_network import DQNNetwork
+from core.ai.dqn.dqn_agent import DQNAgent
+import numpy as np
+import torch
+from gymnasium.vector import AsyncVectorEnv, AutoresetMode
+import multiprocessing
+import sys
+import pickle
+from functools import partial
+from core.ai.dqn.dqn_agent import load_hyperparameters
+from core.ai.dqn.normandy_logging_env import NormandyLoggingEnv
+import json
+from core.ai.dqn.midgame_config import MIDGAME_CONFIG
+
+
+def make_silent_normandy_env(
+    game_config,
+    error_config,
+    shared_count,
+    shared_lock,
+):
+    # if multiprocessing.current_process().name != "MainProcess":
+    #     sys.stdout = open(os.devnull, "w", encoding="utf-8")
+    #     sys.stderr = open(os.devnull, "w", encoding="utf-8")
+
+
+    if multiprocessing.current_process().name != "MainProcess":
+        sys.stdout = open(os.devnull, "w", encoding="utf-8")
+        # Keep stderr visible to diagnose worker crashes.
+        # sys.stderr = open(os.devnull, "w", encoding="utf-8")
+    return NormandyLoggingEnv(
+        config=game_config,
+        shared_count=shared_count,
+        shared_lock=shared_lock,
+        error_config=error_config,
+    )
+
+
+class DQNTrainer:
+
+    def __init__(self, env=None, agent=None):
+        # Create environment
+        self.env = env if env is not None else NormandyEnv()
+
+        # Create agent using environment dimensions
+        if agent is None:
+            observation_size = self.env.observation_space.shape[0]
+            action_size = self.env.action_space.n
+
+            device = torch.device(
+                "cuda" if torch.cuda.is_available() else "cpu"
+            )
+
+            network = DQNNetwork(
+                observation_size,
+                action_size,
+            ).to(device)
+
+            agent = DQNAgent(network, device)
+
+        self.agent = agent
+
+        # Training statistics
+        self.games_completed = 0
+        self.total_decisions = 0
+        self.total_training_updates = 0
+        self._evaluation_pool = None
+
+    def evaluate_policy(self):
+        """
+        Run one greedy evaluation game in a separate process.
+        """
+
+         # Create one persistent evaluation worker, not a new pool per game.
+        if self._evaluation_pool is None:
+            self._evaluation_pool = multiprocessing.get_context("spawn").Pool(
+                processes=1
+            )
+
+
+    def close_evaluation_pool(self, force=False):
+        """Shut down the persistent evaluation process."""
+        pool = self._evaluation_pool
+        self._evaluation_pool = None
+        if pool is None:
+            return
+        if force:
+            pool.terminate()
+        else:
+            pool.close()
+        pool.join()
+
+    def log_evaluation(
+        self,
+        training_games,
+        result,
+        path="core/ai/dqn/logs/evaluation_history.csv",
+    ):
+        path = Path(path)
+        path.parent.mkdir(parents=True, exist_ok=True)
+
+        new_file = not path.exists() or path.stat().st_size == 0
+
+        with path.open("a", newline="", encoding="utf-8") as file:
+
+            writer = csv.writer(file)
+
+            if new_file:
+                writer.writerow([
+                    "training_games",
+                    "epsilon",
+                    "turn_reached",
+                    "result",
+                ])
+
+            writer.writerow([
+                training_games,
+                0.0,
+                result["turn_reached"],
+                result["result"],
+            ])
+
+    def run_silently(self, function, *args, **kwargs):
+        # Suppress game-engine output
+        with open(os.devnull, "w") as null_output, contextlib.redirect_stdout(null_output):
+            return function(*args, **kwargs)
+
+
+
+    def print_checkpoint_performance(
+        self,
+        results,
+        progress_interval,
+        run_start,
+        decisions_before,
+        updates_before,
+        num_workers,
+    ):
+        """Print cumulative run statistics and first-vs-last batch."""
+
+        if not results:
+            return
+
+        elapsed = perf_counter() - run_start
+        n = len(results)
+
+        turns = np.array(
+            [r["turn_reached"] for r in results],
+            dtype=np.int32,
+        )
+
+        wins = sum(r["result"] == "won" for r in results)
+
+        decisions = self.total_decisions - decisions_before
+        updates = self.total_training_updates - updates_before
+
+        def batch_stats(batch):
+            values = np.array(
+                [r["turn_reached"] for r in batch],
+                dtype=np.int32,
+            )
+            return {
+                "avg": float(np.mean(values)),
+                "p20": 100 * float(np.mean(values >= 20)),
+                "p30": 100 * float(np.mean(values >= 30)),
+                "p40": 100 * float(np.mean(values >= 40)),
+            }
+
+        # Compare equal-sized, complete batches only.
+        complete_batches = n // progress_interval
+
+        print()
+        print("=" * 70)
+        print("DQN CHECKPOINT PERFORMANCE")
+        print("=" * 70)
+
+        print(f"Cumulative games:       {self.games_completed:,}")
+        print(f"Games this run:         {n:,}")
+        print(f"Parallel workers:       {num_workers}")
+        print(f"Train frequency:        {self.agent.train_frequency}")
+        print(f"Games won this run:     {wins}")
+        print(f"Win rate:               {100 * wins / n:.3f}%")
+        print(f"Average turn reached:   {np.mean(turns):.2f}")
+        print(f"Reached turn 20+:       {100 * np.mean(turns >= 20):.1f}%")
+        print(f"Reached turn 30+:       {100 * np.mean(turns >= 30):.1f}%")
+        print(f"Reached turn 40+:       {100 * np.mean(turns >= 40):.1f}%")
+        
+
+        if MIDGAME_CONFIG["enabled"]:
+            original_end = self.previous_end_turn
+            print(
+                f"Exceeded original end ({original_end}): "
+                f"{100 * np.mean(turns > original_end):.1f}%"
+            )
+
+        print(f"Maximum turn reached:   {int(np.max(turns))}")
+
+        print(f"Cumulative decisions:   {self.total_decisions:,}")
+        print(f"Cumulative updates:     {self.total_training_updates:,}")
+        print(f"Training updates:       {updates:,}")
+        print(f"Elapsed time:           {elapsed:.1f} seconds")
+        print(f"Games/second:           {n / elapsed if elapsed > 0 else 0:.2f}")
+        print(f"Decisions/second:       {decisions / elapsed if elapsed > 0 else 0:.2f}")
+        print(f"Updates/second:         {updates / elapsed if elapsed > 0 else 0:.2f}")
+        print(f"Current epsilon:        {self.agent.epsilon:.4f}")
+        print(f"PyTorch CPU threads:    {torch.get_num_threads()}")
+
+        if complete_batches >= 2:
+            first_batch = results[:progress_interval]
+
+            last_start = (
+                complete_batches - 1
+            ) * progress_interval
+
+            last_batch = results[
+                last_start:last_start + progress_interval
+            ]
+
+            first = batch_stats(first_batch)
+            last = batch_stats(last_batch)
+
+            print()
+            print("CHANGE OVER RUN")
+            print("-" * 70)
+
+            print(
+                f"First batch: "
+                f"{first_batch[0]['game']:,}–"
+                f"{first_batch[-1]['game']:,}"
+            )
+            print(
+                f"Last batch:  "
+                f"{last_batch[0]['game']:,}–"
+                f"{last_batch[-1]['game']:,}"
+            )
+
+            print()
+            print(
+                f"{'Metric':<25}"
+                f"{'First Batch':>14}"
+                f"{'Last Batch':>14}"
+                f"{'Change':>14}"
+            )
+            print("-" * 67)
+
+            print(
+                f"{'Average turn':<25}"
+                f"{first['avg']:>14.2f}"
+                f"{last['avg']:>14.2f}"
+                f"{last['avg'] - first['avg']:>+14.2f}"
+            )
+
+            for label, key in [
+                ("Games reaching turn 20", "p20"),
+                ("Games reaching turn 30", "p30"),
+                ("Games reaching turn 40", "p40"),
+            ]:
+                print(
+                    f"{label:<25}"
+                    f"{first[key]:>13.1f}%"
+                    f"{last[key]:>13.1f}%"
+                    f"{last[key] - first[key]:>+13.1f}pp"
+                )
+
+            relative_change = (
+                100 * (last["avg"] - first["avg"])
+                / first["avg"]
+                if first["avg"] else 0.0
+            )
+
+            print()
+            print(
+                f"Average turn relative change: "
+                f"{relative_change:+.1f}%"
+            )
+            
+
+        else:
+            print()
+            print(
+                "First-vs-last comparison requires "
+                "at least two complete batches."
+            )
+
+        print("=" * 70)
+        print()
+
+    def print_learning_summary(self, results, interval=100):
+
+        if not results:
+            return
+
+        print()
+        print("===================== DQN LEARNING PROGRESS SUMMARY =====================")
+        print()
+        print(
+            f"{'Games':<20}"
+            f"{'Average Turn':>14}"
+            f"{'Turn 20+':>12}"
+            f"{'Turn 30+':>12}"
+            f"{'Turn 40+':>12}"
+        )
+        # Report PER importance-sampling beta
+        if self.agent.replay_buffer_type == "priority":
+            print(f"PER alpha:            {self.agent.per_alpha:.3f}")
+            print(f"PER beta:             {self.agent.current_per_beta():.6f}")
+            print(f"PER beta steps:       {self.agent.per_beta_steps:,}")
+
+        print("-" * 70)
+
+        averages = []
+        batch_stats = []
+
+        for start in range(0, len(results), interval):
+
+            batch = results[start:start + interval]
+
+            turns = [r["turn_reached"] for r in batch]
+            n = len(turns)
+
+            avg_turn = sum(turns) / n
+
+            pct_20 = 100 * sum(t >= 20 for t in turns) / n
+            pct_30 = 100 * sum(t >= 30 for t in turns) / n
+            pct_40 = 100 * sum(t >= 40 for t in turns) / n
+
+            averages.append(avg_turn)
+
+            batch_stats.append({
+                "avg": avg_turn,
+                "pct_20": pct_20,
+                "pct_30": pct_30,
+                "pct_40": pct_40,
+                "n": n,
+            })
+
+            first_game = batch[0]["game"]
+            last_game = batch[-1]["game"]
+
+            game_range = f"{first_game}–{last_game}"
+
+            print(
+                f"{game_range:<20}"
+                f"{avg_turn:>14.2f}"
+                f"{pct_20:>11.1f}%"
+                f"{pct_30:>11.1f}%"
+                f"{pct_40:>11.1f}%"
+            )
+
+        # Overall statistics
+        all_turns = [r["turn_reached"] for r in results]
+        total_games = len(all_turns)
+
+        overall_avg = sum(all_turns) / total_games
+        overall_20 = 100 * sum(t >= 20 for t in all_turns) / total_games
+        overall_30 = 100 * sum(t >= 30 for t in all_turns) / total_games
+        overall_40 = 100 * sum(t >= 40 for t in all_turns) / total_games
+
+        print("-" * 70)
+
+        print(
+            f"{'OVERALL':<20}"
+            f"{overall_avg:>14.2f}"
+            f"{overall_20:>11.1f}%"
+            f"{overall_30:>11.1f}%"
+            f"{overall_40:>11.1f}%"
+        )
+
+        # Compare first and last batches
+        first = batch_stats[0]
+        last = batch_stats[-1]
+
+        avg_change = last["avg"] - first["avg"]
+
+        avg_pct_change = (
+            100 * avg_change / first["avg"]
+            if first["avg"] != 0
+            else 0
+        )
+
+        change_20 = last["pct_20"] - first["pct_20"]
+        change_30 = last["pct_30"] - first["pct_30"]
+        change_40 = last["pct_40"] - first["pct_40"]
+
+        print()
+        print("======================= CHANGE OVER RUN =======================")
+        print()
+
+        print(
+            f"{'Metric':<25}"
+            f"{'First Batch':>14}"
+            f"{'Last Batch':>14}"
+            f"{'Change':>14}"
+        )
+
+        print("-" * 67)
+
+        print(
+            f"{'Average turn':<25}"
+            f"{first['avg']:>14.2f}"
+            f"{last['avg']:>14.2f}"
+            f"{avg_change:>+14.2f}"
+        )
+
+        print(
+            f"{'Games reaching turn 20':<25}"
+            f"{first['pct_20']:>13.1f}%"
+            f"{last['pct_20']:>13.1f}%"
+            f"{change_20:>+13.1f}pp"
+        )
+
+        print(
+            f"{'Games reaching turn 30':<25}"
+            f"{first['pct_30']:>13.1f}%"
+            f"{last['pct_30']:>13.1f}%"
+            f"{change_30:>+13.1f}pp"
+        )
+
+        print(
+            f"{'Games reaching turn 40':<25}"
+            f"{first['pct_40']:>13.1f}%"
+            f"{last['pct_40']:>13.1f}%"
+            f"{change_40:>+13.1f}pp"
+        )
+
+        print()
+        print(
+            f"Average turn relative change: {avg_pct_change:+.1f}%"
+        )
+
+        print("===============================================================") 
+      
+    def log_game(self, result, path="core/ai/dqn/logs/training_history.csv"):
+        path = Path(path)
+        path.parent.mkdir(parents=True, exist_ok=True)
+
+        fields = [
+            "game",
+            "reward",
+            "decisions",
+            "result",
+            "epsilon",
+            "average_loss",
+            "turn_reached",
+        ]
+
+        new_file = not path.exists() or path.stat().st_size == 0
+
+        with path.open("a", newline="", encoding="utf-8") as file:
+            writer = csv.DictWriter(file, fieldnames=fields)
+
+            if new_file:
+                writer.writeheader()
+
+            writer.writerow({field: result.get(field) for field in fields})
+
+    def cleanup_old_checkpoints(
+        self,
+        path="core/ai/dqn/checkpoints/normandy_latest.pt"
+    ):
+        import re
+
+        checkpoint_dir = Path(path).parent
+
+        numbered_checkpoints = []
+
+        for file in checkpoint_dir.glob("normandy_*.pt"):
+            match = re.fullmatch(r"normandy_(\d+)\.pt", file.name)
+
+            if match:
+                numbered_checkpoints.append(
+                    (int(match.group(1)), file)
+                )
+
+        if len(numbered_checkpoints) <= 1:
+            return
+
+        numbered_checkpoints.sort(reverse=True)
+
+        # Keep the newest numbered checkpoint.
+        latest_number, latest_file = numbered_checkpoints[0]
+
+        print(f"Keeping checkpoint: {latest_file.name}")
+
+        # Delete all older numbered checkpoints.
+        # for number, file in numbered_checkpoints[1:]:
+        #     try:
+        #         file.unlink()
+        #         print(f"Deleted old checkpoint: {file.name}")
+
+        #     except OSError as error:
+        #         print(
+        #             f"WARNING: Could not delete {file.name}: {error}"
+        #         )
+
+
+    def save_checkpoint(self, path="core/ai/dqn/checkpoints/normandy_latest.pt"):
+        import re
+
+        path = Path(path)
+        path.parent.mkdir(parents=True, exist_ok=True)
+
+        # Use the supplied path to determine the checkpoint directory.
+        # All new checkpoints use sequential filenames.
+        checkpoint_dir = path.parent
+
+        existing_numbers = []
+
+        for file in checkpoint_dir.glob("normandy_*.pt"):
+            match = re.fullmatch(r"normandy_(\d+)\.pt", file.name)
+
+            if match:
+                existing_numbers.append(int(match.group(1)))
+
+        next_number = max(existing_numbers, default=0) + 1
+
+        # Never overwrite an existing checkpoint.
+        while True:
+            checkpoint_path = checkpoint_dir / f"normandy_{next_number}.pt"
+
+            try:
+                with checkpoint_path.open("xb") as checkpoint_file:
+
+                    checkpoint = {
+                        "version": 1,
+                        "n_step": self.agent.n_step,
+                        "policy_net": self.agent.policy_net.state_dict(),
+                        "target_net": self.agent.target_net.state_dict(),
+                        "optimizer": self.agent.optimizer.state_dict(),
+                        "replay_buffer": (
+                            self.agent.replay_buffer.state_dict()
+                            if self.agent.replay_buffer_type == "priority"
+                            else list(self.agent.replay_buffer.buffer)
+                        ),
+                        "epsilon": self.agent.epsilon,
+                        "training_steps": self.agent.training_steps,
+                        "games_completed": self.games_completed,
+                        "total_decisions": self.total_decisions,
+                        "total_training_updates": self.total_training_updates,
+                        "train_frequency": self.agent.train_frequency,
+                        "per_beta_steps": self.agent.per_beta_steps,
+                    }
+
+                    torch.save(checkpoint, checkpoint_file)
+
+                break
+
+            except FileExistsError:
+                next_number += 1
+
+            except Exception:
+                # Remove an incomplete checkpoint if writing failed.
+                try:
+                    checkpoint_path.unlink(missing_ok=True)
+                except OSError:
+                    pass
+
+                raise
+
+        print(
+            f"Checkpoint saved: {checkpoint_path} "
+            f"(game {self.games_completed})"
+        )
+
+        return checkpoint_path
+
+    def load_checkpoint(self, path="core/ai/dqn/checkpoints/normandy_latest.pt"):
+        import re
+
+        path = Path(path)
+        checkpoint_dir = path.parent
+
+        # Find numbered checkpoints, newest first.
+        numbered_checkpoints = []
+
+        for file in checkpoint_dir.glob("normandy_*.pt"):
+            match = re.fullmatch(r"normandy_(\d+)\.pt", file.name)
+
+            if match:
+                numbered_checkpoints.append(
+                    (int(match.group(1)), file)
+                )
+
+        numbered_checkpoints.sort(reverse=True)
+
+        candidates = [file for _, file in numbered_checkpoints]
+
+        # Support the original checkpoint during migration.
+        legacy_path = checkpoint_dir / "normandy_latest.pt"
+
+        if legacy_path.is_file() and legacy_path not in candidates:
+            candidates.append(legacy_path)
+
+        if not candidates:
+            raise FileNotFoundError(
+                f"No checkpoints found in: {checkpoint_dir}"
+            )
+
+        # Try newest checkpoint first.
+        for checkpoint_path in candidates:
+
+            try:
+                checkpoint = torch.load(
+                    checkpoint_path,
+                    map_location=self.agent.device,
+                    weights_only=False,
+                )
+
+                if checkpoint["version"] != 1:
+                    raise ValueError("Unsupported checkpoint version")
+
+                if checkpoint["train_frequency"] != self.agent.train_frequency:
+                    print(
+                        f"Training frequency changed: "
+                        f"{checkpoint['train_frequency']} -> "
+                        f"{self.agent.train_frequency}"
+                    )
+
+                # Restore neural networks.
+                self.agent.policy_net.load_state_dict(
+                    checkpoint["policy_net"]
+                )
+
+                self.agent.target_net.load_state_dict(
+                    checkpoint["target_net"]
+                )
+
+                self.agent.target_net.eval()
+
+                # Restore optimizer.
+                self.agent.optimizer.load_state_dict(
+                    checkpoint["optimizer"]
+                )
+
+
+                # Restore replay buffer only when both n-step and buffer type match
+                saved_n_step = int(checkpoint.get("n_step", 1))
+                saved_buffer = checkpoint.get("replay_buffer")
+
+                if saved_n_step != self.agent.n_step:
+                    print(
+                        f"n_step changed: {saved_n_step} -> {self.agent.n_step}. "
+                        "Starting with a fresh replay buffer."
+                    )
+
+                elif self.agent.replay_buffer_type == "uniform":
+                    if isinstance(saved_buffer, list):
+                        self.agent.restore_replay_buffer(saved_buffer)
+                    else:
+                        print(
+                            "Checkpoint contains a priority replay buffer. "
+                            "Ignoring it and using a fresh uniform replay buffer."
+                        )
+
+                elif self.agent.replay_buffer_type == "priority":
+                    if isinstance(saved_buffer, dict):
+                        self.agent.restore_priority_replay_buffer(saved_buffer)
+                    else:
+                        print(
+                            "Checkpoint contains an incompatible replay buffer. "
+                            "Starting with a fresh priority replay buffer."
+                        )
+        # Restore training state.
+                self.agent.epsilon = checkpoint["epsilon"]
+                self.agent.training_steps = checkpoint["training_steps"]
+
+                # Restore PER beta annealing progress.
+                self.agent.per_beta_steps = checkpoint.get("per_beta_steps", 0)
+
+                self.games_completed = checkpoint["games_completed"]
+                self.total_decisions = checkpoint["total_decisions"]
+                self.total_training_updates = checkpoint["total_training_updates"]
+
+                print(
+                    f"Checkpoint loaded: {checkpoint_path} "
+                    f"(game {self.games_completed}, "
+                    f"epsilon {self.agent.epsilon:.4f})"
+                )
+
+                return checkpoint_path
+
+            except (
+                OSError,
+                EOFError,
+                RuntimeError,
+                ValueError,
+                KeyError,
+                TypeError,
+                pickle.UnpicklingError,
+            ) as error:
+
+                print(
+                    f"WARNING: Could not load checkpoint "
+                    f"{checkpoint_path}: {error}"
+                )
+                print("Trying previous checkpoint...")
+
+        raise RuntimeError(
+            "No valid checkpoint could be loaded."
+        )
+    
+    def train(
+        self,
+        num_games=10,
+        resume=False,
+        checkpoint_path=None,
+        save_interval=5000,
+        overwrite=False,
+        num_workers=4,
+        progress_interval=200,
+        evaluation_interval=500,
+        evaluation_games=1,
+        greedy_mode=False,
+        save_checkpoints=True
+    ):
+        # --------------------------------------------------
+        # CHECKPOINT INITIALISATION
+        # --------------------------------------------------
+
+        if num_games < 1:
+            raise ValueError("num_games must be at least 1")
+        if num_workers < 1:
+            raise ValueError("num_workers must be at least 1")
+        if progress_interval < 1:
+            raise ValueError("progress_interval must be at least 1")
+        if evaluation_interval < 1:
+            raise ValueError("evaluation_interval must be at least 1")
+        if evaluation_games < 1:
+            raise ValueError("evaluation_games must be at least 1")
+        checkpointing = checkpoint_path is not None
+
+        if checkpointing:
+            checkpoint_path = Path(checkpoint_path)
+
+            if resume:
+                try:                    
+                    self.load_checkpoint(checkpoint_path)
+
+
+                    # Check replay buffer after checkpoint loading
+                    print(f"Replay buffer type: {type(self.agent.replay_buffer).__name__}")
+                    print(f"Replay buffer size: {len(self.agent.replay_buffer):,}")
+                    # print(f"Replay buffer capacity: {self.agent.replay_buffer.capacity:,}")
+                    # Override checkpoint epsilon TEMP
+                    self.agent.epsilon = 0.02
+                    print(f"Epsilon restarted at: {self.agent.epsilon:.4f}")
+                except FileNotFoundError:
+                    print("No checkpoint found. Starting fresh.")
+
+            elif checkpoint_path.exists() and not overwrite:
+                raise FileExistsError(
+                    f"Checkpoint already exists: {checkpoint_path}. "
+                    "Use resume=True or overwrite=True."
+                )
+
+
+        start_turn = 1
+        previous_end_turn = None
+
+        if MIDGAME_CONFIG["enabled"]:
+            snapshot_path = Path(MIDGAME_CONFIG["fixed_snapshot"])
+            with snapshot_path.open("r", encoding="utf-8") as f:
+                snapshot_metadata = json.load(f)["metadata"]
+
+            start_turn = int(snapshot_metadata["start_turn"])
+            previous_end_turn = int(snapshot_metadata["original_final_turn"])
+            self.previous_end_turn = previous_end_turn
+
+        window_start_checkpoint = self.games_completed
+
+        # --------------------------------------------------
+        # INITIALISE TRAINING
+        # --------------------------------------------------
+        if greedy_mode:
+            self.agent.epsilon = 0
+            print("GREEDY MODE: epsilon = 0")
+            
+        results = []
+        evaluation_results = []
+
+        turns_in_window = []
+        window_start_game = self.games_completed + 1
+
+        run_start = perf_counter()
+        last_save_game = 0
+
+        updates_before = self.total_training_updates
+        decisions_before = self.total_decisions
+
+        completed = 0
+        next_evaluation = evaluation_interval
+
+        episode_rewards = np.zeros(
+            num_workers, dtype=np.float64
+        )
+
+        episode_decisions = np.zeros(
+            num_workers, dtype=np.int64
+        )
+
+        episode_losses = [
+            [] for _ in range(num_workers)
+        ]
+
+        # Diagnostics are observational only; they do not affect action selection.
+        diagnostic_actions = [Counter() for _ in range(num_workers)]
+        diagnostic_no_change = np.zeros(num_workers, dtype=np.int64)
+        diagnostic_zero_reward = np.zeros(num_workers, dtype=np.int64)
+        diagnostic_same_action_streak = np.zeros(num_workers, dtype=np.int64)
+        diagnostic_max_same_action_streak = np.zeros(num_workers, dtype=np.int64)
+        diagnostic_no_change_streak = np.zeros(num_workers, dtype=np.int64)
+        diagnostic_max_no_change_streak = np.zeros(num_workers, dtype=np.int64)
+        diagnostic_last_action = [None] * num_workers
+        diagnostic_high_decision_games = []
+
+        needs_reset = np.zeros(
+            num_workers, dtype=bool
+        )
+        
+        # Independent multi-step transition history for each worker
+        n_step_collectors = [
+            NStepTransitionCollector(
+                n_step=self.agent.n_step,
+                gamma=self.agent.discount_factor,
+            )
+            for _ in range(num_workers)
+]
+
+        # --------------------------------------------------
+        # CREATE PARALLEL ENVIRONMENTS
+        # --------------------------------------------------
+
+        # --------------------------------------------------
+        # CREATE PARALLEL ENVIRONMENTS
+        # --------------------------------------------------
+
+        hyperparameters = load_hyperparameters("normandy_v1")
+
+        game_logging_config = hyperparameters.get(
+            "game_logging", {"enabled": False}
+        )
+
+        error_logging_config = hyperparameters.get(
+            "error_logging", {"enabled": False}
+        )
+
+        log_manager = multiprocessing.Manager()
+        shared_count = log_manager.Value("i", 0)
+        shared_lock = log_manager.Lock()
+
+        env_factory = partial(
+            make_silent_normandy_env,
+            game_config=game_logging_config,
+            error_config=error_logging_config,
+            shared_count=shared_count,
+            shared_lock=shared_lock,
+        )
+
+        env = AsyncVectorEnv(
+            [env_factory for _ in range(num_workers)],
+            autoreset_mode=AutoresetMode.NEXT_STEP,
+        )
+        try:
+
+            observations, info = env.reset()
+
+            # --------------------------------------------------
+            # MAIN TRAINING LOOP
+            # --------------------------------------------------
+
+            while completed < num_games:
+
+                masks = info["action_mask"]
+
+                actions = self.agent.select_actions(
+                    observations,
+                    masks,
+                    needs_reset,
+                )
+
+                # ----------------------------------------------
+                # EXECUTE PARALLEL ENVIRONMENT STEPS
+                # ----------------------------------------------
+
+                (
+                    next_observations,
+                    rewards,
+                    terminated,
+                    truncated,
+                    next_info,
+                ) = env.step(actions)
+
+                next_masks = next_info["action_mask"]
+
+                # ----------------------------------------------
+                # PROCESS EACH WORKER
+                # ----------------------------------------------
+
+                for i in range(num_workers):
+
+                    # ------------------------------------------
+                    # HANDLE AUTOMATIC RESET
+                    # ------------------------------------------
+
+                    if needs_reset[i]:
+
+                        needs_reset[i] = False
+
+                        episode_rewards[i] = 0.0
+                        episode_decisions[i] = 0
+                        episode_losses[i] = []
+
+                        diagnostic_actions[i].clear()
+                        diagnostic_no_change[i] = 0
+                        diagnostic_zero_reward[i] = 0
+                        diagnostic_same_action_streak[i] = 0
+                        diagnostic_max_same_action_streak[i] = 0
+                        diagnostic_no_change_streak[i] = 0
+                        diagnostic_max_no_change_streak[i] = 0
+                        diagnostic_last_action[i] = None
+
+                        continue
+
+                    # ------------------------------------------
+                    # STORE TRANSITION
+                    # ------------------------------------------
+
+                    done = bool(
+                        terminated[i] or truncated[i]
+                    )
+
+
+                    # Collect transitions independently for each worker
+                    completed_transitions = n_step_collectors[i].add(
+                        observation=observations[i],
+                        action_id=int(actions[i]),
+                        reward=float(rewards[i]),
+                        next_observation=next_observations[i],
+                        terminated=done,
+                        next_action_mask=next_masks[i],
+                    )
+
+                    # Store completed transitions in replay memory
+                    for transition in completed_transitions:
+                        (
+                            observation,
+                            action_id,
+                            reward,
+                            next_observation,
+                            transition_done,
+                            next_action_mask,
+                            n_steps,
+                        ) = transition
+
+                        self.agent.replay_buffer.add(
+                            observation=observation,
+                            action_id=action_id,
+                            reward=reward,
+                            next_observation=next_observation,
+                            terminated=transition_done,
+                            next_action_mask=next_action_mask,
+                            n_steps=n_steps,
+                        )
+
+                    # ------------------------------------------
+                    # TRAIN DQN
+                    # ------------------------------------------
+
+                    loss = None
+
+                    if (
+                        (self.total_decisions + 1)
+                        % self.agent.train_frequency
+                        == 0
+                    ):
+
+                        start = perf_counter()
+
+
+                        # if not greedy_mode:
+                        loss = self.agent.train_step()
+
+                        duration = perf_counter() - start
+
+                        if duration > 1.0:
+                            print(
+                                f"SLOW TRAINING UPDATE: "
+                                f"Worker {i}, "
+                                f"Decision {episode_decisions[i] + 1}, "
+                                f"Duration {duration:.2f}s"
+                            )
+
+                    if loss is not None:
+
+                        episode_losses[i].append(loss)
+
+                        self.total_training_updates += 1
+
+
+                    # ------------------------------------------
+                    # UPDATE EPSILON
+                    # ------------------------------------------
+                    if not greedy_mode:
+                        self.agent.epsilon = max(
+                            self.agent.epsilon_min,
+                            self.agent.epsilon * self.agent.epsilon_decay
+                        )
+                    # self.agent.epsilon = max(
+                    #     self.agent.epsilon_min,
+                    #     self.agent.epsilon
+                    #     * self.agent.epsilon_decay,
+                    # )
+                
+
+                    # ------------------------------------------
+                    # UPDATE DECISION STATISTICS
+                    # ------------------------------------------
+
+                    episode_rewards[i] += float(rewards[i])
+
+                    episode_decisions[i] += 1
+                    self.total_decisions += 1
+
+                    # Track action repetition and whether the observation changes.
+                    diagnostic_action = int(actions[i])
+                    diagnostic_actions[i][diagnostic_action] += 1
+                    diagnostic_unchanged = np.array_equal(
+                        observations[i], next_observations[i]
+                    )
+                    diagnostic_no_change[i] += int(diagnostic_unchanged)
+                    diagnostic_zero_reward[i] += int(float(rewards[i]) == 0.0)
+
+                    if diagnostic_last_action[i] == diagnostic_action:
+                        diagnostic_same_action_streak[i] += 1
+                    else:
+                        diagnostic_same_action_streak[i] = 1
+                    diagnostic_last_action[i] = diagnostic_action
+                    diagnostic_max_same_action_streak[i] = max(
+                        diagnostic_max_same_action_streak[i],
+                        diagnostic_same_action_streak[i],
+                    )
+
+                    if diagnostic_unchanged:
+                        diagnostic_no_change_streak[i] += 1
+                    else:
+                        diagnostic_no_change_streak[i] = 0
+                    diagnostic_max_no_change_streak[i] = max(
+                        diagnostic_max_no_change_streak[i],
+                        diagnostic_no_change_streak[i],
+                    )
+
+                    if episode_decisions[i] in (100, 150, 250, 500, 1000):
+                        print(
+                            f"DIAGNOSTIC worker={i} "
+                            f"decisions={episode_decisions[i]} "
+                            f"action={diagnostic_action} "
+                            f"action_count={diagnostic_actions[i][diagnostic_action]} "
+                            f"same_action_streak={diagnostic_same_action_streak[i]} "
+                            f"no_change={diagnostic_no_change[i]} "
+                            f"no_change_streak={diagnostic_no_change_streak[i]} "
+                            f"legal={bool(masks[i][diagnostic_action])} "
+                            f"epsilon={self.agent.epsilon:.4f}",
+                            flush=True,
+                        )
+                    
+                    # Detect excessive decisions before a game becomes stuck.
+                    if episode_decisions[i] == 150:
+                        print(
+                            f"\nWARNING: EXCESSIVE DECISIONS "
+                            f"Worker={i}, "
+                            f"Decisions={episode_decisions[i]}, "
+                            f"Action={int(actions[i])}, "
+                            f"Reward={float(rewards[i]):.3f}, "
+                            f"Done={done}, "
+                            f"LegalActions={int(np.count_nonzero(masks[i]))}, "
+                            f"StateChanged={not np.array_equal(observations[i], next_observations[i])}",
+                            flush=True,
+    )
+
+                    # ------------------------------------------
+                    # GAME COMPLETED
+                    # ------------------------------------------
+
+                    if done:
+
+                        needs_reset[i] = True
+
+                        # Do not count more than the requested
+                        # number of completed games.
+
+                        if completed >= num_games:
+                            continue
+
+                        completed += 1
+
+                        self.games_completed += 1
+
+                        # Gymnasium vector info stores results
+                        # as arrays indexed by worker.
+
+                        game_result = None
+
+                        if "result" in next_info:
+                            game_result = next_info["result"][i]
+                            turn_reached = int(next_info["turn_reached"][i])
+
+                        cards_in_drawn_pile = int(
+                            next_info.get(
+                                "cards_in_drawn_pile",
+                                next_info["turn_reached"]
+                            )[i]
+                        )
+
+                        result = {
+                            "game": self.games_completed,
+                            "reward": float(
+                                episode_rewards[i]
+                            ),
+                            "decisions": int(
+                                episode_decisions[i]
+                            ),
+                            "result": game_result,
+                            "epsilon": self.agent.epsilon,
+                            "average_loss": (
+                                float(np.mean(episode_losses[i]))
+                                if episode_losses[i]
+                                else None
+                            ),
+                            "turn_reached": turn_reached,
+                            "cards_in_drawn_pile": cards_in_drawn_pile,
+                        }
+
+                        results.append(result)
+                        turns_in_window.append(turn_reached)
+
+                        if episode_decisions[i] >= 100:
+                            diagnostic_row = {
+                                "game": self.games_completed,
+                                "worker": i,
+                                "turn_reached": turn_reached,
+                                "decisions": int(episode_decisions[i]),
+                                "epsilon": float(self.agent.epsilon),
+                                "unchanged_observations": int(diagnostic_no_change[i]),
+                                "zero_reward_decisions": int(diagnostic_zero_reward[i]),
+                                "max_same_action_streak": int(diagnostic_max_same_action_streak[i]),
+                                "max_no_change_streak": int(diagnostic_max_no_change_streak[i]),
+                                "top_actions": str(diagnostic_actions[i].most_common(10)),
+                            }
+                            diagnostic_high_decision_games.append(diagnostic_row)
+                            print(f"HIGH-DECISION GAME: {diagnostic_row}", flush=True)
+
+                        if len(turns_in_window) == progress_interval:
+
+                            print()
+                            print("========== DQN LEARNING PROGRESS ==========")
+                            print(
+                                f"Games:               "
+                                f"{window_start_game}–{self.games_completed}"
+                            )
+                            print(
+                                f"Average turn reached: "
+                                f"{np.mean(turns_in_window):.2f}"
+                            )
+   
+                            early_defeat_pct = 100.0 * sum(
+                                r["result"] == "lost" and r["turn_reached"] < 10
+                                for r in results[-len(turns_in_window):]
+                            ) / len(turns_in_window)
+
+                            print(f"Loss before turn 10: {early_defeat_pct:.1f}%")
+   
+                            n = len(turns_in_window)
+
+                            pct_20 = 100 * sum(t >= 20 for t in turns_in_window) / n
+                            pct_30 = 100 * sum(t >= 30 for t in turns_in_window) / n
+                            pct_40 = 100 * sum(t >= 40 for t in turns_in_window) / n
+
+                            print(f"Reached turn 20+:     {pct_20:.1f}%")
+                            print(f"Reached turn 30+:     {pct_30:.1f}%")
+                            print(f"Reached turn 40+:     {pct_40:.1f}%")
+                            
+                            if self.agent.grad_norm_count > 0:
+                                avg_grad_norm = (
+                                    self.agent.grad_norm_sum /
+                                    self.agent.grad_norm_count
+                                )
+
+                                clipped_pct = (
+                                    100.0 * self.agent.grad_norm_clipped_count
+                                    / self.agent.grad_norm_count
+                                )
+
+                                print(f"Gradient norm AVG:    {avg_grad_norm:.2f}")
+                                print(f"Gradient norm MAX:    {self.agent.grad_norm_max:.2f}")
+                                print(f"Gradient samples:     {self.agent.grad_norm_count:,}")
+                                print(f"Gradient clipped:     {clipped_pct:.1f}%")
+
+                                self.agent.grad_norm_sum = 0.0
+                                self.agent.grad_norm_max = 0.0
+                                self.agent.grad_norm_count = 0
+                                self.agent.grad_norm_clipped_count = 0
+                                
+                            # Report PER hyperparameters at each progress interval.
+                            if self.agent.replay_buffer_type == "priority":
+                                print(f"PER alpha:            {self.agent.per_alpha:.3f}")
+                                print(f"PER beta:             {self.agent.current_per_beta():.6f}")
+                                print(f"PER beta steps:       {self.agent.per_beta_steps:,}")
+                            if MIDGAME_CONFIG["enabled"]:
+                                original_end = self.previous_end_turn
+                                pct_exceeded = 100 * sum(
+                                    t > original_end for t in turns_in_window
+                                ) / n
+                                print(
+                                    f"Exceeded original end ({original_end}): "
+                                    f"{pct_exceeded:.1f}%"
+                                )
+
+                            print("===========================================")
+                            print(
+                                f"Maximum turn reached: "
+                                f"{max(turns_in_window)}"
+                            )
+                            print("===========================================")
+                            print()
+                            
+
+                            turns_in_window.clear()
+                            window_start_game = self.games_completed + 1
+
+                        if greedy_mode:
+                            csv_path = (
+                                "core/ai/dqn/logs/"
+                                f"evaluation_checkpoint_{window_start_checkpoint}_eps0.csv"
+                            )
+                        else:
+                            csv_path = "core/ai/dqn/logs/training_history.csv"
+
+                        self.log_game(result, path=csv_path)
+
+
+                        WHITE_ON_RED = "\033[97;41m"
+                        WHITE_ON_GREEN = "\033[97;42m"
+                        WHITE_ON_BLUE = "\033[97;44m"
+                        RESET = "\033[0m"
+                        
+
+                        if game_result == "won":
+                            row_color = WHITE_ON_BLUE
+                        elif turn_reached < 10:
+                            row_color = WHITE_ON_RED
+                        elif turn_reached >= 40:
+                            row_color = WHITE_ON_GREEN
+                        else:
+                            row_color = RESET
+
+                        print(
+                            row_color
+                            + f"Game {self.games_completed:6d} | "
+                            f"Worker: {i} | "
+                            f"Result: {game_result!s:6s} | "
+                            f"Turns: {turn_reached:2d} | "
+                            f"Previous End: {previous_end_turn if previous_end_turn is not None else '-'} | "
+                            f"Cards Drawn: {cards_in_drawn_pile:2d} | "
+                            f"Reward: {episode_rewards[i]:6.1f} | "
+                            f"Decisions: {episode_decisions[i]:4d} | "
+                            f"Epsilon: {self.agent.epsilon:.4f}"
+                            + RESET,
+                            flush=True,
+                        )
+
+
+                # ----------------------------------------------
+                # ADVANCE VECTOR OBSERVATIONS
+                # ----------------------------------------------
+
+                observations = next_observations
+                info = next_info
+
+                # --------------------------------------------------
+                # PERIODIC GREEDY POLICY EVALUATION
+                # --------------------------------------------------
+                if completed >= next_evaluation:
+                    next_evaluation += evaluation_interval
+
+                    for _ in range(evaluation_games):
+                        evaluation = self.evaluate_policy()
+                        evaluation["training_games"] = self.games_completed
+                        evaluation_results.append(evaluation)
+                        self.log_evaluation(
+                            self.games_completed,
+                            evaluation,
+                        )
+                        print()
+                        print("========== DQN POLICY EVALUATION ==========")
+                        print(f"Training games:  {self.games_completed}")
+                        print(f"Evaluation turn: {evaluation['turn_reached']}")
+                        print(f"Result:          {evaluation['result']}")
+                        print("Epsilon:         0.0")
+                        print("===========================================")
+
+                # ----------------------------------------------
+                # PERIODIC CHECKPOINT
+                # ----------------------------------------------
+
+                if (
+                    checkpointing
+                    and completed - last_save_game >= save_interval
+                    and not greedy_mode
+                    and save_checkpoints
+                ):
+                    self.save_checkpoint(checkpoint_path)
+                    last_save_game = completed
+
+                    self.print_checkpoint_performance(
+                        results=results,
+                        progress_interval=progress_interval,
+                        run_start=run_start,
+                        decisions_before=decisions_before,
+                        updates_before=updates_before,
+                        num_workers=num_workers,
+                    )
+
+
+
+        finally:
+            try:
+                env.close()
+            finally:
+                try:
+                    self.close_evaluation_pool(force=True)
+                finally:
+                    if log_manager is not None:
+                        log_manager.shutdown()
+
+        # Write diagnostics to a separate file; leave training history unchanged.
+        diagnostic_path = Path("core/ai/dqn/logs/n_step_diagnostics.csv")
+        diagnostic_path.parent.mkdir(parents=True, exist_ok=True)
+        if diagnostic_high_decision_games:
+            with diagnostic_path.open("w", newline="", encoding="utf-8") as file:
+                writer = csv.DictWriter(
+                    file, fieldnames=list(diagnostic_high_decision_games[0].keys())
+                )
+                writer.writeheader()
+                writer.writerows(diagnostic_high_decision_games)
+        else:
+            with diagnostic_path.open("w", newline="", encoding="utf-8") as file:
+                file.write("No games with 100 or more decisions\n")
+        print("\nN-STEP DECISION DIAGNOSTICS")
+        for threshold in (100, 150, 500):
+            count = sum(r["decisions"] >= threshold for r in results)
+            print(f"Games with >= {threshold} decisions: {count}/{len(results)}")
+        print(f"Diagnostic file: {diagnostic_path}")
+
+        # --------------------------------------------------
+        # PERFORMANCE STATISTICS
+        # --------------------------------------------------
+
+        elapsed = perf_counter() - run_start
+
+        games_won = sum(
+            1 for result in results
+            if result["result"] == "won"
+        )
+
+        win_rate = 100 * games_won / len(results) if results else 0.0
+        games_per_second = (
+            len(results) / elapsed
+            if elapsed > 0
+            else 0.0
+        )
+
+        decisions_this_run = (
+            self.total_decisions - decisions_before
+        )
+
+        decisions_per_second = (
+            decisions_this_run / elapsed
+            if elapsed > 0
+            else 0.0
+        )
+
+        updates_this_run = (
+            self.total_training_updates - updates_before
+        )
+
+        updates_per_second = (
+            updates_this_run / elapsed
+            if elapsed > 0
+            else 0.0
+        )
+
+        print()
+        print("=" * 65)
+        print("DQN TRAINING PERFORMANCE")
+        print("=" * 65)
+
+        print(f"Parallel workers:      {num_workers}")
+        print(f"Train frequency:       {self.agent.train_frequency}")
+        print(f"Games completed:       {len(results)}")
+        print(f"Games won:             {games_won}")
+        print(f"Win rate:              {win_rate:.3f}%")
+        print(f"Cumulative games:      {self.games_completed}")
+        print(f"Cumulative decisions:  {self.total_decisions}")
+        print(f"Cumulative updates:    {self.total_training_updates}")
+        print(f"Elapsed time:          {elapsed:.2f} seconds")
+        print(f"Games/second:          {games_per_second:.2f}")
+        print(f"Decisions/second:      {decisions_per_second:.2f}")
+        print(f"Training updates:      {updates_this_run}")
+        print(f"Updates/second:        {updates_per_second:.2f}")
+        print(f"Final epsilon:         {self.agent.epsilon:.4f}")
+
+        print(f"PyTorch CPU threads: {torch.get_num_threads()}")
+        print("=" * 65)
+
+
+        if evaluation_results:
+            print()
+            print("========== DQN POLICY EVALUATION SUMMARY ==========")
+            print()
+            print(f"{'Training Games':<20} {'Turn Reached':>15} {'Result':>10}")
+
+            for evaluation in evaluation_results:
+
+                print(
+                    f"{evaluation['training_games']:<20} "
+                    f"{evaluation['turn_reached']:>15} "
+                    f"{evaluation['result']:>10}"
+                )
+
+            turns = [
+                evaluation["turn_reached"]
+                for evaluation in evaluation_results
+            ]
+
+            print()
+            print(f"Evaluation games:   {len(turns)}")
+            print(f"Average turns:      {np.mean(turns):.2f}")
+            print(f"First evaluation:   {turns[0]}")
+            print(f"Last evaluation:    {turns[-1]}")
+            print(f"Change:             {turns[-1] - turns[0]:+d} turns")
+            print("===================================================")
+
+        # --------------------------------------------------
+        # FINAL CHECKPOINT
+        # --------------------------------------------------
+
+        if checkpointing and not greedy_mode and save_checkpoints:
+
+            # Avoid saving twice if the final game already
+            # triggered a periodic checkpoint.
+            if last_save_game != completed:
+                self.save_checkpoint(checkpoint_path)
+
+                self.print_checkpoint_performance(
+                    results=results,
+                    progress_interval=progress_interval,
+                    run_start=run_start,
+                    decisions_before=decisions_before,
+                    updates_before=updates_before,
+                    num_workers=num_workers,
+                )
+
+            # Training completed successfully.
+            # Keep only the newest numbered checkpoint.
+            self.cleanup_old_checkpoints(checkpoint_path)
+
+        return results
+
+# NORMAL RUN
+if __name__ == "__main__":
+    torch.set_num_threads(3)
+    trainer = DQNTrainer()
+    trainer.train(
+        num_games=200,
+        num_workers=8,
+        progress_interval=100,
+        evaluation_interval=999999999,
+        evaluation_games=1,
+        resume=True,
+        checkpoint_path="core/ai/dqn/checkpoints/normandy_latest.pt",
+        save_interval=10000,
+        greedy_mode=False,
+        save_checkpoints=False
+    )
+
+# SAVE GAMES
+# if __name__ == "__main__":
+#     torch.set_num_threads(3)
+#     trainer = DQNTrainer()f
+#     trainer.train(
+#         num_games=10,
+#         num_workers=8,
+#         progress_interval=10,
+#         evaluation_interval=999999999,
+#         evaluation_games=1,
+#         resume=True,
+#         checkpoint_path="core/ai/dqn/checkpoints/normandy_latest.pt",
+#         save_interval=10000,
+#         greedy_mode=True
+#     )
+
+# GREEDY RUN
+# if __name__ == "__main__":
+#     torch.set_num_threads(3)
+
+#     trainer = DQNTrainer()
+
+#     trainer.train(
+#         num_games=50,
+#         num_workers=8,
+#         progress_interval=100,
+#         evaluation_interval=99999999999,
+#         evaluation_games=1,
+#         resume=True,
+#         checkpoint_path="core/ai/dqn/checkpoints/normandy_latest.pt",
+#         save_interval=1000000000,
+#         greedy_mode=True
+#     )

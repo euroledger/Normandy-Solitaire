@@ -100,6 +100,7 @@ class FakeNormandyEnv:
     def close(self):
         pass
 
+
 class FakeAsyncVectorEnv:
 
     def __init__(self, env_fns, autoreset_mode=None):
@@ -209,8 +210,6 @@ class FakeVariableLengthVectorEnv(FakeAsyncVectorEnv):
             2, self.num_envs + 2
         )
 
-
-
     def step(self, actions):
 
         observations = np.zeros(
@@ -281,6 +280,7 @@ class FakeVariableLengthVectorEnv(FakeAsyncVectorEnv):
             },
         )
 
+
 class TestDQNTrainer(unittest.TestCase):
 
     def setUp(self):
@@ -303,13 +303,14 @@ class TestDQNTrainer(unittest.TestCase):
 
             return actions
 
-
         self.env = FakeNormandyEnv()
         self.agent = Mock()
         self.agent.select_actions.side_effect = mock_select_actions
         self.agent.replay_buffer = DQNReplayBuffer(
             capacity=100
         )
+        self.agent.n_step = 1
+        self.agent.discount_factor = 0.99
 
         self.agent.epsilon = 1.0
         self.agent.epsilon_min = 0.1
@@ -327,6 +328,7 @@ class TestDQNTrainer(unittest.TestCase):
             env=self.env,
             agent=self.agent,
         )
+
     def test_four_parallel_workers(self):
 
         with patch(
@@ -390,9 +392,8 @@ class TestDQNTrainer(unittest.TestCase):
         self.assertEqual(
             self.agent.select_actions.call_count, 5
         )
-        
-    def test_parallel_replay_buffer_contents(self):
 
+    def test_parallel_replay_buffer_contents(self):
         with patch(
             "core.ai.dqn.dqn_trainer.AsyncVectorEnv",
             FakeAsyncVectorEnv,
@@ -402,25 +403,22 @@ class TestDQNTrainer(unittest.TestCase):
                 num_games=4,
                 num_workers=4,
             )
-
         experiences = list(
             self.agent.replay_buffer.buffer
         )
-
         self.assertEqual(len(experiences), 8)
 
         # Four workers execute their first decision,
         # followed by four second decisions.
 
         for experience in experiences[:4]:
-
-            observation, action, reward, next_observation, done, next_mask = experience
-
+            observation, action, reward, next_observation, done, next_mask, n_steps = experience
             np.testing.assert_array_equal(
                 observation,
                 [1, 0, 0, 0],
             )
 
+            self.assertEqual(n_steps, 1)
             self.assertEqual(action, 1)
             self.assertEqual(reward, 1.0)
             self.assertFalse(done)
@@ -436,13 +434,13 @@ class TestDQNTrainer(unittest.TestCase):
             )
 
         for experience in experiences[4:]:
-
-            observation, action, reward, next_observation, done, next_mask = experience
-
+            observation, action, reward, next_observation, done, next_mask, n_steps = experience
             np.testing.assert_array_equal(
                 observation,
                 [0, 1, 0, 0],
             )
+
+            self.assertEqual(n_steps, 1)
 
             self.assertEqual(action, 2)
             self.assertEqual(reward, 2.0)
@@ -457,7 +455,7 @@ class TestDQNTrainer(unittest.TestCase):
                 next_mask,
                 [0, 0, 0, 0, 0],
             )
-            
+
     def test_workers_finish_at_different_times(self):
 
         with patch(
@@ -493,7 +491,7 @@ class TestDQNTrainer(unittest.TestCase):
 
         for result in results:
             self.assertEqual(result["result"], "lost")
-            
+
     def test_training_frequency_with_variable_length_games(self):
 
         self.agent.train_frequency = 4
@@ -528,8 +526,7 @@ class TestDQNTrainer(unittest.TestCase):
             len(self.agent.replay_buffer),
             decisions,
         )
-        
-                         
+
     def test_evaluation_does_not_modify_training_state(self):
 
         self.agent.epsilon = 0.5856
@@ -571,7 +568,6 @@ class TestDQNTrainer(unittest.TestCase):
             updates_before,
         )
 
-
     def test_evaluation_runs_at_correct_intervals(self):
 
         evaluation = {
@@ -609,7 +605,6 @@ class TestDQNTrainer(unittest.TestCase):
 
         # Two decisions per training game.
         self.assertEqual(self.trainer.total_decisions, 40)
-
 
     def test_evaluation_results_are_logged(self):
 
@@ -673,6 +668,7 @@ class TestDQNTrainer(unittest.TestCase):
                 training_path.read_text(encoding="utf-8"),
                 original_training,
             )
+
 
 class TestDQNTrainerAsyncIntegration(unittest.TestCase):
 
@@ -782,7 +778,16 @@ class TestDQNTrainerAsyncIntegration(unittest.TestCase):
             0,
         )
 
-        self.assertEqual(
+        # Completed games flush all pending n-step transitions.
+        # Other workers may still have transitions pending when training stops.
+        completed_game_decisions = sum(
+            result["decisions"] for result in results
+        )
+        self.assertGreaterEqual(
+            len(agent.replay_buffer),
+            completed_game_decisions,
+        )
+        self.assertLessEqual(
             len(agent.replay_buffer),
             trainer.total_decisions,
         )
@@ -824,6 +829,7 @@ class TestDQNTrainerAsyncIntegration(unittest.TestCase):
         print(f"Training updates:  {trainer.total_training_updates}")
         print(f"Elapsed:           {elapsed:.2f}s")
         print(f"Games/second:      {len(results) / elapsed:.2f}")
+
 
 if __name__ == "__main__":
     unittest.main()

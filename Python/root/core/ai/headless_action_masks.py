@@ -10,7 +10,7 @@ from random import choice, randint
 
 import numpy as np
 from core.actions.actions_helper import can_add_unit_to_space, get_adjacent_german_controlled_spaces, get_german_controlled_spaces
-from core.actions.strategic_reserve_actions import do_move_other_unit_from_strategic_reserve, do_move_panzer_from_strategic_reserve, do_move_panzer_to_strategic_reserve, get_other_units_in_strategic_reserve, get_panzer_divisions_in_strategic_reserve, get_panzer_divisions_on_map
+from core.actions.strategic_reserve_actions import check_stacking, do_move_other_unit_from_strategic_reserve, do_move_panzer_from_strategic_reserve, do_move_panzer_to_strategic_reserve, get_other_units_in_strategic_reserve, get_panzer_divisions_in_strategic_reserve, get_panzer_divisions_on_map
 from core.allied_armies import armies_list
 from core.actions.hitler_intervention import (
     check_hitler_intervention_applies,
@@ -352,12 +352,15 @@ def get_move_panzer_from_strategic_reserve_mask():
         if panzer not in panzer_divisions_in_reserve:
             continue
 
+
+      
         for space_index, space in enumerate(
             german_eligible_spaces
         ):
             if space not in german_controlled_spaces:
                 continue
-
+            if not check_stacking(space):
+                        continue
             local_action_id = (
                 panzer_index
                 * len(german_eligible_spaces)
@@ -385,7 +388,10 @@ def get_move_panzer_to_strategic_reserve_mask():
     for panzer_index, panzer in enumerate(
         panzer_divisions_list
     ):
-        if panzer in panzer_divisions_on_map:
+        if any(
+            map_panzer is panzer
+            for map_panzer in panzer_divisions_on_map
+        ):
             mask[panzer_index] = 1.0
 
     return mask

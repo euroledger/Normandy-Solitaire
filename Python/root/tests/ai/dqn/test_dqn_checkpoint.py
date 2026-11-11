@@ -8,6 +8,7 @@ import torch
 from torch import nn
 
 from core.ai.dqn.dqn_agent import DQNAgent
+from core.ai.dqn.dqn_priority_replay_buffer import DQNPriorityReplayBuffer
 from core.ai.dqn.dqn_trainer import DQNTrainer
 
 
@@ -150,19 +151,42 @@ class TestDQNCheckpoint(unittest.TestCase):
 
     def test_replay_buffer_capacity_preserved(self):
         self.add_experiences()
-        capacity = self.trainer.agent.replay_buffer.buffer.maxlen
 
+        # Get capacity for either uniform replay or PER
+        buffer = self.trainer.agent.replay_buffer
+
+        capacity = (
+            buffer.capacity
+            if isinstance(buffer, DQNPriorityReplayBuffer)
+            else buffer.buffer.maxlen
+        )
+
+        # Save checkpoint
         saved_path = self.trainer.save_checkpoint(self.checkpoint_path)
         self.assertTrue(saved_path.is_file())
 
+        # Clear experiences
         self.trainer.agent.replay_buffer.buffer.clear()
+
+        # Reload checkpoint
         self.trainer.load_checkpoint(self.checkpoint_path)
 
-        self.assertEqual(
-            self.trainer.agent.replay_buffer.buffer.maxlen,
-            capacity,
+        # Verify restored capacity
+        restored_buffer = self.trainer.agent.replay_buffer
+
+        restored_capacity = (
+            restored_buffer.capacity
+            if isinstance(restored_buffer, DQNPriorityReplayBuffer)
+            else restored_buffer.buffer.maxlen
         )
-        self.assertEqual(len(self.trainer.agent.replay_buffer), 3)
+
+        self.assertEqual(restored_capacity, capacity)
+
+        # Verify experiences were restored
+        self.assertEqual(
+            len(self.trainer.agent.replay_buffer),
+            3,
+        )
 
     def test_missing_checkpoint(self):
         with self.assertRaises(FileNotFoundError):

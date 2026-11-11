@@ -21,6 +21,7 @@ class DQNReplayBuffer:
         next_observation,
         terminated,
         next_action_mask,
+        n_steps=1,
     ):
         # Store independent copies of observations and masks
         experience = (
@@ -30,17 +31,23 @@ class DQNReplayBuffer:
             np.array(next_observation, dtype=np.float32, copy=True),
             bool(terminated),
             np.array(next_action_mask, dtype=np.float32, copy=True),
+            int(n_steps)
         )
 
         self.buffer.append(experience)
 
+
     def sample(self, batch_size):
-        # Sample experiences uniformly without replacement
         experiences = random.sample(self.buffer, batch_size)
 
-        observations, actions, rewards, next_observations, terminated, next_masks = zip(
-            *experiences
-        )
+        # Support both existing six-field and new seven-field experiences
+        normalized = [
+            experience if len(experience) == 7 else (*experience, 1)
+            for experience in experiences
+        ]
+
+        observations, actions, rewards, next_observations, terminated, next_masks, n_steps = zip(*normalized)
+
 
         return (
             np.stack(observations),
@@ -49,4 +56,5 @@ class DQNReplayBuffer:
             np.stack(next_observations),
             np.array(terminated, dtype=np.bool_),
             np.stack(next_masks),
+            np.array(n_steps, dtype=np.int64),
         )

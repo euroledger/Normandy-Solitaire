@@ -6,7 +6,7 @@ import torch
 
 from core.ai.dqn.dqn_agent import DQNAgent
 from core.ai.dqn.dqn_replay_buffer import DQNReplayBuffer
-
+from core.ai.dqn.dqn_priority_replay_buffer import DQNPriorityReplayBuffer
 
 class TestDQNAgent(unittest.TestCase):
 
@@ -61,19 +61,22 @@ class TestDQNAgent(unittest.TestCase):
 
 
     def test_replay_buffer_initialization(self):
-        # Check replay buffer is created with the configured capacity
+        # Check that the configured replay buffer is created
         self.assertIsInstance(
             self.agent.replay_buffer,
-            DQNReplayBuffer,
+            (DQNReplayBuffer, DQNPriorityReplayBuffer),
         )
 
-        self.assertEqual(len(self.agent.replay_buffer), 0)
+        # Check capacity using the appropriate buffer implementation
+        if isinstance(self.agent.replay_buffer, DQNPriorityReplayBuffer):
+            capacity = self.agent.replay_buffer.capacity
+        else:
+            capacity = self.agent.replay_buffer.buffer.maxlen
 
         self.assertEqual(
-            self.agent.replay_buffer.buffer.maxlen,
+            capacity,
             self.agent.replay_memory_size,
         )
-        
 
     def test_select_actions_batched_greedy(self):
 

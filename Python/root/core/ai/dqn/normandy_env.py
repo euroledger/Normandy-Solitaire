@@ -1,9 +1,8 @@
 import gymnasium as gym
 import numpy as np
 from gymnasium import spaces
-from requests import options
 from core.ai.dqn.dqn_action_adapter import execute_action_phase_decision, get_action_phase_decision, get_hitler_intervention_decision
-from core.ai.dqn.dqn_game_state_encoder import OBSERVATION_SIZE, encode_game_state
+from core.ai.dqn.dqn_game_state_encoder import OBSERVATION_SIZE
 from core.ai.headless_action_masks import HeadlessDecisionState, get_total_actions
 from reset import reset_game
 from core.global_game_state import GlobalGameState
@@ -11,8 +10,6 @@ from core.ai.normandy_full_game_ai_dqn import advance_to_next_decision
 from core.ai.dqn.dqn_action_adapter import (
     execute_hitler_intervention_decision,
 )
-from pathlib import Path
-import random
 from uuid import uuid4
 from core.ai.dqn.dqn_save_load import MidgameCollector
 from core.ai.dqn.midgame_config import MIDGAME_CONFIG
@@ -22,6 +19,7 @@ from core.ai.headless_action_masks import (
     panzer_divisions_list,
 )
 from core.allied_armies import armies_list
+import sys
 
 
 def debug_action_mask(decision_type, mask):
@@ -142,6 +140,7 @@ class NormandyEnv(gym.Env):
         ):
             raise ValueError(f"Illegal action: {action_id}")
         result = self.execute_action(action_id)
+        
         if self.current_decision_type == "hitler_intervention":
             if result:
                 observation, mask = get_hitler_intervention_decision(
@@ -204,13 +203,17 @@ class NormandyEnv(gym.Env):
                 else:
                     observation, mask = get_action_phase_decision()
         elif (
-            GlobalGameState.actions_left_this_turn == 0
-            and GlobalGameState.reserve_actions == 0
+            action_id == 0
+            or (
+                GlobalGameState.actions_left_this_turn == 0
+                and GlobalGameState.reserve_actions == 0
+            )
         ):
             decision = advance_to_next_decision(
                 self.draw_deck,
                 self.mid_deck,
                 self.late_deck,
+                pass_selected=(action_id == 0),
             )
             if "result" in decision:
                 terminated = True

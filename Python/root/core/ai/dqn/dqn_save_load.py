@@ -365,10 +365,9 @@ class MidgameCollector:
 
 
 def choose_midgame_snapshot(config=None, *, rng=None):
-    """Weighted turn choice, then uniform random file choice within that turn.
+    # Weighted turn choice, then uniform random file choice within that turn.
 
-    Returns (snapshot, path). Empty turns are excluded and weights normalized.
-    """
+    # Returns (snapshot, path). Empty turns are excluded and weights normalized.
     config = _midgame_config(config)
     rng = rng or random
     turns = config['start_turns']

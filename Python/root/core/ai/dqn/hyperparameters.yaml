@@ -7,7 +7,7 @@ normandy_v1:
 
   # Exploration/Exploitation
   epsilon_init: 0.99
-  epsilon_min: 0.05
+  epsilon_min: 0.01
 
   epsilon_decay: 0.9999997
 
@@ -26,10 +26,20 @@ normandy_v1:
 
   greedy_mode: false
 
+  replay_buffer_type: "uniform"  # "uniform" or "priority"
+  per_alpha: 0.6
+  per_beta_initial: 0.4
+  per_beta_final: 1.0
+  per_beta_anneal_steps: 500000
+
+  gradient_clip_norm: 200.0
+
+  n_step: 6
+  
   game_logging:
     enabled: false
-    result: "won"
-    target_turn: [48]
+    result: "lost"
+    target_turn: [20,21,22]
     max_files: 1
     output_dir: "core/ai/dqn/logs/games"
 

@@ -405,6 +405,61 @@ class TestNormandyEnv(unittest.TestCase):
         self.assertFalse(terminated)
         self.assertFalse(truncated)
 
+    def test_step_pass_illegal_with_normal_ap_remaining(self):
+        self.env.reset()
+        self.env.current_decision_type = "action_phase"
+
+        GlobalGameState.actions_left_this_turn = 1
+        GlobalGameState.reserve_actions = 1
+
+        with patch(
+            "core.ai.dqn.normandy_env.advance_to_next_decision"
+        ) as mock_advance:
+            with self.assertRaises(ValueError):
+                self.env.step(0)
+
+            mock_advance.assert_not_called()
+
+        self.assertEqual(GlobalGameState.actions_left_this_turn, 1)
+        self.assertEqual(GlobalGameState.reserve_actions, 1)
+
+    def test_step_pass_advances_with_unused_reserve_ap(self):
+        self.env.reset()
+
+        decision = advance_to_next_decision(
+            self.env.draw_deck,
+            self.env.mid_deck,
+            self.env.late_deck,
+        )
+
+        self.assertEqual(decision["decision_type"], "action_phase")
+        self.env.current_decision_type = "action_phase"
+
+        GlobalGameState.actions_left_this_turn = 0
+        GlobalGameState.reserve_actions = 1
+
+        # Confirm PASS is legal in the real action mask.
+        _, mask = get_action_phase_decision()
+        self.assertEqual(mask[0], 1.0)
+
+        # Execute PASS using the real environment and game progression.
+        first_card = GlobalGameState.current_card
+        first_cards_drawn = len(GlobalGameState.drawn_cards)
+
+        observation, reward, terminated, truncated, info = self.env.step(0)
+
+        # PASS must advance the game despite unused reserve AP.
+        self.assertIsNot(GlobalGameState.current_card, first_card)
+        self.assertEqual(
+            len(GlobalGameState.drawn_cards),
+            first_cards_drawn + 1,
+        )
+
+        self.assertFalse(terminated)
+        self.assertFalse(truncated)
+        self.assertEqual(observation.shape, (OBSERVATION_SIZE,))
+        self.assertGreater(info["action_mask"].sum(), 0)
+
     def test_step_game_termination(self):
         # Establish opening state
         self.env.reset()
@@ -1186,6 +1241,56 @@ class TestNormandyEnv(unittest.TestCase):
         )
         self.assertEqual(reward, 0.0)
         self.assertFalse(truncated)
+
+    def test_hitler_intervention_returns_to_action_phase_with_reserve_ap(self):
+        self.env.reset()
+
+        from cards.card_35 import card
+
+        GlobalGameState.current_card = card
+        self.env.current_decision_type = "hitler_intervention"
+
+        # Normal AP exhausted, but one optional reserve AP remains.
+        GlobalGameState.actions_left_this_turn = 0
+        GlobalGameState.reserve_actions = 1
+
+        HeadlessDecisionState.reset_hitler_intervention()
+
+        # Card 35 has no eligible targets in the opening state.
+        self.assertEqual(
+            get_hitler_intervention_targets(card),
+            [],
+        )
+
+        cards_before = GlobalGameState.cards_drawn
+
+        # Finish Hitler Intervention through the real environment.
+        with patch(
+            "core.ai.dqn.normandy_env.advance_to_next_decision"
+        ) as mock_advance:
+
+            observation, reward, terminated, truncated, info = (
+                self.env.step(0)
+            )
+
+            # The game must NOT advance automatically.
+            mock_advance.assert_not_called()
+
+        # Return to Action Phase with reserve AP preserved.
+        self.assertEqual(
+            self.env.current_decision_type,
+            "action_phase",
+        )
+        self.assertEqual(GlobalGameState.actions_left_this_turn, 0)
+        self.assertEqual(GlobalGameState.reserve_actions, 1)
+        self.assertEqual(GlobalGameState.cards_drawn, cards_before)
+
+        # PASS must be available, allowing voluntary turn completion.
+        self.assertEqual(info["action_mask"][0], 1.0)
+
+        self.assertFalse(terminated)
+        self.assertFalse(truncated)
+        self.assertEqual(reward, 0.0)
 
     def test_complete_random_game(self):
         # Start a new game
