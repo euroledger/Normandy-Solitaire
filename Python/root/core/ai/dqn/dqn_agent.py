@@ -203,6 +203,8 @@ class DQNAgent:
         states = torch.as_tensor(
             observations, dtype=torch.float32, device=self.device
         )
+        
+        
         actions = torch.as_tensor(
             actions, dtype=torch.long, device=self.device
         )
@@ -303,7 +305,6 @@ class DQNAgent:
         self.optimizer.zero_grad()
         loss.backward()
 
-
         grad_norm = torch.nn.utils.clip_grad_norm_(
             self.policy_net.parameters(),
             max_norm=(
@@ -312,6 +313,8 @@ class DQNAgent:
                 else float("inf")
             ),
         )
+        
+    
         
         grad_norm_value = float(grad_norm.item())
         self.grad_norm_sum += grad_norm_value

@@ -31,6 +31,7 @@ Thumbs.db
 *.csv
 *.npz
 
-# Generated DQN game logs
+# DQN generated logs and checkpoints
 /core/ai/dqn/logs/
+/core/ai/dqn/checkpoints/
 /core/ai/dqn/checkpoints/bakup
