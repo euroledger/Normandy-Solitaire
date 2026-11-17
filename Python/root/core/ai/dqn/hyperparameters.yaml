@@ -1,9 +1,13 @@
 normandy_v1:
   # Replay memory and training
   replay_memory_size: 250000
-  mini_batch_size: 64
-  learning_rate: 0.0001
+  # mini_batch_size: 64
+  # learning_rate: 0.0001
   discount_factor: 0.99
+  mini_batch_size: 128
+  learning_rate: 0.00005
+  network_sync_rate: 2000
+
 
   # Exploration/Exploitation
   epsilon_init: 0.99
@@ -12,7 +16,7 @@ normandy_v1:
   epsilon_decay: 0.9999997
 
   # Target network
-  network_sync_rate: 1000
+  # network_sync_rate: 1000
 
   # Network architecture
   hidden_layers: [512, 512, 512]
@@ -37,9 +41,9 @@ normandy_v1:
   n_step: 6
   
   game_logging:
-    enabled: false
-    result: "lost"
-    target_turn: [20,21,22]
+    enabled: true
+    result: "won"
+    target_turn: [48]
     max_files: 1
     output_dir: "core/ai/dqn/logs/games"
 

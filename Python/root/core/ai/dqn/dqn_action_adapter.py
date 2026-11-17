@@ -95,12 +95,7 @@ def get_hitler_intervention_decision(card):
     )
 
     # The mask function may initialise or advance the
-    # Hitler Intervention decision stage, so build it first.
-    print(
-        "HITLER INTERVENTION DEBUG:",
-        "card =", card,
-        "targets =", card.hitler_intervention_target_armies,
-    )
+    # Hitler Intervention decision stage, so build it first
     mask = get_hitler_intervention_mask(card)
     observation = encode_game_state(context)
 

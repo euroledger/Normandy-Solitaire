@@ -89,10 +89,26 @@ def load_noisy_checkpoint(
 
     # The converted checkpoint has no compatible
     # optimizer state. Keep the newly initialised Adam.
-    optimizer_state = checkpoint.get("optimizer")
+    # optimizer_state = checkpoint.get("optimizer")
 
+    # if optimizer_state is not None:
+    #     agent.optimizer.load_state_dict(optimizer_state)
+    # SUNDAY 15 NOV
+    optimizer_state = checkpoint.get("optimizer")
     if optimizer_state is not None:
         agent.optimizer.load_state_dict(optimizer_state)
+
+    # Apply the configured learning rate after restoring Adam's state.
+    for param_group in agent.optimizer.param_groups:
+        param_group["lr"] = agent.learning_rate
+
+    print(f"Learning rate: {agent.optimizer.param_groups[0]['lr']}")
+    print(f"Mini-batch size: {agent.mini_batch_size}")
+    print(f"Target sync interval: {agent.network_sync_rate}")
+
+
+
+
 
     # No epsilon-greedy exploration in Noisy DQN.
     agent.epsilon = 0.0

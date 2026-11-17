@@ -232,6 +232,12 @@ class NoisyDQNTrainer(DQNTrainer):
         turns_in_window = []
         window_start_game = self.games_completed + 1
         run_start = perf_counter()
+        
+        # QUACK Training performance profiling
+        profile_train_seconds = 0.0
+        profile_train_calls = 0
+        # QUACK END
+        
         last_save_game = 0
         updates_before = self.total_training_updates
         decisions_before = self.total_decisions
@@ -331,13 +337,34 @@ class NoisyDQNTrainer(DQNTrainer):
                             next_action_mask=next_action_mask,
                             n_steps=n_steps,
                         )
+                    # loss = None
+                    # if (
+                    #     (self.total_decisions + 1)
+                    #     % self.agent.train_frequency
+                    #     == 0
+                    # ):
+                    #     loss = self.agent.train_step()
+                    # if loss is not None:
+                    #     episode_losses[i].append(loss)
+                    #     self.total_training_updates += 1
+                    
                     loss = None
                     if (
                         (self.total_decisions + 1)
                         % self.agent.train_frequency
                         == 0
                     ):
+                        # QUACK Training update timer
+                        train_start = perf_counter()
+                        # QUACK END
+
                         loss = self.agent.train_step()
+
+                        # QUACK Training update timer
+                        profile_train_seconds += perf_counter() - train_start
+                        profile_train_calls += 1
+                        # QUACK END
+
                     if loss is not None:
                         episode_losses[i].append(loss)
                         self.total_training_updates += 1
@@ -404,6 +431,13 @@ class NoisyDQNTrainer(DQNTrainer):
                             print(f"Reached turn 20+:     {pct_20:.1f}%")
                             print(f"Reached turn 30+:     {pct_30:.1f}%")
                             print(f"Reached turn 40+:     {pct_40:.1f}%")
+                            
+                            # Victory percentage in the current progress window.
+                            window_results = results[-n:]
+                            wins = sum(r["result"] == "won" for r in window_results)
+                            win_pct = 100.0 * wins / n
+                            print(f"Games won:            {wins} ({win_pct:.1f}%)")
+
                             if self.agent.grad_norm_count > 0:
                                 avg_grad_norm = (
                                     self.agent.grad_norm_sum /
@@ -513,7 +547,36 @@ class NoisyDQNTrainer(DQNTrainer):
                 finally:
                     if log_manager is not None:
                         log_manager.shutdown()
+        # elapsed = perf_counter() - run_start
+        # games_won = sum(
+        #     1 for result in results
+        #     if result["result"] == "won"
+        # )
+        
         elapsed = perf_counter() - run_start
+
+        # QUACK Training profiling report
+        print()
+        print("========== TRAINING UPDATE PROFILE ==========")
+        print(f"Total elapsed:  {elapsed:.2f} seconds")
+        print(f"Training time:  {profile_train_seconds:.2f} seconds")
+        print(f"Training calls: {profile_train_calls:,}")
+
+        if profile_train_calls > 0:
+            print(
+                f"Average update: "
+                f"{1000 * profile_train_seconds / profile_train_calls:.2f} ms"
+            )
+
+        if elapsed > 0:
+            print(
+                f"Training share: "
+                f"{100 * profile_train_seconds / elapsed:.1f}%"
+            )
+
+        print("=============================================")
+        # QUACK END
+
         games_won = sum(
             1 for result in results
             if result["result"] == "won"
@@ -597,10 +660,10 @@ class NoisyDQNTrainer(DQNTrainer):
 
 
 if __name__ == "__main__":
-    torch.set_num_threads(8)
+    torch.set_num_threads(4)
     trainer = NoisyDQNTrainer()
     trainer.train(
-        num_games=50000,
+        num_games=10000,
         resume=True,
         save_interval=10000,
         num_workers=8,
@@ -609,6 +672,9 @@ if __name__ == "__main__":
         evaluation_games=1,
         save_checkpoints=True,
         checkpoint_path=latest_noisy_checkpoint(),
+        # checkpoint_path=(
+        #     "core/ai/dqn/checkpoints/noisy/noisy_30.pt"
+        # ),
     )
 
 # if __name__ == "__main__":
